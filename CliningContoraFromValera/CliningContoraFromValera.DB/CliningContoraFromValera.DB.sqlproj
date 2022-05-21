@@ -81,5 +81,6 @@
     <Build Include="dbo\Stored Procedures\Client_Update.sql" />
     <Build Include="dbo\Stored Procedures\Client_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Order_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Order_Delete.sql" />
   </ItemGroup>
 </Project>
