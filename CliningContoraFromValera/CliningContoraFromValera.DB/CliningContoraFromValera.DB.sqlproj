@@ -78,5 +78,6 @@
     <Build Include="dbo\Stored Procedures\Client_Add.sql" />
     <Build Include="dbo\Stored Procedures\Client_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Client_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Client_Update.sql" />
   </ItemGroup>
 </Project>
