@@ -6,7 +6,7 @@
 	@Phone nvarchar(25)
 AS
 BEGIN
-INSERT INTO Client(
+INSERT INTO dbo.Client(
 	FirstName,
 	LastName,
 	Email,
@@ -24,6 +24,6 @@ FirstName = @FirstName,
 LastName = @LastName,
 Email = @Email,
 Phone = @Phone
-FROM Client
+FROM dbo.Client
 WHERE Id = @Id
 END

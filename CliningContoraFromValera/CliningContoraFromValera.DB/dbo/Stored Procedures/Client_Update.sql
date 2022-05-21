@@ -8,7 +8,7 @@
 AS
 BEGIN
 
-UPDATE Client
+UPDATE dbo.Client
 SET FirstName = @FirstName,
 	LastName = @LastName,
 	Email = @Email,

@@ -4,7 +4,7 @@ AS
 BEGIN
 
 	SELECT Id, FirstName, LastName, Email, Phone
-	FROM Client
+	FROM dbo.Client
 	WHERE Id=@Id
 
 END
