@@ -79,5 +79,6 @@
     <Build Include="dbo\Stored Procedures\Client_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Client_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Client_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Client_DeleteById.sql" />
   </ItemGroup>
 </Project>
