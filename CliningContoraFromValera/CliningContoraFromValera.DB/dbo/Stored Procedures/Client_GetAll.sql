@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE [dbo].[Client_GetAll]
+	
+AS
+BEGIN
+
+	SELECT Id, FirstName, LastName, Email, Phone
+	FROM dbo.Client
+
+END
