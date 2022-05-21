@@ -12,6 +12,7 @@
 	@IsCommercial bit
 AS
 BEGIN
+SET IDENTITY_INSERT [Order] ON
 INSERT INTO dbo.[Order](
         Id,
         ClientId,
@@ -37,5 +38,6 @@ INSERT INTO dbo.[Order](
         @AddressId,
         @CountOfEmployees,
         @IsCommercial)
+SET IDENTITY_INSERT [Order] OFF
 END
  
