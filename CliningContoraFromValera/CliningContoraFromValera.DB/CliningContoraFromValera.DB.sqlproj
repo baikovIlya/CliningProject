@@ -81,5 +81,7 @@
     <Build Include="dbo\Stored Procedures\Client_Update.sql" />
     <Build Include="dbo\Stored Procedures\Client_Delete.sql" />
     <Build Include="dbo\Stored Procedures\ServiceType_Add.sql" />
+    <Build Include="dbo\Stored Procedures\ServiceType_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\ServiceType_GetAll.sql" />
   </ItemGroup>
 </Project>
