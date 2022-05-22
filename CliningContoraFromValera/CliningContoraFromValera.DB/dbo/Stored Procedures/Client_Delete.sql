@@ -4,7 +4,8 @@
 AS
 BEGIN
 
-DELETE FROM dbo.Client
-WHERE Id=@Id
+UPDATE dbo.Client
+SET IsDeleted = 1
+WHERE Id = @Id
 
 END
