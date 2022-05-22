@@ -100,5 +100,8 @@
     <Build Include="dbo\Stored Procedures\WorkArea_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\WorkArea_GetById.sql" />
     <Build Include="dbo\Stored Procedures\WorkArea_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Order_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Order_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Order_GetAll.sql" />
   </ItemGroup>
 </Project>
