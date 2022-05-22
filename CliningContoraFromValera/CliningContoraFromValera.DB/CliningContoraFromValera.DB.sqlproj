@@ -82,5 +82,6 @@
     <Build Include="dbo\Stored Procedures\Client_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Employee_Add.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Update.sql" />
   </ItemGroup>
 </Project>
