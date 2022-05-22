@@ -90,5 +90,10 @@
     <Build Include="dbo\Stored Procedures\Order_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Order_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Order_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Service_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Service_GetById.sql" />
   </ItemGroup>
 </Project>
