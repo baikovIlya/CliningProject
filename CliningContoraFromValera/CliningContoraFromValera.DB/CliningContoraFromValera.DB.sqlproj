@@ -115,5 +115,8 @@
     <Build Include="dbo\Stored Procedures\Employee_Order_Add.sql" />
     <Build Include="dbo\Stored Procedures\Employee_Order_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Employee_Order_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Service_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Service_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Service_GetAll.sql" />
   </ItemGroup>
 </Project>
