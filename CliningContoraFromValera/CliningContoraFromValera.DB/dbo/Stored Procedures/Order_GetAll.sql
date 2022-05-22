@@ -5,5 +5,6 @@ BEGIN
 
 	SELECT Id, ClientId, [Date], StartTime, EstimatedEndTime, EndTime, Price, [Status], AddressId, CountOfEmployees, IsCommercial
 	FROM dbo.[Order]
+	WHERE (IsDeleted = 0)
 
 END

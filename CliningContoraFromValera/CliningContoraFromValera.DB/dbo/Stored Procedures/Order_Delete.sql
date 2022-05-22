@@ -4,7 +4,8 @@
 AS
 BEGIN
 
-DELETE FROM dbo.[Order]
+UPDATE dbo.[Order]
+SET IsDeleted = 1
 WHERE Id=@Id
 
 END
