@@ -17,13 +17,5 @@ VALUES(
 	@Email,
 	@Phone)
 
-SET @Id=SCOPE_IDENTITY()
-
-SELECT
-FirstName = @FirstName,
-LastName = @LastName,
-Email = @Email,
-Phone = @Phone
-FROM dbo.Client
-WHERE Id = @Id
+SELECT @@IDENTITY
 END
