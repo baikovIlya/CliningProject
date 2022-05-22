@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Employee_UpdateById]
+﻿CREATE PROCEDURE [dbo].[Employee_Update]
 	@Id int,
 	@FirstName NVARCHAR(50),
 	@LastName NVARCHAR(50),
