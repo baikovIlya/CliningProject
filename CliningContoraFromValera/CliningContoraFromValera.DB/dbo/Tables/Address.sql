@@ -4,6 +4,7 @@
     [Building]   NVARCHAR (50) NOT NULL,
     [Room]       NVARCHAR (50) NULL,
     [WorkAreaId] INT           NOT NULL,
+    [IsDeleted]  bit default 0 NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([WorkAreaId]) REFERENCES [dbo].[WorkArea] ([id])
 );

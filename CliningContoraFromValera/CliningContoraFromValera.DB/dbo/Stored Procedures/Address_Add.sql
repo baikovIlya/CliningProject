@@ -16,14 +16,5 @@ VALUES(
 	@Building,
 	@Room,
 	@WorkAreaId)
-
-SET @Id=SCOPE_IDENTITY()
-
-SELECT
-Street = @Street,
-Building = @Building,
-Room = @Room,
-WorkAreaId = @WorkAreaId
-FROM dbo.[Address]
-WHERE Id = @Id
+SELECT @@IDENTITY
 END

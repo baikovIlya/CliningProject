@@ -4,7 +4,8 @@
 AS
 BEGIN
 
-DELETE FROM dbo.Address
+UPDATE dbo.Address
+SET IsDeleted = 1
 WHERE Id=@Id
 
 END
