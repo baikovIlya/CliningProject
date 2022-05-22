@@ -11,10 +11,5 @@ VALUES (
 	@Name
 	)
 
-SET @Id = SCOPE_IDENTITY()
-
-SELECT 
-[Name] = @Name
-FROM [dbo].[ServiceType]
-WHERE Id=@Id
+SELECT @@IDENTITY
 END
