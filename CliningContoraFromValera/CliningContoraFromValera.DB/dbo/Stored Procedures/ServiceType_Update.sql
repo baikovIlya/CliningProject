@@ -6,7 +6,7 @@ AS
 BEGIN
 
 UPDATE [dbo].[ServiceType]
-SET Name = @Name
+SET [Name] = @Name
 WHERE Id = @Id
 
 END

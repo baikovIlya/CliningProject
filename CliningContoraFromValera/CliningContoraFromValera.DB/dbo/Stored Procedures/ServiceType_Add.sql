@@ -14,7 +14,7 @@ VALUES (
 SET @Id = SCOPE_IDENTITY()
 
 SELECT 
-Name = @Name
+[Name] = @Name
 FROM [dbo].[ServiceType]
 WHERE Id=@Id
 END

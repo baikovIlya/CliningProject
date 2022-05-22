@@ -4,7 +4,7 @@
 AS
 BEGIN
 
-SELECT Id, Name
+SELECT Id, [Name]
 FROM [dbo].[ServiceType]
 WHERE (Id = @Id)
 
