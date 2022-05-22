@@ -14,13 +14,5 @@ VALUES(
 	@OrderId,
 	@ServiceId,
 	@Count)
-
-SET @Id=SCOPE_IDENTITY()
-
-SELECT
-    OrderId = @OrderId,
-    ServiceId = @ServiceId, 
-	[Count] = @Count
-FROM dbo.Service_Order
-WHERE Id = @Id
+SELECT @@IDENTITY
 END

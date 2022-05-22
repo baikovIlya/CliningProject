@@ -83,7 +83,5 @@
     <Build Include="dbo\Stored Procedures\Service_Order_Add.sql" />
     <Build Include="dbo\Stored Procedures\Service_Order_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Service_Order_GetAll.sql" />
-    <Build Include="dbo\Stored Procedures\Service_Order_GetById.sql" />
-    <Build Include="dbo\Stored Procedures\Service_Order_Update.sql" />
   </ItemGroup>
 </Project>
