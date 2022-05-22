@@ -107,5 +107,10 @@
     <Build Include="dbo\Stored Procedures\Employee_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Employee_Update.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Address_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Address_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Address_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Address_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Address_Update.sql" />
   </ItemGroup>
 </Project>
