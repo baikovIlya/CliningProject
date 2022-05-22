@@ -5,8 +5,8 @@
 AS
 BEGIN
 INSERT INTO dbo.Employee_Service(
-	@EmployeeId,
-	@ServiceId)
+	EmployeeId,
+	ServiceId)
 
 VALUES(
 	@EmployeeId,
