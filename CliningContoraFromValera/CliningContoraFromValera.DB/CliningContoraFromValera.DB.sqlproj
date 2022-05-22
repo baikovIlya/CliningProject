@@ -112,5 +112,8 @@
     <Build Include="dbo\Stored Procedures\Address_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Address_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Address_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Order_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Order_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Order_GetAll.sql" />
   </ItemGroup>
 </Project>
