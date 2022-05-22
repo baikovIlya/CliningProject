@@ -6,8 +6,8 @@ BEGIN
 		E.FirstName,
 		E.LastName,
 		E.Phone,
-		E.WorkTimeId,
-		E.IsDeleted
+		E.WorkTimeId
+		
 	FROM dbo.[Employee] E
 	WHERE (E.IsDeleted = 0)
 END
