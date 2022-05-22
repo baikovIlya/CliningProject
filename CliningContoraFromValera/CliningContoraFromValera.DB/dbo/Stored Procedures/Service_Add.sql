@@ -26,16 +26,5 @@ VALUES(
 	@ServiceTypeId,
 	@EstimatedTime)
 
-SET @Id=SCOPE_IDENTITY()
-
-SELECT 
-[Name] = @Name,
-[Description] = @Description,
-Price = @Price,
-CommercialPrice = @CommercialPrice,
-Unit = @Unit,
-ServiceTypeId = @ServiceTypeId,
-EstimatedTime = @EstimatedTime
-FROM dbo.[Service]
-WHERE Id = @Id
+SELECT @@IDENTITY 
 END
