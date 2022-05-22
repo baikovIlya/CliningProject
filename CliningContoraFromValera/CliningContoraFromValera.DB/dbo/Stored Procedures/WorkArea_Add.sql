@@ -7,10 +7,6 @@ INSERT INTO dbo.WorkArea(
 	[Name])
 VALUES(
 	@Name)
-SET @Id=SCOPE_IDENTITY()
 
-SELECT
-[Name] = @Name
-FROM dbo.WorkArea
-WHERE Id = @Id
+SELECT @@IDENTITY
 END

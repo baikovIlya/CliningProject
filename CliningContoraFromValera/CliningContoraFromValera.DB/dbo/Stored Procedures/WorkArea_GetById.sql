@@ -5,6 +5,6 @@ BEGIN
 
 	SELECT Id, [Name]
 	FROM dbo.WorkArea
-	WHERE Id=@Id
+	WHERE Id=@Id AND (IsDeleted = 0)
 
 END
