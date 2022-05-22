@@ -5,7 +5,7 @@
 AS
 BEGIN
 INSERT INTO [dbo].[ServiceType] (
-	Name
+	[Name]
 	)
 VALUES (
 	@Name
