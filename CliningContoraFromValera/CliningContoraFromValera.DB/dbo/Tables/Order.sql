@@ -10,6 +10,7 @@
     [AddressId]        INT             NOT NULL,
     [CountOfEmployees] INT             NOT NULL,
     [IsCommercial]     BIT             NOT NULL,
+    [IsDeleted]        bit default 0   NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([AddressId]) REFERENCES [dbo].[Address] ([Id]),
     FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id])
