@@ -126,5 +126,6 @@
     <Build Include="dbo\Stored Procedures\WorkTime_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_GetById.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_Update.sql" />
+    <Build Include="dbo\Stored Procedures\WorkTime_Delete.sql" />
   </ItemGroup>
 </Project>
