@@ -1,22 +1,25 @@
 ﻿CREATE PROCEDURE [dbo].[WorkTime_Add]
 @Date nvarchar(255),
-@StartTime time,
-@FinishTime time
+@StartTime nvarchar(10),
+@FinishTime nvarchar(10),
+@EmployeeId int
 AS
 BEGIN
 	INSERT INTO dbo.WorkTime
 	(
 	[Date],
 	[StartTime],
-	[FinishTime]
+	[FinishTime],
+	[EmployeeId]
 	)
 	
 	VALUES
 	(
 	@Date,
 	@StartTime,
-	@FinishTime
+	@FinishTime,
+	@EmployeeId
 )
 
-SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY]
+SELECT @@IDENTITY
 END
