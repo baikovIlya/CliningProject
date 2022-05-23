@@ -5,7 +5,7 @@
     @WorkTimeId INT
 AS
 BEGIN
-	INSERT INTO dbo.[Employee] ([FirstName], [LastName], [Phone], [WorkTimeId])
+	INSERT INTO dbo.[Employee] ([FirstName], [LastName], [Phone])
 	VALUES (@FirstName, @LastName, @Phone, @WorkTimeId)
 	SELECT @@IDENTITY
 END

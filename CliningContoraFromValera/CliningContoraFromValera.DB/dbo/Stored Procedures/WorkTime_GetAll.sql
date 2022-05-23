@@ -3,11 +3,11 @@
 AS
 Begin
 Select 	
-	[Id],
+    Id,
 	[Date],
-	[StartTime],
-	[FinishTime],
-	[EmployeeId]
+	StartTime,
+	FinishTime,
+	EmployeeId
 From dbo.[WorkTime] 
 Where (IsDeleted = 0)
 End

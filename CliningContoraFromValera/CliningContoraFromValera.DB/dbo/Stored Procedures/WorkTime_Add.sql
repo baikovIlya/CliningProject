@@ -8,9 +8,9 @@ BEGIN
 	INSERT INTO dbo.WorkTime
 	(
 	[Date],
-	[StartTime],
-	[FinishTime],
-	[EmployeeId]
+	StartTime,
+	FinishTime,
+	EmployeeId
 	)
 	
 	VALUES

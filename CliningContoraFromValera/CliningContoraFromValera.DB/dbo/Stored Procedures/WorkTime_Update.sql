@@ -9,8 +9,8 @@ Begin
 update dbo.WorkTime
 set
 [Date] = @Date,
-[StartTime] = @StartTime,
-[FinishTime] = @FinishTime,
-[EmployeeId] = @EmployeeId
+StartTime = @StartTime,
+FinishTime = @FinishTime,
+EmployeeId = @EmployeeId
 where Id = @Id
 End

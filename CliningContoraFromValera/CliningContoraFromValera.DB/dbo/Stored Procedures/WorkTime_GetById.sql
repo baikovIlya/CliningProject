@@ -3,11 +3,11 @@
 AS
 BEGIN
 	SELECT 
-	[Id],
+	Id,
 	[Date],
-	[StartTime],
-	[FinishTime],
-	[EmployeeId]
+	StartTime,
+	FinishTime,
+	EmployeeId
 	FROM dbo.[WorkTime] 
 	WHERE Id = @Id
 END	

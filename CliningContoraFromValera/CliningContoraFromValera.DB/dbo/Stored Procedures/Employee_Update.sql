@@ -10,7 +10,6 @@ BEGIN
 	SET 
 		FirstName = @FirstName,
 		LastName = @LastName,
-		Phone = @Phone,
-		WorkTimeId = @WorkTimeId
+		Phone = @Phone
 	WHERE Id = @Id
 END
