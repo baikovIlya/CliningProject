@@ -6,7 +6,7 @@
 	@EstimatedEndTime nvarchar(10),
 	@EndTime nvarchar(10),
 	@Price decimal(10,2),
-	@Status nvarchar(1),
+	@Status nvarchar(50),
 	@AddressId int,
 	@CountOfEmployees int,
 	@IsCommercial bit
