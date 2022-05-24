@@ -5,7 +5,7 @@ AS
 BEGIN
 
 SELECT Id, [Name]
-FROM [dbo].[ServiceType]
-WHERE (Id = @Id)
+FROM [dbo].[ServiceType] ST
+WHERE (Id = @Id) AND (ST.IsDeleted = 0)
 
 END
