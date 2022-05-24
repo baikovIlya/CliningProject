@@ -5,6 +5,5 @@ BEGIN
 
 	SELECT Id, [Name]
 	FROM dbo.WorkArea
-	WHERE (IsDeleted = 0)
 
 END
