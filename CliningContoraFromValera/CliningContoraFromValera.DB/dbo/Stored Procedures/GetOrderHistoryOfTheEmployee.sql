@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[GetOrderHistoryOfTheEmployee]
 AS
 BEGIN
-	SELECT E.Id, O.[Date], ST.[Name], S.[Name], SO.[Count], O.Price, C.FirstName, C.LastName,
+	SELECT E.Id, E.FirstName, E.LastName, O.[Date], ST.[Name], S.[Name], SO.[Count], O.Price, C.FirstName, C.LastName,
 	W.[Name], A.Street, A.Building, A.Room, O.[Status] FROM [dbo].[Employee] AS E
 	join [dbo].[Employee_Order] AS EO ON E.Id = EO.EmployeeId
 	join [dbo].[Order] AS O ON EO.OrderId = O.Id
