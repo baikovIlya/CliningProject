@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[WorkTime_Update]
+﻿CREATE PROCEDURE [dbo].[WorkTime_UpdateById]
 @Id int,
 @Date nvarchar(255),
 @StartTime nvarchar(10),

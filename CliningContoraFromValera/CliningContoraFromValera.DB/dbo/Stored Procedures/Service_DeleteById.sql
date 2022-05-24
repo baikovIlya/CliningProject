@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Service_Delete]
+﻿CREATE PROCEDURE [dbo].[Service_DeleteById]
 	@Id int
 AS 
 BEGIN 

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Address_Update]
+﻿CREATE PROCEDURE [dbo].[Address_UpdateById]
 	@Id int,
 	@Street nvarchar(50),
 	@Building nvarchar(50),

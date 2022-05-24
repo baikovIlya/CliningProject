@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[WorkArea_Update]
+﻿CREATE PROCEDURE [dbo].[WorkArea_UpdateById]
 	@Id int,
 	@Name nvarchar(30)
 

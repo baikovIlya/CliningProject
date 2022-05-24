@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Service_Update]
+﻿CREATE PROCEDURE [dbo].[Service_UpdateById]
 	@Id int,
 	@Name nvarchar(100),
 	@Description nvarchar(255),
