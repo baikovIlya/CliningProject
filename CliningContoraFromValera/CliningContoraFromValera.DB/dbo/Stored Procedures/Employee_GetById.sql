@@ -8,5 +8,5 @@ BEGIN
 		E.LastName,
 		E.Phone
 	FROM dbo.[Employee] E
-	WHERE Id = @Id
+	WHERE Id = @Id AND (E.IsDeleted = 0)
 END	
