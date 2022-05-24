@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Client_Update]
+﻿CREATE PROCEDURE [dbo].[Client_UpdateById]
 	@Id int,
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50),

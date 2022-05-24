@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Order_Update]
+﻿CREATE PROCEDURE [dbo].[Order_UpdateById]
 	@id int,
 	@ClientId int,
 	@Date nvarchar(10),

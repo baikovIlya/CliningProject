@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Employee_Delete]
+﻿CREATE PROCEDURE [dbo].[Employee_DeleteById]
 	@Id int
 
 AS

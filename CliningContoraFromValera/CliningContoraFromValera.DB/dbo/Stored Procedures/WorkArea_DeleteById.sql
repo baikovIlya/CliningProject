@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[WorkArea_Delete]
+﻿CREATE PROCEDURE [dbo].[WorkArea_DeleteById]
 	@Id int
 
 AS

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[WorkTime_Delete]
+﻿CREATE PROCEDURE [dbo].[WorkTime_DeleteById]
 	@Id int
 
 AS
