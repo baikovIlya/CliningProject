@@ -4,7 +4,7 @@ AS
 BEGIN
 
 	SELECT Id, [Name], [Description], Price, CommercialPrice, Unit, ServiceTypeId, EstimatedTime
-	FROM dbo.[Service]
-	WHERE Id=@Id
+	FROM dbo.[Service] S
+	WHERE Id=@Id AND (S.IsDeleted = 0)
 
 END
