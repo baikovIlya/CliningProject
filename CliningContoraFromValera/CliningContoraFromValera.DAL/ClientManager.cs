@@ -15,7 +15,7 @@ namespace CliningContoraFromValera.DAL
                 connection.Open();
 
                 return connection.Query<ClientDTO>(
-                    "Client_GetAll",
+                    StoredProcedures.Client_GetAll,
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }
@@ -28,11 +28,67 @@ namespace CliningContoraFromValera.DAL
                 connection.Open();
 
                 return connection.QuerySingle<ClientDTO>(
-                    "Client_GetById",
+                    StoredProcedures.Client_GetById,
                     param: new { id = id },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
+
+        public void AddClient(int id, string firstName, string lastName, string email, string phone)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingle<ClientDTO>(
+                    StoredProcedures.Client_Add,
+                    param: new { 
+                        id = id,
+                        FirstName = firstName,
+                        LastName = lastName, 
+                        Email = email,
+                        Phone = phone},
+                    commandType: System.Data.CommandType.StoredProcedure
+                    );
+            }
+        }
+
+        public void UpdateClientById(int id, string firstName, string lastName, string email, string phone)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingleOrDefault<ClientDTO>(
+                    StoredProcedures.Client_UpdateById,
+                    param: new
+                    {
+                        id = id,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Email = email,
+                        Phone = phone
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure
+                    );
+            }
+        }
+
+        public void DeleteClientById(int id)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingleOrDefault<ClientDTO>(
+                    StoredProcedures.Client_DeleteById,
+                    param: new { id = id },
+                    commandType: System.Data.CommandType.StoredProcedure
+                    );
+            }
+        }
+
+
     }
 }
