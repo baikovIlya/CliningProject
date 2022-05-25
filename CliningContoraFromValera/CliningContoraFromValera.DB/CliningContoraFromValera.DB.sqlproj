@@ -130,5 +130,6 @@
     <Build Include="dbo\Stored Procedures\GetEmployeeSchedule.sql" />
     <Build Include="dbo\Stored Procedures\GetOrderHistoryOfTheEmployee.sql" />
     <Build Include="dbo\Stored Procedures\ChangeEmployeeScheduleByEmployeeIdByDate.sql" />
+    <Build Include="dbo\Stored Procedures\WorkArea_DeleteById.sql" />
   </ItemGroup>
 </Project>
