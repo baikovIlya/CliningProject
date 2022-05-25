@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[GetOrderHistoryOfTheEmployee]
+	@Id int
 AS
 BEGIN
 	SELECT E.Id, E.FirstName, E.LastName, O.[Date], ST.[Name], S.[Name], SO.[Count], O.Price, C.FirstName, C.LastName,
@@ -11,5 +12,5 @@ BEGIN
 	join [dbo].[Service_Order] AS SO ON O.Id = SO.OrderId
 	join [dbo].[Service] AS S ON SO.ServiceId = S.Id
 	join [dbo].[ServiceType] AS ST ON S.Id = ST.Id
-	WHERE O.IsDeleted = 0
+	WHERE O.IsDeleted = 0 AND (E.Id = @Id)
 END
