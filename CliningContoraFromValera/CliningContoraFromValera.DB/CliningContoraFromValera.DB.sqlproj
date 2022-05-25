@@ -125,10 +125,10 @@
     <Build Include="dbo\Stored Procedures\WorkTime_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_GetById.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_UpdateById.sql" />
-    <Build Include="dbo\Stored Procedures\WorkTime_DeleteById.sql" />
     <Build Include="dbo\Stored Procedures\GetAllEmployeesInfo.sql" />
     <Build Include="dbo\Stored Procedures\GetAllEmployeesSkills.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeeSchedule.sql" />
     <Build Include="dbo\Stored Procedures\GetOrderHistoryOfTheEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\ChangeEmployeeScheduleByEmployeeIdByDate.sql" />
   </ItemGroup>
 </Project>
