@@ -129,5 +129,6 @@
     <Build Include="dbo\Stored Procedures\GetAllEmployeesInfo.sql" />
     <Build Include="dbo\Stored Procedures\GetAllEmployeesSkills.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeeSchedule.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrderHistoryOfTheEmployee.sql" />
   </ItemGroup>
 </Project>
