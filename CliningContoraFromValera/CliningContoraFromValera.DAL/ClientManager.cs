@@ -2,7 +2,7 @@
 using Dapper;
 using System.Data.SqlClient;
 
-namespace CoCoCoWorking.DAL
+namespace CliningContoraFromValera.DAL
 {
     public class ClientManager
     {
