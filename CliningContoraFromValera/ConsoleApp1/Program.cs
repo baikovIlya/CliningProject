@@ -17,10 +17,15 @@ using CliningContoraFromValera.DAL.DTOs;
 
 var SM = new ServiceManager();
 
-List<ServiceDTO> service = SM.GetAllServices();
+//List<ServiceDTO> service = SM.GetAllServices();
 
-foreach (var i in service)
-{
-    i.ToString();
-    Console.WriteLine(i.ToString());
-}
+//foreach (var i in service)
+//{
+//    i.ToString();
+//    Console.WriteLine(i.ToString());
+//}
+
+Console.WriteLine(SM.GetServicetById(3));
+
+SM.UpdateServiceById(4, "xbcnbv", "qqqqqqqqqqqqqqqqqqqqqqq", 1000, 2333, "v2", 1, "12");
+SM.DeleteServiceById(1);
