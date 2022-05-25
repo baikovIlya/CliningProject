@@ -8,7 +8,7 @@ namespace CliningContoraFromValera.DAL
     {
         public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
 
-        public List<ClientDTO> GetAllCustomers()
+        public List<ClientDTO> GetAllClients()
         {
             using (var connection = new SqlConnection(connectionString))
             {
