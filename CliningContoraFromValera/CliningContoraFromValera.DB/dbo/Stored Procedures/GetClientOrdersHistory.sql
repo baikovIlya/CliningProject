@@ -11,5 +11,5 @@ SELECT C.Id, C.FirstName, C.LastName, O.Id, ST.[Name], S.[Name], WA.[Name], A.[S
 	join [dbo].[Address] as A on O.AddressId = A.Id
 	join [dbo].[WorkArea] as WA on A.WorkAreaId = WA.id
 
-	WHERE (C.Id = @Id AND C.IsDeleted = 0)
+	WHERE C.Id = @Id
 END

@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[Order_Add]
-	@id int,
 	@ClientId int,
 	@Date nvarchar(10),
 	@StartTime nvarchar(10),

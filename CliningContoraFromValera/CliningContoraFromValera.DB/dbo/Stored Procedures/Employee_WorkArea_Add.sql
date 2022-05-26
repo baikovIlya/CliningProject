@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[Employee_WorkArea_Add]
-	@Id int,
 	@WorkAreaId int,
 	@EmployeeId int
 AS
