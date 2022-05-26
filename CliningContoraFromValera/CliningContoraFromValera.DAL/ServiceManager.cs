@@ -1,5 +1,4 @@
-﻿using CliningContoraFromValera.DAL;
-using Dapper;
+﻿using Dapper;
 using System.Data.SqlClient;
 using CliningContoraFromValera.DAL.DTOs;
 
@@ -36,7 +35,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddService(int id, string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
+        public void AddService(string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -46,7 +45,6 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Service_Add,
                     param: new
                     {
-                        id = id,
                         Name = name,
                         Description = description,
                         Price = price,
