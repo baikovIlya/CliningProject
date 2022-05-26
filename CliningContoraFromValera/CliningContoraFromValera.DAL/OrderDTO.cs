@@ -19,5 +19,12 @@ namespace CliningContoraFromValera.DAL
         public bool IsCommercial { get; set; }
         public int ClientId { get; set; }
         public int AddressId { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id={Id} Date={Date} StartTime={StartTime} EstimatedEndTime={EstimatedEndTime} EndTime={EndTime}" +
+                $"SummOfOrder={SummOfOrder} Status={Status} CountOfEmployees={CountOfEmployees} IsCommercial={IsCommercial}" +
+                $"CliendId={ClientId} AddressId={AddressId}";
+        }
     }
 }
