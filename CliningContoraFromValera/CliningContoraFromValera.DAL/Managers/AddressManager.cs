@@ -1,16 +1,13 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.DAL
 {
     public class AddressManager
     {
-        public string _connectionString = @"Server=.\SQLEXPRESS;Database=CliningContoraFromValera;Trusted_Connection=True;";
-
         public void AddAddress(string street, string building, string room, int workAreaId)
         {
-            using(var connection = new SqlConnection(_connectionString))
+            using(var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -31,7 +28,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteAddressById(int id)
         {
-            using(var connection = new SqlConnection(_connectionString))
+            using(var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -46,7 +43,7 @@ namespace CliningContoraFromValera.DAL
 
         public void UpdateAddressById(int id, string street, string building, string room, int workAreaId)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -68,7 +65,7 @@ namespace CliningContoraFromValera.DAL
 
         public List<AddressDTO> GetAllAddresses()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -82,7 +79,7 @@ namespace CliningContoraFromValera.DAL
 
         public AddressDTO GetAddressById(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
