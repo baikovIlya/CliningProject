@@ -1,6 +1,4 @@
-﻿
-
-namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL
 {
     public class ServiceDTO
     {

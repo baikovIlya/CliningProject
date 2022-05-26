@@ -1,17 +1,13 @@
-﻿using CliningContoraFromValera.DAL;
-using Dapper;
+﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.DAL
 {
     public class ServiceManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<ServiceDTO> GetAllServices()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -24,7 +20,7 @@ namespace CliningContoraFromValera.DAL
 
         public ServiceDTO GetServicetById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -36,9 +32,9 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddService(int id, string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
+        public void AddService(string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -46,7 +42,6 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Service_Add,
                     param: new
                     {
-                        id = id,
                         Name = name,
                         Description = description,
                         Price = price,
@@ -62,7 +57,7 @@ namespace CliningContoraFromValera.DAL
 
         public void UpdateServiceById(int id, string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -86,7 +81,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteServiceById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -97,11 +92,5 @@ namespace CliningContoraFromValera.DAL
                     );
             }
         }
-
-
-
-
-
-
     }
 }
