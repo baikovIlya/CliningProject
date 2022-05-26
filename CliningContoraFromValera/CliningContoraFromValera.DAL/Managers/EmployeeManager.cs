@@ -5,11 +5,9 @@ namespace CliningContoraFromValera.DAL
 {
     public class EmployeeManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<EmployeeDTO> GetAllEmployees()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -22,7 +20,7 @@ namespace CliningContoraFromValera.DAL
 
         public EmployeeDTO GetEmployeeByID(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -36,7 +34,7 @@ namespace CliningContoraFromValera.DAL
 
         public void AddEmployee(string firstName, string lastName, string phone)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -55,7 +53,7 @@ namespace CliningContoraFromValera.DAL
 
         public void UpdateEmployeeById(int id, string firstName, string lastName, string phone)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -75,7 +73,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteEmployeeById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 

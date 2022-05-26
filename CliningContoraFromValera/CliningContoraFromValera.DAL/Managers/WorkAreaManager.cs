@@ -5,11 +5,9 @@ namespace CliningContoraFromValera.DAL
 {
     public class WorkAreaManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<WorkAreaDTO> GetAllWorkAreas()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -22,7 +20,7 @@ namespace CliningContoraFromValera.DAL
 
         public WorkAreaDTO GetWorkAreaByID(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -36,7 +34,7 @@ namespace CliningContoraFromValera.DAL
 
         public void AddWorkArea(string Name)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -53,7 +51,7 @@ namespace CliningContoraFromValera.DAL
 
         public void UpdateClientById(int id, string Name)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -71,7 +69,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteClientById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 

@@ -6,11 +6,9 @@ namespace CliningContoraFromValera.DAL
 {
     public class ClientManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<ClientDTO> GetAllClients()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -23,7 +21,7 @@ namespace CliningContoraFromValera.DAL
 
         public ClientDTO GetClientByID(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -37,7 +35,7 @@ namespace CliningContoraFromValera.DAL
 
         public void AddClient(string firstName, string lastName, string email, string phone)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -55,7 +53,7 @@ namespace CliningContoraFromValera.DAL
 
         public void UpdateClientById(int id, string firstName, string lastName, string email, string phone)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -76,7 +74,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteClientById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 

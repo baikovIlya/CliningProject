@@ -5,11 +5,9 @@ namespace CliningContoraFromValera.DAL
 {
     public class WorkTimeManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<WorkTimeDTO> GetAllWorkTimes()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -22,7 +20,7 @@ namespace CliningContoraFromValera.DAL
 
         public WorkTimeDTO GetWorkTimeByID(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -36,7 +34,7 @@ namespace CliningContoraFromValera.DAL
 
         public void AddWorkTime(string date, string startTime, string finishTime, int employeeId)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -56,7 +54,7 @@ namespace CliningContoraFromValera.DAL
 
         public void UpdateWorkTimeById(int id, string date, string startTime, string finishTime, int employeeId)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -77,7 +75,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteWorkTimeById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -91,7 +89,7 @@ namespace CliningContoraFromValera.DAL
 
         public void ChangeEmployeeScheduleByEmployeeIdByDate(int id, string date, string startTime, string finishTime)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
