@@ -1,16 +1,13 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
 
-namespace CliningContoraFromValera.DAL.Managers
+namespace CliningContoraFromValera.DAL
 {
     public class ServiceTypeManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<ServiceTypeDTO> GetAllServices()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -23,7 +20,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
         public ServiceTypeDTO GetServicetById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -37,7 +34,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
         public void AddServiceType(string name)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -51,7 +48,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
         public void UpdateServiceTypeById(int id, string name)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -65,7 +62,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
         public void DeleteServiceTypeById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
