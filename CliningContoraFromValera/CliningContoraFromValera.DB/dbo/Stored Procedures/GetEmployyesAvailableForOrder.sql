@@ -1,14 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[GetEmployyesAvailableForOrder]
-@Date nvarchar (10),
+@Date date,
 @ServiceId int,
 @WorkAreaId int
 AS
 BEGIN
-	  SELECT Empl.FirstName, Empl.LastName, WT.StartTime, WT.FinishTime, Ser.[Name], Empl.Phone FROM [dbo].[Employee] AS Empl
-	  join dbo.WorkTime as WT on Empl.Id = WT.EmployeeId
-	  join dbo.Employee_Service as EmpSer on Empl.Id = EmpSer.EmployeeId
-	  join dbo.[Service] as Ser on EmpSer.ServiceId = Ser.Id
-	  join dbo.Employee_WorkArea as EmpArea on Empl.Id = EmpArea.EmployeeId
-	  join dbo.WorkArea as WAr on EmpArea.WorkAreaId = WAr.id
-      WHERE Empl.IsDeleted = 0 AND WT.[Date] = @Date AND Ser.Id = @ServiceId AND WAr.id = @WorkAreaId
+	  SELECT E.FirstName, E.LastName, WT.StartTime, WT.FinishTime, S.[Name], E.Phone FROM [dbo].[Employee] AS E
+	  join dbo.WorkTime as WT on E.Id = WT.EmployeeId
+	  join dbo.Employee_Service as ES on E.Id = ES.EmployeeId
+	  join dbo.[Service] as S on ES.ServiceId = S.Id
+	  join dbo.Employee_WorkArea as EA on E.Id = EA.EmployeeId
+	  join dbo.WorkArea as WA on EA.WorkAreaId = WA.id
+      WHERE E.IsDeleted = 0 AND WT.[Date] = @Date AND S.Id = @ServiceId AND WA.id = @WorkAreaId
 END
