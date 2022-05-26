@@ -12,5 +12,5 @@ BEGIN
 	join [dbo].[Service_Order] AS SO ON O.Id = SO.OrderId
 	join [dbo].[Service] AS S ON SO.ServiceId = S.Id
 	join [dbo].[ServiceType] AS ST ON S.Id = ST.Id
-	WHERE O.IsDeleted = 0 AND (E.Id = @Id)
+	WHERE O.IsDeleted = 0 AND E.Id = @Id
 END

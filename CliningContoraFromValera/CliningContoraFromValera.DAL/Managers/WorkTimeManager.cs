@@ -32,7 +32,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddWorkTime(string date, string startTime, string finishTime, int employeeId)
+        public void AddWorkTime(DateOnly date, TimeOnly startTime, TimeOnly finishTime, int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -52,7 +52,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void UpdateWorkTimeById(int id, string date, string startTime, string finishTime, int employeeId)
+        public void UpdateWorkTimeById(int id, DateOnly date, TimeOnly startTime, TimeOnly finishTime, int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -87,7 +87,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void ChangeEmployeeScheduleByEmployeeIdByDate(int id, string date, string startTime, string finishTime)
+        public void ChangeEmployeeScheduleByEmployeeIdByDate(int id, DateOnly date, TimeOnly startTime, TimeOnly finishTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
