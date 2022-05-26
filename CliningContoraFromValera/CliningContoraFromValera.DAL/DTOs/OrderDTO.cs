@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CliningContoraFromValera.DAL
+﻿namespace CliningContoraFromValera.DAL
 {
     public class OrderDTO
     {
@@ -12,8 +6,8 @@ namespace CliningContoraFromValera.DAL
         public string Date { get; set; }
         public TimeOnly StartTime { get; set; }
         public TimeOnly EstimatedEndTime { get; set; }
-        public TimeOnly EndTime { get; set; }
-        public decimal SummOfOrder { get; set; }
+        public TimeOnly? FinishTime { get; set; }
+        public decimal Price { get; set; }
         public string Status { get; set; }
         public int CountOfEmployees { get; set; }
         public bool IsCommercial { get; set; }
@@ -22,8 +16,8 @@ namespace CliningContoraFromValera.DAL
 
         public override string ToString()
         {
-            return $"Id={Id} Date={Date} StartTime={StartTime} EstimatedEndTime={EstimatedEndTime} EndTime={EndTime}" +
-                $"SummOfOrder={SummOfOrder} Status={Status} CountOfEmployees={CountOfEmployees} IsCommercial={IsCommercial}" +
+            return $"Id={Id} Date={Date} StartTime={StartTime} EstimatedEndTime={EstimatedEndTime} EndTime={FinishTime}" +
+                $"SummOfOrder={Price} Status={Status} CountOfEmployees={CountOfEmployees} IsCommercial={IsCommercial}" +
                 $"CliendId={ClientId} AddressId={AddressId}";
         }
     }

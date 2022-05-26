@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using System.Data.SqlClient;
 
 namespace CliningContoraFromValera.DAL
 {
     public class OrderManager
     {
-        public string connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
-
         public List<OrderDTO> GetAllOrders()
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -27,7 +20,7 @@ namespace CliningContoraFromValera.DAL
 
         public OrderDTO GetOrderById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -38,11 +31,11 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddOrder(int id, string date, TimeOnly startTime, TimeOnly estimatedEndTime, 
+        public void AddOrder(DateOnly date, TimeOnly startTime, TimeOnly estimatedEndTime, 
             TimeOnly endTime, decimal summOfOrder, string status, int countOfEmployees, bool isCommercial,
             int clientId, int addressId)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -50,7 +43,6 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Order_Add,
                     param: new
                     {
-                        Id = id,
                         Date = date,
                         StartTime = startTime,
                         EstimatedEndTime = estimatedEndTime,
@@ -66,11 +58,11 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void UpdateOrderById(int id, string date, TimeOnly startTime, TimeOnly estimatedEndTime,
+        public void UpdateOrderById(int id, DateOnly date, TimeOnly startTime, TimeOnly estimatedEndTime,
             TimeOnly endTime, decimal summOfOrder, string status, int countOfEmployees, bool isCommercial,
             int clientId, int addressId)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
@@ -96,7 +88,7 @@ namespace CliningContoraFromValera.DAL
 
         public void DeleteOrderById(int id)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
