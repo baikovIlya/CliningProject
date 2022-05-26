@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[GetEmployeeSchedule]
-@MinDate nvarchar (10),
-@MaxDate nvarchar (10)
+@MinDate date,
+@MaxDate date
 AS
 BEGIN
 	  SELECT E.Id, E.FirstName, E.LastName, WT.[Date], WT.StartTime, WT.FinishTime FROM [dbo].[Employee] AS E

@@ -32,7 +32,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddService(string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
+        public void AddService(string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, TimeOnly estimatedTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -55,7 +55,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void UpdateServiceById(int id, string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, string estimatedTime)
+        public void UpdateServiceById(int id, string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, TimeOnly estimatedTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {

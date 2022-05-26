@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[ChangeEmployeeScheduleByEmployeeIdByDate]
 @Id int,
-@Date nvarchar(10),
-@StartTime nvarchar(10),
-@FinishTime nvarchar(10)
+@Date date,
+@StartTime time,
+@FinishTime time
 AS
 BEGIN
 UPDATE dbo.WorkTime

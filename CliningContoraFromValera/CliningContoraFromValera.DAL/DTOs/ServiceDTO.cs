@@ -9,7 +9,7 @@
         public decimal CommercialPrice { get; set; }
         public string? Unit { get; set; }
         public int ServiceTypeId { get; set; }
-        public string EstimatedTime { get; set; }
+        public TimeOnly EstimatedTime { get; set; }
 
         public override string ToString()
         {
