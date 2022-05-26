@@ -1,4 +1,5 @@
 ﻿using CliningContoraFromValera.DAL;
+using CliningContoraFromValera.DAL.DTOs;
 
 //var CL = new ClientManager();
 
