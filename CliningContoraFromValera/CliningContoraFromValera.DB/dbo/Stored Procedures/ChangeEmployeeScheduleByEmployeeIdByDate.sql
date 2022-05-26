@@ -7,7 +7,6 @@ AS
 BEGIN
 UPDATE dbo.WorkTime
 SET
-[Date] = @Date,
 StartTime = @StartTime,
 FinishTime = @FinishTime
 WHERE EmployeeId = @Id AND [Date] = @Date
