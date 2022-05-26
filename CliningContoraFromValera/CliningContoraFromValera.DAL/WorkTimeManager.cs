@@ -99,6 +99,8 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.ChangeEmployeeScheduleByEmployeeIdByDate,
                     param: new
                     {
+                        id = id,
+                        Date = date,
                         StartTime = startTime,
                         FinishTime = finishTime
                     },
