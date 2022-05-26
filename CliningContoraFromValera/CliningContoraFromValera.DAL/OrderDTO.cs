@@ -10,9 +10,9 @@ namespace CliningContoraFromValera.DAL
     {
         public int Id { get; set; }
         public string Date { get; set; }
-        public string StartTime { get; set; }
-        public string EstimatedEndTime { get; set; }
-        public string EndTime { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EstimatedEndTime { get; set; }
+        public TimeOnly EndTime { get; set; }
         public decimal SummOfOrder { get; set; }
         public string Status { get; set; }
         public int CountOfEmployees { get; set; }
