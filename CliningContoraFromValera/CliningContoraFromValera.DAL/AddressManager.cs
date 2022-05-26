@@ -8,7 +8,7 @@ namespace CliningContoraFromValera.DAL
     {
         public string _connectionString = @"Server=.\SQLEXPRESS;Database=CliningContoraFromValera;Trusted_Connection=True;";
 
-        public void AddAddress(int id, string street, string building, string room, int workAreaId)
+        public void AddAddress(string street, string building, string room, int workAreaId)
         {
             using(var connection = new SqlConnection(_connectionString))
             {
@@ -19,7 +19,6 @@ namespace CliningContoraFromValera.DAL
                         StoredProcedures.Address_Add,
                         param: new 
                         {
-                            id = id,
                             street = street,
                             building = building,
                             room = room,
