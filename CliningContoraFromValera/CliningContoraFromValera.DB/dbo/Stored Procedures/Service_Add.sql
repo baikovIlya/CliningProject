@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[Service_Add]
-	@Id int,
 	@Name nvarchar(100),
 	@Description nvarchar(255),
 	@Price DECIMAL (10, 2),

@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[Client_Add]
-	@Id int,
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50),
 	@Email nvarchar(50),

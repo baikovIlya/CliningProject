@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[Service_Order_Add]
-	@Id int,
 	@OrderId int,
 	@ServiceId int, 
 	@Count int

@@ -34,7 +34,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddWorkArea(int id, string Name)
+        public void AddWorkArea(string Name)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -44,7 +44,6 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.WorkArea_Add,
                     param: new
                     {
-                        id = id,
                         Name = Name
                     },
                     commandType: System.Data.CommandType.StoredProcedure

@@ -34,7 +34,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddEmployee(int id, string firstName, string lastName, string phone)
+        public void AddEmployee(string firstName, string lastName, string phone)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -44,7 +44,6 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Employee_Add,
                     param: new
                     {
-                        id = id,
                         FirstName = firstName,
                         LastName = lastName,
                         Phone = phone

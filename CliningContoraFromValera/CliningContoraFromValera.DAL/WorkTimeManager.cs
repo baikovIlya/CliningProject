@@ -34,7 +34,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddWorkTime(int id, string date, string startTime, string finishTime, int employeeId)
+        public void AddWorkTime(string date, string startTime, string finishTime, int employeeId)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -44,7 +44,6 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.WorkTime_Add,
                     param: new
                     {
-                        id = id,
                         Date = date,
                         StartTime = startTime,
                         FinishTime = finishTime,

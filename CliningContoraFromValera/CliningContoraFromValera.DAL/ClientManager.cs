@@ -35,7 +35,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddClient(int id, string firstName, string lastName, string email, string phone)
+        public void AddClient(string firstName, string lastName, string email, string phone)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -44,7 +44,6 @@ namespace CliningContoraFromValera.DAL
                 connection.QuerySingle<ClientDTO>(
                     StoredProcedures.Client_Add,
                     param: new { 
-                        id = id,
                         FirstName = firstName,
                         LastName = lastName, 
                         Email = email,
