@@ -26,14 +26,12 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<OrderDTO>(
                     StoredProcedures.Order_GetById,
-                    param: new {Id = id},
+                    param: new {id = id},
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
 
-        public void AddOrder(DateOnly date, TimeOnly startTime, TimeOnly estimatedEndTime, 
-            TimeOnly endTime, decimal summOfOrder, string status, int countOfEmployees, bool isCommercial,
-            int clientId, int addressId)
+        public void AddOrder(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -43,24 +41,22 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Order_Add,
                     param: new
                     {
-                        Date = date,
-                        StartTime = startTime,
-                        EstimatedEndTime = estimatedEndTime,
-                        EndTime = endTime,
-                        SummOfOrder = summOfOrder,
-                        Status = status,
-                        CountOfEmployees = countOfEmployees,
-                        IsCommercial = isCommercial,
-                        ClientId = clientId,
-                        AddressId = addressId
+                        newOrder.Date,
+                        newOrder.StartTime,
+                        newOrder.EstimatedEndTime,
+                        newOrder.FinishTime,
+                        newOrder.Price,
+                        newOrder.Status,
+                        newOrder.CountOfEmployees,
+                        newOrder.IsCommercial,
+                        newOrder.ClientId,
+                        newOrder.AddressId
                     },
                     commandType: System.Data.CommandType.StoredProcedure);          
             }
         }
 
-        public void UpdateOrderById(int id, DateOnly date, TimeOnly startTime, TimeOnly estimatedEndTime,
-            TimeOnly endTime, decimal summOfOrder, string status, int countOfEmployees, bool isCommercial,
-            int clientId, int addressId)
+        public void UpdateOrderById(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -70,23 +66,23 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Order_UpdateById,
                     param: new
                     {
-                        Id = id,
-                        Date = date,
-                        StartTime = startTime,
-                        EstimatedEndTime = estimatedEndTime,
-                        EndTime = endTime,
-                        SummOfOrder = summOfOrder,
-                        Status = status,
-                        CountOfEmployees = countOfEmployees,
-                        IsCommercial = isCommercial,
-                        ClientId = clientId,
-                        AddressId = addressId
+                        newOrder.Id,
+                        newOrder.Date,
+                        newOrder.StartTime,
+                        newOrder.EstimatedEndTime,
+                        newOrder.FinishTime,
+                        newOrder.Price,
+                        newOrder.Status,
+                        newOrder.CountOfEmployees,
+                        newOrder.IsCommercial,
+                        newOrder.ClientId,
+                        newOrder.AddressId
                     },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
 
-        public void DeleteOrderById(int id)
+        public void DeleteOrderById(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -94,7 +90,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<OrderDTO>(
                     StoredProcedures.Order_DeleteById,
-                    param: new { Id = id },
+                    param: new { newOrder.Id },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
