@@ -6,7 +6,7 @@
     [CommercialPrice] DECIMAL (10, 2) NOT NULL,
     [Unit]            NVARCHAR (30)   NULL,
     [ServiceTypeId]   INT             NOT NULL,
-    [EstimatedTime]   TIME            NOT NULL,
+    [EstimatedTime]   TIME (0)        NOT NULL,
     [IsDeleted]       BIT DEFAULT 0   NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([ServiceTypeId]) REFERENCES [dbo].[ServiceType] ([Id])
