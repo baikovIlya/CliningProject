@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CliningContoraFromValera.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ClilingFromValera" Height="500" Width="800" Background="White">
     <Grid>
+        <TabControl x:Name="MainTabControl" Height="500" Width="800">
+            <TabItem Header="Клиенты">
+                <DataGrid Height="418" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,379,0"/>
+            </TabItem>
+
+
+            <TabItem Header="Заказы">
+            </TabItem>
+            <TabItem Header="Сотрудники">
+                
+            </TabItem>
+            <TabItem Header="График">
+            </TabItem>
+            <TabItem Header="Наши услуги">
+            </TabItem>
+            
+
+        </TabControl>
 
     </Grid>
 </Window>
