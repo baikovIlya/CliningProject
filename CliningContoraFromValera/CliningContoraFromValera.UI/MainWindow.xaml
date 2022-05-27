@@ -5,32 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CliningContoraFromValera.UI"
         mc:Ignorable="d"
-        Title="ClilingFromValera" Height="500" Width="800" Background="Transparent">
+        Title="ClilingFromValera" Height="500" Width="800" Background="White">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"></ColumnDefinition>
-            <ColumnDefinition Width="75*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Center" Height="484" VerticalAlignment="Center" Width="800">
+            <TabItem Header="Заказы">
+            </TabItem>
+            <TabItem Header="Сотрудники">
+            </TabItem>
+            <TabItem Header="Клиенты">
+            </TabItem>
+            <TabItem Header="График">
+            </TabItem>
+            <TabItem Header="Наши услуги">
+            </TabItem>
+        </TabControl>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="90*"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <Rectangle Grid.ColumnSpan="2" Fill="DarkSlateGray" />
-        <TextBlock Text="Клининг у Валеры: ты отдыхаешь, а Валерка сделает за тебя" 
-                   Grid.ColumnSpan="2"
-                   VerticalAlignment="Center"
-                   Foreground="White"
-                   Margin="30,0,0,0"
-                   FontSize="20" />
-
-        <StackPanel Grid.Row="1" Background="#FF2D464F">
-            <RadioButton Content="Главный экран"
-                         Height="40"
-                         Foreground="White"
-                         FontSize="16"
-                         Margin="0,20,0,0" />
-        </StackPanel>
     </Grid>
 </Window>
