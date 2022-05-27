@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public WorkTimeDTO GetWorkTimeByID(int id)
+        public WorkTimeDTO GetWorkTimeById(int id)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -32,7 +32,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddWorkTime(DateOnly date, TimeOnly startTime, TimeOnly finishTime, int employeeId)
+        public void AddWorkTime(WorkTimeDTO newWokrTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -42,17 +42,17 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.WorkTime_Add,
                     param: new
                     {
-                        Date = date,
-                        StartTime = startTime,
-                        FinishTime = finishTime,
-                        EmployeeId = employeeId
+                        newWokrTime.Date,
+                        newWokrTime.StartTime,
+                        newWokrTime.FinishTime,
+                        newWokrTime.EmployeeId
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void UpdateWorkTimeById(int id, DateOnly date, TimeOnly startTime, TimeOnly finishTime, int employeeId)
+        public void UpdateWorkTimeById(WorkTimeDTO newWokrTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -62,18 +62,18 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.WorkTime_UpdateById,
                     param: new
                     {
-                        id = id,
-                        Date = date,
-                        StartTime = startTime,
-                        FinishTime = finishTime,
-                        EmployeeId = employeeId
+                        newWokrTime.Id,
+                        newWokrTime.Date,
+                        newWokrTime.StartTime,
+                        newWokrTime.FinishTime,
+                        newWokrTime.EmployeeId
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void DeleteWorkTimeById(int id)
+        public void DeleteWorkTimeById(WorkTimeDTO newWokrTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -81,13 +81,13 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<WorkTimeDTO>(
                     StoredProcedures.WorkTime_DeleteById,
-                    param: new { id = id },
+                    param: new { newWokrTime.Id },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void ChangeEmployeeScheduleByEmployeeIdByDate(int employeeId, DateOnly date, TimeOnly startTime, TimeOnly finishTime)
+        public void ChangeEmployeeScheduleByEmployeeIdByDate(WorkTimeDTO newWokrTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -97,10 +97,10 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.ChangeEmployeeScheduleByEmployeeIdByDate,
                     param: new
                     {
-                        id = employeeId,
-                        Date = date,
-                        StartTime = startTime,
-                        FinishTime = finishTime
+                        newWokrTime.EmployeeId,
+                        newWokrTime.Date,
+                        newWokrTime.StartTime,
+                        newWokrTime.FinishTime
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );

@@ -32,7 +32,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddWorkArea(string Name)
+        public void AddWorkArea(WorkAreaDTO newWorkArea)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -41,15 +41,13 @@ namespace CliningContoraFromValera.DAL
                 connection.QuerySingle<WorkAreaDTO>(
                     StoredProcedures.WorkArea_Add,
                     param: new
-                    {
-                        Name = Name
-                    },
+                    { newWorkArea.Name},
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void UpdateClientById(int id, string Name)
+        public void UpdateClientById(WorkAreaDTO newWorkArea)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -59,15 +57,15 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.WorkArea_UpdateById,
                     param: new
                     {
-                        id = id,
-                        Name = Name,
+                        newWorkArea.Id,
+                        newWorkArea.Name,
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void DeleteClientById(int id)
+        public void DeleteClientById(WorkAreaDTO newWorkArea)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -75,7 +73,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<WorkAreaDTO>(
                     StoredProcedures.WorkArea_DeleteById,
-                    param: new { id = id },
+                    param: new { newWorkArea.Id },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

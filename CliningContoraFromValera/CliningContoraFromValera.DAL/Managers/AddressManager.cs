@@ -5,7 +5,7 @@ namespace CliningContoraFromValera.DAL
 {
     public class AddressManager
     {
-        public void AddAddress(string street, string building, string room, int workAreaId)
+        public void AddAddress(AddressDTO newAddress)
         {
             using(var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -16,17 +16,17 @@ namespace CliningContoraFromValera.DAL
                         StoredProcedures.Address_Add,
                         param: new 
                         {
-                            street = street,
-                            building = building,
-                            room = room,
-                            workAreaId = workAreaId
+                            newAddress.Street,
+                            newAddress.Bilding,
+                            newAddress.Room,
+                            newAddress.WorkAreaId
                         },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void DeleteAddressById(int id)
+        public void DeleteAddressById(AddressDTO newAddress)
         {
             using(var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -35,13 +35,13 @@ namespace CliningContoraFromValera.DAL
                 connection.QuerySingle<AddressDTO>
                     (
                         StoredProcedures.Address_DeleteById,
-                        param: new { id = id },
+                        param: new { newAddress.Id },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void UpdateAddressById(int id, string street, string building, string room, int workAreaId)
+        public void UpdateAddressById(AddressDTO newAddress)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -52,11 +52,11 @@ namespace CliningContoraFromValera.DAL
                         StoredProcedures.Address_UpdateById,
                         param: new
                         {
-                            id = id,
-                            street = street,
-                            building = building,
-                            room = room,
-                            workAreaId = workAreaId
+                            newAddress.Id,
+                            newAddress.Street,
+                            newAddress.Bilding,
+                            newAddress.Room,
+                            newAddress.WorkAreaId
                         },
                         commandType: System.Data.CommandType.StoredProcedure
                     );

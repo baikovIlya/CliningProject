@@ -3,10 +3,10 @@
     public class OrderDTO
     {
         public int Id { get; set; }
-        public string Date { get; set; }
-        public TimeOnly StartTime { get; set; }
-        public TimeOnly EstimatedEndTime { get; set; }
-        public TimeOnly? FinishTime { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EstimatedEndTime { get; set; }
+        public DateTime? FinishTime { get; set; }
         public decimal Price { get; set; }
         public string Status { get; set; }
         public int CountOfEmployees { get; set; }

@@ -32,7 +32,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddServiceType(string name)
+        public void AddServiceType(ServiceTypeDTO newServiceType)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -40,13 +40,13 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingle<ServiceTypeDTO>(
                     StoredProcedures.ServiceType_Add,
-                    param: new { Name = name},
+                    param: new { newServiceType.Name},
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void UpdateServiceTypeById(int id, string name)
+        public void UpdateServiceTypeById(ServiceTypeDTO newServiceType)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -54,13 +54,13 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<ServiceTypeDTO>(
                     StoredProcedures.ServiceType_UpdateById,
-                    param: new { id = id, Name = name },
+                    param: new { newServiceType.Id, newServiceType.Name },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void DeleteServiceTypeById(int id)
+        public void DeleteServiceTypeById(ServiceTypeDTO newServiceType)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -68,7 +68,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<ServiceTypeDTO>(
                     StoredProcedures.ServiceType_DeleteById,
-                    param: new { id = id },
+                    param: new { newServiceType.Id },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
