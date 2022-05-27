@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[WorkTime_Add]
-@Id int,
-@Date nvarchar(255),
-@StartTime nvarchar(10),
-@FinishTime nvarchar(10),
+@Date date,
+@StartTime time,
+@FinishTime time,
 @EmployeeId int
 AS
 BEGIN

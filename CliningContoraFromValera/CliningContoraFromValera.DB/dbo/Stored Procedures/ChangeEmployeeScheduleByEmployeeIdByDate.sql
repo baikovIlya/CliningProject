@@ -1,13 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[ChangeEmployeeScheduleByEmployeeIdByDate]
-@Id int,
-@Date nvarchar(10),
-@StartTime nvarchar(10),
-@FinishTime nvarchar(10)
+@EmployeeId int,
+@Date date,
+@StartTime time,
+@FinishTime time
 AS
 BEGIN
 UPDATE dbo.WorkTime
 SET
 StartTime = @StartTime,
 FinishTime = @FinishTime
-WHERE EmployeeId = @Id AND [Date] = @Date
+WHERE EmployeeId = @EmployeeId AND [Date] = @Date
 END

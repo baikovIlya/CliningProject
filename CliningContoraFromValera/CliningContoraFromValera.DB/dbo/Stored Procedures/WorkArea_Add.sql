@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[WorkArea_Add]
-	@Id int,
 	@Name nvarchar(30)
 AS
 BEGIN

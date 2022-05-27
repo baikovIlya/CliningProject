@@ -133,5 +133,7 @@
     <Build Include="dbo\Stored Procedures\WorkArea_DeleteById.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_DeleteById.sql" />
     <Build Include="dbo\Stored Procedures\GetClientOrdersHistory.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllServicesInfo.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmployyesAvailableForOrder.sql" />
   </ItemGroup>
 </Project>
