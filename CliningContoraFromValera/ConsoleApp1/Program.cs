@@ -1,5 +1,4 @@
 ﻿using CliningContoraFromValera.DAL;
-using CliningContoraFromValera.DAL.DTOs;
 
 //var CL = new ClientManager();
 
@@ -16,7 +15,7 @@ List<WorkTimeDTO> test = WT.GetAllWorkTimes();
 //WT.AddWorkTime("01.06.2022", "10.00", "22.00", 1);
 //WT.AddWorkTime("02.06.2022", "11.00", "20.00", 1);
 //WT.DeleteWorkTimeById(3);
-WT.ChangeEmployeeScheduleByEmployeeIdByDate(1, "01.06.2022", "08.00", "12.00");
+WT.ChangeEmployeeScheduleByEmployeeIdByDate(1, new DateOnly(01,06,2022), new TimeOnly(08,00), new TimeOnly(12, 00));
 foreach (var i in test)
 {
     i.ToString();

@@ -5,7 +5,7 @@
 	@CommercialPrice DECIMAL (10, 2),
 	@Unit nvarchar(30),
 	@ServiceTypeId int,
-	@EstimatedTime nvarchar(10)
+	@EstimatedTime time
 AS
 BEGIN
 INSERT INTO dbo.[Service](
