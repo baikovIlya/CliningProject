@@ -14,15 +14,58 @@
 
 
             <TabItem Header="Заказы">
+                <Grid Height="437" Margin="10">
+                    <TabControl>
+                        <TabItem Header="Актуальные заказы">
+                            <Grid Margin="10">
+                                <DataGrid Height="400"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Добавить заказ">
+                            <ListBox Margin="20">
+                                <Grid Height="358" Width="710" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox Grid.Column="0" Grid.Row="0" Text="TextBox" Margin="19"/>
+                                    <Label Grid.Column="0" Grid.Row="0" Content="Клиент" Margin="22,22,45,22"/>
+                                    <DatePicker Grid.Column="0" Grid.Row="1"  Margin="19"/>
+                                    <TextBox Grid.Column="0" Grid.Row="2" Text="Время начала" Margin="19"/>
+                                    <TextBox Grid.Column="0" Grid.Row="3" Text="Время конца" Margin="19"/>
+                                    <ComboBox Grid.Column="0" Grid.Row="4" Text="TextBox" Margin="19"/>
+                                    <Label Grid.Column="0" Grid.Row="4" Content="Физ. лицо/Юр. лицо" Margin="22,22,45,22"/>
+                                    <ComboBox Grid.Column="1" Grid.Row="0" Text="TextBox" Margin="19"/>
+                                    <Label Grid.Column="1" Grid.Row="0" Content="Статус" Margin="22,22,45,22"/>
+                                    <TextBox Grid.Column="1" Grid.Row="1" Text="Адрес" Margin="19"/>
+                                    <ComboBox Grid.Column="1" Grid.Row="2" Text="TextBox" Margin="19"/>
+                                    <Label Grid.Column="1" Grid.Row="2" Content="Количество сотрудников" Margin="22,22,45,22"/>
+                                    <TextBox Grid.Column="1" Grid.Row="3" Text="Цена" Margin="19"/>
+                                    <ComboBox Grid.Column="1" Grid.Row="4" Text="TextBox" Margin="19,19,66,19"/>
+                                    <Button Content="+" Grid.Column="1" Grid.Row="4" Margin="294,19,19,19"/>
+                                    <Label Grid.Column="1" Grid.Row="4" Content="Услуги" Margin="22,22,81,22"/>
+                                </Grid>
+                            </ListBox>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+
             </TabItem>
             <TabItem Header="Сотрудники">
-                
+
             </TabItem>
             <TabItem Header="График">
             </TabItem>
             <TabItem Header="Наши услуги">
             </TabItem>
-            
+
 
         </TabControl>
 
