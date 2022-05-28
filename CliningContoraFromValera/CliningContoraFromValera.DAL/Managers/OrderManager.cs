@@ -105,7 +105,7 @@ namespace CliningContoraFromValera.DAL
                 Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
 
                 connection.Query<OrderDTO, ServiceOrderDTO, OrderDTO>(
-                    "GetAllOrderInfo",
+                    "GetAllOrderServicesInfo",
                     (order, service) => {
                         if (!result.ContainsKey(order.Id))
                         {
