@@ -64,7 +64,6 @@
 
         public const string ChangeEmployeeScheduleByEmployeeIdByDate = "ChangeEmployeeScheduleByEmployeeIdByDate";
         public const string GetAllEmployeesInfo = "GetAllEmployeesInfo";
-        public const string GetAllEmployeesSkills = "GetAllEmployeesSkills";
         public const string GetEmployeeSchedule = "GetEmployeeSchedule";
         public const string GetOrderHistoryOfTheEmployee = "GetOrderHistoryOfTheEmployee";
         public const string GetAllServicesInfo = "GetAllServicesInfo";
