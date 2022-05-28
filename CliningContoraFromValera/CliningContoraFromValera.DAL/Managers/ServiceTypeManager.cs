@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public ServiceTypeDTO GetServicetById(int id)
+        public ServiceTypeDTO GetServicetById(int serviceTypeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<ServiceTypeDTO>(
                     StoredProcedures.ServiceType_GetById,
-                    param: new { id = id },
+                    param: new { id = serviceTypeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -60,7 +60,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteServiceTypeById(ServiceTypeDTO newServiceType)
+        public void DeleteServiceTypeById(int serviceTypeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -68,7 +68,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<ServiceTypeDTO>(
                     StoredProcedures.ServiceType_DeleteById,
-                    param: new { newServiceType.Id },
+                    param: new { id = serviceTypeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

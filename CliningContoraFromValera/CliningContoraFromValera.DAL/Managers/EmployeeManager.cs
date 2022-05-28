@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public EmployeeDTO GetEmployeeByID(int id)
+        public EmployeeDTO GetEmployeeByID(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<EmployeeDTO>(
                     StoredProcedures.Employee_GetById,
-                    param: new { id = id },
+                    param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -71,7 +71,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteEmployeeById(EmployeeDTO newEmployee)
+        public void DeleteEmployeeById(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -79,9 +79,42 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<EmployeeDTO>(
                     StoredProcedures.Employee_DeleteById,
-                    param: new { newEmployee.Id },
+                    param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
+            }
+        }
+
+        public List<EmployeeDTO> GetAllEmployeesInfo()
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
+
+                connection.Query<EmployeeDTO, ServiceDTO, WorkAreaDTO, EmployeeDTO>(
+                    StoredProcedures.GetAllEmployeesInfo,
+                    (employee, service, workArea) => {
+                        if (!result.ContainsKey(employee.Id))
+                        {
+                            result.Add(employee.Id, employee);
+                        }
+                        EmployeeDTO crnt = result[employee.Id];
+                        if (service != null)
+                        {
+                            crnt.Services.Add(service);
+                        }
+                        if (workArea != null)
+                        {
+                            crnt.WorkAreas.Add(workArea);
+                        }
+                        return crnt;
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result.Values.ToList();
             }
         }
     }

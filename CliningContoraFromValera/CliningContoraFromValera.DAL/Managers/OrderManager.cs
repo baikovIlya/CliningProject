@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public OrderDTO GetOrderById(int id)
+        public OrderDTO GetOrderById(int orderId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<OrderDTO>(
                     StoredProcedures.Order_GetById,
-                    param: new {id = id},
+                    param: new { id = orderId },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
@@ -82,7 +82,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteOrderById(OrderDTO newOrder)
+        public void DeleteOrderById(int orderId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -90,7 +90,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<OrderDTO>(
                     StoredProcedures.Order_DeleteById,
-                    param: new { newOrder.Id },
+                    param: new { id = orderId },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }

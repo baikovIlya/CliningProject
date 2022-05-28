@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteAddressById(AddressDTO newAddress)
+        public void DeleteAddressById(int addressId)
         {
             using(var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -35,7 +35,7 @@ namespace CliningContoraFromValera.DAL
                 connection.QuerySingle<AddressDTO>
                     (
                         StoredProcedures.Address_DeleteById,
-                        param: new { newAddress.Id },
+                        param: new { id = addressId },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -77,7 +77,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public AddressDTO GetAddressById(int id)
+        public AddressDTO GetAddressById(int addressId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -86,7 +86,7 @@ namespace CliningContoraFromValera.DAL
                 return connection.QuerySingle<AddressDTO>
                     (
                         StoredProcedures.Address_GetById,
-                        param: new { id = id },
+                        param: new { id = addressId },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
             }

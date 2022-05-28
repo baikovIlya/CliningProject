@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public WorkTimeDTO GetWorkTimeById(int id)
+        public WorkTimeDTO GetWorkTimeById(int workTimeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<WorkTimeDTO>(
                     StoredProcedures.WorkTime_GetById,
-                    param: new { id = id },
+                    param: new { id = workTimeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -73,7 +73,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteWorkTimeById(WorkTimeDTO newWokrTime)
+        public void DeleteWorkTimeById(int workTimeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -81,7 +81,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<WorkTimeDTO>(
                     StoredProcedures.WorkTime_DeleteById,
-                    param: new { newWokrTime.Id },
+                    param: new { id = workTimeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
