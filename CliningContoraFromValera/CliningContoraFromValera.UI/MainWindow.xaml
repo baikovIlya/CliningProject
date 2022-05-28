@@ -22,43 +22,92 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">
-                            <ListBox Margin="20">
-                                <Grid Height="358" Width="710" >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <ComboBox Grid.Column="0" Grid.Row="0" Text="TextBox" Margin="19"/>
-                                    <Label Grid.Column="0" Grid.Row="0" Content="Клиент" Margin="22,22,45,22"/>
-                                    <DatePicker Grid.Column="0" Grid.Row="1"  Margin="19"/>
-                                    <TextBox Grid.Column="0" Grid.Row="2" Text="Время начала" Margin="19"/>
-                                    <TextBox Grid.Column="0" Grid.Row="3" Text="Время конца" Margin="19"/>
-                                    <ComboBox Grid.Column="0" Grid.Row="4" Text="TextBox" Margin="19"/>
-                                    <Label Grid.Column="0" Grid.Row="4" Content="Физ. лицо/Юр. лицо" Margin="22,22,45,22"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="0" Text="TextBox" Margin="19"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Content="Статус" Margin="22,22,45,22"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Text="Адрес" Margin="19"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="2" Text="TextBox" Margin="19"/>
-                                    <Label Grid.Column="1" Grid.Row="2" Content="Количество сотрудников" Margin="22,22,45,22"/>
-                                    <TextBox Grid.Column="1" Grid.Row="3" Text="Цена" Margin="19"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="4" Text="TextBox" Margin="19,19,66,19"/>
-                                    <Button Content="+" Grid.Column="1" Grid.Row="4" Margin="294,19,19,19"/>
-                                    <Label Grid.Column="1" Grid.Row="4" Content="Услуги" Margin="22,22,81,22"/>
-                                </Grid>
-                            </ListBox>
+                            <Grid Height="382" Width="619" Margin="40, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="0" Grid.Row="0" Text="TextBox" Margin="14"/>
+                                <Label Grid.Column="0" Grid.Row="0" Content="Клиент" Margin="14,18,144,20"/>
+                                <DatePicker Grid.Column="0" Grid.Row="1"  Margin="14"/>
+                                <TextBox Grid.Column="0" Grid.Row="2" Text="Время начала" Margin="14"/>
+                                <TextBox Grid.Column="0" Grid.Row="3" Text="Время конца" Margin="14"/>
+                                <ComboBox Grid.Column="0" Grid.Row="4" Text="TextBox" Margin="14"/>
+                                <Label Grid.Column="0" Grid.Row="4" Content="Физ. лицо/Юр. лицо" Margin="14,18,144,20"/>
+                                <ComboBox Grid.Column="1" Grid.Row="0" Text="TextBox" Margin="14"/>
+                                <Label Grid.Column="1" Grid.Row="0" Content="Статус" Margin="14,18,144,20"/>
+                                <TextBox Grid.Column="1" Grid.Row="1" Text="Адрес" Margin="14"/>
+                                <ComboBox Grid.Column="1" Grid.Row="2" Text="TextBox" Margin="14"/>
+                                <Label Grid.Column="1" Grid.Row="2" Content="Количество сотрудников" Margin="14,18,144,20"/>
+                                <TextBox Grid.Column="1" Grid.Row="3" Text="Цена" Margin="14"/>
+                                <ComboBox Grid.Column="1" Grid.Row="4" Text="TextBox" Margin="14,14,59,14"/>
+                                <Label Grid.Column="1" Grid.Row="4" Content="Услуги" Margin="14,18,144,20"/>
+                                <Button Content="+" Grid.Column="1" Grid.Row="4" Margin="255,14,14,14" />
+                                <Button Content="Создать заказ" Grid.Column="1" Grid.Row="5" Margin="14"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>
 
             </TabItem>
             <TabItem Header="Сотрудники">
+                <Grid Height="437" Margin="10">
+                    <TabControl>
+                        <TabItem Header="Сотрудники">
+                            <Grid Height="382" Margin="20,0,20,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <DataGrid Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,242,34"/>
+                                <ListBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="20,0,0,0"/>
+                                <ComboBox Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="44" Margin="20,0,0,0"/>
+                                <Label Content="Персон инфа, скиллы,  ворктайм" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,223,20"/>
+                                <Button Grid.Column="1" VerticalAlignment="Top" Grid.Row="5" Content="Сохранить" Margin="20,17,0,0" Height="47"/>
+                                <Button Grid.Column="2" Content="Отменить" Grid.Row="5" Margin="20,17,0,0" Height="47"/>
+                                <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="5" Width="121" Height="34"/>
+                                <Button Content="Редактировать" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="5" Width="121" Height="34"/>
+                                <TextBox HorizontalAlignment="Center" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="243" Height="29"/>
+                                <Button Content="Удалить" VerticalAlignment="Bottom" Grid.Row="4" Height="34"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="График">
+                            <Grid Height="382" Margin="20,0,20,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="24"/>
+                                <Button Content="Найти смену" HorizontalAlignment="Left" Margin="150,0,0,0" VerticalAlignment="Top" Width="125" Height="24"/>
+                                <DataGrid Grid.RowSpan="3" Margin="0,37,0,0"/>
+                                <DatePicker Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Width="469" Height="43"/>
+                                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="469" Height="43"/>
+                                <Label Content="Выбрать сотрудника" Margin="0,58,407,6" Grid.Row="3"/>
+                                <Button Content="Добавить смену" HorizontalAlignment="Right" Grid.Row="4" VerticalAlignment="Bottom" Width="215" Height="43"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
 
             </TabItem>
             <TabItem Header="График">
