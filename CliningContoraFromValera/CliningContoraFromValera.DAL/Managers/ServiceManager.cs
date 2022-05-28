@@ -32,7 +32,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void AddService(string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, TimeOnly estimatedTime)
+        public void AddService(ServiceDTO newService)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -42,20 +42,20 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Service_Add,
                     param: new
                     {
-                        Name = name,
-                        Description = description,
-                        Price = price,
-                        CommercialPrice = commercialPrice,
-                        Unit = unit,
-                        ServiceTypeId = serviceTypeId,
-                        EstimatedTime = estimatedTime
+                        newService.Name,
+                        newService.Description,
+                        newService.Price,
+                        newService.CommercialPrice,
+                        newService.Unit,
+                        newService.ServiceTypeId,
+                        newService.EstimatedTime
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void UpdateServiceById(int id, string name, string description, decimal price, decimal commercialPrice, string unit, int serviceTypeId, TimeOnly estimatedTime)
+        public void UpdateServiceById(ServiceDTO newService)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -65,21 +65,21 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Service_UpdateById,
                     param: new
                     {
-                        id = id,
-                        Name = name,
-                        Description = description,
-                        Price = price,
-                        CommercialPrice = commercialPrice,
-                        Unit = unit,
-                        ServiceTypeId = serviceTypeId,
-                        EstimatedTime = estimatedTime
+                        newService.Id,
+                        newService.Name,
+                        newService.Description,
+                        newService.Price,
+                        newService.CommercialPrice,
+                        newService.Unit,
+                        newService.ServiceTypeId,
+                        newService.EstimatedTime
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
         }
 
-        public void DeleteServiceById(int id)
+        public void DeleteServiceById(ServiceDTO newService)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -87,7 +87,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<ServiceDTO>(
                     StoredProcedures.Service_DeleteById,
-                    param: new { id = id },
+                    param: new { newService.Id },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

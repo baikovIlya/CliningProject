@@ -11,11 +11,18 @@
 var E = new EmployeeManager();
 //E.AddEmployee("Вася", "Петров", "+79514521271");
 var WT = new WorkTimeManager();
+var WTDTO = new WorkTimeDTO()
+{
+    Date = new DateTime(2022, 06, 02),
+    StartTime = new TimeSpan(12,30,00),
+    FinishTime = new TimeSpan(20,00,00),
+    EmployeeId = 1
+};
 List<WorkTimeDTO> test = WT.GetAllWorkTimes();
-//WT.AddWorkTime("01.06.2022", "10.00", "22.00", 1);
-//WT.AddWorkTime("02.06.2022", "11.00", "20.00", 1);
-//WT.DeleteWorkTimeById(3);
-WT.ChangeEmployeeScheduleByEmployeeIdByDate(1, new DateOnly(01,06,2022), new TimeOnly(08,00), new TimeOnly(12, 00));
+//WT.AddWorkTime(WTDTO);
+//WT.DeleteWorkTimeById(WTDTO);
+//Console.WriteLine(WT.GetWorkTimeById(1));
+//WT.ChangeEmployeeScheduleByEmployeeIdByDate(WTDTO);
 foreach (var i in test)
 {
     i.ToString();

@@ -3,9 +3,9 @@
     public class WorkTimeDTO
     {
         public int Id { get; set; }
-        public DateOnly Date { get; set; }
-        public TimeOnly StartTime { get; set; }
-        public TimeOnly FinishTime { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan FinishTime { get; set; }
         public int EmployeeId { get; set; }
 
         public override string ToString()
