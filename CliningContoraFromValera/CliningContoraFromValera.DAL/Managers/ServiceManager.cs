@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<ServiceDTO>(
                     StoredProcedures.Service_GetById,
-                    param: new { serviceId },
+                    param: new { id = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -87,7 +87,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<ServiceDTO>(
                     StoredProcedures.Service_DeleteById,
-                    param: new { serviceId },
+                    param: new { id = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

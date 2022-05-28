@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<OrderDTO>(
                     StoredProcedures.Order_GetById,
-                    param: new { orderId },
+                    param: new { id = orderId },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
@@ -90,7 +90,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<OrderDTO>(
                     StoredProcedures.Order_DeleteById,
-                    param: new { orderId },
+                    param: new { id = orderId },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }

@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<WorkAreaDTO>(
                     StoredProcedures.WorkArea_GetById,
-                    param: new { workAreaId },
+                    param: new { id = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -73,7 +73,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<WorkAreaDTO>(
                     StoredProcedures.WorkArea_DeleteById,
-                    param: new { workAreaId },
+                    param: new { id = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

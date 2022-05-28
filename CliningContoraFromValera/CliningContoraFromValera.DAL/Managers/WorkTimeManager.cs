@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<WorkTimeDTO>(
                     StoredProcedures.WorkTime_GetById,
-                    param: new { workTimeId },
+                    param: new { id = workTimeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -81,7 +81,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<WorkTimeDTO>(
                     StoredProcedures.WorkTime_DeleteById,
-                    param: new { workTimeId },
+                    param: new { id = workTimeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

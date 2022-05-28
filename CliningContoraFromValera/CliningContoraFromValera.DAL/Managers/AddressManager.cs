@@ -35,7 +35,7 @@ namespace CliningContoraFromValera.DAL
                 connection.QuerySingle<AddressDTO>
                     (
                         StoredProcedures.Address_DeleteById,
-                        param: new { addressId },
+                        param: new { id = addressId },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -86,7 +86,7 @@ namespace CliningContoraFromValera.DAL
                 return connection.QuerySingle<AddressDTO>
                     (
                         StoredProcedures.Address_GetById,
-                        param: new { addressId },
+                        param: new { id = addressId },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
             }
