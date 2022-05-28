@@ -96,27 +96,32 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public List<OrderDTO> GetAllOrderInfo()
+        public List<ServiceOrderDTO> GetAllOrderInfo()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
+                Dictionary<int, ServiceOrderDTO> result = new Dictionary<int, ServiceOrderDTO>();
 
-                connection.Query<OrderDTO, ServiceDTO, OrderDTO>(
+                connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
                     "GetAllOrderServicesInfo",
-                    (order, service) => {
-                        if (!result.ContainsKey(order.Id))
+                    (serviceOrder, order, service) => {
+                        if (!result.ContainsKey(serviceOrder.Id))
                         {
-                            result.Add(order.Id, order);
+                            result.Add(serviceOrder.Id, serviceOrder);
                         }
 
-                        OrderDTO crnt = result[order.Id];
+                        ServiceOrderDTO crnt = result[serviceOrder.Id];
 
                         if (service != null)
                         {
-                            crnt.OrderServices.Add(service);
+                            crnt.Services.Add(service);
+                        }
+
+                        if (order != null)
+                        {
+                            crnt.Orders.Add(order);
                         }
 
                         return crnt;

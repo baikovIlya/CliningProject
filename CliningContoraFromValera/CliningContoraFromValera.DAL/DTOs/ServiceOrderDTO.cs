@@ -8,8 +8,9 @@ namespace CliningContoraFromValera.DAL.DTOs
 {
     public class ServiceOrderDTO
     {
-        public int OrderID { get; set; }
-        public string ServiceName { get; set; }
+        public int Id { get; set; }
+        public List<OrderDTO> Orders { get; set; }
+        public List<ServiceDTO> Services { get; set; }
         public int Count { get; set; }
     }
 }
