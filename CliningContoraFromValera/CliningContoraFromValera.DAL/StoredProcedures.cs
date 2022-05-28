@@ -63,8 +63,8 @@
         public const string WorkTime_UpdateById = "WorkTime_UpdateById";
 
         public const string ChangeEmployeeScheduleByEmployeeIdByDate = "ChangeEmployeeScheduleByEmployeeIdByDate";
-        public const string GetAllEployeesInfo = "GetAllEployeesInfo";
-        public const string GetAllEployeesSkills = "GetAllEployeesSkills";
+        public const string GetAllEmployeesInfo = "GetAllEmployeesInfo";
+        public const string GetAllEmployeesSkills = "GetAllEmployeesSkills";
         public const string GetEmployeeSchedule = "GetEmployeeSchedule";
         public const string GetOrderHistoryOfTheEmployee = "GetOrderHistoryOfTheEmployee";
         public const string GetAllServicesInfo = "GetAllServicesInfo";

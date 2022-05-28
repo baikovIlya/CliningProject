@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public WorkAreaDTO GetWorkAreaByID(int id)
+        public WorkAreaDTO GetWorkAreaByID(int workAreaId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<WorkAreaDTO>(
                     StoredProcedures.WorkArea_GetById,
-                    param: new { id = id },
+                    param: new { workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -65,7 +65,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteClientById(WorkAreaDTO newWorkArea)
+        public void DeleteClientById(int workAreaId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -73,7 +73,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<WorkAreaDTO>(
                     StoredProcedures.WorkArea_DeleteById,
-                    param: new { newWorkArea.Id },
+                    param: new { workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

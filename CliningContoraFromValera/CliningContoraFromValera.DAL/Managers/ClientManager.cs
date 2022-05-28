@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public ClientDTO GetClientByID(int id)
+        public ClientDTO GetClientByID(int clientId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<ClientDTO>(
                     StoredProcedures.Client_GetById,
-                    param: new { id = id },
+                    param: new { clientId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -72,7 +72,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteClientById(ClientDTO newClient)
+        public void DeleteClientById(int clientId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -80,7 +80,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<ClientDTO>(
                     StoredProcedures.Client_DeleteById,
-                    param: new { newClient.Id },
+                    param: new { clientId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

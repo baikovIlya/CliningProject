@@ -18,7 +18,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public EmployeeDTO GetEmployeeByID(int id)
+        public EmployeeDTO GetEmployeeByID(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -26,7 +26,7 @@ namespace CliningContoraFromValera.DAL
 
                 return connection.QuerySingle<EmployeeDTO>(
                     StoredProcedures.Employee_GetById,
-                    param: new { id = id },
+                    param: new { employeeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -71,7 +71,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void DeleteEmployeeById(EmployeeDTO newEmployee)
+        public void DeleteEmployeeById(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -79,7 +79,7 @@ namespace CliningContoraFromValera.DAL
 
                 connection.QuerySingleOrDefault<EmployeeDTO>(
                     StoredProcedures.Employee_DeleteById,
-                    param: new { newEmployee.Id },
+                    param: new { employeeId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
