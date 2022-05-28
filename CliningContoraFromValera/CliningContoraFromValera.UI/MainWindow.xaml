@@ -46,21 +46,66 @@
                               CanUserAddRows="False"
                               Margin="10,0,10,20">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Width="13"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Тип" Width="70"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Id" Width="13"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Услуга" Width="85"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Тип" Width="80"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Услуга" Width="95"></DataGridTextColumn>
                             <DataGridTextColumn Header="Описание" Width="90"></DataGridTextColumn>
-                            <DataGridTextColumn Header="~t" Width="30"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Цена" Width="45"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Комм. цена" Width="45"></DataGridTextColumn>
+                            <DataGridTextColumn Header="~t" Width="40"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цена" Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Комм. " Width="50"></DataGridTextColumn>
                             <DataGridTextColumn Header="Ед. изм/" Width="50"></DataGridTextColumn>
                         </DataGrid.Columns>
+
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Удалить"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
 
                     </DataGrid>
 
                     <Label Grid.Column="1" Content="Добавить новый тип услуг:" Margin="10,5,0,0"></Label>
-                    <TextBox VerticalAlignment="Top" Margin="10,36,10,0" Grid.Column="1"/>
+                    <TextBox VerticalAlignment="Top" Margin="10,36,30,0" Grid.Column="1" MaxLength="50"/>
+                    <Button Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Content="+" Width="20" Margin="0,34,10,0" />
+
+                    <Label Grid.Row="1" Grid.Column="1" Content="Добавить новую услугу:"
+                           Margin="10,0,0,0"/>
+
+
+                    <Label Grid.Row="1" Content="Название:" Margin="10,26,-5,10" Grid.Column="1" />
+                    <TextBox Grid.Row="1" VerticalAlignment="Top" Margin="10,58,10,0" Grid.Column="1"
+                             MaxLength="100" />
+
+                    <Label Grid.Row="1" Grid.Column="1" Content="Описание:" Margin="10,78,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,105,10,0"
+                             AcceptsReturn="True" MaxLength="255" />
+
+                    <Label  Grid.Row="1" Grid.Column="1" Content="Цена:" Margin="10,128,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,158,10,0" />
+
+
+                    <Label  Grid.Row="1" Grid.Column="1" Content="Коммерческая цена:" Margin="10,178,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,208,10,0" />
+
+                    <Label  Grid.Row="1" Grid.Column="1" Content="Единицы измерения:" Margin="10,228,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,258,10,0" />
+
+
+                    <Label  Grid.Row="1" Grid.Column="1" Content="Примерное время выполнения:" Margin="10,278,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,308,10,0" 
+                             MaxLength="10"/>
+
+
+                    <Label  Grid.Row="1" Grid.Column="1" Content="Тип услуги:" Margin="10,333,230,0"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="93,338,10,49"/>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,318,10,12" Height="20">
+                        <Button Content="Добавить" Margin="40,0,169,0" Width="86.7"/>
+                        <Button Content="Очистить" Margin="100,-20,10,0" 
+                                Width="86.7"/>
+                    </StackPanel>
+
+
 
 
                 </Grid>
