@@ -114,20 +114,19 @@ namespace CliningContoraFromValera.DAL
 
                         ServiceOrderDTO crnt = result[serviceOrder.Id];
 
+                        if (order != null)
+                        {
+                            crnt.Orders.Add(order);
+                        }
                         if (service != null)
                         {
                             crnt.Services.Add(service);
                         }
 
-                        if (order != null)
-                        {
-                            crnt.Orders.Add(order);
-                        }
-
                         return crnt;
                     },
                     commandType: System.Data.CommandType.StoredProcedure,
-                    splitOn: "Name"
+                    splitOn: "Id"
                 );
 
                 return result.Values.ToList();

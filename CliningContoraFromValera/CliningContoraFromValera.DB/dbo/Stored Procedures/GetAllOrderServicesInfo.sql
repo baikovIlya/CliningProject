@@ -1,7 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[GetAllOrderServicesInfo]
 AS
 BEGIN
-SELECT O.ClientId,
+SELECT 
+SO.Id, 
+SO.OrderId, 
+SO.ServiceId, 
+SO.[Count], 
+O.Id,
+O.ClientId,
 O.[Date],
 O.StartTime,
 O.EstimatedEndTime,
@@ -18,7 +24,7 @@ S.CommercialPrice,
 S.Unit, 
 S.ServiceTypeId, 
 S.EstimatedTime
-from dbo.[Order] as O 
-join [dbo].[Service_Order] AS SO ON O.Id = SO.OrderId 
+from dbo.[Service_Order] as SO 
+join [dbo].[Order] AS O ON O.Id = SO.OrderId 
 join [dbo].[Service] AS S on S.Id = SO.ServiceId 
 END 

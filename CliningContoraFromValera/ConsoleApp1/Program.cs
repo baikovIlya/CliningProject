@@ -33,8 +33,4 @@ var SO = new OrderManager();
 
 var q = SO.GetAllOrderInfo();
 
-foreach (var i in q)
-{
-    i.ToString();
-    Console.WriteLine(i.ToString());
-}
+Console.WriteLine(q);
