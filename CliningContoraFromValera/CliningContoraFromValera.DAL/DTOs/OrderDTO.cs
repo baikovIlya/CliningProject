@@ -15,7 +15,7 @@ namespace CliningContoraFromValera.DAL
         public bool IsCommercial { get; set; }
         public int ClientId { get; set; }
         public int AddressId { get; set; }
-        public List<ServiceOrderDTO> OrderServices { get; set; }
+        public List<ServiceDTO> OrderServices { get; set; }
 
 
         public override string ToString()
