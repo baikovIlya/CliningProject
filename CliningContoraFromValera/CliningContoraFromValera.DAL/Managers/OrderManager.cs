@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using CliningContoraFromValera.DAL.DTOs;
+using Dapper;
 using System.Data.SqlClient;
 
 namespace CliningContoraFromValera.DAL
@@ -92,6 +93,39 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Order_DeleteById,
                     param: new { newOrder.Id },
                     commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
+
+        public List<OrderDTO> GetAllOrderInfo()
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
+
+                connection.Query<OrderDTO, ServiceOrderDTO, OrderDTO>(
+                    "GetAllOrderInfo",
+                    (order, service) => {
+                        if (!result.ContainsKey(order.Id))
+                        {
+                            result.Add(order.Id, order);
+                        }
+
+                        OrderDTO crnt = result[order.Id];
+
+                        if (service != null)
+                        {
+                            crnt.OrderServices.Add(service);
+                        }
+
+                        return crnt;
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "id"
+                );
+
+                return result.Values.ToList();
             }
         }
     }

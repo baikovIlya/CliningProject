@@ -1,4 +1,6 @@
-﻿namespace CliningContoraFromValera.DAL
+﻿using CliningContoraFromValera.DAL.DTOs;
+
+namespace CliningContoraFromValera.DAL
 {
     public class OrderDTO
     {
@@ -13,6 +15,8 @@
         public bool IsCommercial { get; set; }
         public int ClientId { get; set; }
         public int AddressId { get; set; }
+        public List<ServiceOrderDTO> OrderServices { get; set; }
+
 
         public override string ToString()
         {
