@@ -16,13 +16,56 @@
             <TabItem Header="Заказы">
             </TabItem>
             <TabItem Header="Сотрудники">
-                
+
             </TabItem>
             <TabItem Header="График">
             </TabItem>
+
+            <!--услуги-->
             <TabItem Header="Наши услуги">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"></RowDefinition>
+                        <RowDefinition Height="90*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"></ColumnDefinition>
+                        <ColumnDefinition Width="40*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Content="Выбери тип услуги:" Margin="10,5,0,0"></Label>
+                    <ComboBox VerticalAlignment="Top" Margin="10,34,10,0">
+
+                    </ComboBox>
+
+
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="False"
+                              CanUserAddRows="False"
+                              Margin="10,0,10,20">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Width="13"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Тип" Width="70"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Id" Width="13"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Услуга" Width="85"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Описание" Width="90"></DataGridTextColumn>
+                            <DataGridTextColumn Header="~t" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цена" Width="45"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Комм. цена" Width="45"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ед. изм/" Width="50"></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                    <Label Grid.Column="1" Content="Добавить новый тип услуг:" Margin="10,5,0,0"></Label>
+                    <TextBox VerticalAlignment="Top" Margin="10,36,10,0" Grid.Column="1"/>
+
+
+                </Grid>
             </TabItem>
-            
+
 
         </TabControl>
 
