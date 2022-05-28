@@ -135,5 +135,6 @@
     <Build Include="dbo\Stored Procedures\GetClientOrdersHistory.sql" />
     <Build Include="dbo\Stored Procedures\GetAllServicesInfo.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployyesAvailableForOrder.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllOrderInfo.sql" />
   </ItemGroup>
 </Project>
