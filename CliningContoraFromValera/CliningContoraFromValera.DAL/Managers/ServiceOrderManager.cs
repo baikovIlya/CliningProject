@@ -16,7 +16,7 @@ namespace CliningContoraFromValera.DAL.Managers
                 Dictionary<int, ServiceOrderDTO> result = new Dictionary<int, ServiceOrderDTO>();
 
                 connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
-                    "GetAllOrderServicesInfo",
+                    StoredProcedures.GetAllOrderServicesInfo,
                     (serviceOrder, order, service) => {
                         if (!result.ContainsKey(serviceOrder.Id))
                         {
@@ -52,7 +52,7 @@ namespace CliningContoraFromValera.DAL.Managers
                 ServiceOrderDTO result = new ServiceOrderDTO();
 
                  connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
-                    "GetAllOrderServicesInfoById",
+                    StoredProcedures.GetAllOrderServicesInfoById,
                     (serviceOrder, order, service) =>
                     {
                         ServiceOrderDTO crnt = result;
