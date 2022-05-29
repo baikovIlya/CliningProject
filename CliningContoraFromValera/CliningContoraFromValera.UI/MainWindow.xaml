@@ -109,8 +109,6 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="График">
-            </TabItem>
 
             <!--услуги-->
             <TabItem Header="Наши услуги">
