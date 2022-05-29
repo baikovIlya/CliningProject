@@ -1,4 +1,5 @@
 ﻿using CliningContoraFromValera.DAL;
+using CliningContoraFromValera.DAL.Managers;
 
 //var CL = new ClientManager();
 
@@ -29,8 +30,8 @@
 //    Console.WriteLine(i.ToString());
 //}
 
-var SO = new OrderManager();
+var SO = new ServiceOrderManager();
 
-var q = SO.GetAllOrderInfo();
+var q = SO.GetById(2);
 
 Console.WriteLine(q);

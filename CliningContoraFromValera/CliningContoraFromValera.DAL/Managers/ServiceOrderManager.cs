@@ -1,5 +1,6 @@
 ﻿using CliningContoraFromValera.DAL.DTOs;
 using Dapper;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace CliningContoraFromValera.DAL.Managers
@@ -32,7 +33,6 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             crnt.Services.Add(service);
                         }
-
                         return crnt;
                     },
                     commandType: System.Data.CommandType.StoredProcedure,
@@ -43,40 +43,38 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        //public ServiceOrderDTO GetById(int id)
-        //{
-        //    using (var connection = new SqlConnection(ServerSettings._connectionString))
-        //    {
-        //        connection.Open();
+        public ServiceOrderDTO GetById(int id)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
 
-        //        Dictionary<int, ServiceOrderDTO> result = new Dictionary<int, ServiceOrderDTO>();
+                ServiceOrderDTO result = new ServiceOrderDTO();
 
-        //        connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
-        //            "GetAllOrderServicesInfo",
-        //            (serviceOrder, order, service) => {
-        //                if (!result.ContainsKey(serviceOrder.Id))
-        //                {
-        //                    result.Add(serviceOrder.Id, serviceOrder);
-        //                }
+                 connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
+                    "GetAllOrderServicesInfoById",
+                    (serviceOrder, order, service) =>
+                    {
 
-        //                ServiceOrderDTO crnt = result[serviceOrder.Id];
+                        ServiceOrderDTO crnt = result;
 
-        //                if (order != null)
-        //                {
-        //                    crnt.Orders.Add(order);
-        //                }
-        //                if (service != null)
-        //                {
-        //                    crnt.Services.Add(service);
-        //                }
+                        if (order != null)
+                        {
+                            crnt.Orders.Add(order);
+                        }
+                        if (service != null)
+                        {
+                            crnt.Services.Add(service);
+                        }
 
-        //                return crnt;
-        //            },
-        //            commandType: System.Data.CommandType.StoredProcedure,
-        //            splitOn: "Id"
-        //        ).FirstOrDefault(); 
+                        return crnt;
 
-        //    }
+                    },
+                    param: new { id = id },
+                    commandType: System.Data.CommandType.StoredProcedure);
+
+                return result;
+            }
         }
 
     }
