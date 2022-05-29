@@ -11,6 +11,7 @@
         public int ServiceTypeId { get; set; }
         public TimeSpan EstimatedTime { get; set; }
 
+
         public override string ToString()
         {
             return $"Id={Id} Name={Name} Description={Description} Price={Price} CommercialPrice={CommercialPrice}," +
