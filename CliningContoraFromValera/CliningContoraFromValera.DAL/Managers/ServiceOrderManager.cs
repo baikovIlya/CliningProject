@@ -55,9 +55,13 @@ namespace CliningContoraFromValera.DAL.Managers
                     "GetAllOrderServicesInfoById",
                     (serviceOrder, order, service) =>
                     {
-
                         ServiceOrderDTO crnt = result;
 
+                        if (serviceOrder != null)
+                        {
+                            crnt.Id = serviceOrder.Id;
+                            crnt.Count = serviceOrder.Count;
+                        }
                         if (order != null)
                         {
                             crnt.Orders.Add(order);
