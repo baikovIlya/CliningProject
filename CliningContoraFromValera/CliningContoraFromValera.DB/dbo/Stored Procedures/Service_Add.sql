@@ -4,7 +4,6 @@
 	@Price DECIMAL (10, 2),
 	@CommercialPrice DECIMAL (10, 2),
 	@Unit nvarchar(30),
-	@ServiceTypeId int,
 	@EstimatedTime time
 AS
 BEGIN
@@ -14,7 +13,6 @@ INSERT INTO dbo.[Service](
 	Price,
 	CommercialPrice,
 	Unit,
-	ServiceTypeId,
 	EstimatedTime)
 VALUES(
 	@Name,
@@ -22,7 +20,6 @@ VALUES(
 	@Price,
 	@CommercialPrice,
 	@Unit,
-	@ServiceTypeId,
 	@EstimatedTime)
 
 SELECT @@IDENTITY 

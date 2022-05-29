@@ -69,7 +69,6 @@
     <Build Include="dbo\Tables\Order.sql" />
     <Build Include="dbo\Tables\WorkTime.sql" />
     <Build Include="dbo\Tables\Employee.sql" />
-    <Build Include="dbo\Tables\ServiceType.sql" />
     <Build Include="dbo\Tables\Service.sql" />
     <Build Include="dbo\Tables\Employee_Service.sql" />
     <Build Include="dbo\Tables\Employee_Order.sql" />
@@ -80,11 +79,6 @@
     <Build Include="dbo\Stored Procedures\Client_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Client_UpdateById.sql" />
     <Build Include="dbo\Stored Procedures\Client_DeleteById.sql" />
-    <Build Include="dbo\Stored Procedures\ServiceType_Add.sql" />
-    <Build Include="dbo\Stored Procedures\ServiceType_GetById.sql" />
-    <Build Include="dbo\Stored Procedures\ServiceType_GetAll.sql" />
-    <Build Include="dbo\Stored Procedures\ServiceType_UpdateById.sql" />
-    <Build Include="dbo\Stored Procedures\ServiceType_DeleteById.sql" />
     <Build Include="dbo\Stored Procedures\Order_Add.sql" />
     <Build Include="dbo\Stored Procedures\Order_DeleteById.sql" />
     <Build Include="dbo\Stored Procedures\Order_GetAll.sql" />

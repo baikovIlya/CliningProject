@@ -5,7 +5,6 @@
 	@Price DECIMAL (10, 2),
 	@CommercialPrice DECIMAL (10, 2),
 	@Unit nvarchar(30),
-	@ServiceTypeId int,
 	@EstimatedTime time
 AS
 BEGIN
@@ -16,7 +15,6 @@ SET [Name] = @Name,
     Price = @Price,
     CommercialPrice = @CommercialPrice,
     Unit = @Unit,
-    ServiceTypeId = @ServiceTypeId,
     EstimatedTime = @EstimatedTime
 WHERE Id = @Id
 

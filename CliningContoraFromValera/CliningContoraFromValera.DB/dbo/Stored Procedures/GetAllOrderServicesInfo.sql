@@ -22,7 +22,6 @@ S.[Name],
 S.Price, 
 S.CommercialPrice, 
 S.Unit, 
-S.ServiceTypeId, 
 S.EstimatedTime
 from dbo.[Service_Order] as SO 
 join [dbo].[Order] AS O ON O.Id = SO.OrderId 
