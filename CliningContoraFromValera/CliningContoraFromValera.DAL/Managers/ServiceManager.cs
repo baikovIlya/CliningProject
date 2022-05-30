@@ -42,6 +42,7 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.Service_Add,
                     param: new
                     {
+                        newService.ServiceType,
                         newService.Name,
                         newService.Description,
                         newService.Price,
@@ -65,6 +66,7 @@ namespace CliningContoraFromValera.DAL
                     param: new
                     {
                         newService.Id,
+                        newService.ServiceType,
                         newService.Name,
                         newService.Description,
                         newService.Price,

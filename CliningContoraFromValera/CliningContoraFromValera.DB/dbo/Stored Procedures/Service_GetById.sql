@@ -3,7 +3,7 @@
 AS
 BEGIN
 
-	SELECT Id, [Name], [Description], Price, CommercialPrice, Unit, EstimatedTime
+	SELECT Id, [ServiceType], [Name], [Description], Price, CommercialPrice, Unit, EstimatedTime
 	FROM dbo.[Service]
 	WHERE Id=@Id
 

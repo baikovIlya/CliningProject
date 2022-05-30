@@ -3,7 +3,7 @@
 AS
 BEGIN
 
-	SELECT Id, ClientId, [Date], StartTime, EstimatedEndTime, FinishTime, Price, [Status], AddressId, CountOfEmployees, IsCommercial
+	SELECT Id, [Date], StartTime, EstimatedEndTime, FinishTime, Price, [Status], CountOfEmployees, IsCommercial, ClientId, AddressId
 	FROM dbo.[Order]
 	WHERE (IsDeleted = 0)
 

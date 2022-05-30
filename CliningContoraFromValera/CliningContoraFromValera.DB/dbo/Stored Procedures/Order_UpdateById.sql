@@ -1,21 +1,20 @@
 ﻿CREATE PROCEDURE [dbo].[Order_UpdateById]
 	@Id int,
-	@ClientId int,
 	@Date date,
 	@StartTime time,
 	@EstimatedEndTime time,
 	@FinishTime time,
 	@Price decimal(10,2),
 	@Status nvarchar(50),
-	@AddressId int,
 	@CountOfEmployees int,
-	@IsCommercial bit
+	@IsCommercial bit,
+	@ClientId int,
+	@AddressId int
 AS
 BEGIN
 
 UPDATE dbo.[Order]
 SET 
-        ClientId = @ClientId,
         [Date] = @Date,
         StartTime = @StartTime,
         EstimatedEndTime = @EstimatedEndTime,
@@ -24,7 +23,10 @@ SET
         [Status] = @Status,
         AddressId = @AddressId,
         CountOfEmployees = @CountOfEmployees,
-        IsCommercial = @IsCommercial
+        IsCommercial = @IsCommercial,
+		ClientId = @ClientId,
+		AddressId = @AddressId
+
 WHERE Id = @Id
 
 END

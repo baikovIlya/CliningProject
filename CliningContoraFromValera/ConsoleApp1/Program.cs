@@ -49,13 +49,7 @@ var SDTO = new ServiceDTO()
     Price = 30,
     CommercialPrice = 40,
     Unit = "м2",
-    ServiceTypeId = 1,
     EstimatedTime = new TimeSpan(02, 00, 00)
-};
-var ST = new ServiceTypeManager();
-var STDTO = new ServiceTypeDTO()
-{
-    Name = "химчистка"
 };
 var O = new OrderManager();
 var ODTO = new OrderDTO()

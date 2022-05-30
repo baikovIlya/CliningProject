@@ -12,28 +12,28 @@
 AS
 BEGIN
 INSERT INTO dbo.[Order](
-        ClientId,
         [Date],
         StartTime,
         EstimatedEndTime,
         FinishTime,
         Price,
         [Status],
-        AddressId,
         CountOfEmployees,
-        IsCommercial)
+        IsCommercial,
+        ClientId,
+        AddressId)
         
  VALUES (
-        @ClientId,
         @Date,
         @StartTime,
         @EstimatedEndTime,
         @FinishTime,
         @Price,
         @Status,
-        @AddressId,
         @CountOfEmployees,
-        @IsCommercial)
+        @IsCommercial,
+        @ClientId,
+        @AddressId)
 SELECT @@IDENTITY 
 END
  

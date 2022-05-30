@@ -5,7 +5,7 @@
 AS
 BEGIN
 	  SELECT E.Id, E.FirstName, E.LastName, E.Phone, WT.Id, WT.[Date], WT.StartTime, WT.FinishTime, WT.EmployeeId,
-	  S.Id, S.[Name], S.[Description], S.Price, S.CommercialPrice, S.Unit, S.ServiceTypeId, S.EstimatedTime,
+	  S.Id, S.ServiceType, S.[Name], S.[Description], S.Price, S.CommercialPrice, S.Unit, S.EstimatedTime,
 	  WA.Id, WA.[Name] FROM [dbo].[Employee] AS E
 	  join dbo.WorkTime as WT on E.Id = WT.EmployeeId
 	  join dbo.Employee_Service as ES on E.Id = ES.EmployeeId

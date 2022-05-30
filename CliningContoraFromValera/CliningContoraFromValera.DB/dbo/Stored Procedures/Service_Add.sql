@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Service_Add]
+    @ServiceType nvarchar(100),
 	@Name nvarchar(100),
 	@Description nvarchar(255),
 	@Price DECIMAL (10, 2),
@@ -8,6 +9,7 @@
 AS
 BEGIN
 INSERT INTO dbo.[Service](
+	[ServiceType],
 	[Name],
 	[Description],
 	Price,
@@ -15,6 +17,7 @@ INSERT INTO dbo.[Service](
 	Unit,
 	EstimatedTime)
 VALUES(
+    @ServiceType,
 	@Name,
 	@Description,
 	@Price,
