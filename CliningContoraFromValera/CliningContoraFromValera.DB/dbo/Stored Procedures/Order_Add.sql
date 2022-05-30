@@ -1,14 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[Order_Add]
-	@ClientId int,
 	@Date date,
 	@StartTime time,
 	@EstimatedEndTime time,
 	@FinishTime time,
 	@Price decimal(10,2),
 	@Status nvarchar(50),
-	@AddressId int,
 	@CountOfEmployees int,
-	@IsCommercial bit
+	@IsCommercial bit,
+    @ClientId int,
+    @AddressId int
 AS
 BEGIN
 INSERT INTO dbo.[Order](

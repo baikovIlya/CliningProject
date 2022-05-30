@@ -17,7 +17,7 @@ namespace CliningContoraFromValera.DAL
                         param: new 
                         {
                             newAddress.Street,
-                            newAddress.Bilding,
+                            newAddress.Building,
                             newAddress.Room,
                             newAddress.WorkAreaId
                         },
@@ -54,7 +54,7 @@ namespace CliningContoraFromValera.DAL
                         {
                             newAddress.Id,
                             newAddress.Street,
-                            newAddress.Bilding,
+                            newAddress.Building,
                             newAddress.Room,
                             newAddress.WorkAreaId
                         },
