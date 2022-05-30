@@ -85,7 +85,7 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public List<EmployeeDTO> GetAllEmployeesInfo()
+        public EmployeeDTO GetAllEmployeesInfoById(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -94,27 +94,90 @@ namespace CliningContoraFromValera.DAL
                 Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
 
                 connection.Query<EmployeeDTO, ServiceDTO, WorkAreaDTO, EmployeeDTO>(
-                    StoredProcedures.GetAllEmployeesInfo,
+                    StoredProcedures.GetAllEmployeesInfoById,
                     (employee, service, workArea) => {
                         if (!result.ContainsKey(employee.Id))
                         {
                             result.Add(employee.Id, employee);
                         }
                         EmployeeDTO crnt = result[employee.Id];
-                        if (service != null)
+                        if (crnt.Services == null && crnt.WorkAreas == null)
                         {
-                            crnt.Services.Add(service);
+                            crnt.Services = new Dictionary<int, ServiceDTO>();
+                            crnt.WorkAreas = new Dictionary<int, WorkAreaDTO>();
                         }
-                        if (workArea != null)
+                        if (service != null && !crnt.Services!.ContainsKey(service.Id))
                         {
-                            crnt.WorkAreas.Add(workArea);
+                            crnt.Services.Add(service.Id, service);
+                        }
+                        if (workArea != null && !crnt.WorkAreas!.ContainsKey(workArea.Id))
+                        {
+                            crnt.WorkAreas.Add(workArea.Id, workArea);
                         }
                         return crnt;
                     },
+                    param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure,
                     splitOn: "Id"
                 );
-                return result.Values.ToList();
+                return result[employeeId];
+            }
+        }
+
+        public EmployeeDTO GetOrderHistoryOfTheEmployeeById(int employeeId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
+
+                connection.Query<EmployeeDTO, OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, ServiceDTO, EmployeeDTO>(
+                    StoredProcedures.GetOrderHistoryOfTheEmployeeById,
+                    (employee, order, client, address, workArea, service) =>
+                    {
+                        if (!result.ContainsKey(employee.Id))
+                        {
+                            result.Add(employee.Id, employee);
+                        }
+                        EmployeeDTO crnt = result[employee.Id];
+                        if (crnt.Orders == null )
+                        {
+                            crnt.Orders = new Dictionary<int, OrderDTO>();
+                        }
+                        if (order != null && !crnt.Orders!.ContainsKey(order.Id))
+                        {
+                            crnt.Orders!.Add(order.Id, order);
+                        }
+                        OrderDTO employeeOrder = crnt.Orders[order!.Id];
+                        if (employeeOrder.Services == null)
+                        {
+                            employeeOrder.Services = new Dictionary<int, ServiceDTO>();
+                        }
+                        if (order != null && client != null && employeeOrder.Client == null)
+                        {
+                            employeeOrder.Client = client;
+                        }
+                        if (order != null && address != null && employeeOrder.Address == null)
+                        {
+                            employeeOrder.Address = address;
+                        }
+                        if (order != null && address != null && workArea != null
+                        && employeeOrder.Address!.WorkArea == null)
+                        {
+                            employeeOrder.Address!.WorkArea = workArea;
+                        }
+                        if (order != null && !employeeOrder.Services!.ContainsKey(service.Id))
+                        {
+                            employeeOrder.Services!.Add(service.Id, service);
+                        }
+                        return crnt;
+                    },
+                    param: new { id = employeeId },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result[employeeId];
             }
         }
     }

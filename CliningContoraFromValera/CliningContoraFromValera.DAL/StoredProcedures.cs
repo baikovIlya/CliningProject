@@ -63,12 +63,12 @@
         public const string WorkTime_UpdateById = "WorkTime_UpdateById";
 
         public const string ChangeEmployeeScheduleByEmployeeIdByDate = "ChangeEmployeeScheduleByEmployeeIdByDate";
-        public const string GetAllEmployeesInfo = "GetAllEmployeesInfo";
+        public const string GetAllEmployeesInfoById = "GetAllEmployeesInfoById";
         public const string GetEmployeeSchedule = "GetEmployeeSchedule";
-        public const string GetOrderHistoryOfTheEmployee = "GetOrderHistoryOfTheEmployee";
+        public const string GetOrderHistoryOfTheEmployeeById = "GetOrderHistoryOfTheEmployeeById";
         public const string GetAllServicesInfo = "GetAllServicesInfo";
         public const string GetClientOrdersHistory = "GetClientOrdersHistory";
-        public const string GetGetEmployyesAvailableForOrder = "GetEmployyesAvailableForOrder";
+        public const string GetEmployyesAvailableForOrder = "GetEmployyesAvailableForOrder";
         public const string GetAllOrderServicesInfoById = "GetAllOrderServicesInfoById";
         public const string GetAllOrderServicesInfo = "GetAllOrderServicesInfo";
     }
