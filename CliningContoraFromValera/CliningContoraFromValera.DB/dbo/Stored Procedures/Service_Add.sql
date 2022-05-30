@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Service_Add]
-    @ServiceType nvarchar(100),
+    @ServiceType nvarchar(50),
 	@Name nvarchar(100),
 	@Description nvarchar(255),
 	@Price DECIMAL (10, 2),
@@ -9,7 +9,7 @@
 AS
 BEGIN
 INSERT INTO dbo.[Service](
-	[ServiceType],
+	ServiceType,
 	[Name],
 	[Description],
 	Price,

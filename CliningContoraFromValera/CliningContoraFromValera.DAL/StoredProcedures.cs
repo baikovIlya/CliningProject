@@ -44,12 +44,6 @@
         public const string Service_GetById = "Service_GetById";
         public const string Service_UpdateById = "Service_UpdateById";
 
-        public const string ServiceType_Add = "ServiceType_Add";
-        public const string ServiceType_DeleteById = "ServiceType_DeleteById";
-        public const string ServiceType_GetAll = "ServiceType_GetAll";
-        public const string ServiceType_GetById = "ServiceType_GetById";
-        public const string ServiceType_UpdateById = "ServiceType_UpdateById";
-
         public const string WorkArea_Add = "WorkArea_Add";
         public const string WorkArea_DeleteById = "WorkArea_DeleteById";
         public const string WorkArea_GetAll = "WorkArea_GetAll";

@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return $"Id={Id} Name={Name} Description={Description} Price={Price} CommercialPrice={CommercialPrice}," +
+            return $"Id={Id} ServiceType={ServiceType} Name={Name} Description={Description} Price={Price} CommercialPrice={CommercialPrice}," +
                 $" Unit = {Unit}, EstimatedTime = {EstimatedTime}  ";
         }
 
