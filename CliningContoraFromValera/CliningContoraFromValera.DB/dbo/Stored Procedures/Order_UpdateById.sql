@@ -21,7 +21,6 @@ SET
         FinishTime = @FinishTime,
         Price = @Price,
         [Status] = @Status,
-        AddressId = @AddressId,
         CountOfEmployees = @CountOfEmployees,
         IsCommercial = @IsCommercial,
 		ClientId = @ClientId,
