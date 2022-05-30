@@ -87,11 +87,11 @@ var CDTO = new ClientDTO()
 //WT.DeleteWorkTimeById(WTDTO);
 //Console.WriteLine(WT.GetWorkTimeById(1));
 //WT.ChangeEmployeeScheduleByEmployeeIdByDate(WTDTO);
-foreach (var i in test)
-{
-    i.ToString();
-    Console.WriteLine(i.ToString());
-}
+//foreach (var i in test)
+//{
+//    i.ToString();
+//    Console.WriteLine(i.ToString());
+//}
 //var E = new EmployeeManager();
 ////E.AddEmployee("Вася", "Петров", "+79514521271");
 //var WT = new WorkTimeManager();
