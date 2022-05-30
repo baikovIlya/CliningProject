@@ -8,8 +8,45 @@
         Title="ClilingFromValera" Height="500" Width="800" Background="White">
     <Grid>
         <TabControl x:Name="MainTabControl" Height="500" Width="800">
+
             <TabItem Header="Клиенты">
-                <DataGrid Height="418" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,379,0"/>
+                <Grid Height="427" Margin="16,0,31,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"></ColumnDefinition>
+                        <ColumnDefinition Width="40*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Фамилия:" Grid.ColumnSpan="2" Margin="448,0,0,0"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,34,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    <Label Content="Имя:" Grid.ColumnSpan="2" Margin="448,80,0,-80"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,114,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    <Label Content="Телефон:" Grid.ColumnSpan="2" Margin="448,161,0,-161"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,196,10,0" AcceptsReturn="True" MaxLength="255" Height="29" />
+                    <Label Content="Почта:" Grid.ColumnSpan="2" Margin="448,240,0,-240"/>
+                    <Button Content="Сохранить" Margin="54,368,51,30" Grid.Column="1"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="False"
+                              CanUserAddRows="False"
+                              Margin="20,-2,19,67" Height="362" RenderTransformOrigin="0.5,0.5">
+                        <DataGrid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </DataGrid.RenderTransform>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия" Width="90"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Имя" Width="95"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Телефон" Width="120"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Почта" Width="150"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Добавить" Margin="20,368,314,30"></Button>
+                    <Button Content="Редактировать" Margin="168,368,166,30"></Button>
+                    <Button Content="Удалить" Margin="315,368,19,30"></Button>
+                </Grid>
             </TabItem>
 
 
@@ -199,8 +236,6 @@
 
                 </Grid>
             </TabItem>
-
-
         </TabControl>
 
     </Grid>
