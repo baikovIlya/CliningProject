@@ -47,7 +47,6 @@ namespace CliningContoraFromValera.DAL
                         newService.Price,
                         newService.CommercialPrice,
                         newService.Unit,
-                        newService.ServiceTypeId,
                         newService.EstimatedTime
                     },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -71,7 +70,6 @@ namespace CliningContoraFromValera.DAL
                         newService.Price,
                         newService.CommercialPrice,
                         newService.Unit,
-                        newService.ServiceTypeId,
                         newService.EstimatedTime
                     },
                     commandType: System.Data.CommandType.StoredProcedure
