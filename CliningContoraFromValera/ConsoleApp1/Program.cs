@@ -1,17 +1,15 @@
-﻿using CliningContoraFromValera.DAL;
-using CliningContoraFromValera.DAL.Managers;
+﻿using CliningContoraFromValera.Bll;
+using AutoMapper;
+using CliningContoraFromValera.Bll.Models;
+using CliningContoraFromValera.DAL;
 
-//List<ClientDTO> test = CL.GetAllClients();
-//CL.AddClient("малыш", "пупсович", "mfkssd", "+799992332");
-//CL.AddClient("котик", "мяукович", "may", "+79514871215");
-//CL.UpdateClientById(2, "гномик", "пупсочик", null, "+792532342");
-//CL.DeleteClientById(2);
-var E = new EmployeeManager();
-var EDTO = new EmployeeDTO()
+ClientDTO ClientDTO = new ClientDTO()
 {
-    FirstName = "Карина",
-    LastName = "Быстрова",
-    Phone = "+79821247892"
+    Id = 4,
+    FirstName = "asdasdas",
+    LastName = "sadasdas",
+    Email = "12e123423",
+    Phone = "100"
 };
 //E.AddEmployee(EDTO);
 var WA = new WorkAreaManager();
@@ -108,13 +106,11 @@ var CDTO = new ClientDTO()
 //    Console.WriteLine(i.ToString());
 //}
 
-var SO = new ServiceOrderManager();
 
-var q = SO.GetById(2);
+MapperConfigStorage configStorage = new MapperConfigStorage();
 
-Console.WriteLine(q);
-//foreach (var i in test)
-//{
-//    i.ToString();
-//    Console.WriteLine(i.ToString());
-//}
+AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
+
+ClientModel clientModel = mapper.Map<ClientModel>(ClientDTO);
+
+Console.WriteLine();
