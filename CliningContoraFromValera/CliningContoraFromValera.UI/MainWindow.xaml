@@ -55,7 +55,7 @@
                     <TabControl>
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="10">
-                                <DataGrid Height="400"/>
+                                <DataGrid x:Name="DataGrid_AllOrders" Height="400" Loaded="DataGrid_AllOrders_Loaded"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">
