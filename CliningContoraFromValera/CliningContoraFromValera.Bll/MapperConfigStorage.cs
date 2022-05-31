@@ -27,6 +27,8 @@ namespace CliningContoraFromValera.Bll
 
                 cfg.CreateMap<WorkAreaDTO, WorkAreaModel>();
 
+                cfg.CreateMap<EmployeeDTO, EmployeeModel>();
+
             })); 
         }
 
