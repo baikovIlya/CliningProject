@@ -10,9 +10,10 @@
         public decimal CommercialPrice { get; set; }
         public string? Unit { get; set; }
         public TimeSpan EstimatedTime { get; set; }
+        public ServiceOrderDTO? ServiceOrder { get; set; }
 
 
-        public override string ToString()
+    public override string ToString()
         {
             return $"Id={Id} ServiceType={ServiceType} Name={Name} Description={Description} Price={Price} CommercialPrice={CommercialPrice}," +
                 $" Unit = {Unit}, EstimatedTime = {EstimatedTime}  ";
