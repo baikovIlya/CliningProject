@@ -84,6 +84,19 @@ namespace CliningContoraFromValera.DAL
                     );
             }
         }
+        public void DeleteEmployeesOrder(int employeeId, int orderId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingleOrDefault<EmployeeDTO>(
+                    StoredProcedures.Employee_Order_DeleteByValue,
+                    param: new { EmployeeId = employeeId, OrderId = orderId },
+                    commandType: System.Data.CommandType.StoredProcedure
+                    );
+            }
+        }
 
         public EmployeeDTO GetAllEmployeesInfoById(int employeeId)
         {

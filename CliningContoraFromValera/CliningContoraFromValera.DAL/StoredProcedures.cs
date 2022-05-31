@@ -23,6 +23,7 @@
         public const string Employee_Order_Add = "Employee_Order_Add";
         public const string Employee_Order_DeleteById = "Employee_Order_DeleteById";
         public const string Employee_Order_GetAll = "Employee_Order_GetAll";
+        public const string Employee_Order_DeleteByValue = "Employee_Order_DeleteByValue";
 
         public const string Employee_Service_Add = "Employee_Service_Add";
         public const string Employee_Service_DeleteById = "Employee_Service_DeleteById";
