@@ -24,17 +24,24 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+            //List<ClientDTO> clients = ClientManager.GetAllClients();
+            //List<ClientModel> ClientModel = mapper.Map<List<ClientModel>>(clients);
+            //DataGrid_AllOrders.ItemsSource = ClientModel;
+        //ClientManager ClientManager = new ClientManager();
+
+
         AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
-        ClientManager ClientManager = new ClientManager();
-
-
+        EmployeeManager EmployeeManager = new EmployeeManager();
 
         public MainWindow()
         {
             InitializeComponent();
-            List<ClientDTO> clients = ClientManager.GetAllClients();
-            List<ClientModel> ClientModel = mapper.Map<List<ClientModel>>(clients);
-            DataGrid_AllOrders.ItemsSource = ClientModel;
+
+            EmployeeDTO history = EmployeeManager.GetAllEmployeesInfoById(1);
+            EmployeeModel EmployeeModel = mapper.Map<EmployeeModel>(history);
+            DataGrid_AllOrders.ItemsSource = (System.Collections.IEnumerable)EmployeeModel;
+
+
         }
 
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
