@@ -10,7 +10,7 @@ namespace CliningContoraFromValera.Bll.Models
         public TimeSpan EstimatedEndTime { get; set; }
         public TimeSpan? FinishTime { get; set; }
         public decimal Price { get; set; }
-        public string Status { get; set; }
+        public StatusType Status { get; set; }
         public int CountOfEmployees { get; set; }
         public bool IsCommercial { get; set; }
         public ClientDTO? Client { get; set; }

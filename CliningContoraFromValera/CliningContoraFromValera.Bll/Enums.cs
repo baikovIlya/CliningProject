@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CliningContoraFromValera.Bll
 {
-    public enum Status
+    public enum StatusType
     {
         Processed,
         InProgress,
