@@ -41,6 +41,8 @@
         public const string Order_GetById = "Order_GetById";
         public const string Order_UpdateById = "Order_UpdateById";
 
+        public const string Service_Order_DeleteByValue = "Service_Order_DeleteByValue";
+
         public const string Service_Add = "Service_Add";
         public const string Service_DeleteById = "Service_DeleteById";
         public const string Service_GetAll = "Service_GetAll";

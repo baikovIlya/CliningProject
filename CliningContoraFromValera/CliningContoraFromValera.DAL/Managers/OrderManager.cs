@@ -95,5 +95,17 @@ namespace CliningContoraFromValera.DAL
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
+        public void DeleteServiceFromOrder(int serviceId, int orderId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingleOrDefault<OrderDTO>(
+                    StoredProcedures.Service_Order_DeleteByValue,
+                    param: new { ServiceId = serviceId, OrderId = orderId },
+                    commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
     }
 }
