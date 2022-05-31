@@ -13,14 +13,14 @@ namespace CliningContoraFromValera.Bll
             if (_instance == null)
                 InitializeInstance();
             return _instance;
-
         }
 
         private static void InitializeInstance()
         {
             _instance = new Mapper(new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ClientDTO,ClientModel>();
+                cfg.CreateMap<ClientDTO, ClientModel>();
+                cfg.CreateMap<ServiceDTO, ServiceModel>();
                
             })); 
         }
