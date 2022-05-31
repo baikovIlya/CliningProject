@@ -78,5 +78,35 @@ namespace CliningContoraFromValera.DAL
                     );
             }
         }
+
+        public List<WorkAreaDTO> GetWorkareasAndAdresses()
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, WorkAreaDTO> result = new Dictionary<int, WorkAreaDTO>();
+
+                connection.Query<WorkAreaDTO, AddressDTO, WorkAreaDTO>
+                (
+                    StoredProcedures.GetWorkareasAndAdresses,
+                    (workarea, address) => {
+                        if (!result.ContainsKey(workarea.Id))
+                        {
+                            result.Add(workarea.Id, workarea);
+                        }
+                        WorkAreaDTO crnt = result[workarea.Id];
+                        if (address != null)
+                        {
+                            crnt.Addresses.Add(address);
+                        }
+                        return crnt;
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result.Values.ToList();
+            }
+        }
     }
 }
