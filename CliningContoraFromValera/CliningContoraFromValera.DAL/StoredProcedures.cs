@@ -69,6 +69,7 @@
         public const string GetAllServicesInfo = "GetAllServicesInfo";
         public const string GetClientOrdersHistory = "GetClientOrdersHistory";
         public const string GetGetEmployyesAvailableForOrder = "GetEmployyesAvailableForOrder";
+        public const string GetWorkareasAndAdresses = "GetWorkareasAndAdresses";
 
     }
 }
