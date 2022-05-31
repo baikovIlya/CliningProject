@@ -13,7 +13,6 @@ namespace CliningContoraFromValera.Bll
             if (_instance == null)
                 InitializeInstance();
             return _instance;
-
         }
 
         private static void InitializeInstance()
