@@ -1,4 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
+﻿using CliningContoraFromValera.DAL;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,11 +27,11 @@ namespace CliningContoraFromValera.DAL.Managers
 
                         if (order != null)
                         {
-                            crnt.Orders.Add(order);
+                            //crnt.Orders.Add(order);
                         }
                         if (service != null)
                         {
-                            crnt.Services.Add(service);
+                            //crnt.Services.Add(service);
                         }
                         return crnt;
                     },
@@ -64,11 +64,11 @@ namespace CliningContoraFromValera.DAL.Managers
                         }
                         if (order != null)
                         {
-                            crnt.Orders.Add(order);
+                            //crnt.Orders.Add(order);
                         }
                         if (service != null)
                         {
-                            crnt.Services.Add(service);
+                            //crnt.Services.Add(service);
                         }
 
                         return crnt;

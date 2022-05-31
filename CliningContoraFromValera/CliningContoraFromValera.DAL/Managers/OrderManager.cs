@@ -1,4 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
+﻿using CliningContoraFromValera.DAL;
 using Dapper;
 using System.Data.SqlClient;
 

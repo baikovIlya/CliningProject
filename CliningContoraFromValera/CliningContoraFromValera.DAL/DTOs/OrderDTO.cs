@@ -1,6 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
-
-namespace CliningContoraFromValera.DAL
+﻿namespace CliningContoraFromValera.DAL
 {
     public class OrderDTO
     {

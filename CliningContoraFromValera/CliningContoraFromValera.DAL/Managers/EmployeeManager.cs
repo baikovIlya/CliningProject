@@ -100,21 +100,21 @@ namespace CliningContoraFromValera.DAL
                         {
                             result.Add(employee.Id, employee);
                         }
-                        EmployeeDTO crnt = result[employee.Id];
-                        if (crnt.Services == null && crnt.WorkAreas == null)
+                        EmployeeDTO crntEmployee = result[employee.Id];
+                        if (crntEmployee.Services == null && crntEmployee.WorkAreas == null)
                         {
-                            crnt.Services = new Dictionary<int, ServiceDTO>();
-                            crnt.WorkAreas = new Dictionary<int, WorkAreaDTO>();
+                            crntEmployee.Services = new Dictionary<int, ServiceDTO>();
+                            crntEmployee.WorkAreas = new Dictionary<int, WorkAreaDTO>();
                         }
-                        if (service != null && !crnt.Services!.ContainsKey(service.Id))
+                        if (service != null && !crntEmployee.Services!.ContainsKey(service.Id))
                         {
-                            crnt.Services.Add(service.Id, service);
+                            crntEmployee.Services.Add(service.Id, service);
                         }
-                        if (workArea != null && !crnt.WorkAreas!.ContainsKey(workArea.Id))
+                        if (workArea != null && !crntEmployee.WorkAreas!.ContainsKey(workArea.Id))
                         {
-                            crnt.WorkAreas.Add(workArea.Id, workArea);
+                            crntEmployee.WorkAreas.Add(workArea.Id, workArea);
                         }
-                        return crnt;
+                        return crntEmployee;
                     },
                     param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure,
@@ -132,24 +132,24 @@ namespace CliningContoraFromValera.DAL
 
                 Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
 
-                connection.Query<EmployeeDTO, OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, ServiceDTO, EmployeeDTO>(
+                connection.Query<EmployeeDTO, OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, ServiceDTO, ServiceOrderDTO, EmployeeDTO>(
                     StoredProcedures.GetOrderHistoryOfTheEmployeeById,
-                    (employee, order, client, address, workArea, service) =>
+                    (employee, order, client, address, workArea, service, serviceOrder) =>
                     {
                         if (!result.ContainsKey(employee.Id))
                         {
                             result.Add(employee.Id, employee);
                         }
-                        EmployeeDTO crnt = result[employee.Id];
-                        if (crnt.Orders == null )
+                        EmployeeDTO crntEmployee = result[employee.Id];
+                        if (crntEmployee.Orders == null )
                         {
-                            crnt.Orders = new Dictionary<int, OrderDTO>();
+                            crntEmployee.Orders = new Dictionary<int, OrderDTO>();
                         }
-                        if (order != null && !crnt.Orders!.ContainsKey(order.Id))
+                        if (order != null && !crntEmployee.Orders!.ContainsKey(order.Id))
                         {
-                            crnt.Orders!.Add(order.Id, order);
+                            crntEmployee.Orders!.Add(order.Id, order);
                         }
-                        OrderDTO employeeOrder = crnt.Orders[order!.Id];
+                        OrderDTO employeeOrder = crntEmployee.Orders[order!.Id];
                         if (employeeOrder.Services == null)
                         {
                             employeeOrder.Services = new Dictionary<int, ServiceDTO>();
@@ -170,8 +170,18 @@ namespace CliningContoraFromValera.DAL
                         if (order != null && !employeeOrder.Services!.ContainsKey(service.Id))
                         {
                             employeeOrder.Services!.Add(service.Id, service);
+                            ServiceDTO crntServiceOrder = employeeOrder.Services[service.Id];
+                            if (crntServiceOrder.ServiceOrder == null)
+                            {
+                                crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
+                            }
+                            if(serviceOrder != null && serviceOrder.OrderId == employeeOrder.Id
+                            && serviceOrder.ServiceId == crntServiceOrder.Id)
+                            {
+                                crntServiceOrder.ServiceOrder = serviceOrder;
+                            }
                         }
-                        return crnt;
+                        return crntEmployee;
                     },
                     param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure,
@@ -196,26 +206,26 @@ namespace CliningContoraFromValera.DAL
                         {
                             result.Add(employee.Id, employee);
                         }
-                        EmployeeDTO crnt = result[employee.Id];
-                        if (crnt.Services == null && crnt.WorkAreas == null && crnt.WorkTime == null)
+                        EmployeeDTO crntEmployee = result[employee.Id];
+                        if (crntEmployee.Services == null && crntEmployee.WorkAreas == null && crntEmployee.WorkTime == null)
                         {
-                            crnt.Services = new Dictionary<int, ServiceDTO>();
-                            crnt.WorkAreas = new Dictionary<int, WorkAreaDTO>();
-                            crnt.WorkTime = new WorkTimeDTO();
+                            crntEmployee.Services = new Dictionary<int, ServiceDTO>();
+                            crntEmployee.WorkAreas = new Dictionary<int, WorkAreaDTO>();
+                            crntEmployee.WorkTime = new WorkTimeDTO();
                         }
                         if (service != null)
                         {
-                            crnt.Services!.Add(service.Id, service);
+                            crntEmployee.Services!.Add(service.Id, service);
                         }
                         if (workArea != null)
                         {
-                            crnt.WorkAreas!.Add(workArea.Id, workArea);
+                            crntEmployee.WorkAreas!.Add(workArea.Id, workArea);
                         }
                         if (workTime != null)
                         {
-                            crnt.WorkTime = workTime;
+                            crntEmployee.WorkTime = workTime;
                         }
-                        return crnt;
+                        return crntEmployee;
                     },
                     param: new { date = date, serviceId = serviceId, workAreaId = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure,
