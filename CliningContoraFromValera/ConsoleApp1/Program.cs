@@ -27,9 +27,10 @@ var ADTO = new AddressDTO()
     WorkAreaId = 1
 };
 //A.AddAddress(ADTO);
-//Console.WriteLine(E.GetAllEmployeesInfoById(5));
+var E = new EmployeeManager();
+//Console.WriteLine(E.GetAllEmployeesInfoById(1));
 //Console.WriteLine(E.GetOrderHistoryOfTheEmployeeById(1));
-//E.GetEmployyesAvailableForOrder(new DateTime(2022, 06, 01), 4, 3);
+E.GetEmployyesAvailableForOrder(new DateTime(2022, 06, 01), 4, 3);
 //Console.WriteLine(E.GetEmployeeByID(1));
 var WT = new WorkTimeManager();
 var WTDTO = new WorkTimeDTO()
@@ -85,7 +86,6 @@ var CDTO = new ClientDTO()
 //    i.ToString();
 //    Console.WriteLine(i.ToString());
 //}
-//var E = new EmployeeManager();
 ////E.AddEmployee("Вася", "Петров", "+79514521271");
 //var WT = new WorkTimeManager();
 //var WTDTO = new WorkTimeDTO()
