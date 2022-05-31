@@ -27,6 +27,7 @@
 
         public const string Employee_Service_Add = "Employee_Service_Add";
         public const string Employee_Service_DeleteById = "Employee_Service_DeleteById";
+        public const string Employee_Service_DeleteByValue = "Employee_Service_DeleteByValue";
         public const string Employee_Service_GetAll = "Employee_Service_GetAll";
 
         public const string Employee_WorkArea_Add = "Employee_WorkArea_Add";
