@@ -29,8 +29,9 @@ var ADTO = new AddressDTO()
     WorkAreaId = 1
 };
 //A.AddAddress(ADTO);
-//Console.WriteLine(E.GetAllEmployeesInfoById(1));
-Console.WriteLine(E.GetOrderHistoryOfTheEmployeeById(1));
+//Console.WriteLine(E.GetAllEmployeesInfoById(5));
+//Console.WriteLine(E.GetOrderHistoryOfTheEmployeeById(5));
+//E.GetEmployyesAvailableForOrder(new DateTime(2022, 06, 01), 4, 3);
 //Console.WriteLine(E.GetEmployeeByID(1));
 var WT = new WorkTimeManager();
 var WTDTO = new WorkTimeDTO()

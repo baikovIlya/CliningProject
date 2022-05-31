@@ -180,5 +180,49 @@ namespace CliningContoraFromValera.DAL
                 return result[employeeId];
             }
         }
+
+        public List<EmployeeDTO> GetEmployyesAvailableForOrder(DateTime date, int serviceId, int workAreaId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
+
+                connection.Query<EmployeeDTO, WorkTimeDTO, ServiceDTO, WorkAreaDTO, EmployeeDTO>(
+                    StoredProcedures.GetEmployyesAvailableForOrder,
+                    (employee, workTime, service, workArea) => {
+                        if (!result.ContainsKey(employee.Id))
+                        {
+                            result.Add(employee.Id, employee);
+                        }
+                        EmployeeDTO crnt = result[employee.Id];
+                        if (crnt.Services == null && crnt.WorkAreas == null && crnt.WorkTime == null)
+                        {
+                            crnt.Services = new Dictionary<int, ServiceDTO>();
+                            crnt.WorkAreas = new Dictionary<int, WorkAreaDTO>();
+                            crnt.WorkTime = new WorkTimeDTO();
+                        }
+                        if (service != null)
+                        {
+                            crnt.Services!.Add(service.Id, service);
+                        }
+                        if (workArea != null)
+                        {
+                            crnt.WorkAreas!.Add(workArea.Id, workArea);
+                        }
+                        if (workTime != null)
+                        {
+                            crnt.WorkTime = workTime;
+                        }
+                        return crnt;
+                    },
+                    param: new { date = date, serviceId = serviceId, workAreaId = workAreaId },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result.Values.ToList();
+            }
+        }
     }
 }
