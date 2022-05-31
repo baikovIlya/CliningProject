@@ -12,4 +12,11 @@ namespace CliningContoraFromValera.Bll
         InProgress,
         Done
     }
+
+    public enum ServiceType
+    {
+        DryCleaning,
+        Cleaning,
+        Disinsection
+    }
 }
