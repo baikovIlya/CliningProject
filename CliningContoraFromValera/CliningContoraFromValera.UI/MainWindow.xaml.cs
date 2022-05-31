@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CliningContoraFromValera.Bll;
+using AutoMapper;
+using CliningContoraFromValera.Bll.Models;
+using CliningContoraFromValera.DAL;
 
 namespace CliningContoraFromValera.UI
 {
@@ -20,9 +24,28 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
+        ClientManager ClientManager = new ClientManager();
+
+
+
         public MainWindow()
         {
             InitializeComponent();
+            List<ClientDTO> clients = ClientManager.GetAllClients();
+            List<ClientModel> ClientModel = mapper.Map<List<ClientModel>>(clients);
+            DataGrid_AllOrders.ItemsSource = ClientModel;
+        }
+
+        private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+
         }
     }
 }
