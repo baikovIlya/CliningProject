@@ -21,7 +21,8 @@ namespace CliningContoraFromValera.Bll
             _instance = new Mapper(new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ClientDTO,ClientModel>();
-               
+                cfg.CreateMap<WorkAreaDTO, WorkAreaModel>();
+
             })); 
         }
 
