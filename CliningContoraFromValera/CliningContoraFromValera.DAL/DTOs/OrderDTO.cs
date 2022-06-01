@@ -15,7 +15,7 @@
         public int AddressId { get; set; }
         public ClientDTO? Client { get; set; }
         public AddressDTO? Address { get; set; }
-        public Dictionary<int, ServiceDTO>? Services { get; set; }
+        public List<ServiceDTO>? Services { get; set; }
 
 
         public override string ToString()

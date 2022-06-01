@@ -8,7 +8,7 @@
         public string Phone { get; set; }
         public List<ServiceDTO>? Services { get; set; }
         public List<WorkAreaDTO>? WorkAreas { get; set; }
-        public Dictionary<int, OrderDTO>? Orders { get; set; }
+        public List<OrderDTO>? Orders { get; set; }
         public WorkTimeDTO? WorkTime { get; set; }
 
         public override string ToString()
