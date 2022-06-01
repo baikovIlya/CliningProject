@@ -31,6 +31,10 @@ namespace CliningContoraFromValera.Bll
 
                 cfg.CreateMap<AddressDTO, AddressModel>();
 
+                cfg.CreateMap<WorkTimeDTO, WorkTimeModel>();
+
+                cfg.CreateMap<ServiceOrderDTO, ServiceOrderModel>();
+
             })); 
         }
 

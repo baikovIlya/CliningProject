@@ -2,9 +2,9 @@
 
 namespace CliningContoraFromValera.Bll.Models
 {
-    public class WorkAreaModel
+    public class ServiceOrderModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int Count { get; set; }
     }
 }
