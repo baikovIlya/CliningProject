@@ -1,7 +1,8 @@
-﻿using CliningContoraFromValera.Bll;
-using AutoMapper;
+﻿using AutoMapper;
+using CliningContoraFromValera.Bll;
 using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL;
+using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Managers;
 
 ClientDTO ClientDTO = new ClientDTO()
 {
