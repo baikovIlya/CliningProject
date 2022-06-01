@@ -76,7 +76,7 @@
                                 <Label Grid.Column="0" Grid.Row="0" Content="Клиент" Margin="14,18,144,20"/>
                                 <DatePicker Grid.Column="0" Grid.Row="1"  Margin="14"/>
                                 <TextBox Grid.Column="0" Grid.Row="2" Text="Время начала" Margin="14"/>
-                                <TextBox Grid.Column="0" Grid.Row="3" Text="Время конца" Margin="14"/>
+                                <Label Grid.Column="0" Grid.Row="3" Content="Время конца" Margin="14"/>
                                 <ComboBox Grid.Column="0" Grid.Row="4" Text="TextBox" Margin="14"/>
                                 <Label Grid.Column="0" Grid.Row="4" Content="Физ. лицо/Юр. лицо" Margin="14,18,144,20"/>
                                 <ComboBox Grid.Column="1" Grid.Row="0" Text="TextBox" Margin="14"/>
@@ -84,7 +84,7 @@
                                 <TextBox Grid.Column="1" Grid.Row="1" Text="Адрес" Margin="14"/>
                                 <ComboBox Grid.Column="1" Grid.Row="2" Text="TextBox" Margin="14"/>
                                 <Label Grid.Column="1" Grid.Row="2" Content="Количество сотрудников" Margin="14,18,144,20"/>
-                                <TextBox Grid.Column="1" Grid.Row="3" Text="Цена" Margin="14"/>
+                                <Label Grid.Column="1" Grid.Row="3" Content="Цена" Margin="14"/>
                                 <ComboBox Grid.Column="1" Grid.Row="4" Text="TextBox" Margin="14,14,59,14"/>
                                 <Label Grid.Column="1" Grid.Row="4" Content="Услуги" Margin="14,18,144,20"/>
                                 <Button Content="+" Grid.Column="1" Grid.Row="4" Margin="255,14,14,14" />
