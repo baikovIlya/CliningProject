@@ -1,5 +1,4 @@
-﻿using System;
-using CliningContoraFromValera.DAL;
+﻿using CliningContoraFromValera.DAL;
 
 namespace CliningContoraFromValera.Bll.Models
 {
@@ -9,7 +8,6 @@ namespace CliningContoraFromValera.Bll.Models
         public string Street { get; set; }
         public string Building { get; set; }
         public string? Room { get; set; }
-        public int WorkAreaId { get; set; }
         public WorkAreaDTO? WorkArea { get; set; }
     }
 }
