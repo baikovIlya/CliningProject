@@ -1,8 +1,8 @@
-﻿using CliningContoraFromValera.DAL;
-using Dapper;
+﻿using Dapper;
 using System.Data.SqlClient;
+using CliningContoraFromValera.DAL.DTOs;
 
-namespace CliningContoraFromValera.DAL
+namespace CliningContoraFromValera.DAL.Managers
 {
     public class OrderManager
     {

@@ -1,4 +1,4 @@
-﻿namespace CliningContoraFromValera.DAL
+﻿namespace CliningContoraFromValera.DAL.DTOs
 {
     public class AddressDTO
     {

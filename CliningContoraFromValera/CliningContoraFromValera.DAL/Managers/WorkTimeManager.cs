@@ -1,7 +1,8 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
+using CliningContoraFromValera.DAL.DTOs;
 
-namespace CliningContoraFromValera.DAL
+namespace CliningContoraFromValera.DAL.Managers
 {
     public class WorkTimeManager
     {
@@ -87,7 +88,8 @@ namespace CliningContoraFromValera.DAL
             }
         }
 
-        public void ChangeEmployeeScheduleByEmployeeIdByDate(WorkTimeDTO newWokrTime)
+        public void ChangeEmployeeScheduleByEmployeeIdByDate(int employeeId, DateTime date,
+            TimeSpan startTime, TimeSpan finishTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -97,10 +99,10 @@ namespace CliningContoraFromValera.DAL
                     StoredProcedures.ChangeEmployeeScheduleByEmployeeIdByDate,
                     param: new
                     {
-                        newWokrTime.EmployeeId,
-                        newWokrTime.Date,
-                        newWokrTime.StartTime,
-                        newWokrTime.FinishTime
+                        EmployeeId = employeeId,
+                        Date = date,
+                        StartTime = startTime,
+                        FinishTime = finishTime
                     },
                     commandType: System.Data.CommandType.StoredProcedure
                     );

@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 using CliningContoraFromValera.Bll;
 using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL;
+using CliningContoraFromValera.DAL.Managers;
+using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.UI
 {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL;
+using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.Bll
 {
@@ -32,8 +32,6 @@ namespace CliningContoraFromValera.Bll
                 cfg.CreateMap<AddressDTO, AddressModel>();
 
                 cfg.CreateMap<WorkTimeDTO, WorkTimeModel>();
-
-                cfg.CreateMap<ServiceOrderDTO, ServiceOrderModel>();
 
             })); 
         }

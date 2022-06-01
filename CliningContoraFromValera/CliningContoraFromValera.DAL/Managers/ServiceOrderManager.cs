@@ -1,7 +1,6 @@
-﻿using CliningContoraFromValera.DAL;
-using Dapper;
-using System.Data;
+﻿using Dapper;
 using System.Data.SqlClient;
+using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
