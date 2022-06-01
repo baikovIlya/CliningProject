@@ -129,5 +129,9 @@
     <Build Include="dbo\Stored Procedures\GetEmployyesAvailableForOrder.sql" />
     <Build Include="dbo\Stored Procedures\GetAllOrderServicesInfo.sql" />
     <Build Include="dbo\Stored Procedures\GetAllOrderServicesInfoById.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Order_DeleteByValue.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_WorkArea_DeleteByValue.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Service_DeleteByValue.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Order_DeleteByValue.sql" />
   </ItemGroup>
 </Project>
