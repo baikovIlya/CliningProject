@@ -9,7 +9,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     {
         WorkTimeManager WorkTimeManager = new WorkTimeManager();
 
-        public List<WorkTimeModel> GetAll()
+        public List<WorkTimeModel> GetAllWorkTimes()
         {
             List<WorkTimeDTO> workTimes = WorkTimeManager.GetAllWorkTimes();
             return MapperConfigStorage.GetInstance().Map<List<WorkTimeModel>>(workTimes);
@@ -33,10 +33,9 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             WorkTimeManager.AddWorkTime(workTime);
         }
 
-        public void DeleteWorkTime(int workTimeId)
+        public void DeleteWorkTimeById(int workTimeId)
         {
-            WorkTimeDTO workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDTO>(workTimeId);
-            WorkTimeManager.DeleteWorkTimeById(workTime.Id);
+            WorkTimeManager.DeleteWorkTimeById(workTimeId);
         }
     }
 }

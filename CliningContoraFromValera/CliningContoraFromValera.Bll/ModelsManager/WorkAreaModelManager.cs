@@ -9,7 +9,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     {
         WorkAreaManager WorkAreaManager = new WorkAreaManager();
 
-        public List<WorkAreaModel> GetAll()
+        public List<WorkAreaModel> GetAllWorkAreas()
         {
             List<WorkAreaDTO> workAreas = WorkAreaManager.GetAllWorkAreas();
             return MapperConfigStorage.GetInstance().Map<List<WorkAreaModel>>(workAreas);
@@ -35,8 +35,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public void DeleteWorkAreaById(int workAreaId)
         {
-            WorkAreaDTO workArea = MapperConfigStorage.GetInstance().Map<WorkAreaDTO>(workAreaId);
-            WorkAreaManager.DeleteWorkAreaById(workArea.Id);
+            WorkAreaManager.DeleteWorkAreaById(workAreaId);
         }
     }
 }
