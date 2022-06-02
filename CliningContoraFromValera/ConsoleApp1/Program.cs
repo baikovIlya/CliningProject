@@ -1,17 +1,28 @@
 ﻿using AutoMapper;
 using CliningContoraFromValera.Bll;
 using CliningContoraFromValera.Bll.Models;
+using CliningContoraFromValera.Bll.ModelsManager;
+
 using CliningContoraFromValera.DAL.DTOs;
 using CliningContoraFromValera.DAL.Managers;
 
-ClientDTO ClientDTO = new ClientDTO()
+ClientModel ClientModel = new ClientModel()
 {
     Id = 4,
-    FirstName = "asdasdas",
+    FirstName = "вввввввввввввв",
     LastName = "sadasdas",
     Email = "12e123423",
     Phone = "100"
 };
+
+//var C = new ClientModelManager();
+//ClientModelManager.UpdateClientByID(ClientModel);
+
+
+
+
+
+
 //E.AddEmployee(EDTO);
 var WA = new WorkAreaManager();
 var WADTO = new WorkAreaDTO()

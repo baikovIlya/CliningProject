@@ -19,7 +19,7 @@ namespace CliningContoraFromValera.Bll
         {
             _instance = new Mapper(new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ClientDTO, ClientModel>();
+                cfg.CreateMap<ClientDTO, ClientModel>().ReverseMap();
 
                 cfg.CreateMap<OrderDTO, OrderModel>();
 
