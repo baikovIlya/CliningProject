@@ -20,5 +20,23 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             WorkTimeDTO workTime = WorkTimeManager.GetWorkTimeById(workTimeId);
             return MapperConfigStorage.GetInstance().Map<WorkTimeModel>(workTime);
         }
+
+        public void UpdateWorkTimeById(WorkTimeModel workTimeModel)
+        {
+            WorkTimeDTO workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDTO>(workTimeModel);
+            WorkTimeManager.UpdateWorkTimeById(workTime);
+        }
+
+        public void AddWorkTime(WorkTimeModel workTimeModel)
+        {
+            WorkTimeDTO workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDTO>(workTimeModel);
+            WorkTimeManager.AddWorkTime(workTime);
+        }
+
+        public void DeleteWorkTime(int workTimeId)
+        {
+            WorkTimeDTO workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDTO>(workTimeId);
+            WorkTimeManager.DeleteWorkTimeById(workTime.Id);
+        }
     }
 }
