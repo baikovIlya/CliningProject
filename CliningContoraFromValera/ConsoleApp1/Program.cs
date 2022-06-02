@@ -6,15 +6,6 @@ using CliningContoraFromValera.Bll.ModelsManager;
 using CliningContoraFromValera.DAL.DTOs;
 using CliningContoraFromValera.DAL.Managers;
 
-ClientModel ClientModel = new ClientModel()
-{
-    Id = 4,
-    FirstName = "вввввввввввввв",
-    LastName = "sadasdas",
-    Email = "12e123423",
-    Phone = "100"
-};
-
 //var C = new ClientModelManager();
 //ClientModelManager.UpdateClientByID(ClientModel);
 

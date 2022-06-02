@@ -15,7 +15,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     {
         ClientManager ClientManager = new ClientManager();
 
-        public List<ClientModel> GetAll()
+        public List<ClientModel> GetAllClients()
         {
             List<ClientDTO> clients = ClientManager.GetAllClients();
             return MapperConfigStorage.GetInstance().Map<List<ClientModel>>(clients);
@@ -27,7 +27,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             return MapperConfigStorage.GetInstance().Map<ClientModel>(client);
         }
 
-        public void UpdateClientByID(ClientModel clientModel)
+        public void UpdateClientById(ClientModel clientModel)
         {
             ClientDTO client = MapperConfigStorage.GetInstance().Map<ClientDTO>(clientModel);
             ClientManager.UpdateClientById(client);
@@ -39,10 +39,9 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             ClientManager.AddClient(client);
         }
 
-        public void Delete(int id)
+        public void DeleteClientById(int id)
         {
-            ClientDTO client = MapperConfigStorage.GetInstance().Map<ClientDTO>(id);
-            ClientManager.DeleteClientById(client.Id);
+            ClientManager.DeleteClientById(id);
         }
 
     }

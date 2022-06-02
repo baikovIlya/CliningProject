@@ -17,6 +17,7 @@ using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
+using System.Data;
 using CliningContoraFromValera.Bll.ModelsManager;
 
 namespace CliningContoraFromValera.UI
@@ -37,28 +38,89 @@ namespace CliningContoraFromValera.UI
             InitializeComponent();
         }
 
-        private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
-
+            List<ClientModel> clients = ClientModelManager.GetAllClients();
+            DataGrid_Clients.ItemsSource = clients;
         }
 
-        private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
+        private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ClientModel client = DataGrid_Clients.SelectedItem as ClientModel;
+            ClientModelManager.DeleteClientById(client.Id);
+        }
+
+        private void DataGrid_Clients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
 
-            ClientModel clients = ClientModelManager.GetClientById(4);
-            DataGrid_AllOrders.Items.Add(clients);
-
-            ClientModel ClientModel = new ClientModel()
+            ClientModel client = (ClientModel)e.Row.Item;
+            var Element = (TextBox)e.EditingElement;
+            if (String.IsNullOrWhiteSpace(Element.Text))
             {
-                FirstName = "ВАЛЕРКА",
-                LastName = "ДЯДЯ",
-                Email = "12e123423",
-                Phone = "100"
-            };
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else
+            {
+                if (String.Equals((string)e.Column.Header, "Имя"))
+                {
+                    client.FirstName = Element.Text;
 
-            ClientModelManager.AddClient(ClientModel);
+                }
+                else if (String.Equals((string)e.Column.Header, "Фамилия"))
+                {
+                    client.LastName = Element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                {
+                    client.Phone = Element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Почта"))
+                {
+                    client.Email = Element.Text;
+                }
 
-            //ClientModelManager.GetClientById(2);
+                ClientModelManager.UpdateClientById(client);
+            }
+        }
+
+        private void Button_ClientAdd_Click(object sender, RoutedEventArgs e)
+        {
+           if (String.IsNullOrWhiteSpace(TextBox_Name.Text) || String.IsNullOrWhiteSpace(TextBox_LastName.Text))
+           {
+                GetMassegeBoxEmptyTextBoxes();
+           }
+           else if(String.IsNullOrWhiteSpace(TextBox_Email.Text) || String.IsNullOrWhiteSpace(TextBox_Phone.Text))
+           {
+                GetMassegeBoxEmptyTextBoxes();
+           }
+           else
+           {
+             ClientModel client = new ClientModel(TextBox_Name.Text,
+               TextBox_LastName.Text,
+               TextBox_Email.Text,
+               TextBox_Phone.Text);
+             ClientModelManager.AddClient(client);
+             ClearClientAddTextBoxes();
+           }
+        }
+
+        private void ClearClientAddTextBoxes()
+        {
+            TextBox_Name.Clear();
+            TextBox_LastName.Clear();
+            TextBox_Email.Clear();
+            TextBox_Phone.Clear();
+        }
+
+        private void GetMassegeBoxEmptyTextBoxes()
+        {
+            MessageBox.Show("Все поля обязательны к заполнению!");
+        }
+
+        private void Button_ClientRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            List<ClientModel> clients = ClientModelManager.GetAllClients();
+            DataGrid_Clients.ItemsSource = clients;
         }
     }
 }
