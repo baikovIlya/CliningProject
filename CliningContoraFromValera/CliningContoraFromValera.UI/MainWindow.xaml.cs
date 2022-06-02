@@ -29,7 +29,9 @@ namespace CliningContoraFromValera.UI
     {
         AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
         ClientManager ClientManager = new ClientManager();
+        EmployeeManager EmployeeManager = new EmployeeManager();
         ClientModelManager ClientModelManager = new ClientModelManager();
+        EmployeeModelManager EmployeeModelManager = new EmployeeModelManager();
 
 
 
@@ -57,7 +59,7 @@ namespace CliningContoraFromValera.UI
             var Element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(Element.Text))
             {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
             }
             else
             {
@@ -87,11 +89,11 @@ namespace CliningContoraFromValera.UI
         {
            if (String.IsNullOrWhiteSpace(TextBox_Name.Text) || String.IsNullOrWhiteSpace(TextBox_LastName.Text))
            {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
            }
            else if(String.IsNullOrWhiteSpace(TextBox_Email.Text) || String.IsNullOrWhiteSpace(TextBox_Phone.Text))
            {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
            }
            else
            {
@@ -112,9 +114,15 @@ namespace CliningContoraFromValera.UI
             TextBox_Phone.Clear();
         }
 
-        private void GetMassegeBoxEmptyTextBoxes()
+        private void GetMessageBoxEmptyTextBoxes()
         {
             MessageBox.Show("Все поля обязательны к заполнению!");
+        }
+
+        private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            DataGrid_Employees.ItemsSource = employees;
         }
 
         private void Button_ClientRefresh_Click(object sender, RoutedEventArgs e)
@@ -125,22 +133,40 @@ namespace CliningContoraFromValera.UI
 
         private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
         {
-            
+            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
         }
 
         private void Button_EmployeeAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text))
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else if (String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else
+            {
+                EmployeeModel employee = new EmployeeModel(TB_FirstNameEmployee.Text,
+                    TB_LastNameEmployee.Text,
+                    TB_PhoneEmployee.Text);
+                EmployeeModelManager.AddEmployee(employee);
+                ClearEmployeeAddTextBoxes();
+            }
         }
 
         private void Button_EmployeeDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            EmployeeModel employee = DataGrid_Employees.SelectedItem as EmployeeModel;
+            EmployeeModelManager.DeleteEmployeeById(employee.Id);
         }
 
-        private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
+        private void ClearEmployeeAddTextBoxes()
         {
-
+            TB_LastNameEmployee.Clear();
+            TB_FirstNameEmployee.Clear();
+            TB_PhoneEmployee.Clear();
         }
     }
 }

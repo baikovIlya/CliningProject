@@ -139,9 +139,9 @@
                                 <Button Grid.Column="2" Content="Отменить" Grid.Row="5" Margin="20,17,0,0" Height="47"/>
                                 <Button x:Name="Button_EmployeeAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeAdd_Click"/>
                                 <Button x:Name="Button_EmployeeRefresh" Content="Обновить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeRefresh_Click"/>
-                                <TextBox HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
-                                <TextBox HorizontalAlignment="Right" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
-                                <TextBox HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="363" Height="29"/>
+                                <TextBox x:Name="TB_LastNameEmployee" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
+                                <TextBox x:Name="TB_FirstNameEmployee" HorizontalAlignment="Right" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
+                                <TextBox x:Name="TB_PhoneEmployee" HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="363" Height="29"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="График">
