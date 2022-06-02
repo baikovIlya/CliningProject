@@ -27,15 +27,13 @@ namespace CliningContoraFromValera.UI
     {
         AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
         ClientManager ClientManager = new ClientManager();
+        OrderManager OrderManager = new OrderManager();
 
 
 
         public MainWindow()
         {
             InitializeComponent();
-            List<ClientDTO> clients = ClientManager.GetAllClients();
-            List<ClientModel> ClientModel = mapper.Map<List<ClientModel>>(clients);
-            DataGrid_AllOrders.ItemsSource = ClientModel;
         }
 
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +43,8 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            List<OrderDTO> clients = OrderManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = clients;
 
         }
     }

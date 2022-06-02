@@ -6,18 +6,67 @@ namespace CliningContoraFromValera.DAL.Managers
 {
     public class OrderManager
     {
-        public List<OrderDTO> GetAllOrders()
+
+        public List<OrderDTO> GetAllOrder()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<OrderDTO>(
-                    StoredProcedures.Order_GetAll, 
-                    commandType: System.Data.CommandType.StoredProcedure)
-                    .ToList();
+                Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
+
+                connection.Query<OrderDTO, ClientDTO, AddressDTO, ServiceOrderDTO, ServiceDTO, OrderDTO>(
+                    StoredProcedures.Order_GetAll,
+                    (order, client, address, serviceOrder, service) => {
+                        if (!result.ContainsKey(order.Id))
+                        {
+                            result.Add(order.Id, order);
+                        }
+
+                        OrderDTO crnt = result[order.Id];
+                        if (client != null)
+                        {
+                           crnt.Client = client;    
+                        }
+                        if (address != null)
+                        {
+                           crnt.Address = address;
+                        }
+                        if(serviceOrder != null)
+                        {
+                            crnt.ServiceOrder.Add(serviceOrder);
+                        }
+                        if(service != null)
+                        {
+                            crnt.Services.Add(service);
+                        }
+                        return crnt;
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result.Values.ToList();
             }
         }
+
+
+
+
+
+
+
+        //public List<OrderDTO> GetAllOrders()
+        //{
+        //    using (var connection = new SqlConnection(ServerSettings._connectionString))
+        //    {
+        //        connection.Open();
+
+        //        return connection.Query<OrderDTO>(
+        //            StoredProcedures.Order_GetAll, 
+        //            commandType: System.Data.CommandType.StoredProcedure)
+        //            .ToList();
+        //    }
+        //}
 
         public OrderDTO GetOrderById(int orderId)
         {
