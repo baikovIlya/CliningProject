@@ -30,7 +30,9 @@ namespace CliningContoraFromValera.UI
         AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
         ClientManager ClientManager = new ClientManager();
         ClientModelManager ClientModelManager = new ClientModelManager();
-        WorkTimeManager WorkTimeManager = new WorkTimeManager();    
+        WorkTimeModelManager WorkTimeModelManager = new WorkTimeModelManager();
+        EmployeeWorkTimeModelManager EmployeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+
 
 
 
@@ -126,8 +128,9 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List <EmployeeDTO > datss = WorkTimeManager.GetEmployeesAndWorkTimes();
+            List<EmployeeWorkTimeModel> datss = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = datss;
+     
         }
     }
 }

@@ -37,5 +37,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             WorkTimeManager.DeleteWorkTimeById(workTimeId);
         }
+
     }
 }
