@@ -15,19 +15,19 @@
                         <ColumnDefinition Width="60*"></ColumnDefinition>
                         <ColumnDefinition Width="40*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Фамилия:" Grid.ColumnSpan="2" Margin="448,0,0,0"/>
-                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,34,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
-                    <Label Content="Имя:" Grid.ColumnSpan="2" Margin="448,80,0,-80"/>
-                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,114,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    <Label Content="Имя:" Grid.ColumnSpan="2" Margin="448,0,0,0"/>
+                    <TextBox x:Name="TextBox_ClientFirstName" Grid.Column="1" VerticalAlignment="Top" Margin="10,34,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    <Label Content="Фамилия:" Grid.ColumnSpan="2" Margin="448,80,0,-80"/>
+                    <TextBox x:Name="TextBox_ClientLastName" Grid.Column="1" VerticalAlignment="Top" Margin="10,114,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
                     <Label Content="Телефон:" Grid.ColumnSpan="2" Margin="448,161,0,-161"/>
-                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,196,10,0" AcceptsReturn="True" MaxLength="255" Height="29" />
+                    <TextBox x:Name="TextBox_ClientPhone" Grid.Column="1" VerticalAlignment="Top" Margin="10,196,10,0" AcceptsReturn="True" MaxLength="255" Height="29" />
                     <Label Content="Почта:" Grid.ColumnSpan="2" Margin="448,240,0,-240"/>
                     <Button Content="Сохранить" Margin="54,368,51,30" Grid.Column="1"/>
-                    <TextBox Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    <TextBox  x:Name="TextBox_ClientEmail" Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
 
                     <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" ItemsSource="{Binding ClientModel}" IsReadOnly="False" 
                               CanUserAddRows="False"
-                              Margin="20,-2,19,67" Height="362" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" RowEditEnding="DataGrid_Clients_RowEditEnding">
+                              Margin="20,-2,19,67" Height="362" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" RowEditEnding="DataGrid_Clients_RowEditEnding" SelectedCellsChanged="DataGrid_Clients_SelectedCellsChanged">
                         <DataGrid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -51,7 +51,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="Добавить" Margin="20,368,314,30"></Button>
-                    <Button Content="Редактировать" Margin="168,368,166,30"></Button>
+                    <Button x:Name="Button_ClientEdit" Content="Редактировать" Margin="168,368,166,30" Click="Button_ClientEdit_Click"></Button>
                     <Button x:Name="Button_DeleteClient" Content="Удалить" Margin="315,368,19,30"></Button>
                 </Grid>
             </TabItem>

@@ -17,6 +17,7 @@ using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
+using System.Data;
 
 namespace CliningContoraFromValera.UI
 {
@@ -58,14 +59,27 @@ namespace CliningContoraFromValera.UI
         {
             ClientDTO client = DataGrid_Clients.SelectedItem as ClientDTO;
             ClientManager.DeleteClientById(client.Id);
-            List<ClientDTO> clients = new List<ClientDTO>();
-            DataGrid_Clients.ItemsSource = clients;
+            
         }
 
 
 
         private void DataGrid_Clients_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
+        }
+
+        private void DataGrid_Clients_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            
+        }
+
+        private void Button_ClientEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var cellInfo = DataGrid_Clients.SelectedCells[0];
+            var content = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text;
+            TextBox_ClientFirstName.Text = content;
+
+            
         }
     }
 }
