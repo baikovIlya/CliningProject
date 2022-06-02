@@ -137,5 +137,10 @@ namespace CliningContoraFromValera.UI
         {
 
         }
+
+        private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

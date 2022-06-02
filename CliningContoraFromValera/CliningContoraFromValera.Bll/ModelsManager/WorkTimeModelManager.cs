@@ -2,7 +2,7 @@
 using CliningContoraFromValera.DAL;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
-
+    
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class WorkTimeModelManager
