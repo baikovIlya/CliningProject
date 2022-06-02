@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CliningContoraFromValera.UI"
         mc:Ignorable="d"
-        Title="ClilingFromValera" Height="500" Width="800" Background="White">
+        Title="CliningFromValera" Height="500" Width="800" Background="White">
     <Grid>
         <TabControl x:Name="MainTabControl" Height="500" Width="800">
 
