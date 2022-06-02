@@ -33,9 +33,6 @@ namespace CliningContoraFromValera.UI
         public MainWindow()
         {
             InitializeComponent();
-            List<ClientDTO> clients = ClientManager.GetAllClients();
-            List<ClientModel> ClientModel = mapper.Map<List<ClientModel>>(clients);
-            DataGrid_AllOrders.ItemsSource = ClientModel;
         }
 
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,6 +44,28 @@ namespace CliningContoraFromValera.UI
         {
             
 
+        }
+
+        private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ClientDTO> clients = ClientManager.GetAllClients();
+            List<ClientModel> CustomerModel = mapper.Map<List<ClientModel>>(clients);
+            DataGrid_Clients.ItemsSource = clients;
+
+        }
+
+        private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ClientDTO client = DataGrid_Clients.SelectedItem as ClientDTO;
+            ClientManager.DeleteClientById(client.Id);
+            List<ClientDTO> clients = new List<ClientDTO>();
+            DataGrid_Clients.ItemsSource = clients;
+        }
+
+
+
+        private void DataGrid_Clients_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
         }
     }
 }
