@@ -119,9 +119,16 @@
                                 </Grid.ColumnDefinitions>
                                 <DataGrid Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия" Width="120"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя" Width="120"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Телефон" Width="120"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия" Width="100"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя" Width="100"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Телефон" Width="100"></DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Удалить" Width="60">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_EmployeeDelete" Content="Удалить" Click="Button_EmployeeDelete_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <DataGrid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="20,0,0,0"/>
@@ -129,8 +136,8 @@
                                 <Label Content="Персон инфа, скиллы, ворктайм" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,223,20"/>
                                 <Button Grid.Column="1" VerticalAlignment="Top" Grid.Row="5" Content="Сохранить" Margin="20,17,0,0" Height="47"/>
                                 <Button Grid.Column="2" Content="Отменить" Grid.Row="5" Margin="20,17,0,0" Height="47"/>
-                                <Button Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34"/>
-                                <Button Content="Обновить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34"/>
+                                <Button x:Name="Button_EmployeeAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeAdd_Click"/>
+                                <Button x:Name="Button_EmployeeRefresh" Content="Обновить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeRefresh_Click"/>
                                 <TextBox HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
                                 <TextBox HorizontalAlignment="Right" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
                                 <TextBox HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="363" Height="29"/>

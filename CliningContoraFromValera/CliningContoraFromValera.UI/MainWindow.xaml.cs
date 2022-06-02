@@ -122,5 +122,20 @@ namespace CliningContoraFromValera.UI
             List<ClientModel> clients = ClientModelManager.GetAllClients();
             DataGrid_Clients.ItemsSource = clients;
         }
+
+        private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Button_EmployeeAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_EmployeeDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
