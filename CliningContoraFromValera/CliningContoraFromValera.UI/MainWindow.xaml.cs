@@ -18,6 +18,7 @@ using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
 using System.Data;
+using CliningContoraFromValera.Bll.ModelsManager;
 
 namespace CliningContoraFromValera.UI
 {
@@ -28,6 +29,7 @@ namespace CliningContoraFromValera.UI
     {
         AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
         ClientManager ClientManager = new ClientManager();
+        ClientModelManager ClientModelManager = new ClientModelManager();
 
 
 
@@ -78,6 +80,20 @@ namespace CliningContoraFromValera.UI
         private void Button_ClientAdd_Click(object sender, RoutedEventArgs e)
         {
 
+            ClientModel clients = ClientModelManager.GetClientById(4);
+            DataGrid_AllOrders.Items.Add(clients);
+
+            ClientModel ClientModel = new ClientModel()
+            {
+                FirstName = "ВАЛЕРКА",
+                LastName = "ДЯДЯ",
+                Email = "12e123423",
+                Phone = "100"
+            };
+
+            ClientModelManager.AddClient(ClientModel);
+
+            //ClientModelManager.GetClientById(2);
         }
     }
 }
