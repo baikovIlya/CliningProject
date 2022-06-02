@@ -120,9 +120,9 @@
                                 <DataGrid x:Name="DataGrid_Employees" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding EmployeeModel}" IsReadOnly="False" 
                                           CanUserAddRows="False" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34" Loaded="DataGrid_Employees_Loaded">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Телефон" Width="100"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"></DataGridTextColumn>
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
