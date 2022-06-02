@@ -55,24 +55,32 @@ namespace CliningContoraFromValera.UI
 
             ClientModel client = (ClientModel)e.Row.Item;
             var Element = (TextBox)e.EditingElement;
-            if (String.Equals((string)e.Column.Header, "Имя"))
+            if (String.IsNullOrWhiteSpace(Element.Text))
             {
-                client.FirstName = Element.Text;
+                GetMassegeBoxEmptyTextBoxes();
             }
-            else if (String.Equals((string)e.Column.Header, "Фамилия"))
+            else
             {
-                client.LastName = Element.Text;
-            }
-            else if (String.Equals((string)e.Column.Header, "Телефон"))
-            {
-                client.Phone = Element.Text;
-            }
-            else if (String.Equals((string)e.Column.Header, "Почта"))
-            {
-                client.Email = Element.Text;
-            }
+                if (String.Equals((string)e.Column.Header, "Имя"))
+                {
+                    client.FirstName = Element.Text;
 
-            ClientModelManager.UpdateClientById(client);
+                }
+                else if (String.Equals((string)e.Column.Header, "Фамилия"))
+                {
+                    client.LastName = Element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                {
+                    client.Phone = Element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Почта"))
+                {
+                    client.Email = Element.Text;
+                }
+
+                ClientModelManager.UpdateClientById(client);
+            }
         }
 
         private void Button_ClientAdd_Click(object sender, RoutedEventArgs e)
