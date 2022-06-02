@@ -13,9 +13,9 @@
         public bool IsCommercial { get; set; }
         public int ClientId { get; set; }
         public int AddressId { get; set; }
-        public ClientDTO? Client { get; set; }
-        public AddressDTO? Address { get; set; }
-        public List<ServiceDTO>? Services { get; set; }
+        public ClientDTO Client { get; set; }
+        public AddressDTO Address { get; set; }
+        public List<ServiceDTO> Services { get; set; }
 
 
         public override string ToString()
