@@ -19,7 +19,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public ServiceDTO GetServicetById(int serviceId)
+        public ServiceDTO GetServiceById(int serviceId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {

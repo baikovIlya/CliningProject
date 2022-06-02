@@ -48,7 +48,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateClientById(WorkAreaDTO newWorkArea)
+        public void UpdateWorkAreaById(WorkAreaDTO newWorkArea)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -66,7 +66,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void DeleteClientById(int workAreaId)
+        public void DeleteWorkAreaById(int workAreaId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
