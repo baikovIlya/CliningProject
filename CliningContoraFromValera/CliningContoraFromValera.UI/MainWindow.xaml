@@ -118,7 +118,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <DataGrid x:Name="DataGrid_Employees" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding EmployeeModel}" IsReadOnly="False" 
-                                          CanUserAddRows="False" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34" Loaded="DataGrid_Employees_Loaded">
+                                          CanUserAddRows="False" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34" Loaded="DataGrid_Employees_Loaded" CellEditEnding="DataGrid_Employees_CellEditEnding">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100"></DataGridTextColumn>
@@ -139,9 +139,9 @@
                                 <Button Grid.Column="2" Content="Отменить" Grid.Row="5" Margin="20,17,0,0" Height="47"/>
                                 <Button x:Name="Button_EmployeeAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeAdd_Click"/>
                                 <Button x:Name="Button_EmployeeRefresh" Content="Обновить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeRefresh_Click"/>
-                                <TextBox x:Name="TB_LastNameEmployee" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
-                                <TextBox x:Name="TB_FirstNameEmployee" HorizontalAlignment="Right" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="181" Height="29"/>
-                                <TextBox x:Name="TB_PhoneEmployee" HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="363" Height="29"/>
+                                <TextBox x:Name="TB_LastNameEmployee" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="29"/>
+                                <TextBox x:Name="TB_FirstNameEmployee" HorizontalAlignment="Right" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="29"/>
+                                <TextBox x:Name="TB_PhoneEmployee" HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="29"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="График">

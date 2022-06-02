@@ -5,14 +5,16 @@ namespace CliningContoraFromValera.Bll
 {
     public class MapperManager
     {
-        public EmployeeModel MapEmployeeDTOToEmployeeModel (EmployeeDTO employeeDTO)
-        {
-            return new EmployeeModel()
-            {
-                Id = employeeDTO.Id,
-                Name = $"{employeeDTO.LastName} {employeeDTO.LastName}"
-            };
-        }
+        //public EmployeeModel MapEmployeeDTOToEmployeeModel (EmployeeDTO employeeDTO)
+        //{
+        //    return new EmployeeModel()
+        //    {
+        //        //Id = employeeDTO.Id,
+        //        FirstName = employeeDTO.FirstName,
+        //        LastName = employeeDTO.LastName,
+        //        Phone = employeeDTO.Phone
+        //    };
+        //}
 
         public AllEmployeesInfoModel MapEmployeeDTOToAllEmployeeInfoModel(EmployeeDTO employeeDTO)
         {

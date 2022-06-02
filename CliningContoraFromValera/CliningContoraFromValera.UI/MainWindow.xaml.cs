@@ -54,7 +54,6 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Clients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-
             ClientModel client = (ClientModel)e.Row.Item;
             var Element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(Element.Text))
@@ -134,6 +133,7 @@ namespace CliningContoraFromValera.UI
         private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
         {
             List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            DataGrid_Employees.ItemsSource = employees;
         }
 
         private void Button_EmployeeAdd_Click(object sender, RoutedEventArgs e)
@@ -167,6 +167,33 @@ namespace CliningContoraFromValera.UI
             TB_LastNameEmployee.Clear();
             TB_FirstNameEmployee.Clear();
             TB_PhoneEmployee.Clear();
+        }
+
+        private void DataGrid_Employees_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            EmployeeModel employee = (EmployeeModel)e.Row.Item;
+            var element = (TextBox)e.EditingElement;
+            if (String.IsNullOrWhiteSpace(element.Text))
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else
+            {
+                if (String.Equals((string)e.Column.Header, "Фамилия"))
+                {
+                    employee.LastName = element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Имя"))
+                {
+                    employee.FirstName = element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                {
+                    employee.Phone = element.Text;
+                }
+
+                EmployeeModelManager.UpdateEmployeeById(employee);
+            }
         }
     }
 }
