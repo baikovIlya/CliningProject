@@ -2,8 +2,8 @@
 
 namespace CliningContoraFromValera.Bll.Models
 {
-    public class AllEmployeesServiceModel
+    public class AllEmployeesWorkAreaModel
     {
-        public List<ServiceModel> Services { get; set; }
+        public List<WorkAreaModel> WorkAreas { get; set; }
     }
 }
