@@ -108,5 +108,37 @@ namespace CliningContoraFromValera.DAL.Managers
                     );
             }
         }
+
+        public List<EmployeeDTO> GetEmployeesAndWorkTimes()
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
+
+                connection.Query<EmployeeDTO, WorkTimeDTO, EmployeeDTO>(
+                    StoredProcedures.GetEmployeesAndWorkTimes,
+                    (employee, workTime) => {
+                        if (!result.ContainsKey(employee.Id))
+                        {
+                            result.Add(employee.Id, employee);
+                        }
+
+                        EmployeeDTO crnt = result[employee.Id];
+
+                        if (workTime != null)
+                        {
+                            crnt.WorkTime = workTime;
+                        }
+                        return crnt;
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+
+                return result.Values.ToList();
+            }
+        }
     }
 }
