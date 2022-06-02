@@ -36,17 +36,6 @@ namespace CliningContoraFromValera.UI
             InitializeComponent();
         }
 
-        private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-
-        }
-
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
             List<ClientDTO> clients = ClientManager.GetAllClients();
@@ -59,27 +48,36 @@ namespace CliningContoraFromValera.UI
         {
             ClientDTO client = DataGrid_Clients.SelectedItem as ClientDTO;
             ClientManager.DeleteClientById(client.Id);
-            
         }
 
-
-
-        private void DataGrid_Clients_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void DataGrid_Clients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+
+            ClientDTO client = (ClientDTO)e.Row.Item;
+            var Element = (TextBox)e.EditingElement;
+            if (String.Equals((string)e.Column.Header, "Имя"))
+            {
+                client.FirstName = Element.Text;
+            }
+            else if (String.Equals((string)e.Column.Header, "Фамилия"))
+            {
+                client.LastName = Element.Text;
+            }
+            else if (String.Equals((string)e.Column.Header, "Телефон"))
+            {
+                client.Phone = Element.Text;
+            }
+            else if (String.Equals((string)e.Column.Header, "Почта"))
+            {
+                client.Email = Element.Text;
+            }
+
+            ClientManager.UpdateClientById(client);
         }
 
-        private void DataGrid_Clients_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        private void Button_ClientAdd_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
 
-        private void Button_ClientEdit_Click(object sender, RoutedEventArgs e)
-        {
-            var cellInfo = DataGrid_Clients.SelectedCells[0];
-            var content = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text;
-            TextBox_ClientFirstName.Text = content;
-
-            
         }
     }
 }

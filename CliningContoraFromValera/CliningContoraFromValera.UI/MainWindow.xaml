@@ -22,12 +22,12 @@
                     <Label Content="Телефон:" Grid.ColumnSpan="2" Margin="448,161,0,-161"/>
                     <TextBox x:Name="TextBox_ClientPhone" Grid.Column="1" VerticalAlignment="Top" Margin="10,196,10,0" AcceptsReturn="True" MaxLength="255" Height="29" />
                     <Label Content="Почта:" Grid.ColumnSpan="2" Margin="448,240,0,-240"/>
-                    <Button Content="Сохранить" Margin="54,368,51,30" Grid.Column="1"/>
+                    <Button x:Name="Button_ClientAdd" Content="Сохранить" Margin="54,368,51,30" Grid.Column="1" Click="Button_ClientAdd_Click"/>
                     <TextBox  x:Name="TextBox_ClientEmail" Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
 
                     <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" ItemsSource="{Binding ClientModel}" IsReadOnly="False" 
                               CanUserAddRows="False"
-                              Margin="20,-2,19,67" Height="362" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" RowEditEnding="DataGrid_Clients_RowEditEnding" SelectedCellsChanged="DataGrid_Clients_SelectedCellsChanged">
+                              Margin="20,-2,19,67" Height="362" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
                         <DataGrid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -51,7 +51,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="Добавить" Margin="20,368,314,30"></Button>
-                    <Button x:Name="Button_ClientEdit" Content="Редактировать" Margin="168,368,166,30" Click="Button_ClientEdit_Click"></Button>
+                    <Button x:Name="Button_ClientEdit" Content="Редактировать" Margin="168,368,166,30"/>
                     <Button x:Name="Button_DeleteClient" Content="Удалить" Margin="315,368,19,30"></Button>
                 </Grid>
             </TabItem>
@@ -62,7 +62,7 @@
                     <TabControl>
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="10">
-                                <DataGrid x:Name="DataGrid_AllOrders" Height="400" Loaded="DataGrid_AllOrders_Loaded"/>
+                                <DataGrid x:Name="DataGrid_AllOrders" Height="400"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">
