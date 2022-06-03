@@ -33,6 +33,7 @@ namespace CliningContoraFromValera.UI
         EmployeeModelManager EmployeeModelManager = new EmployeeModelManager();
         WorkTimeModelManager WorkTimeModelManager = new WorkTimeModelManager();
         EmployeeWorkTimeModelManager EmployeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+        OrderManager OrderManager = new OrderManager();
 
 
 
@@ -44,8 +45,11 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ClientModel> clients = ClientModelManager.GetAllClients();
-            DataGrid_Clients.ItemsSource = clients;
+            //List<ClientModel> clients = ClientModelManager.GetAllClients();
+            //DataGrid_Clients.ItemsSource = clients;
+
+            List<OrderDTO> dto = OrderManager.GetOrdersServices();
+            DataGrid_Clients.ItemsSource = dto;
         }
 
         private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
@@ -204,5 +208,7 @@ namespace CliningContoraFromValera.UI
                 EmployeeModelManager.UpdateEmployeeById(employee);
             }
         }
+
+
     }
 }

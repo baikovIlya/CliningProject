@@ -167,5 +167,54 @@ namespace CliningContoraFromValera.DAL.Managers
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
+
+        public OrderDTO GetOrdersServices(int ordersService)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                OrderDTO result = new OrderDTO();
+                List<int> serviceId = new List<int>();
+                connection.Query<OrderDTO, ServiceDTO, ServiceOrderDTO, OrderDTO >(
+                    StoredProcedures.GetOrdersService,
+                    (order, service, serviceOrder) =>
+                    {
+                        if (order != null && result.Id != order.Id)
+                        {
+                            result = order;
+                        }
+                        if (result.Services == null)
+                        {
+                            result.Services = new List<ServiceDTO>();
+                        }
+                        if (order != null && service != null && !serviceId.Contains(service.Id))
+                        {
+                            serviceId.Add(service.Id);
+                            result.Services!.Add(service);
+                            for (int i = 0; i <= result.Services.Count - 1; i++)
+                            {
+                                ServiceDTO crntServiceOrder = result.Services[i];
+                                if (crntServiceOrder.ServiceOrder == null)
+                                {
+                                    crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
+                                }
+                                if (serviceOrder.OrderId == result.Id
+                                && serviceOrder.ServiceId == crntServiceOrder.Id)
+                                {
+                                    crntServiceOrder.ServiceOrder = serviceOrder;
+                                }
+                            }
+                        }
+                        return result;
+                    },
+                    param: new { id = ordersService },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result;
+            }
+        }
+
     }
 }
