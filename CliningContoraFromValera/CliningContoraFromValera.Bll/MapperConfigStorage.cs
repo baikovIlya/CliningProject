@@ -49,8 +49,6 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("StartTime", opt => opt.MapFrom(c => c.StartTime))
                 .ForMember("FinishTime", opt => opt.MapFrom(c => c.FinishTime));
 
-                cfg.CreateMap<WorkTimeDTO, WorkTimeModel>();
-
                 cfg.CreateMap<EmployeeDTO, EmployeeWorkTimeModel>()
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))

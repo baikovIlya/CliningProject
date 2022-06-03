@@ -33,7 +33,7 @@ var ADTO = new AddressDTO()
 var E = new EmployeeManager();
 var O = new OrderManager();
 //Console.WriteLine(O.GetAllOrder());
-//Console.WriteLine(E.GetAllEmployeesInfoById(1));
+//Console.WriteLine(E.GetAllEmployeesServicesById(1));
 //Console.WriteLine(E.GetOrderHistoryOfTheEmployeeById(1));
 //E.GetEmployyesAvailableForOrder(new DateTime(2022, 06, 01), 4, 3);
 //Console.WriteLine(E.GetEmployeeByID(1));

@@ -126,7 +126,41 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public EmployeeDTO GetAllEmployeesInfoById(int employeeId)
+        public EmployeeDTO GetAllEmployeesWorkAreasById(int employeeId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                EmployeeDTO result = new EmployeeDTO();
+                List<int>  workAreaId = new List<int>();
+                connection.Query<EmployeeDTO, WorkAreaDTO, EmployeeDTO>(
+                    StoredProcedures.GetEmployeesWorkAreasById,
+                    (employee, workArea) => {
+                        if (employee != null && result.Id != employee.Id)
+                        {
+                            result = employee;
+                        }
+                        if (result.Services == null && result.WorkAreas == null)
+                        {
+                            result.WorkAreas = new List<WorkAreaDTO>();
+                        }
+                        if (workArea != null && !workAreaId.Contains(workArea.Id))
+                        {
+                            workAreaId.Add(workArea.Id);
+                            result.WorkAreas!.Add(workArea);
+                        }
+                        return result;
+                    },
+                    param: new { id = employeeId },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result;
+            }
+        }
+
+        public EmployeeDTO GetAllEmployeesServicesById(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -134,10 +168,9 @@ namespace CliningContoraFromValera.DAL.Managers
 
                 EmployeeDTO result = new EmployeeDTO();
                 List<int> serviceId = new List<int>();
-                List<int>  workAreaId = new List<int>();
-                connection.Query<EmployeeDTO, ServiceDTO, WorkAreaDTO, EmployeeDTO>(
-                    StoredProcedures.GetAllEmployeesInfoById,
-                    (employee, service, workArea) => {
+                connection.Query<EmployeeDTO, ServiceDTO, EmployeeDTO>(
+                    StoredProcedures.GetEmployeesServicesById,
+                    (employee, service) => {
                         if (employee != null && result.Id != employee.Id)
                         {
                             result = employee;
@@ -145,17 +178,11 @@ namespace CliningContoraFromValera.DAL.Managers
                         if (result.Services == null && result.WorkAreas == null)
                         {
                             result.Services = new List<ServiceDTO>();
-                            result.WorkAreas = new List<WorkAreaDTO>();
                         }
                         if (service != null && !serviceId.Contains(service.Id))
                         {
                             serviceId.Add(service.Id);
                             result.Services!.Add(service);
-                        }
-                        if (workArea != null && !workAreaId.Contains(workArea.Id))
-                        {
-                            workAreaId.Add(workArea.Id);
-                            result.WorkAreas!.Add(workArea);
                         }
                         return result;
                     },
