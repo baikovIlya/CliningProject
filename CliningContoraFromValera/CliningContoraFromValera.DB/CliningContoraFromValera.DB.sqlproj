@@ -133,5 +133,6 @@
     <Build Include="dbo\Stored Procedures\GetEmployeesAndWorkTimes.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeesServicesById.sql" />
     <Build Include="dbo\Stored Procedures\GetOrdersService.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmployeesScheduleByIdByDate.sql" />
   </ItemGroup>
 </Project>
