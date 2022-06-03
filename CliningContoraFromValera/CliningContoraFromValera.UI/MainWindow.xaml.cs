@@ -32,6 +32,7 @@ namespace CliningContoraFromValera.UI
         ClientModelManager ClientModelManager = new ClientModelManager();
         WorkTimeModelManager WorkTimeModelManager = new WorkTimeModelManager();
         EmployeeWorkTimeModelManager EmployeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+        EmployeeModelManager EmployeeModelManager = new EmployeeModelManager();
 
 
 
@@ -67,7 +68,6 @@ namespace CliningContoraFromValera.UI
                 if (String.Equals((string)e.Column.Header, "Имя"))
                 {
                     client.FirstName = Element.Text;
-
                 }
                 else if (String.Equals((string)e.Column.Header, "Фамилия"))
                 {
@@ -128,9 +128,33 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeWorkTimeModel> datss = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
-            DataGrid_Schedule.ItemsSource = datss;
-     
+            List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            DataGrid_Schedule.ItemsSource = employeesWorkTimes;
+        }
+
+        private void ComboBox_EmployeeSchedule_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            ComboBox_EmployeeSchedule.ItemsSource = employees;
+        }
+
+        private void Button_AddShift_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employee = ComboBox_EmployeeSchedule.SelectedValue as EmployeeModel;
+
+
+            TimeSpan newStartTime = TimeSpan.Parse(TextBox_EmployeeStartTime.Text);
+            TimeSpan newFinishTime = TimeSpan.Parse(TextBox_EmployeeFinishTime.Text);
+            DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
+            WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
+            WorkTimeModelManager.AddWorkTime(workTime);
+
+        }
+
+        private void Button_RefreshSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
     }
 }

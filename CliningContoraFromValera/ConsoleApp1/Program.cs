@@ -110,10 +110,10 @@ var CDTO = new ClientDTO()
 //}
 
 
-MapperConfigStorage configStorage = new MapperConfigStorage();
+//MapperConfigStorage configStorage = new MapperConfigStorage();
 
-AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
+//AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
 
-ClientModel clientModel = mapper.Map<ClientModel>(ClientDTO);
+//ClientModel clientModel = mapper.Map<ClientModel>(ClientDTO);
 
-Console.WriteLine();
+//Console.WriteLine();
