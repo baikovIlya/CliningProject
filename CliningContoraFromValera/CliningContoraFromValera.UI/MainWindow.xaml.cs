@@ -48,7 +48,7 @@ namespace CliningContoraFromValera.UI
             //List<ClientModel> clients = ClientModelManager.GetAllClients();
             //DataGrid_Clients.ItemsSource = clients;
 
-            //List<OrderDTO> dto = OrderManager.GetOrdersService();
+            //List<OrderDTO> dto = OrderManager.GetOrdersSer();
             //DataGrid_Clients.ItemsSource = dto;
         }
 

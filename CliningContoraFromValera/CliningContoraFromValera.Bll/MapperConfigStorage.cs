@@ -38,10 +38,10 @@ namespace CliningContoraFromValera.Bll
                 .ForMember(pts => pts.FirstName, opt => opt.MapFrom(ps => ps.Client!.FirstName))
                 .ForMember(pts => pts.LastName, opt => opt.MapFrom(ps => ps.Client!.LastName))
                 .ForMember(pts => pts.Phone, opt => opt.MapFrom(ps => ps.Client!.Phone))
+                .ForMember(pts => pts.Name, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Name))
                 .ForMember(pts => pts.Street, opt => opt.MapFrom(ps => ps.Address!.Street))
                 .ForMember(pts => pts.Building, opt => opt.MapFrom(ps => ps.Address!.Building))
-                .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room))
-                .ForMember(pts => pts.Name, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Name)); 
+                .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room));
 
                 cfg.CreateMap<ServiceDTO, ServiceModel>()
                 .ForMember("ServiceType", opt => opt.MapFrom(c => c.ServiceType))
