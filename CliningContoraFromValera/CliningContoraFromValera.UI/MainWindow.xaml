@@ -117,6 +117,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
+                                
                                 <DataGrid x:Name="DataGrid_Employees" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding EmployeeModel}" IsReadOnly="False" 
                                           CanUserAddRows="False" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34" Loaded="DataGrid_Employees_Loaded" CellEditEnding="DataGrid_Employees_CellEditEnding">
                                     <DataGrid.Columns>
@@ -131,10 +132,39 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
+                                    
                                 </DataGrid>
-                                <DataGrid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="20,0,0,0"/>
-                                <ComboBox Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="44" Margin="20,0,0,0"/>
-                                <Label Content="Персон инфа, скиллы, ворктайм" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,223,20"/>
+
+                                <DataGrid x:Name="DataGrid_EmployeeServices" AutoGenerateColumns="False" Grid.Column="1" Grid.RowSpan="3" Margin="20,0,0,0" ItemsSource="{Binding ServiceModel}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Тип сервиса" Binding="{Binding ServiceType}" Width="79"/>
+                                        <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="65"/>
+                                        <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="55"/>
+                                        <DataGridTextColumn Header="Комм.ц." Binding="{Binding CommercialPrice}" Width="55"/>
+                                        <DataGridTextColumn Header="Ед.изм." Binding="{Binding Unit}" Width="48"/>
+                                        <DataGridTextColumn Header="Ср.вр." Binding="{Binding }" Width="58"/>
+                                    </DataGrid.Columns>
+                                    
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header=""/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+
+                                <DataGrid x:Name="DataGrid_EmployeeWorkAreas" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Margin="20,20,0,0" ItemsSource="{Binding WorkaAreaModel}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Названия районов" Binding="{Binding Name}" Width="342"/>
+                                    </DataGrid.Columns>
+
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header=""/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+
+
                                 <Button Grid.Column="1" VerticalAlignment="Top" Grid.Row="5" Content="Сохранить" Margin="20,17,0,0" Height="47"/>
                                 <Button Grid.Column="2" Content="Отменить" Grid.Row="5" Margin="20,17,0,0" Height="47"/>
                                 <Button x:Name="Button_EmployeeAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeAdd_Click"/>
