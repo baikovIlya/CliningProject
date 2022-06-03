@@ -13,8 +13,8 @@ namespace CliningContoraFromValera.Bll.Models
         public StatusType Status { get; set; }
         public int CountOfEmployees { get; set; }
         public bool IsCommercial { get; set; }
-        public ClientDTO? Client { get; set; }
-        public AddressDTO? Address { get; set; }
-        public List<ServiceDTO>? Services { get; set; }
+        public ClientModel? Client { get; set; }
+        //public AddressModel? Address { get; set; }
+        public List<ServiceModel>? Services { get; set; }
     }
 }
