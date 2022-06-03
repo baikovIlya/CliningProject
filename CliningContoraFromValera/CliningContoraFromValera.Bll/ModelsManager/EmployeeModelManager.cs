@@ -1,5 +1,4 @@
 ﻿using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
 
@@ -40,12 +39,12 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public void GetEmployeesWorkAreasById(int employeeId)
         {
-            employeeManager.DeleteEmployeeById(employeeId);
+            //employeeManager.DeleteEmployeeById(employeeId);
         }
 
         public void GetEmployeesServicesById(int employeeId)
         {
-            employeeManager.DeleteEmployeeById(employeeId);
+            //employeeManager.DeleteEmployeeById(employeeId);
         }
     }
 }

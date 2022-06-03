@@ -14,7 +14,6 @@ namespace CliningContoraFromValera.Bll.Models
         public int CountOfEmployees { get; set; }
         public bool IsCommercial { get; set; }
         public ClientModel? Client { get; set; }
-        //public AddressModel? Address { get; set; }
-        public List<ServiceModel>? Services { get; set; }
+        public AddressModel? Address { get; set; }
     }
 }
