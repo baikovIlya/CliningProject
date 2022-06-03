@@ -33,6 +33,7 @@ namespace CliningContoraFromValera.UI
         EmployeeModelManager EmployeeModelManager = new EmployeeModelManager();
         WorkTimeModelManager WorkTimeModelManager = new WorkTimeModelManager();
         EmployeeWorkTimeModelManager EmployeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+        OrderModelManager OrderModelManager = new OrderModelManager();
 
 
 
@@ -203,6 +204,12 @@ namespace CliningContoraFromValera.UI
 
                 EmployeeModelManager.UpdateEmployeeById(employee);
             }
+        }
+
+        private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<OrderModel> o = OrderModelManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = o;
         }
     }
 }

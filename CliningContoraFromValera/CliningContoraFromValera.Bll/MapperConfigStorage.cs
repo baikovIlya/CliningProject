@@ -23,7 +23,8 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
                 .ForMember("Email", opt => opt.MapFrom(c => c.Email))
-                .ForMember("Phone", opt => opt.MapFrom(c => c.Phone)).ReverseMap();
+                .ForMember("Phone", opt => opt.MapFrom(c => c.Phone))
+                .ReverseMap();
 
                 cfg.CreateMap<OrderDTO, OrderModel>()
                 .ForMember("Date", opt => opt.MapFrom(c => c.Date))
@@ -33,7 +34,14 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Price", opt => opt.MapFrom(c => c.Price))
                 .ForMember("Status", opt => opt.MapFrom(c => c.Status))
                 .ForMember("CountOfEmployees", opt => opt.MapFrom(c => c.CountOfEmployees))
-                .ForMember("IsCommercial", opt => opt.MapFrom(c => c.IsCommercial));
+                .ForMember("IsCommercial", opt => opt.MapFrom(c => c.IsCommercial))
+                .ForMember(pts => pts.FirstName, opt => opt.MapFrom(ps => ps.Client!.FirstName))
+                .ForMember(pts => pts.LastName, opt => opt.MapFrom(ps => ps.Client!.LastName))
+                .ForMember(pts => pts.Phone, opt => opt.MapFrom(ps => ps.Client!.Phone))
+                .ForMember(pts => pts.Street, opt => opt.MapFrom(ps => ps.Address!.Street))
+                .ForMember(pts => pts.Building, opt => opt.MapFrom(ps => ps.Address!.Building))
+                .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room))
+                .ForMember(pts => pts.Name, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Name)); 
 
                 cfg.CreateMap<ServiceDTO, ServiceModel>()
                 .ForMember("ServiceType", opt => opt.MapFrom(c => c.ServiceType))
@@ -68,6 +76,8 @@ namespace CliningContoraFromValera.Bll
                 .ForMember(pts => pts.Date, opt => opt.MapFrom(ps => ps.WorkTime!.Date))
                 .ForMember(pts => pts.StartTime, opt => opt.MapFrom(ps => ps.WorkTime!.StartTime))
                 .ForMember(pts => pts.FinishTime, opt => opt.MapFrom(ps => ps.WorkTime!.FinishTime));
+
+
 
             })); 
         }
