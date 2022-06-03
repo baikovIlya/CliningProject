@@ -1,84 +1,35 @@
-﻿using Dapper;
+﻿using CliningContoraFromValera.DAL.DTOs;
+using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class ServiceOrderManager
     {
-        public List<ServiceOrderDTO> GetAllOrderInfo()
+        public void AddServiceFromOrder(int orderId, int serviceId, int count)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                Dictionary<int, ServiceOrderDTO> result = new Dictionary<int, ServiceOrderDTO>();
-
-                connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
-                    StoredProcedures.GetAllOrderServicesInfo,
-                    (serviceOrder, order, service) => {
-                        if (!result.ContainsKey(serviceOrder.Id))
-                        {
-                            result.Add(serviceOrder.Id, serviceOrder);
-                        }
-
-                        ServiceOrderDTO crnt = result[serviceOrder.Id];
-
-                        if (order != null)
-                        {
-                            //crnt.Orders.Add(order);
-                        }
-                        if (service != null)
-                        {
-                            //crnt.Services.Add(service);
-                        }
-                        return crnt;
-                    },
-                    commandType: System.Data.CommandType.StoredProcedure,
-                    splitOn: "Id"
-                );
-
-                return result.Values.ToList();
-            }
-        }
-
-        public ServiceOrderDTO GetById(int id)
-        {
-            using (var connection = new SqlConnection(ServerSettings._connectionString))
-            {
-                connection.Open();
-
-                ServiceOrderDTO result = new ServiceOrderDTO();
-
-                 connection.Query<ServiceOrderDTO, OrderDTO, ServiceDTO, ServiceOrderDTO>(
-                    StoredProcedures.GetAllOrderServicesInfoById,
-                    (serviceOrder, order, service) =>
-                    {
-                        ServiceOrderDTO crnt = result;
-
-                        if (serviceOrder != null)
-                        {
-                            crnt.Id = serviceOrder.Id;
-                            crnt.Count = serviceOrder.Count;
-                        }
-                        if (order != null)
-                        {
-                            //crnt.Orders.Add(order);
-                        }
-                        if (service != null)
-                        {
-                            //crnt.Services.Add(service);
-                        }
-
-                        return crnt;
-
-                    },
-                    param: new { id = id },
+                connection.QuerySingleOrDefault<OrderDTO>(
+                    StoredProcedures.Service_Order_Add,
+                    param: new { OrderId = orderId, ServiceId = serviceId, Count = count },
                     commandType: System.Data.CommandType.StoredProcedure);
-
-                return result;
             }
         }
 
+        public void DeleteServiceFromOrder(int orderId, int serviceId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingleOrDefault<OrderDTO>(
+                    StoredProcedures.Service_Order_DeleteByValue,
+                    param: new { OrderId = orderId, ServiceId = serviceId },
+                    commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
     }
 }

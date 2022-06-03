@@ -2,7 +2,7 @@
 	@Id int
 AS
 BEGIN
-SELECT E.Id, E.FirstName, E.LastName, E.Phone, S.Id, S.ServiceType, S.[Name], S.[Description], S.Price,
+SELECT E.Id, E.FirstName, E.LastName, E.Phone, S.Id, S.ServiceType, S.ServiceName, S.[Description], S.ServicePrice,
 S.CommercialPrice, S.Unit, S.EstimatedTime, W.Id, W.[Name] from [dbo].[Employee] AS E
 join dbo.[Employee_WorkArea] as EW on E.Id = EW.EmployeeId
 join dbo.[WorkArea] as W on EW.WorkAreaId = W.id

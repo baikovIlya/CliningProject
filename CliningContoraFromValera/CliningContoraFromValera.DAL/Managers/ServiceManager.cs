@@ -44,9 +44,9 @@ namespace CliningContoraFromValera.DAL.Managers
                     param: new
                     {
                         newService.ServiceType,
-                        newService.Name,
+                        newService.ServiceName,
                         newService.Description,
-                        newService.Price,
+                        newService.ServicePrice,
                         newService.CommercialPrice,
                         newService.Unit,
                         newService.EstimatedTime
@@ -68,9 +68,9 @@ namespace CliningContoraFromValera.DAL.Managers
                     {
                         newService.Id,
                         newService.ServiceType,
-                        newService.Name,
+                        newService.ServiceName,
                         newService.Description,
-                        newService.Price,
+                        newService.ServicePrice,
                         newService.CommercialPrice,
                         newService.Unit,
                         newService.EstimatedTime
