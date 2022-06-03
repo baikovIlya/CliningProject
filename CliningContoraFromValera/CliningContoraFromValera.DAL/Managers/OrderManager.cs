@@ -14,14 +14,12 @@ namespace CliningContoraFromValera.DAL.Managers
                 connection.Open();
 
                 Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
-                List<int> serviceId = new List<int>();
-                connection.Query<OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, ServiceDTO, ServiceOrderDTO, OrderDTO>(
+                connection.Query<OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, OrderDTO>(
                     StoredProcedures.Order_GetAll,
-                    (order, client, address, wokrArea, service, serviceOrder) => {
+                    (order, client, address, wokrArea) => {
                         if (!result.ContainsKey(order.Id))
                         {
                             result.Add(order.Id, order);
-                            serviceId.Clear();
                         }
                         OrderDTO crnt = result[order.Id];
                         if (order !=  null && client != null && crnt.Client == null)
@@ -36,28 +34,6 @@ namespace CliningContoraFromValera.DAL.Managers
                         && crnt.Address!.WorkArea == null)
                         {
                             crnt.Address!.WorkArea = wokrArea;
-                        }
-                        if (crnt.Services == null)
-                        {
-                            crnt.Services = new List<ServiceDTO>();
-                        }
-                        if (order != null && service != null && !serviceId.Contains(service.Id))
-                        {
-                            serviceId.Add(service.Id);
-                            crnt.Services!.Add(service);
-                            for (int i = 0; i <= crnt.Services.Count - 1; i++)
-                            {
-                                ServiceDTO crntServiceOrder = crnt.Services[i];
-                                if (crntServiceOrder.ServiceOrder == null)
-                                {
-                                    crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
-                                }
-                                if (serviceOrder.OrderId == crnt.Id
-                                && serviceOrder.ServiceId == crntServiceOrder.Id)
-                                {
-                                    crntServiceOrder.ServiceOrder = serviceOrder;
-                                }
-                            }
                         }
                         return crnt;
                     },
@@ -168,52 +144,52 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public OrderDTO GetOrdersServices(int ordersService)
-        {
-            using (var connection = new SqlConnection(ServerSettings._connectionString))
-            {
-                connection.Open();
-
-                OrderDTO result = new OrderDTO();
-                List<int> serviceId = new List<int>();
-                connection.Query<OrderDTO, ServiceDTO, ServiceOrderDTO, OrderDTO >(
-                    StoredProcedures.GetOrdersService,
-                    (order, service, serviceOrder) =>
-                    {
-                        if (order != null && result.Id != order.Id)
-                        {
-                            result = order;
+        public OrderDTO GetOrdersServices(int ordersService)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                OrderDTO result = new OrderDTO();
+                List<int> serviceId = new List<int>();
+                connection.Query<OrderDTO, ServiceDTO, ServiceOrderDTO, OrderDTO >(
+                    StoredProcedures.GetOrdersService,
+                    (order, service, serviceOrder) =>
+                    {
+                        if (order != null && result.Id != order.Id)
+                        {
+                            result = order;
                         }
-                        if (result.Services == null)
-                        {
-                            result.Services = new List<ServiceDTO>();
+                        if (result.Services == null)
+                        {
+                            result.Services = new List<ServiceDTO>();
                         }
-                        if (order != null && service != null && !serviceId.Contains(service.Id))
-                        {
-                            serviceId.Add(service.Id);
-                            result.Services!.Add(service);
-                            for (int i = 0; i <= result.Services.Count - 1; i++)
-                            {
-                                ServiceDTO crntServiceOrder = result.Services[i];
-                                if (crntServiceOrder.ServiceOrder == null)
-                                {
-                                    crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
-                                }
-                                if (serviceOrder.OrderId == result.Id
-                                && serviceOrder.ServiceId == crntServiceOrder.Id)
-                                {
-                                    crntServiceOrder.ServiceOrder = serviceOrder;
-                                }
-                            }
+                        if (order != null && service != null && !serviceId.Contains(service.Id))
+                        {
+                            serviceId.Add(service.Id);
+                            result.Services!.Add(service);
+                            for (int i = 0; i <= result.Services.Count - 1; i++)
+                            {
+                                ServiceDTO crntServiceOrder = result.Services[i];
+                                if (crntServiceOrder.ServiceOrder == null)
+                                {
+                                    crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
+                                }
+                                if (serviceOrder.OrderId == result.Id
+                                && serviceOrder.ServiceId == crntServiceOrder.Id)
+                                {
+                                    crntServiceOrder.ServiceOrder = serviceOrder;
+                                }
+                            }
                         }
-                        return result;
-                    },
-                    param: new { id = ordersService },
-                    commandType: System.Data.CommandType.StoredProcedure,
-                    splitOn: "Id"
-                );
-                return result;
-            }
+                        return result;
+                    },
+                    param: new { id = ordersService },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+                return result;
+            }
         }
 
     }

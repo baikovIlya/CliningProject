@@ -9,9 +9,9 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     {
         public List<EmployeeWorkTimeModel> GetEmployeesAndWorkTimes()
         {
-            WorkTimeManager WorkTimeManager = new WorkTimeManager();
+            WorkTimeManager workTimeManager = new WorkTimeManager();
 
-            List<EmployeeDTO> workTimes = WorkTimeManager.GetEmployeesAndWorkTimes();
+            List<EmployeeDTO> workTimes = workTimeManager.GetEmployeesAndWorkTimes();
             return MapperConfigStorage.GetInstance().Map<List<EmployeeWorkTimeModel>>(workTimes);
         }
     }
