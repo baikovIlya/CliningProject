@@ -68,20 +68,20 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, "Имя"))
+                if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
                 {
                     client.FirstName = Element.Text;
 
                 }
-                else if (String.Equals((string)e.Column.Header, "Фамилия"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.LastName))
                 {
                     client.LastName = Element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
                 {
                     client.Phone = Element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Почта"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.Email))
                 {
                     client.Email = Element.Text;
                 }
@@ -121,7 +121,7 @@ namespace CliningContoraFromValera.UI
 
         private void GetMessageBoxEmptyTextBoxes()
         {
-            MessageBox.Show("Все поля обязательны к заполнению!");
+            MessageBox.Show(UITextElements.EmptyFieldsError);
         }
 
         private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
@@ -192,15 +192,15 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, "Фамилия"))
+                if (String.Equals((string)e.Column.Header, UITextElements.LastName))
                 {
                     employee.LastName = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Имя"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
                 {
                     employee.FirstName = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
                 {
                     employee.Phone = element.Text;
                 }
