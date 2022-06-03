@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[Service_Order_DeleteByValue]
-	@ServiceId int,
-	@OrderId int
+	@OrderId int,
+	@ServiceId int
 
 AS
 BEGIN

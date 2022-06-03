@@ -29,6 +29,8 @@ var ADTO = new AddressDTO()
 };
 //A.AddAddress(ADTO);
 var E = new EmployeeManager();
+var O = new OrderManager();
+//Console.WriteLine(O.GetAllOrder());
 //Console.WriteLine(E.GetAllEmployeesInfoById(1));
 //Console.WriteLine(E.GetOrderHistoryOfTheEmployeeById(1));
 //E.GetEmployyesAvailableForOrder(new DateTime(2022, 06, 01), 4, 3);
@@ -52,7 +54,6 @@ var SDTO = new ServiceDTO()
     Unit = "м2",
     EstimatedTime = new TimeSpan(02, 00, 00)
 };
-var O = new OrderManager();
 var ODTO = new OrderDTO()
 {
     Date = new DateTime(2022, 06, 05),
