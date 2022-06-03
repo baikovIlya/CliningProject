@@ -141,7 +141,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             result = employee;
                         }
-                        if (result.Services == null && result.WorkAreas == null)
+                        if (result.WorkAreas == null)
                         {
                             result.WorkAreas = new List<WorkAreaDTO>();
                         }
@@ -175,7 +175,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             result = employee;
                         }
-                        if (result.Services == null && result.WorkAreas == null)
+                        if (result.Services == null)
                         {
                             result.Services = new List<ServiceDTO>();
                         }

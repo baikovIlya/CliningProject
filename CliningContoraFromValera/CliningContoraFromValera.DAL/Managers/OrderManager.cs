@@ -168,38 +168,38 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public OrderDTO GetOrdersServices()
+        public OrderDTO GetOrdersServices(int ordersService)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
+
+                OrderDTO result = new OrderDTO();
                 List<int> serviceId = new List<int>();
-                connection.Query<OrderDTO, ServiceOrderDTO, ServiceDTO, OrderDTO>(
-                    StoredProcedures.GetEmployyesAvailableForOrder,
-                    (order, serviceOrder, service) =>
+                connection.Query<OrderDTO, ServiceDTO, ServiceOrderDTO, OrderDTO >(
+                    StoredProcedures.GetOrdersService,
+                    (order, service, serviceOrder) =>
                     {
-                        if (!result.ContainsKey(order.Id))
+                        if (order != null && result.Id != order.Id)
                         {
-                            result.Add(order.Id, order);
-                            serviceId.Clear();
+                            result = order;
                         }
-                        OrderDTO crnt = result[order.Id];
-                        if (crnt.Services == null)
+                        if (result.Services == null)
                         {
-                            crnt.Services = new List<ServiceDTO>();
+                            result.Services = new List<ServiceDTO>();
                         }
                         if (order != null && service != null && !serviceId.Contains(service.Id))
                         {
                             serviceId.Add(service.Id);
-                            crnt.Services!.Add(service);
-                            for (int i = 0; i <= crnt.Services.Count - 1; i++)
+                            result.Services!.Add(service);
+                            for (int i = 0; i <= result.Services.Count - 1; i++)
                             {
-                                ServiceDTO crntServiceOrder = crnt.Services[i];
+                                ServiceDTO crntServiceOrder = result.Services[i];
                                 if (crntServiceOrder.ServiceOrder == null)
                                 {
                                     crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
                                 }
-                                if (serviceOrder.OrderId == crnt.Id
+                                if (serviceOrder.OrderId == result.Id
                                 && serviceOrder.ServiceId == crntServiceOrder.Id)
                                 {
                                     crntServiceOrder.ServiceOrder = serviceOrder;
@@ -208,6 +208,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         }
                         return result;
                     },
+                    param: new { id = ordersService },
                     commandType: System.Data.CommandType.StoredProcedure,
                     splitOn: "Id"
                 );
