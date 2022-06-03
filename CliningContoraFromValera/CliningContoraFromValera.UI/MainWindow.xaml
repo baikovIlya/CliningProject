@@ -300,10 +300,79 @@
                     </StackPanel>
 
 
+                </Grid>
+            </TabItem>
+            
+            
 
+            <TabItem Header="Подбор сотрудников">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="12*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+
+
+
+                    <DataGrid x:Name="DataGrid_RelevantEmployees" 
+                              Grid.ColumnSpan="4" 
+                              AutoGenerateColumns="False" 
+                              Margin="10">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Сотрудники" Width="372"/>
+                            <DataGridTextColumn Header="Начало смены" Width="200"/>
+                            <DataGridTextColumn Header="Конец смены" Width="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+
+                    <DataGrid x:Name="DataGrid_RelevantServices" 
+                              Grid.Row="1" 
+                              Grid.ColumnSpan="4" 
+                              AutoGenerateColumns="False" Margin="10">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Время начала" Width="150"/>
+                            <DataGridTextColumn Header="Приблиз. вр. выполнения" Width="180"/>
+                            <DataGridTextColumn Header="Время окончания" Width="150"/>
+                            <DataGridTextColumn Header="Адрес" Width="300"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Grid.Row="2" Margin="10,0,10,0"
+                           VerticalAlignment="Bottom" Content="Начало услуги:"/>
+                    <TextBox Grid.Row="3" Margin="10"/>
+
+                    <Label Grid.Column="1" Grid.Row="2" Margin="10,0,10,0"
+                           VerticalAlignment="Center" Content="Тип и услуга:"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Margin="100,10,10,10"/>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="10"/>
+
+                    <Label Grid.Column="2" Grid.Row="2" Margin="10,0,10,0"
+                           VerticalAlignment="Center" Content="Район и адрес:"/>
+                    <ComboBox Grid.Column="2" Grid.Row="2" Margin="100,10,10,10"/>
+                    <ComboBox Grid.Column="2" Grid.Row="3" Margin="10"/>
+
+                    <Button Grid.Column="3" 
+                            Grid.Row="2" Margin="10"
+                            Content="Подобрать"/>
+
+                    <Button Grid.Column="3" 
+                            Grid.Row="3" Margin="10"
+                            Content="Обнулить"/>
 
                 </Grid>
             </TabItem>
+            
         </TabControl>
 
     </Grid>
