@@ -34,6 +34,7 @@ namespace CliningContoraFromValera.UI
         EmployeeWorkTimeModelManager EmployeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
         OrderModelManager OrderModelManager = new OrderModelManager();
         WorkAreaModelManager WorkAreaModelManager = new WorkAreaModelManager();
+        ServiceModelManager ServiceModelManager = new ServiceModelManager();
 
 
 
@@ -217,13 +218,13 @@ namespace CliningContoraFromValera.UI
 
         private void Button_EmployeeSelection_Click(object sender, RoutedEventArgs e)
         {
-            if (CB_DesiredWorkArea.SelectedItem != null
+            if (CB_DesiredWorkArea.SelectedItem != null && CB_DesiredService.SelectedItem != null
                 && TB_OrdersDate.Text != "")
             {
                 DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
                 WorkAreaModel wa = CB_DesiredWorkArea.SelectedItem as WorkAreaModel;
                 ServiceModel sa = CB_DesiredService.SelectedItem as ServiceModel;
-                List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(date, 1, wa.Id);
+                List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
                 DataGrid_RelevantEmployees.ItemsSource = emloyees;
             }
             else
@@ -234,11 +235,14 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_RelevantEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
-            int employeeId = employee.Id;
-            DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
-            List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
-            DataGrid_RelevantServices.ItemsSource = orders;
+            if (DataGrid_RelevantEmployees.SelectedItem != null)
+            {
+                EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
+                int employeeId = employee.Id;
+                DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
+                List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
+                DataGrid_RelevantServices.ItemsSource = orders;
+            }
         }
 
         private void CB_DesiredWorkArea_Loaded(object sender, RoutedEventArgs e)
@@ -249,8 +253,8 @@ namespace CliningContoraFromValera.UI
 
         private void CB_DesiredService_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<ServiceModel> services = ServiceModelManager.GetAllServices();
-            //CB_DesiredWorkArea.ItemsSource = services;
+            List<ServiceModel> services = ServiceModelManager.GetAllServices();
+            CB_DesiredService.ItemsSource = services;
         }
     }
 }
