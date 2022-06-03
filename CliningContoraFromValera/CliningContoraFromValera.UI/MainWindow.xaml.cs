@@ -27,7 +27,6 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
         ClientManager ClientManager = new ClientManager();
         EmployeeManager EmployeeManager = new EmployeeManager();
         ClientModelManager ClientModelManager = new ClientModelManager();
@@ -51,7 +50,7 @@ namespace CliningContoraFromValera.UI
 
         private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
         {
-            ClientModel client = DataGrid_Clients.SelectedItem as ClientModel;
+            ClientModel client = (ClientModel)DataGrid_Clients.SelectedItem;
             ClientModelManager.DeleteClientById(client.Id);
         }
 
@@ -168,7 +167,7 @@ namespace CliningContoraFromValera.UI
 
         private void Button_EmployeeDelete_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeModel employee = DataGrid_Employees.SelectedItem as EmployeeModel;
+            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             EmployeeModelManager.DeleteEmployeeById(employee.Id);
         }
 

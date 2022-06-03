@@ -118,7 +118,7 @@
     <Build Include="dbo\Stored Procedures\WorkTime_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_GetById.sql" />
     <Build Include="dbo\Stored Procedures\WorkTime_UpdateById.sql" />
-    <Build Include="dbo\Stored Procedures\GetAllEmployeesInfoById.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmployeesWorkAreasById.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeeSchedule.sql" />
     <Build Include="dbo\Stored Procedures\GetOrderHistoryOfTheEmployeeById.sql" />
     <Build Include="dbo\Stored Procedures\ChangeEmployeeScheduleByEmployeeIdByDate.sql" />
@@ -131,5 +131,6 @@
     <Build Include="dbo\Stored Procedures\Employee_Service_DeleteByValue.sql" />
     <Build Include="dbo\Stored Procedures\Service_Order_DeleteByValue.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeesAndWorkTimes.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmployeesServicesById.sql" />
   </ItemGroup>
 </Project>
