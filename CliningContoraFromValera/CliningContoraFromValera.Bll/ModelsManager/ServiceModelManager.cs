@@ -30,5 +30,9 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
             _serviceManager.UpdateServiceById(serviceDTO);
         }
+        public void DeleteServiceyId(int id)
+        {
+            _serviceManager.DeleteServiceById(id);
+        }
     }
 }
