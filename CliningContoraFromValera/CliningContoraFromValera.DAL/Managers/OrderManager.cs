@@ -144,7 +144,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public OrderDTO GetOrdersServices(int ordersService)
+        public OrderDTO GetOrdersServices(int orderId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -183,7 +183,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         }
                         return result;
                     },
-                    param: new { id = ordersService },
+                    param: new { id = orderId },
                     commandType: System.Data.CommandType.StoredProcedure,
                     splitOn: "Id"
                 );
