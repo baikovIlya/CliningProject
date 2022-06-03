@@ -132,5 +132,6 @@
     <Build Include="dbo\Stored Procedures\Service_Order_DeleteByValue.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeesAndWorkTimes.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeesServicesById.sql" />
+    <Build Include="dbo\Stored Procedures\GetOrdersServices.sql" />
   </ItemGroup>
 </Project>
