@@ -15,5 +15,10 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(serviceDTOs);
         }
 
+        public ServiceModel GetServiceById(int id)
+        {
+            ServiceDTO serviceDTO = _serviceManager.GetServiceById(id);
+            return MapperConfigStorage.GetInstance().Map<ServiceModel>(serviceDTO);
+        }
     }
 }
