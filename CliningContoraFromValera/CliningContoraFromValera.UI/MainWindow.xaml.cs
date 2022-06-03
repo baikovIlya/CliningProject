@@ -48,8 +48,8 @@ namespace CliningContoraFromValera.UI
             //List<ClientModel> clients = ClientModelManager.GetAllClients();
             //DataGrid_Clients.ItemsSource = clients;
 
-            List<OrderDTO> dto = OrderManager.GetOrdersServices();
-            DataGrid_Clients.ItemsSource = dto;
+            //List<OrderDTO> dto = OrderManager.GetOrdersService();
+            //DataGrid_Clients.ItemsSource = dto;
         }
 
         private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
