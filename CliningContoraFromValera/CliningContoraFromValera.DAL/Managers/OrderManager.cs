@@ -147,7 +147,7 @@ namespace CliningContoraFromValera.DAL.Managers
             AddressManager addressManager = new AddressManager();
             addressManager.UpdateAddressById(newAddress);
             WorkAreaManager workAreaManager = new WorkAreaManager();
-            workAreaManager.UpdateClientById(newWorkArea);
+            workAreaManager.UpdateWorkAreaById(newWorkArea);
             ServiceManager servicsManager = new ServiceManager();
             servicsManager.UpdateServiceById(newService);
             ServiceOrderManager serviceOrderManager = new ServiceOrderManager();

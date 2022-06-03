@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[Service_UpdateById]
 	@Id int,
 	@ServiceType nvarchar(50),
-	@ServiceName nvarchar(100),
+	@Name nvarchar(100),
 	@Description nvarchar(255),
-	@ServicePrice DECIMAL (10, 2),
+	@Price DECIMAL (10, 2),
 	@CommercialPrice DECIMAL (10, 2),
 	@Unit nvarchar(30),
 	@EstimatedTime time
@@ -12,9 +12,9 @@ BEGIN
 
 UPDATE dbo.[Service]
 SET ServiceType = @ServiceType,
-    ServiceName = @ServiceName,
+    [Name] = @Name,
     [Description] = @Description,
-    ServicePrice = @ServicePrice,
+    Price = @Price,
     CommercialPrice = @CommercialPrice,
     Unit = @Unit,
     EstimatedTime = @EstimatedTime

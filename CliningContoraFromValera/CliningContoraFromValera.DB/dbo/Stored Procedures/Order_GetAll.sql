@@ -6,9 +6,8 @@ O.IsCommercial, O.ClientId, O.AddressId,
 C.Id, C.FirstName, C.LastName, c.Email, c.Phone, 
 A.Id, A.Street, A.Building, A.Room, A.WorkAreaId,
 WA.Id, WA.[Name],
-S.Id, S.ServiceType, S.ServiceName, S.[Description], S.ServicePrice, S.CommercialPrice, S.Unit, S.EstimatedTime,
-SO.Id, SO.OrderId, SO.ServiceId, SO.[Count]
-from dbo.[Order] as O
+S.Id, S.ServiceType, S.[Name], S.[Description], S.Price, S.CommercialPrice, S.Unit, S.EstimatedTime,
+SO.Id, SO.OrderId, SO.ServiceId, SO.[Count] from dbo.[Order] as O
 join dbo.Client as C on C.Id = O.ClientId
 join dbo.[Address] as A on A.Id = O.AddressId
 join dbo.[WorkArea] as WA on WA.Id = A.WorkAreaId
