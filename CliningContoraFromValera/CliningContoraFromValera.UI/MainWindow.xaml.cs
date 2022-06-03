@@ -217,13 +217,17 @@ namespace CliningContoraFromValera.UI
 
         private void Button_EmployeeSelection_Click(object sender, RoutedEventArgs e)
         {
-            List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(new DateTime(2022,06,15), 1, 1);
+            DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
+            List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(date, 1, 1);
             DataGrid_RelevantEmployees.ItemsSource = emloyees;
         }
 
         private void DataGrid_RelevantEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(2, new DateTime(2022,06,15));
+            EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
+            int employeeId = employee.Id;
+            DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
+            List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
             DataGrid_RelevantServices.ItemsSource = orders;
         }
     }
