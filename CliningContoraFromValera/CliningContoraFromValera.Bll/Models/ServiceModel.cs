@@ -12,6 +12,5 @@ namespace CliningContoraFromValera.Bll.Models
         public decimal CommercialPrice { get; set; }
         public string Unit { get; set; }
         public TimeSpan EstimatedTime { get; set; }
-        public ServiceOrderModel ServiceOrder { get; set; }
     }
 }
