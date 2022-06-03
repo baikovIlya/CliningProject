@@ -1,6 +1,6 @@
-﻿namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL.Dtos
 {
-    public class OrderDTO
+    public class OrderDto
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
@@ -13,9 +13,9 @@
         public bool IsCommercial { get; set; }
         public int ClientId { get; set; }
         public int AddressId { get; set; }
-        public ClientDTO? Client { get; set; }
-        public AddressDTO? Address { get; set; }
-        public List<ServiceDTO>? Services { get; set; }
+        public ClientDto? Client { get; set; }
+        public AddressDto? Address { get; set; }
+        public List<ServiceDto>? Services { get; set; }
 
 
         public override string ToString()

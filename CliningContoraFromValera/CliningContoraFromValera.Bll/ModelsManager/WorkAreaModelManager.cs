@@ -1,7 +1,7 @@
 ﻿using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL;
 using CliningContoraFromValera.DAL.Managers;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
@@ -11,25 +11,25 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<WorkAreaModel> GetAllWorkAreas()
         {
-            List<WorkAreaDTO> workAreas = WorkAreaManager.GetAllWorkAreas();
+            List<WorkAreaDto> workAreas = WorkAreaManager.GetAllWorkAreas();
             return MapperConfigStorage.GetInstance().Map<List<WorkAreaModel>>(workAreas);
         }
 
         public WorkAreaModel GetWorkAreaById(int workAreaId)
         {
-            WorkAreaDTO workArea = WorkAreaManager.GetWorkAreaByID(workAreaId);
+            WorkAreaDto workArea = WorkAreaManager.GetWorkAreaByID(workAreaId);
             return MapperConfigStorage.GetInstance().Map<WorkAreaModel>(workArea);
         }
 
         public void UpdateWorkAreaById(WorkAreaModel workAreaModel)
         {
-            WorkAreaDTO workArea = MapperConfigStorage.GetInstance().Map<WorkAreaDTO>(workAreaModel);
+            WorkAreaDto workArea = MapperConfigStorage.GetInstance().Map<WorkAreaDto>(workAreaModel);
             WorkAreaManager.UpdateWorkAreaById(workArea);
         }
 
         public void AddWorkArea(WorkAreaModel workAreaModel)
         {
-            WorkAreaDTO workArea = MapperConfigStorage.GetInstance().Map<WorkAreaDTO>(workAreaModel);
+            WorkAreaDto workArea = MapperConfigStorage.GetInstance().Map<WorkAreaDto>(workAreaModel);
             WorkAreaManager.AddWorkArea(workArea);
         }
 

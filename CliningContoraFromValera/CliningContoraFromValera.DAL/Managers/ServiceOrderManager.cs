@@ -1,4 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
+﻿using CliningContoraFromValera.DAL.Dtos;
 using Dapper;
 using System.Data.SqlClient;
 
@@ -12,7 +12,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<OrderDTO>(
+                connection.QuerySingleOrDefault<OrderDto>(
                     StoredProcedures.Service_Order_Add,
                     param: new { OrderId = orderId, ServiceId = serviceId, Count = count },
                     commandType: System.Data.CommandType.StoredProcedure);
@@ -25,7 +25,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<OrderDTO>(
+                connection.QuerySingleOrDefault<OrderDto>(
                     StoredProcedures.Service_Order_DeleteByValue,
                     param: new { OrderId = orderId, ServiceId = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure);

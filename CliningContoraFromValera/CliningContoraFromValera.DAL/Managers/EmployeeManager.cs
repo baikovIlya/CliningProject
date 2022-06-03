@@ -1,31 +1,31 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class EmployeeManager
     {
-        public List<EmployeeDTO> GetAllEmployees()
+        public List<EmployeeDto> GetAllEmployees()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<EmployeeDTO>(
+                return connection.Query<EmployeeDto>(
                     StoredProcedures.Employee_GetAll,
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }
         }
 
-        public EmployeeDTO GetEmployeeByID(int employeeId)
+        public EmployeeDto GetEmployeeByID(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.QuerySingle<EmployeeDTO>(
+                return connection.QuerySingle<EmployeeDto>(
                     StoredProcedures.Employee_GetById,
                     param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -33,13 +33,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddEmployee(EmployeeDTO newEmployee)
+        public void AddEmployee(EmployeeDto newEmployee)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<EmployeeDTO>(
+                connection.QuerySingle<EmployeeDto>(
                     StoredProcedures.Employee_Add,
                     param: new
                     {
@@ -52,13 +52,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateEmployeeById(EmployeeDTO newEmployee)
+        public void UpdateEmployeeById(EmployeeDto newEmployee)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<EmployeeDTO>(
+                connection.QuerySingleOrDefault<EmployeeDto>(
                     StoredProcedures.Employee_UpdateById,
                     param: new
                     {
@@ -78,7 +78,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<EmployeeDTO>(
+                connection.QuerySingleOrDefault<EmployeeDto>(
                     StoredProcedures.Employee_DeleteById,
                     param: new { id = employeeId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -91,7 +91,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<EmployeeDTO>(
+                connection.QuerySingleOrDefault<EmployeeDto>(
                     StoredProcedures.Employee_Order_DeleteByValue,
                     param: new { EmployeeId = employeeId, OrderId = orderId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -105,7 +105,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<EmployeeDTO>(
+                connection.QuerySingleOrDefault<EmployeeDto>(
                     StoredProcedures.Employee_WorkArea_DeleteByValue,
                     param: new { EmployeeId = employeeId, OrderId = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -118,7 +118,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<EmployeeDTO>(
+                connection.QuerySingleOrDefault<EmployeeDto>(
                     StoredProcedures.Employee_Service_DeleteByValue,
                     param: new { EmployeeId = employeeId, OrderId = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -126,16 +126,16 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public EmployeeDTO GetAllEmployeesInfoById(int employeeId)
+        public EmployeeDto GetAllEmployeesInfoById(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                EmployeeDTO result = new EmployeeDTO();
+                EmployeeDto result = new EmployeeDto();
                 List<int> serviceId = new List<int>();
                 List<int>  workAreaId = new List<int>();
-                connection.Query<EmployeeDTO, ServiceDTO, WorkAreaDTO, EmployeeDTO>(
+                connection.Query<EmployeeDto, ServiceDto, WorkAreaDto, EmployeeDto>(
                     StoredProcedures.GetAllEmployeesInfoById,
                     (employee, service, workArea) => {
                         if (employee != null && result.Id != employee.Id)
@@ -144,8 +144,8 @@ namespace CliningContoraFromValera.DAL.Managers
                         }
                         if (result.Services == null && result.WorkAreas == null)
                         {
-                            result.Services = new List<ServiceDTO>();
-                            result.WorkAreas = new List<WorkAreaDTO>();
+                            result.Services = new List<ServiceDto>();
+                            result.WorkAreas = new List<WorkAreaDto>();
                         }
                         if (service != null && !serviceId.Contains(service.Id))
                         {
@@ -167,15 +167,15 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public EmployeeDTO GetOrderHistoryOfTheEmployeeById(int employeeId)
+        public EmployeeDto GetOrderHistoryOfTheEmployeeById(int employeeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
-                EmployeeDTO result = new EmployeeDTO();
+                EmployeeDto result = new EmployeeDto();
                 List<int> orderId = new List<int>();
                 List<int> serviceId = new List<int>();
-                connection.Query<EmployeeDTO, OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, ServiceDTO, ServiceOrderDTO, EmployeeDTO>(
+                connection.Query<EmployeeDto, OrderDto, ClientDto, AddressDto, WorkAreaDto, ServiceDto, ServiceOrderDto, EmployeeDto>(
                     StoredProcedures.GetOrderHistoryOfTheEmployeeById,
                     (employee, order, client, address, workArea, service, serviceOrder) =>
                     {
@@ -185,7 +185,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         }
                         if (result.Orders == null)
                         {
-                            result.Orders = new List<OrderDTO>();
+                            result.Orders = new List<OrderDto>();
                         }
                         if (order != null && !orderId.Contains(order.Id))
                         {
@@ -197,10 +197,10 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             if (order != null && result.Orders[i].Id == order.Id)
                             {
-                                OrderDTO employeeOrder = result.Orders[i];
+                                OrderDto employeeOrder = result.Orders[i];
                                 if (employeeOrder.Services == null)
                                 {
-                                    employeeOrder.Services = new List<ServiceDTO>();
+                                    employeeOrder.Services = new List<ServiceDto>();
                                 }
                                 if (order != null && client != null && employeeOrder.Client == null)
                                 {
@@ -221,10 +221,10 @@ namespace CliningContoraFromValera.DAL.Managers
                                     employeeOrder.Services!.Add(service);
                                     for (int j = 0; j <= employeeOrder.Services.Count-1; j++)
                                     {
-                                        ServiceDTO crntServiceOrder = employeeOrder.Services[j];
+                                        ServiceDto crntServiceOrder = employeeOrder.Services[j];
                                         if (crntServiceOrder.ServiceOrder == null)
                                         {
-                                            crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
+                                            crntServiceOrder.ServiceOrder = new ServiceOrderDto();
                                         }
                                         if (serviceOrder.OrderId == employeeOrder.Id
                                         && serviceOrder.ServiceId == crntServiceOrder.Id)
@@ -245,13 +245,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public List<EmployeeDTO> GetEmployyesAvailableForOrder(DateTime date, int serviceId, int workAreaId)
+        public List<EmployeeDto> GetEmployyesAvailableForOrder(DateTime date, int serviceId, int workAreaId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
-                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
-                connection.Query<EmployeeDTO, WorkTimeDTO, EmployeeDTO>(
+                Dictionary<int, EmployeeDto> result = new Dictionary<int, EmployeeDto>();
+                connection.Query<EmployeeDto, WorkTimeDto, EmployeeDto>(
                     StoredProcedures.GetEmployyesAvailableForOrder,
                     (employee, workTime) =>
                     {
@@ -259,10 +259,10 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             result.Add(employee.Id, employee);
                         }
-                        EmployeeDTO crntEmployee = result[employee.Id];
+                        EmployeeDto crntEmployee = result[employee.Id];
                         if (crntEmployee.WorkTime == null)
                         {
-                            crntEmployee.WorkTime = new WorkTimeDTO();
+                            crntEmployee.WorkTime = new WorkTimeDto();
                         }
                         if (workTime != null)
                         {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.Bll
 {
@@ -19,21 +19,21 @@ namespace CliningContoraFromValera.Bll
         {
             _instance = new Mapper(new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ClientDTO, ClientModel>().ReverseMap();
+                cfg.CreateMap<ClientDto, ClientModel>().ReverseMap();
 
-                cfg.CreateMap<OrderDTO, OrderModel>();
+                cfg.CreateMap<OrderDto, OrderModel>();
 
-                cfg.CreateMap<ServiceDTO, ServiceModel>();
+                cfg.CreateMap<ServiceDto, ServiceModel>();
 
-                cfg.CreateMap<WorkAreaDTO, WorkAreaModel>();
+                cfg.CreateMap<WorkAreaDto, WorkAreaModel>();
 
-                cfg.CreateMap<EmployeeDTO, EmployeeModel>().ReverseMap();
+                cfg.CreateMap<EmployeeDto, EmployeeModel>().ReverseMap();
 
-                cfg.CreateMap<AddressDTO, AddressModel>();
+                cfg.CreateMap<AddressDto, AddressModel>();
 
-                cfg.CreateMap<WorkTimeDTO, WorkTimeModel>();
+                cfg.CreateMap<WorkTimeDto, WorkTimeModel>();
 
-                cfg.CreateMap<EmployeeDTO, EmployeeWorkTimeModel>()
+                cfg.CreateMap<EmployeeDto, EmployeeWorkTimeModel>()
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
                 .ForMember(pts => pts.Date, opt => opt.MapFrom(ps => ps.WorkTime!.Date))

@@ -1,6 +1,6 @@
-﻿namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL.Dtos
 {
-    public class ServiceOrderDTO
+    public class ServiceOrderDto
     {
         public int Id { get; set; }
         public int OrderId { get; set; }

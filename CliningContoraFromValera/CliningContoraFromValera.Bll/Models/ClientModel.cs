@@ -1,4 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
+﻿using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.Bll.Models
 {

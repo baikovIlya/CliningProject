@@ -1,15 +1,15 @@
-﻿namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL.Dtos
 {
-    public class EmployeeDTO
+    public class EmployeeDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
-        public List<ServiceDTO>? Services { get; set; }
-        public List<WorkAreaDTO>? WorkAreas { get; set; }
-        public List<OrderDTO>? Orders { get; set; }
-        public WorkTimeDTO? WorkTime { get; set; }
+        public List<ServiceDto>? Services { get; set; }
+        public List<WorkAreaDto>? WorkAreas { get; set; }
+        public List<OrderDto>? Orders { get; set; }
+        public WorkTimeDto? WorkTime { get; set; }
 
         public override string ToString()
         {

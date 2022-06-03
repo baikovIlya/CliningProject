@@ -1,6 +1,6 @@
-﻿namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL.Dtos
 {
-    public class WorkTimeDTO
+    public class WorkTimeDto
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

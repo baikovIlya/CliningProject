@@ -1,31 +1,31 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class WorkAreaManager
     {
-        public List<WorkAreaDTO> GetAllWorkAreas()
+        public List<WorkAreaDto> GetAllWorkAreas()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<WorkAreaDTO>(
+                return connection.Query<WorkAreaDto>(
                     StoredProcedures.WorkArea_GetAll,
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }
         }
 
-        public WorkAreaDTO GetWorkAreaByID(int workAreaId)
+        public WorkAreaDto GetWorkAreaByID(int workAreaId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.QuerySingle<WorkAreaDTO>(
+                return connection.QuerySingle<WorkAreaDto>(
                     StoredProcedures.WorkArea_GetById,
                     param: new { id = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -33,13 +33,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddWorkArea(WorkAreaDTO newWorkArea)
+        public void AddWorkArea(WorkAreaDto newWorkArea)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<WorkAreaDTO>(
+                connection.QuerySingle<WorkAreaDto>(
                     StoredProcedures.WorkArea_Add,
                     param: new
                     { newWorkArea.Name},
@@ -48,13 +48,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateWorkAreaById(WorkAreaDTO newWorkArea)
+        public void UpdateWorkAreaById(WorkAreaDto newWorkArea)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<WorkAreaDTO>(
+                connection.QuerySingleOrDefault<WorkAreaDto>(
                     StoredProcedures.WorkArea_UpdateById,
                     param: new
                     {
@@ -72,7 +72,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<WorkAreaDTO>(
+                connection.QuerySingleOrDefault<WorkAreaDto>(
                     StoredProcedures.WorkArea_DeleteById,
                     param: new { id = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure

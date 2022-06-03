@@ -16,7 +16,7 @@ using CliningContoraFromValera.Bll;
 using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 using System.Data;
 using CliningContoraFromValera.Bll.ModelsManager;
 

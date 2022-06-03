@@ -1,6 +1,6 @@
-﻿namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL.Dtos
 {
-    public class ServiceDTO
+    public class ServiceDto
     {
         public int Id { get; set; }
         public string ServiceType { get; set; }
@@ -10,7 +10,7 @@
         public decimal CommercialPrice { get; set; }
         public string? Unit { get; set; }
         public TimeSpan EstimatedTime { get; set; }
-        public ServiceOrderDTO? ServiceOrder { get; set; }
+        public ServiceOrderDto? ServiceOrder { get; set; }
 
 
         public override string ToString()

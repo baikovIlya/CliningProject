@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CliningContoraFromValera.DAL;
 using CliningContoraFromValera.DAL.Managers;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 
 namespace CliningContoraFromValera.Bll.ModelsManager
@@ -17,25 +17,25 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<ClientModel> GetAllClients()
         {
-            List<ClientDTO> clients = ClientManager.GetAllClients();
+            List<ClientDto> clients = ClientManager.GetAllClients();
             return MapperConfigStorage.GetInstance().Map<List<ClientModel>>(clients);
         }
 
         public ClientModel GetClientById(int clientId)
         {
-            ClientDTO client = ClientManager.GetClientByID(clientId);
+            ClientDto client = ClientManager.GetClientByID(clientId);
             return MapperConfigStorage.GetInstance().Map<ClientModel>(client);
         }
 
         public void UpdateClientById(ClientModel clientModel)
         {
-            ClientDTO client = MapperConfigStorage.GetInstance().Map<ClientDTO>(clientModel);
+            ClientDto client = MapperConfigStorage.GetInstance().Map<ClientDto>(clientModel);
             ClientManager.UpdateClientById(client);
         }
 
         public void AddClient(ClientModel clientModel)
         {
-            ClientDTO client = MapperConfigStorage.GetInstance().Map<ClientDTO>(clientModel);
+            ClientDto client = MapperConfigStorage.GetInstance().Map<ClientDto>(clientModel);
             ClientManager.AddClient(client);
         }
 

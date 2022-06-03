@@ -1,4 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
+﻿using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.Bll.Models
 {
@@ -12,6 +12,6 @@ namespace CliningContoraFromValera.Bll.Models
         public decimal CommercialPrice { get; set; }
         public string Unit { get; set; }
         public TimeSpan EstimatedTime { get; set; }
-        public ServiceOrderDTO ServiceOrder { get; set; }
+        public ServiceOrderDto ServiceOrder { get; set; }
     }
 }

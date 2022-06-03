@@ -1,43 +1,43 @@
 ﻿using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.Bll
 {
     public class MapperManager
     {
-        //public EmployeeModel MapEmployeeDTOToEmployeeModel (EmployeeDTO employeeDTO)
+        //public EmployeeModel MapEmployeeDtoToEmployeeModel (EmployeeDto employeeDto)
         //{
         //    return new EmployeeModel()
         //    {
-        //        //Id = employeeDTO.Id,
-        //        FirstName = employeeDTO.FirstName,
-        //        LastName = employeeDTO.LastName,
-        //        Phone = employeeDTO.Phone
+        //        //Id = employeeDto.Id,
+        //        FirstName = employeeDto.FirstName,
+        //        LastName = employeeDto.LastName,
+        //        Phone = employeeDto.Phone
         //    };
         //}
 
-        public AllEmployeesInfoModel MapEmployeeDTOToAllEmployeeInfoModel(EmployeeDTO employeeDTO)
+        public AllEmployeesInfoModel MapEmployeeDtoToAllEmployeeInfoModel(EmployeeDto employeeDto)
         {
             List<string> workArea = new List<string>();
-            for (int i = 0; i <= employeeDTO.WorkAreas!.Count - 1; i++)
+            for (int i = 0; i <= employeeDto.WorkAreas!.Count - 1; i++)
             {
-                workArea.Add(employeeDTO.WorkAreas[i].Name);
+                workArea.Add(employeeDto.WorkAreas[i].Name);
             }
             string tmp = String.Join(" ", workArea);
             return new AllEmployeesInfoModel()
             {
-                Id = employeeDTO.Id,
-                Phone = employeeDTO.Phone,
+                Id = employeeDto.Id,
+                Phone = employeeDto.Phone,
                 WorkArea = tmp
             };
         }
 
-        //public AllEmployeesServiceModel MapEmployeeDTOToAllEmployeeServiceModel(EmployeeDTO employeeDTO)
+        //public AllEmployeesServiceModel MapEmployeeDtoToAllEmployeeServiceModel(EmployeeDto employeeDto)
         //{
         //    return new AllEmployeesServiceModel()
         //    {
-        //        Id = employeeDTO.Id,
-        //        Service = employeeDTO.Services.ToString();
+        //        Id = employeeDto.Id,
+        //        Service = employeeDto.Services.ToString();
         //    }
     }
 }

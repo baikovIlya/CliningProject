@@ -1,18 +1,18 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class AddressManager
     {
-        public void AddAddress(AddressDTO newAddress)
+        public void AddAddress(AddressDto newAddress)
         {
             using(var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<AddressDTO>
+                connection.QuerySingle<AddressDto>
                     (
                         StoredProcedures.Address_Add,
                         param: new 
@@ -33,7 +33,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingle<AddressDTO>
+                connection.QuerySingle<AddressDto>
                     (
                         StoredProcedures.Address_DeleteById,
                         param: new { id = addressId },
@@ -42,13 +42,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateAddressById(AddressDTO newAddress)
+        public void UpdateAddressById(AddressDto newAddress)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<AddressDTO>
+                connection.QuerySingle<AddressDto>
                     (
                         StoredProcedures.Address_UpdateById,
                         param: new
@@ -64,13 +64,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public List<AddressDTO> GetAllAddresses()
+        public List<AddressDto> GetAllAddresses()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<AddressDTO>
+                return connection.Query<AddressDto>
                     (
                         StoredProcedures.Address_GetAll,
                         commandType: System.Data.CommandType.StoredProcedure
@@ -78,13 +78,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public AddressDTO GetAddressById(int addressId)
+        public AddressDto GetAddressById(int addressId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.QuerySingle<AddressDTO>
+                return connection.QuerySingle<AddressDto>
                     (
                         StoredProcedures.Address_GetById,
                         param: new { id = addressId },

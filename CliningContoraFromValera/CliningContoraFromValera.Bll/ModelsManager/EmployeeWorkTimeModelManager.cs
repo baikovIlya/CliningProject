@@ -1,5 +1,5 @@
 ﻿using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 using CliningContoraFromValera.DAL.Managers;
 
 
@@ -11,7 +11,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             WorkTimeManager WorkTimeManager = new WorkTimeManager();
 
-            List<EmployeeDTO> workTimes = WorkTimeManager.GetEmployeesAndWorkTimes();
+            List<EmployeeDto> workTimes = WorkTimeManager.GetEmployeesAndWorkTimes();
             return MapperConfigStorage.GetInstance().Map<List<EmployeeWorkTimeModel>>(workTimes);
         }
     }

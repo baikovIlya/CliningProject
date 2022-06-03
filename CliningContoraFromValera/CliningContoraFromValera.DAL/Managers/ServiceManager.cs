@@ -1,31 +1,31 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class ServiceManager
     {
-        public List<ServiceDTO> GetAllServices()
+        public List<ServiceDto> GetAllServices()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<ServiceDTO>(
+                return connection.Query<ServiceDto>(
                     StoredProcedures.Service_GetAll,
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }
         }
 
-        public ServiceDTO GetServiceById(int serviceId)
+        public ServiceDto GetServiceById(int serviceId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.QuerySingle<ServiceDTO>(
+                return connection.QuerySingle<ServiceDto>(
                     StoredProcedures.Service_GetById,
                     param: new { id = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -33,13 +33,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddService(ServiceDTO newService)
+        public void AddService(ServiceDto newService)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<ServiceDTO>(
+                connection.QuerySingle<ServiceDto>(
                     StoredProcedures.Service_Add,
                     param: new
                     {
@@ -56,13 +56,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateServiceById(ServiceDTO newService)
+        public void UpdateServiceById(ServiceDto newService)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<ServiceDTO>(
+                connection.QuerySingleOrDefault<ServiceDto>(
                     StoredProcedures.Service_UpdateById,
                     param: new
                     {
@@ -86,7 +86,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<ServiceDTO>(
+                connection.QuerySingleOrDefault<ServiceDto>(
                     StoredProcedures.Service_DeleteById,
                     param: new { id = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure

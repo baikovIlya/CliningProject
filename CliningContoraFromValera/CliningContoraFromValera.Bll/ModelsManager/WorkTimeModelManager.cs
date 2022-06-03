@@ -1,7 +1,7 @@
 ﻿using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL;
 using CliningContoraFromValera.DAL.Managers;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
     
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
@@ -11,25 +11,25 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<WorkTimeModel> GetAllWorkTimes()
         {
-            List<WorkTimeDTO> workTimes = WorkTimeManager.GetAllWorkTimes();
+            List<WorkTimeDto> workTimes = WorkTimeManager.GetAllWorkTimes();
             return MapperConfigStorage.GetInstance().Map<List<WorkTimeModel>>(workTimes);
         }
 
         public WorkTimeModel GetWorkTimeById(int workTimeId)
         {
-            WorkTimeDTO workTime = WorkTimeManager.GetWorkTimeById(workTimeId);
+            WorkTimeDto workTime = WorkTimeManager.GetWorkTimeById(workTimeId);
             return MapperConfigStorage.GetInstance().Map<WorkTimeModel>(workTime);
         }
 
         public void UpdateWorkTimeById(WorkTimeModel workTimeModel)
         {
-            WorkTimeDTO workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDTO>(workTimeModel);
+            WorkTimeDto workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDto>(workTimeModel);
             WorkTimeManager.UpdateWorkTimeById(workTime);
         }
 
         public void AddWorkTime(WorkTimeModel workTimeModel)
         {
-            WorkTimeDTO workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDTO>(workTimeModel);
+            WorkTimeDto workTime = MapperConfigStorage.GetInstance().Map<WorkTimeDto>(workTimeModel);
             WorkTimeManager.AddWorkTime(workTime);
         }
 

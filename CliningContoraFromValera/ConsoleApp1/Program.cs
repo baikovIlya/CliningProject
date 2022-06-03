@@ -3,7 +3,7 @@ using CliningContoraFromValera.Bll;
 using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.Bll.ModelsManager;
 
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 using CliningContoraFromValera.DAL.Managers;
 
 //var C = new ClientModelManager();
@@ -14,22 +14,22 @@ using CliningContoraFromValera.DAL.Managers;
 
 
 
-//E.AddEmployee(EDTO);
+//E.AddEmployee(EDto);
 var WA = new WorkAreaManager();
-var WADTO = new WorkAreaDTO()
+var WADto = new WorkAreaDto()
 {
     Name = "Морской"
 };
-WA.AddWorkArea(WADTO);
+WA.AddWorkArea(WADto);
 var A = new AddressManager();
-var ADTO = new AddressDTO()
+var ADto = new AddressDto()
 {
     Street = "Невский",
     Building = "пятая парадная",
     Room = "12",
     WorkAreaId = 1
 };
-//A.AddAddress(ADTO);
+//A.AddAddress(ADto);
 var E = new EmployeeManager();
 var O = new OrderManager();
 //Console.WriteLine(O.GetAllOrder());
@@ -38,16 +38,16 @@ var O = new OrderManager();
 //E.GetEmployyesAvailableForOrder(new DateTime(2022, 06, 01), 4, 3);
 //Console.WriteLine(E.GetEmployeeByID(1));
 var WT = new WorkTimeManager();
-var WTDTO = new WorkTimeDTO()
+var WTDto = new WorkTimeDto()
 {
     Date = new DateTime(2022, 06, 02),
     StartTime = new TimeSpan(12, 30, 00),
     FinishTime = new TimeSpan(20, 00, 00),
     EmployeeId = 1
 };
-//List<WorkTimeDTO> test = WT.GetAllWorkTimes();
+//List<WorkTimeDto> test = WT.GetAllWorkTimes();
 var S = new ServiceManager();
-var SDTO = new ServiceDTO()
+var SDto = new ServiceDto()
 {
     Name = "химчистка диванов",
     Description = "обработка шампунем",
@@ -56,7 +56,7 @@ var SDTO = new ServiceDTO()
     Unit = "м2",
     EstimatedTime = new TimeSpan(02, 00, 00)
 };
-var ODTO = new OrderDTO()
+var ODto = new OrderDto()
 {
     Date = new DateTime(2022, 06, 05),
     StartTime = new TimeSpan(12, 30, 00),
@@ -69,22 +69,22 @@ var ODTO = new OrderDTO()
     ClientId = 1,
     AddressId = 2
 };
-//O.AddOrder(ODTO);
+//O.AddOrder(ODto);
 var C = new ClientManager();
-var CDTO = new ClientDTO()
+var CDto = new ClientDto()
 {
     FirstName = "Маша",
     LastName = "Иванова",
     Email = "@fgmn",
     Phone = "+79851476512"
 };
-//C.AddClient (CDTO);
-//ST.AddServiceType(STDTO);
-//S.AddService(SDTO);
-//WT.AddWorkTime(WTDTO);
-//WT.DeleteWorkTimeById(WTDTO);
+//C.AddClient (CDto);
+//ST.AddServiceType(STDto);
+//S.AddService(SDto);
+//WT.AddWorkTime(WTDto);
+//WT.DeleteWorkTimeById(WTDto);
 //Console.WriteLine(WT.GetWorkTimeById(1));
-//WT.ChangeEmployeeScheduleByEmployeeIdByDate(WTDTO);
+//WT.ChangeEmployeeScheduleByEmployeeIdByDate(WTDto);
 //foreach (var i in test)
 //{
 //    i.ToString();
@@ -92,18 +92,18 @@ var CDTO = new ClientDTO()
 //}
 ////E.AddEmployee("Вася", "Петров", "+79514521271");
 //var WT = new WorkTimeManager();
-//var WTDTO = new WorkTimeDTO()
+//var WTDto = new WorkTimeDto()
 //{
 //    Date = new DateTime(2022, 06, 02),
 //    StartTime = new TimeSpan(12,30,00),
 //    FinishTime = new TimeSpan(20,00,00),
 //    EmployeeId = 1
 //};
-//List<WorkTimeDTO> test = WT.GetAllWorkTimes();
-////WT.AddWorkTime(WTDTO);
-////WT.DeleteWorkTimeById(WTDTO);
+//List<WorkTimeDto> test = WT.GetAllWorkTimes();
+////WT.AddWorkTime(WTDto);
+////WT.DeleteWorkTimeById(WTDto);
 ////Console.WriteLine(WT.GetWorkTimeById(1));
-////WT.ChangeEmployeeScheduleByEmployeeIdByDate(WTDTO);
+////WT.ChangeEmployeeScheduleByEmployeeIdByDate(WTDto);
 //foreach (var i in test)
 //{
 //    i.ToString();
@@ -115,6 +115,6 @@ var CDTO = new ClientDTO()
 
 //AutoMapper.Mapper mapper = MapperConfigStorage.GetInstance();
 
-//ClientModel clientModel = mapper.Map<ClientModel>(ClientDTO);
+//ClientModel clientModel = mapper.Map<ClientModel>(ClientDto);
 
 //Console.WriteLine();

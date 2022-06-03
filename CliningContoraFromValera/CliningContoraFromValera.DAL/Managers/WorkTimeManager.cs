@@ -1,31 +1,31 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class WorkTimeManager
     {
-        public List<WorkTimeDTO> GetAllWorkTimes()
+        public List<WorkTimeDto> GetAllWorkTimes()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<WorkTimeDTO>(
+                return connection.Query<WorkTimeDto>(
                     StoredProcedures.WorkTime_GetAll,
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }
         }
 
-        public WorkTimeDTO GetWorkTimeById(int workTimeId)
+        public WorkTimeDto GetWorkTimeById(int workTimeId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.QuerySingle<WorkTimeDTO>(
+                return connection.QuerySingle<WorkTimeDto>(
                     StoredProcedures.WorkTime_GetById,
                     param: new { id = workTimeId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -33,13 +33,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddWorkTime(WorkTimeDTO newWokrTime)
+        public void AddWorkTime(WorkTimeDto newWokrTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<WorkTimeDTO>(
+                connection.QuerySingle<WorkTimeDto>(
                     StoredProcedures.WorkTime_Add,
                     param: new
                     {
@@ -53,13 +53,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateWorkTimeById(WorkTimeDTO newWokrTime)
+        public void UpdateWorkTimeById(WorkTimeDto newWokrTime)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<WorkTimeDTO>(
+                connection.QuerySingleOrDefault<WorkTimeDto>(
                     StoredProcedures.WorkTime_UpdateById,
                     param: new
                     {
@@ -80,7 +80,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<WorkTimeDTO>(
+                connection.QuerySingleOrDefault<WorkTimeDto>(
                     StoredProcedures.WorkTime_DeleteById,
                     param: new { id = workTimeId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -95,7 +95,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<WorkTimeDTO>(
+                connection.QuerySingleOrDefault<WorkTimeDto>(
                     StoredProcedures.ChangeEmployeeScheduleByEmployeeIdByDate,
                     param: new
                     {
@@ -109,15 +109,15 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public List<EmployeeDTO> GetEmployeesAndWorkTimes()
+        public List<EmployeeDto> GetEmployeesAndWorkTimes()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
+                Dictionary<int, EmployeeDto> result = new Dictionary<int, EmployeeDto>();
 
-                connection.Query<EmployeeDTO, WorkTimeDTO, EmployeeDTO>(
+                connection.Query<EmployeeDto, WorkTimeDto, EmployeeDto>(
                     StoredProcedures.GetEmployeesAndWorkTimes,
                     (employee, workTime) => {
                         if (!result.ContainsKey(employee.Id))
@@ -125,7 +125,7 @@ namespace CliningContoraFromValera.DAL.Managers
                             result.Add(employee.Id, employee);
                         }
 
-                        EmployeeDTO crnt = result[employee.Id];
+                        EmployeeDto crnt = result[employee.Id];
 
                         if (workTime != null)
                         {

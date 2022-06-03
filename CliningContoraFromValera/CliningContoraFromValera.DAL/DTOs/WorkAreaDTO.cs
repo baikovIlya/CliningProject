@@ -1,6 +1,6 @@
-﻿namespace CliningContoraFromValera.DAL.DTOs
+﻿namespace CliningContoraFromValera.DAL.Dtos
 {
-    public class WorkAreaDTO
+    public class WorkAreaDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,31 +1,31 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
-using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Dtos;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
     public class ClientManager
     {
-        public List<ClientDTO> GetAllClients()
+        public List<ClientDto> GetAllClients()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.Query<ClientDTO>(
+                return connection.Query<ClientDto>(
                     StoredProcedures.Client_GetAll,
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }
         }
 
-        public ClientDTO GetClientByID(int clientId)
+        public ClientDto GetClientByID(int clientId)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                return connection.QuerySingle<ClientDTO>(
+                return connection.QuerySingle<ClientDto>(
                     StoredProcedures.Client_GetById,
                     param: new { id = clientId },
                     commandType: System.Data.CommandType.StoredProcedure
@@ -33,13 +33,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddClient(ClientDTO newClient)
+        public void AddClient(ClientDto newClient)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingle<ClientDTO>(
+                connection.QuerySingle<ClientDto>(
                     StoredProcedures.Client_Add,
                     param: new { 
                         newClient.FirstName,
@@ -52,13 +52,13 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateClientById(ClientDTO newClient)
+        public void UpdateClientById(ClientDto newClient)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<ClientDTO>(
+                connection.QuerySingleOrDefault<ClientDto>(
                     StoredProcedures.Client_UpdateById,
                     param: new
                     {
@@ -79,7 +79,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingleOrDefault<ClientDTO>(
+                connection.QuerySingleOrDefault<ClientDto>(
                     StoredProcedures.Client_DeleteById,
                     param: new { id = clientId },
                     commandType: System.Data.CommandType.StoredProcedure
