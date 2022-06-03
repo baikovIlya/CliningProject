@@ -141,7 +141,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             result = employee;
                         }
-                        if (result.Services == null && result.WorkAreas == null)
+                        if (result.WorkAreas == null)
                         {
                             result.WorkAreas = new List<WorkAreaDTO>();
                         }
@@ -175,7 +175,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             result = employee;
                         }
-                        if (result.Services == null && result.WorkAreas == null)
+                        if (result.Services == null)
                         {
                             result.Services = new List<ServiceDTO>();
                         }
@@ -304,5 +304,68 @@ namespace CliningContoraFromValera.DAL.Managers
                 return result.Values.ToList();
             }
         }
+
+        public void AddOrderToEmployee(int employeeId, int orderId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingle<OrderDTO>(
+                    StoredProcedures.Employee_Order_Add,
+                    param: new
+                    {
+                        EmployeeId = employeeId,
+                        OrderId = orderId
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
+
+        public void AddWorkAreaToEmployee(int employeeId, int workAreaId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingle<OrderDTO>(
+                    StoredProcedures.Employee_WorkArea_Add,
+                    param: new
+                    {
+                        EmployeeId = employeeId,
+                        WorkAreaId = workAreaId
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
+        public void AddServiceToEmployee(int employeeId, int serviceId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                connection.QuerySingle<OrderDTO>(
+                    StoredProcedures.Employee_Service_Add,
+                    param: new
+                    {
+                        EmployeeId = employeeId,
+                        ServiceId = serviceId
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
+        public List<OrderDTO> GetEmployeesOrdersByEmployeeIdByDate(int employeeId, DateTime date)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                return connection.Query<OrderDTO>(
+                    StoredProcedures.GetEmployeesScheduleByIdByDate,
+                    commandType: System.Data.CommandType.StoredProcedure)
+                    .ToList();
+            }
+        }
+
     }
 }
