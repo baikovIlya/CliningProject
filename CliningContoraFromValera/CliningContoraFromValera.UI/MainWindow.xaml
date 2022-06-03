@@ -137,11 +137,12 @@
 
                                 <DataGrid x:Name="DataGrid_EmployeeServices" AutoGenerateColumns="False" Grid.Column="1" Grid.RowSpan="3" Margin="20,0,0,0" ItemsSource="{Binding ServiceModel}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Тип сервиса" Binding="{Binding ServiceType}" Width="80"/>
-                                        <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="71"/>
-                                        <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="67"/>
-                                        <DataGridTextColumn Header="Комм.ц." Binding="{Binding CommercialPrice}" Width="67"/>
-                                        <DataGridTextColumn Header="Ед. изм." Binding="{Binding Unit}" Width="58"/>
+                                        <DataGridTextColumn Header="Тип сервиса" Binding="{Binding ServiceType}" Width="79"/>
+                                        <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="65"/>
+                                        <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="55"/>
+                                        <DataGridTextColumn Header="Комм.ц." Binding="{Binding CommercialPrice}" Width="55"/>
+                                        <DataGridTextColumn Header="Ед.изм." Binding="{Binding Unit}" Width="48"/>
+                                        <DataGridTextColumn Header="Ср.вр." Binding="{Binding }" Width="58"/>
                                     </DataGrid.Columns>
                                     
                                     <DataGrid.ContextMenu>
