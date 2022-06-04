@@ -45,7 +45,7 @@ namespace CliningContoraFromValera.DAL.Managers
         }
 
         public void AddOrder(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder, int count)
+            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -77,11 +77,11 @@ namespace CliningContoraFromValera.DAL.Managers
             ServiceManager servicsManager = new ServiceManager();
             servicsManager.AddService(newService);
             ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
-            serviceOrderManager.AddServiceFromOrder(newOrder.Id, newService.Id, count);
+            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void UpdateOrderById(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder, int count)
+            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -115,7 +115,7 @@ namespace CliningContoraFromValera.DAL.Managers
             servicsManager.UpdateServiceById(newService);
             ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
             serviceOrderManager.DeleteServiceFromOrder(newOrder.Id, newService.Id);
-            serviceOrderManager.AddServiceFromOrder(newOrder.Id, newService.Id, count);
+            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void DeleteOrderById(int orderId)

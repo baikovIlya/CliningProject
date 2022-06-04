@@ -13,6 +13,12 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindow()
+        {
+            InitializeComponent();
+            Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
+        }
+
         ClientModelManager clientModelManager = new ClientModelManager();
         EmployeeModelManager employeeModelManager = new EmployeeModelManager();
         WorkTimeModelManager workTimeModelManager = new WorkTimeModelManager();
@@ -20,12 +26,6 @@ namespace CliningContoraFromValera.UI
         OrderModelManager orderModelManager = new OrderModelManager();
         WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
         ServiceModelManager serviceModelManager = new ServiceModelManager();
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
-        }
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {

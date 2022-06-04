@@ -6,7 +6,7 @@ namespace CliningContoraFromValera.DAL.Managers
 {
     public class ServiceOrderManager
     {
-        public void AddServiceFromOrder(ServiceOrderDTO serviceOrderDTO)
+        public void AddServiceToOrder(ServiceOrderDTO serviceOrderDTO)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {

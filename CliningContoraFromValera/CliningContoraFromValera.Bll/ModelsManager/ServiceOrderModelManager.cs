@@ -11,7 +11,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         public void AddServiceToOrder(ServiceOrderModel serviceOrderModel)
         {
             ServiceOrderDTO serviceOrderDTO = MapperConfigStorage.GetInstance().Map<ServiceOrderDTO>(serviceOrderModel);
-            _serviceOrderManager.AddServiceFromOrder(serviceOrderDTO);
+            _serviceOrderManager.AddServiceToOrder(serviceOrderDTO);
         }
 
         public void DeleteServiceFromOrder(ServiceOrderModel serviceOrderModel)
