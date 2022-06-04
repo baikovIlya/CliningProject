@@ -46,6 +46,7 @@ namespace CliningContoraFromValera.Bll
                 cfg.CreateMap<ServiceDTO, ServiceModel>()
                 .ForMember("ServiceType", opt => opt.MapFrom(c => c.ServiceType))
                 .ForMember("Name", opt => opt.MapFrom(c => c.Name))
+                .ForMember("Description", opt => opt.MapFrom(c => c.Description))
                 .ForMember("Price", opt => opt.MapFrom(c => c.Price))
                 .ForMember("CommercialPrice", opt => opt.MapFrom(c => c.CommercialPrice))
                 .ForMember("Unit", opt => opt.MapFrom(c => c.Unit))

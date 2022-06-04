@@ -258,7 +258,127 @@ namespace CliningContoraFromValera.UI
             ServiceModel employeesService = (ServiceModel)DataGrid_EmployeesServices.SelectedItem;
             serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
         }
+        private void Button_ServicesDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceModel employee = (ServiceModel)DataGrid_Services.SelectedItem;
+            serviceModelManager.DeleteServiceyId(employee.Id);
+        }
 
-        
+        private void CB_ChooseEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CB_ChooseServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //CB_ChooseServiceType.ItemsSource = 
+        }
+        private void GetMessageBoxFormatDemical()
+        {
+            MessageBox.Show("Все поля обязательны к заполнению!");
+        }
+        private void GetMessageBoxFormatTime()
+        {
+            MessageBox.Show("Все поля обязательны к заполнению!");
+        }
+
+        private void Button_ServiceAdd_Click(object sender, RoutedEventArgs e)
+        {
+            //char ch = '1';
+            string str = TB_Price.Text;
+            string str2 = TB_Price.Text;
+            string str3 = TB_Price.Text;
+            bool hasLetters = str.Any(char.IsLetter);
+
+            if (String.IsNullOrWhiteSpace(TB_Description.Text) || String.IsNullOrWhiteSpace(TB_Name.Text)
+                || String.IsNullOrWhiteSpace(TB_Price.Text) || String.IsNullOrWhiteSpace(TB_CommercialPrice.Text)
+                || String.IsNullOrWhiteSpace(TB_Unit.Text) || String.IsNullOrWhiteSpace(TB_EstimatedTime.Text)
+                || CB_ChooseServiceType.SelectedItem == null)
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else if ((System.Text.RegularExpressions.Regex.IsMatch(str, @"[а-я]"))
+                || (System.Text.RegularExpressions.Regex.IsMatch(str2, @"[а-я]")))
+            {
+                GetMessageBoxFormatDemical();
+            }
+            //else if (char.IsLetter(ch) || ch == '.' || ch == ',')
+            //{
+            //    GetMessageBoxFormatTime();
+            //}
+            else
+            {
+                TimeSpan estimatedTime = TimeSpan.Parse(TB_EstimatedTime.Text);
+                ServiceModel employee = new ServiceModel((ServiceType)CB_ChooseServiceType.SelectedItem, TB_Name.Text, TB_Description.Text,
+                Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), TB_Unit.Text, estimatedTime);
+                serviceModelManager.AddService(employee);
+                ClearServiceAddTextBoxes();
+            }
+        }
+
+        private void ClearServiceAddTextBoxes()
+        {
+            TB_Description.Clear();
+            TB_Name.Clear();
+            TB_Price.Clear();
+            TB_CommercialPrice.Clear();
+            TB_Unit.Clear();
+            TB_EstimatedTime.Clear();
+            CB_ChooseServiceType.SelectedIndex = 0;
+        }
+
+        private void Button_ServiceClear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_ServiceToEmployeeAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_Services_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            EmployeeModel service = (EmployeeModel)e.Row.Item;
+            var element = (TextBox)e.EditingElement;
+            if (String.IsNullOrWhiteSpace(element.Text))
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else
+            {
+                if (String.Equals((string)e.Column.Header, "Тип сервиса"))
+                {
+                    service.FirstName = element.Text;
+                }
+                if (String.Equals((string)e.Column.Header, "Услуга"))
+                {
+                    service.LastName = element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Цена"))
+                {
+                    service.FirstName = element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Коммерч. цена"))
+                {
+                    service.Phone = element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Ед. измер."))
+                {
+                    service.FirstName = element.Text;
+                }
+                else if (String.Equals((string)e.Column.Header, "Ср. время."))
+                {
+                    service.FirstName = element.Text;
+                }
+                employeeModelManager.UpdateEmployeeById(service);
+            }
+        }
+
+        private void DataGrid_Services_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            DataGrid_Employees.ItemsSource = employees;
+        }
     }
 }
