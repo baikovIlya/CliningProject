@@ -350,19 +350,16 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Label Grid.Row="2" Margin="10,0,10,0"
-                           VerticalAlignment="Bottom" Content="Начало услуги:"/>
-                    <TextBox x:Name="TB_OrdersDate" Grid.Row="3" Margin="10"/>
+                    <DatePicker x:Name="DP_OrdersDate" Grid.Row="3" Margin="10"/>
 
-                    <Label Grid.Column="1" Grid.Row="2" Margin="10,0,10,0"
+                    <Label Grid.Column="1" Grid.Row="2" Margin="10,10,10,0"
                            VerticalAlignment="Center" Content="Тип и услуга:"/>
-                    <ComboBox x:Name="CB_DesiredService" Grid.Column="1" Grid.Row="2" Margin="100,10,10,10" Loaded="CB_DesiredService_Loaded"/>
-                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="10"/>
+                    <ComboBox x:Name="CB_DesiredServiceType" Grid.Column="1" Grid.Row="2" Margin="100,10,10,10" Loaded="CB_DesiredService_Loaded"/>
+                    <ComboBox x:Name="CB_DesiredService" Grid.Column="1" Grid.Row="3" Margin="10"/>
 
-                    <Label Grid.Column="2" Grid.Row="2" Margin="10,0,10,0"
-                           VerticalAlignment="Center" Content="Район и адрес:"/>
-                    <ComboBox x:Name="CB_DesiredWorkArea" Grid.Column="2" Grid.Row="2" Margin="100,10,10,10" Loaded="CB_DesiredWorkArea_Loaded"/>
-                    <ComboBox Grid.Column="2" Grid.Row="3" Margin="10"/>
+                    <Label Grid.Column="2" Grid.Row="2" Margin="10,10,10,0"
+                           VerticalAlignment="Center" Content="Районы:"/>
+                    <ComboBox x:Name="CB_DesiredWorkArea" Grid.Column="2" Grid.Row="3" Margin="10" Loaded="CB_DesiredWorkArea_Loaded"/>
 
                     <Button x:Name="Button_EmployeeSelection" Grid.Column="3" 
                             Grid.Row="2" Margin="10"

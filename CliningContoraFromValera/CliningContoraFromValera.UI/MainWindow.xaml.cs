@@ -219,9 +219,9 @@ namespace CliningContoraFromValera.UI
         private void Button_EmployeeSelection_Click(object sender, RoutedEventArgs e)
         {
             if (CB_DesiredWorkArea.SelectedItem != null && CB_DesiredService.SelectedItem != null
-                && TB_OrdersDate.Text != "")
+                && DP_OrdersDate.SelectedDate != null)
             {
-                DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
+                DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
                 WorkAreaModel wa = CB_DesiredWorkArea.SelectedItem as WorkAreaModel;
                 ServiceModel sa = CB_DesiredService.SelectedItem as ServiceModel;
                 List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
@@ -239,7 +239,7 @@ namespace CliningContoraFromValera.UI
             {
                 EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
                 int employeeId = employee.Id;
-                DateTime date = Convert.ToDateTime(TB_OrdersDate.Text);
+                DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
                 List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
                 DataGrid_RelevantServices.ItemsSource = orders;
             }
