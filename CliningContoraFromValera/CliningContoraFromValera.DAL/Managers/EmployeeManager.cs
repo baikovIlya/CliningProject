@@ -354,18 +354,6 @@ namespace CliningContoraFromValera.DAL.Managers
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
-        public List<OrderDTO> GetEmployeesOrdersByEmployeeIdByDate(int employeeId, DateTime date)
-        {
-            using (var connection = new SqlConnection(ServerSettings._connectionString))
-            {
-                connection.Open();
-
-                return connection.Query<OrderDTO>(
-                    StoredProcedures.GetEmployeesScheduleByIdByDate,
-                    commandType: System.Data.CommandType.StoredProcedure)
-                    .ToList();
-            }
-        }
 
     }
 }

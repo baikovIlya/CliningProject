@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using CliningContoraFromValera.Bll;
 using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
 using System.Data;
 using CliningContoraFromValera.Bll.ModelsManager;
@@ -65,20 +64,20 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, "Имя"))
+                if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
                 {
                     client.FirstName = Element.Text;
 
                 }
-                else if (String.Equals((string)e.Column.Header, "Фамилия"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.LastName))
                 {
                     client.LastName = Element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
                 {
                     client.Phone = Element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Почта"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.Email))
                 {
                     client.Email = Element.Text;
                 }
@@ -124,7 +123,7 @@ namespace CliningContoraFromValera.UI
 
         private void GetMessageBoxEmptyTextBoxes()
         {
-            MessageBox.Show("Все поля обязательны к заполнению!");
+            MessageBox.Show(UITextElements.EmptyFieldsError);
         }
 
         //СОТРУДНИКИ
@@ -191,15 +190,15 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, "Фамилия"))
+                if (String.Equals((string)e.Column.Header, UITextElements.LastName))
                 {
                     employee.LastName = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Имя"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
                 {
                     employee.FirstName = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, "Телефон"))
+                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
                 {
                     employee.Phone = element.Text;
                 }
@@ -260,5 +259,83 @@ namespace CliningContoraFromValera.UI
         }
 
         
+
+        private void Button_EmployeeSelection_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_DesiredWorkArea.SelectedItem != null && CB_DesiredService.SelectedItem != null
+                && DP_OrdersDate.SelectedDate != null)
+            {
+                DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
+                WorkAreaModel wa = CB_DesiredWorkArea.SelectedItem as WorkAreaModel;
+                ServiceModel sa = CB_DesiredService.SelectedItem as ServiceModel;
+                List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
+                DataGrid_RelevantEmployees.ItemsSource = emloyees;
+            }
+            else
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+        }
+
+        private void DataGrid_RelevantEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataGrid_RelevantEmployees.SelectedItem != null)
+            {
+                EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
+                int employeeId = employee.Id;
+                DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
+                List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
+                DataGrid_CurrentOrders.ItemsSource = orders;
+            }
+        }
+
+        private void CB_DesiredWorkArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<WorkAreaModel> workAreas = WorkAreaModelManager.GetAllWorkAreas();
+            CB_DesiredWorkArea.ItemsSource = workAreas;
+        }
+
+        private void CB_DesiredService_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ServiceModel> allServices = ServiceModelManager.GetAllServices();
+            CB_DesiredService.ItemsSource = allServices;
+        }
+
+        private void CB_DesiredServiceType_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ServiceType> serviceTypes = new List<ServiceType> { };
+            foreach(ServiceType st in Enum.GetValues(typeof(ServiceType)))
+            {
+                serviceTypes.Add(st);
+            }
+            CB_DesiredServiceType.ItemsSource = serviceTypes;
+
+        }
+
+        private void Button_ResetAll_Click(object sender, RoutedEventArgs e)
+        {
+            DP_OrdersDate.SelectedDate = null;
+            CB_DesiredServiceType.SelectedItem = null;
+            CB_DesiredService.SelectedItem = null;
+            CB_DesiredWorkArea.SelectedItem = null;
+            DataGrid_RelevantEmployees.ItemsSource = null;
+            DataGrid_CurrentOrders.ItemsSource = null;
+        }
+
+        private void CB_DesiredServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CB_DesiredService.ItemsSource = null;
+            List<ServiceModel> allServices = ServiceModelManager.GetAllServices();
+            if (CB_DesiredServiceType.SelectedItem == null)
+            {
+                CB_DesiredService.ItemsSource = allServices;
+            }
+            else
+            {
+                List<ServiceModel> services = ServiceModelManager.GetServicesByType(allServices,
+                    (ServiceType)CB_DesiredServiceType.SelectedItem);
+                CB_DesiredService.ItemsSource = services;
+            }
+        }
     }
 }

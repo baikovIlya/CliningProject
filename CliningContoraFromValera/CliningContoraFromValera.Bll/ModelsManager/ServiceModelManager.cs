@@ -16,6 +16,38 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(serviceDTOs);
         }
 
+        public ServiceModel GetServiceById(int id)
+        {
+            ServiceDTO serviceDTO = _serviceManager.GetServiceById(id);
+            return MapperConfigStorage.GetInstance().Map<ServiceModel>(serviceDTO);
+        }
+        public void AddService(ServiceModel service)
+        {
+            ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
+            _serviceManager.AddService(serviceDTO);
+        }
+        {
+        public void UpdateService(ServiceModel service)
+            ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
+            _serviceManager.UpdateServiceById(serviceDTO);
+        }
+        public void DeleteServiceyId(int id)
+        {
+            _serviceManager.DeleteServiceById(id);
+        }
+
+        public List<ServiceModel> GetServicesByType(List<ServiceModel> list, ServiceType serviceType)
+        {
+            List<ServiceModel> result = new List<ServiceModel>();
+            foreach(ServiceModel service in list)
+            {
+                if (service.ServiceType == serviceType)
+                {
+                    result.Add(service);
+                }
+            }
+            return result;
+        }
         public void DeleteEmployeesService(int employeeId, int serviceId)
         {
             employeeManager.DeleteEmployeesService(employeeId, serviceId);
