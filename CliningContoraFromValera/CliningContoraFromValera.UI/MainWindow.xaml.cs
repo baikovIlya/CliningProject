@@ -241,7 +241,7 @@ namespace CliningContoraFromValera.UI
                 int employeeId = employee.Id;
                 DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
                 List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
-                DataGrid_RelevantServices.ItemsSource = orders;
+                DataGrid_CurrentOrders.ItemsSource = orders;
             }
         }
 
@@ -253,8 +253,8 @@ namespace CliningContoraFromValera.UI
 
         private void CB_DesiredService_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceModel> services = ServiceModelManager.GetAllServices();
-            CB_DesiredService.ItemsSource = services;
+            List<ServiceModel> allServices = ServiceModelManager.GetAllServices();
+            CB_DesiredService.ItemsSource = allServices;
         }
 
         private void CB_DesiredServiceType_Loaded(object sender, RoutedEventArgs e)
@@ -269,9 +269,25 @@ namespace CliningContoraFromValera.UI
             DP_OrdersDate.SelectedDate = null;
             CB_DesiredServiceType.SelectedItem = null;
             CB_DesiredService.SelectedItem = null;
-            CB_DesiredWorkArea = null;
+            CB_DesiredWorkArea.SelectedItem = null;
             DataGrid_RelevantEmployees.ItemsSource = null;
             DataGrid_CurrentOrders.ItemsSource = null;
+        }
+
+        private void CB_DesiredServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CB_DesiredService.ItemsSource = null;
+            List<ServiceModel> allServices = ServiceModelManager.GetAllServices();
+            if (CB_DesiredServiceType.SelectedItem == null)
+            {
+                CB_DesiredService.ItemsSource = allServices;
+            }
+            else
+            {
+                List<ServiceModel> services = ServiceModelManager.GetServicesByType(allServices,
+                    (ServiceType)CB_DesiredServiceType.SelectedItem);
+                CB_DesiredService.ItemsSource = services;
+            }
         }
     }
 }
