@@ -263,5 +263,15 @@ namespace CliningContoraFromValera.UI
             CB_DesiredServiceType.ItemsSource = serviceTypes;
 
         }
+
+        private void Button_ResetAll_Click(object sender, RoutedEventArgs e)
+        {
+            DP_OrdersDate.SelectedDate = null;
+            CB_DesiredServiceType.SelectedItem = null;
+            CB_DesiredService.SelectedItem = null;
+            CB_DesiredWorkArea = null;
+            DataGrid_RelevantEmployees.ItemsSource = null;
+            DataGrid_CurrentOrders.ItemsSource = null;
+        }
     }
 }

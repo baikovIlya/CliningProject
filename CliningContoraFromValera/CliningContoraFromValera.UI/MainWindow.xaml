@@ -336,7 +336,7 @@
                     </DataGrid>
 
 
-                    <DataGrid x:Name="DataGrid_RelevantServices"
+                    <DataGrid x:Name="DataGrid_CurrentOrders"
                               ItemsSource="{Binding OrderModel}"
                               Grid.Row="1" 
                               Grid.ColumnSpan="4" 
@@ -365,9 +365,9 @@
                             Grid.Row="2" Margin="10"
                             Content="Подобрать" Click="Button_EmployeeSelection_Click"/>
 
-                    <Button Grid.Column="3" 
+                    <Button x:Name="Button_ResetAll" Grid.Column="3" 
                             Grid.Row="3" Margin="10"
-                            Content="Обнулить"/>
+                            Content="Обнулить" Click="Button_ResetAll_Click"/>
 
                 </Grid>
             </TabItem>
