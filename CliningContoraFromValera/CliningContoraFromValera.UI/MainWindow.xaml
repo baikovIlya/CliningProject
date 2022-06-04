@@ -117,7 +117,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <DataGrid x:Name="DataGrid_Employees" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding EmployeeModel}" IsReadOnly="False" 
                                           CanUserAddRows="False" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34" Loaded="DataGrid_Employees_Loaded" CellEditEnding="DataGrid_Employees_CellEditEnding">
                                     <DataGrid.Columns>
@@ -132,7 +132,7 @@
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
-                                    
+
                                 </DataGrid>
 
                                 <DataGrid x:Name="DataGrid_EmployeeServices" AutoGenerateColumns="False" Grid.Column="1" Grid.RowSpan="3" Margin="20,0,0,0" ItemsSource="{Binding ServiceModel}">
@@ -144,7 +144,7 @@
                                         <DataGridTextColumn Header="Ед.изм." Binding="{Binding Unit}" Width="48"/>
                                         <DataGridTextColumn Header="Ср.вр." Binding="{Binding }" Width="58"/>
                                     </DataGrid.Columns>
-                                    
+
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header=""/>
@@ -302,8 +302,8 @@
 
                 </Grid>
             </TabItem>
-            
-            
+
+
 
             <TabItem Header="Подбор сотрудников">
                 <Grid>
@@ -330,9 +330,11 @@
                               Margin="10" SelectionChanged="DataGrid_RelevantEmployees_SelectionChanged">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Сотрудники" Binding="{Binding FirstName}" Width="372"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="150"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="150"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="150"/>
                             <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" Width="200"/>
-                            <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="200"/>
+                            <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="114"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -342,14 +344,14 @@
                               Grid.Row="1" 
                               Grid.ColumnSpan="4" 
                               CanUserAddRows="False"
-                              AutoGenerateColumns="False" Margin="10">
+                              AutoGenerateColumns="False" Margin="10,20,10,47" Grid.RowSpan="2">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="150"/>
                             <DataGridTextColumn Header="Приблиз. вр. выполнения" Binding="{Binding EstimatedEndTime}" Width="180"/>
                             <DataGridTextColumn Header="Время окончания" Binding="{Binding FinishTime}" Width="150"/>
                             <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="200"/>
-                            <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="92"/>
+                            <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="84"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -374,8 +376,9 @@
 
                 </Grid>
             </TabItem>
-            
+
         </TabControl>
+        <Label Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="63,247,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
