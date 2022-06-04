@@ -17,12 +17,5 @@
         public AddressDTO? Address { get; set; }
         public List<ServiceDTO>? Services { get; set; }
 
-
-        public override string ToString()
-        {
-            return $"Id={Id} Date={Date} StartTime={StartTime} EstimatedEndTime={EstimatedEndTime} EndTime={FinishTime}" +
-                $"SummOfOrder={Price} Status={Status} CountOfEmployees={CountOfEmployees} IsCommercial={IsCommercial}" +
-                $"CliendId={ClientId} AddressId={AddressId}";
-        }
     }
 }

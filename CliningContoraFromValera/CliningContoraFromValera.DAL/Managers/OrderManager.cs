@@ -44,19 +44,6 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        //public OrderDTO GetOrderById(int orderId)
-        //{
-        //    using (var connection = new SqlConnection(ServerSettings._connectionString))
-        //    {
-        //        connection.Open();
-
-        //        return connection.QuerySingle<OrderDTO>(
-        //            StoredProcedures.Order_GetById,
-        //            param: new { id = orderId },
-        //            commandType: System.Data.CommandType.StoredProcedure);
-        //    }
-        //}
-
         public void AddOrder(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
             ServiceDTO newService, ServiceOrderDTO newServiceOrder, int count)
         {

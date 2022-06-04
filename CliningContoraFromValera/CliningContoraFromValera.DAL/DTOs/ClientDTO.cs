@@ -8,10 +8,5 @@
         public string? Email { get; set; }
         public string Phone { get; set; }
 
-        public override string ToString()
-        {
-            return $"Id={Id} FirstName={FirstName} LastName={LastName} Email={Email} Phone={Phone} ";
-        }
-
     }
 }

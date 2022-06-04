@@ -8,9 +8,5 @@
         public TimeSpan FinishTime { get; set; }
         public int EmployeeId { get; set; }
 
-        public override string ToString()
-        {
-            return $"Id={Id} Date={Date} StartTime={StartTime} FinishTime={FinishTime} EmployeeId={EmployeeId}";
-        }
     }
 }
