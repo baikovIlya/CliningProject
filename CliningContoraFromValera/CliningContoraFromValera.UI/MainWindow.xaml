@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CliningContoraFromValera.UI"
         mc:Ignorable="d"
-        Title="CliningFromValera" Height="500" Width="800" Background="White">
+        Title="CliningFromValera" Height="600" Width="900" Background="White">
     <Grid>
         <TabControl x:Name="MainTabControl" Height="500" Width="800">
 
@@ -326,6 +326,7 @@
                               ItemsSource="{Binding EmployeeWorkTimeModel}"
                               Grid.ColumnSpan="4" 
                               AutoGenerateColumns="False" 
+                              CanUserAddRows="False"
                               Margin="10" SelectionChanged="DataGrid_RelevantEmployees_SelectionChanged">
 
                         <DataGrid.Columns>
@@ -340,13 +341,15 @@
                               ItemsSource="{Binding OrderModel}"
                               Grid.Row="1" 
                               Grid.ColumnSpan="4" 
+                              CanUserAddRows="False"
                               AutoGenerateColumns="False" Margin="10">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="150"/>
                             <DataGridTextColumn Header="Приблиз. вр. выполнения" Binding="{Binding EstimatedEndTime}" Width="180"/>
                             <DataGridTextColumn Header="Время окончания" Binding="{Binding FinishTime}" Width="150"/>
-                            <DataGridTextColumn Header="Адрес" Binding="{Binding Street}" Width="300"/>
+                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="200"/>
+                            <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="92"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
