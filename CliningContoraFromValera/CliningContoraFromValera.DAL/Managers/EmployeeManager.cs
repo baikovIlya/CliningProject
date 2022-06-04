@@ -107,7 +107,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
                 connection.QuerySingleOrDefault<EmployeeDTO>(
                     StoredProcedures.Employee_WorkArea_DeleteByValue,
-                    param: new { EmployeeId = employeeId, OrderId = workAreaId },
+                    param: new { EmployeeId = employeeId, WorkAreaId = workAreaId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }
@@ -120,7 +120,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
                 connection.QuerySingleOrDefault<EmployeeDTO>(
                     StoredProcedures.Employee_Service_DeleteByValue,
-                    param: new { EmployeeId = employeeId, OrderId = serviceId },
+                    param: new { EmployeeId = employeeId, ServiceId = serviceId },
                     commandType: System.Data.CommandType.StoredProcedure
                     );
             }

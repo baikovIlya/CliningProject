@@ -8,6 +8,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class ServiceModelManager
     {
         ServiceManager _serviceManager = new ServiceManager();
+        EmployeeManager employeeManager = new EmployeeManager();
 
         public List<ServiceModel> GetAllServices()
         {
@@ -25,8 +26,8 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
             _serviceManager.AddService(serviceDTO);
         }
-        public void UpdateService(ServiceModel service)
         {
+        public void UpdateService(ServiceModel service)
             ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
             _serviceManager.UpdateServiceById(serviceDTO);
         }
@@ -46,6 +47,10 @@ namespace CliningContoraFromValera.Bll.ModelsManager
                 }
             }
             return result;
+        }
+        public void DeleteEmployeesService(int employeeId, int serviceId)
+        {
+            employeeManager.DeleteEmployeesService(employeeId, serviceId);
         }
     }
 }
