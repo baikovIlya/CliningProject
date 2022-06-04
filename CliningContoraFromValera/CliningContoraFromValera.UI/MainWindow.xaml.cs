@@ -259,7 +259,11 @@ namespace CliningContoraFromValera.UI
 
         private void CB_DesiredServiceType_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceType> serviceTypes = new List<ServiceType> { ServiceType.DryCleaning, ServiceType.Cleaning, ServiceType.Disinsection };
+            List<ServiceType> serviceTypes = new List<ServiceType> { };
+            foreach(ServiceType st in Enum.GetValues(typeof(ServiceType)))
+            {
+                serviceTypes.Add(st);
+            }
             CB_DesiredServiceType.ItemsSource = serviceTypes;
 
         }
