@@ -34,5 +34,18 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             _serviceManager.DeleteServiceById(id);
         }
+
+        public List<ServiceModel> GetServicesByType(List<ServiceModel> list, ServiceType serviceType)
+        {
+            List<ServiceModel> result = new List<ServiceModel>();
+            foreach(ServiceModel service in list)
+            {
+                if (service.ServiceType == serviceType)
+                {
+                    result.Add(service);
+                }
+            }
+            return result;
+        }
     }
 }
