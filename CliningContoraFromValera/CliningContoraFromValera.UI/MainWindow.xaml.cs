@@ -156,5 +156,19 @@ namespace CliningContoraFromValera.UI
             List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
+
+        private void Button_ShowSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime startDate = DateTime.Parse(DatePicker_FromDate.Text);
+            DateTime endDate = DateTime.Parse(DatePicker_ToDate.Text);
+            List<EmployeeWorkTimeModel> employeesSchedule= EmployeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
+            DataGrid_Schedule.ItemsSource = employeesSchedule;  
+        }
+
+        private void Button_ShiftDelete_Click(object sender, RoutedEventArgs e)
+        {
+            WorkTimeModel shift = DataGrid_Schedule.SelectedItem as WorkTimeModel;
+            WorkTimeModelManager.DeleteWorkTimeById(shift.Id);
+        }
     }
 }

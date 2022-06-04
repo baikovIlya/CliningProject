@@ -125,7 +125,7 @@ namespace CliningContoraFromValera.DAL.Managers
                         {
                             result.Add(employee);
                         }
-                        EmployeeDTO crnt = new EmployeeDTO();
+                        EmployeeDTO crnt = employee;
                         if (workTime != null)
                         {
                             crnt.WorkTime = workTime;   
@@ -136,6 +136,39 @@ namespace CliningContoraFromValera.DAL.Managers
                     splitOn: "Id"
                 );
 
+                return result;
+            }
+        }
+
+        public List<EmployeeDTO> GetEmployeesSchedule(DateTime minDate, DateTime maxDate)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+                List<EmployeeDTO> result = new List<EmployeeDTO>();
+                connection.Query<EmployeeDTO, WorkTimeDTO, EmployeeDTO>(
+                    StoredProcedures.GetEmployeesSchedule,
+                    (employee, workTime) =>
+                    {
+                        if (employee != null)
+                        {
+                            result.Add(employee);
+                        }
+                        EmployeeDTO crnt = employee;
+                        if (crnt.WorkTime == null)
+                        {
+                            crnt.WorkTime = new WorkTimeDTO();
+                        }
+                        if (workTime != null)
+                        {
+                            crnt.WorkTime = workTime;
+                        }
+                        return crnt;
+                    },
+                    param: new { MinDate = minDate, MaxDate = maxDate },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
                 return result;
             }
         }

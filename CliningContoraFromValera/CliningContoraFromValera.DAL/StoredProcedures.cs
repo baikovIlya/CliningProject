@@ -74,5 +74,6 @@
         public const string GetAllOrderServicesInfoById = "GetAllOrderServicesInfoById";
         public const string GetAllOrderServicesInfo = "GetAllOrderServicesInfo";
         public const string GetEmployeesAndWorkTimes = "GetEmployeesAndWorkTimes";
+        public const string GetEmployeesSchedule = "GetEmployeeSchedule";
     }
 }
