@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CliningContoraFromValera.UI"
         mc:Ignorable="d"
-        Title="CliningFromValera" Height="540" Width="850" Background="White" ResizeMode="NoResize">
+        Title="CliningFromValera" Height="580" Width="880" Background="White" ResizeMode="NoResize">
     <Grid>
         <TabControl x:Name="MainTabControl" Width="800">
 
@@ -330,7 +330,7 @@
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
 
-
+                    <Label Grid.Row="0" Grid.RowSpan="2" Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="10,30,0,0" Height="30"/>
 
                     <DataGrid x:Name="DataGrid_RelevantEmployees" 
                               ItemsSource="{Binding EmployeeWorkTimeModel}"
@@ -348,13 +348,14 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
+                    
 
                     <DataGrid x:Name="DataGrid_CurrentOrders"
                               ItemsSource="{Binding OrderModel}"
                               Grid.Row="1" 
                               Grid.ColumnSpan="4" 
                               CanUserAddRows="False"
-                              AutoGenerateColumns="False" Margin="10,20,10,47" Grid.RowSpan="2">
+                              AutoGenerateColumns="False" Margin="10,26,10,41" Grid.RowSpan="2">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="150"/>
@@ -388,7 +389,7 @@
             </TabItem>
 
         </TabControl>
-        <Label Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="63,247,0,0" VerticalAlignment="Top"/>
+        
 
     </Grid>
 </Window>

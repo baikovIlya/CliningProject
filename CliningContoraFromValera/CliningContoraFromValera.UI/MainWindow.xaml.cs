@@ -268,7 +268,7 @@ namespace CliningContoraFromValera.UI
                 DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
                 WorkAreaModel wa = CB_DesiredWorkArea.SelectedItem as WorkAreaModel;
                 ServiceModel sa = CB_DesiredService.SelectedItem as ServiceModel;
-                List<EmployeeWorkTimeModel> emloyees = EmployeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
+                List<EmployeeWorkTimeModel> emloyees = employeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
                 DataGrid_RelevantEmployees.ItemsSource = emloyees;
             }
             else
@@ -284,20 +284,20 @@ namespace CliningContoraFromValera.UI
                 EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
                 int employeeId = employee.Id;
                 DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
-                List<OrderModel> orders = OrderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
+                List<OrderModel> orders = orderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
                 DataGrid_CurrentOrders.ItemsSource = orders;
             }
         }
 
         private void CB_DesiredWorkArea_Loaded(object sender, RoutedEventArgs e)
         {
-            List<WorkAreaModel> workAreas = WorkAreaModelManager.GetAllWorkAreas();
+            List<WorkAreaModel> workAreas = workAreaModelManager.GetAllWorkAreas();
             CB_DesiredWorkArea.ItemsSource = workAreas;
         }
 
         private void CB_DesiredService_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceModel> allServices = ServiceModelManager.GetAllServices();
+            List<ServiceModel> allServices = serviceModelManager.GetAllServices();
             CB_DesiredService.ItemsSource = allServices;
         }
 
@@ -325,14 +325,14 @@ namespace CliningContoraFromValera.UI
         private void CB_DesiredServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CB_DesiredService.ItemsSource = null;
-            List<ServiceModel> allServices = ServiceModelManager.GetAllServices();
+            List<ServiceModel> allServices = serviceModelManager.GetAllServices();
             if (CB_DesiredServiceType.SelectedItem == null)
             {
                 CB_DesiredService.ItemsSource = allServices;
             }
             else
             {
-                List<ServiceModel> services = ServiceModelManager.GetServicesByType(allServices,
+                List<ServiceModel> services = serviceModelManager.GetServicesByType(allServices,
                     (ServiceType)CB_DesiredServiceType.SelectedItem);
                 CB_DesiredService.ItemsSource = services;
             }
