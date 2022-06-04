@@ -256,5 +256,12 @@ namespace CliningContoraFromValera.UI
             List<ServiceModel> services = ServiceModelManager.GetAllServices();
             CB_DesiredService.ItemsSource = services;
         }
+
+        private void CB_DesiredServiceType_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ServiceType> serviceTypes = new List<ServiceType> { ServiceType.DryCleaning, ServiceType.Cleaning, ServiceType.Disinsection };
+            CB_DesiredServiceType.ItemsSource = serviceTypes;
+
+        }
     }
 }
