@@ -115,21 +115,20 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                Dictionary<int, EmployeeDTO> result = new Dictionary<int, EmployeeDTO>();
+                List<EmployeeDTO> result = new List<EmployeeDTO>();
 
                 connection.Query<EmployeeDTO, WorkTimeDTO, EmployeeDTO>(
                     StoredProcedures.GetEmployeesAndWorkTimes,
-                    (employee, workTime) => {
-                        if (!result.ContainsKey(employee.Id))
+                    (employee, workTime) =>
+                    {
+                        if(employee != null)
                         {
-                            result.Add(employee.Id, employee);
+                            result.Add(employee);
                         }
-
-                        EmployeeDTO crnt = result[employee.Id];
-
+                        EmployeeDTO crnt = new EmployeeDTO();
                         if (workTime != null)
                         {
-                            crnt.WorkTime = workTime;
+                            crnt.WorkTime = workTime;   
                         }
                         return crnt;
                     },
@@ -137,7 +136,7 @@ namespace CliningContoraFromValera.DAL.Managers
                     splitOn: "Id"
                 );
 
-                return result.Values.ToList();
+                return result;
             }
         }
     }
