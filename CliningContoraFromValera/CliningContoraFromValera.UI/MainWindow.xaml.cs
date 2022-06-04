@@ -1,22 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CliningContoraFromValera.Bll;
-using AutoMapper;
 using CliningContoraFromValera.Bll.Models;
-using CliningContoraFromValera.DAL.DTOs;
-using System.Data;
 using CliningContoraFromValera.Bll.ModelsManager;
 
 namespace CliningContoraFromValera.UI
