@@ -266,10 +266,11 @@ namespace CliningContoraFromValera.UI
                 && DP_OrdersDate.SelectedDate != null)
             {
                 DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
-                WorkAreaModel wa = CB_DesiredWorkArea.SelectedItem as WorkAreaModel;
-                ServiceModel sa = CB_DesiredService.SelectedItem as ServiceModel;
+                WorkAreaModel wa = (WorkAreaModel)CB_DesiredWorkArea.SelectedItem;
+                ServiceModel sa = (ServiceModel)CB_DesiredService.SelectedItem;
                 List<EmployeeWorkTimeModel> emloyees = employeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
                 DataGrid_RelevantEmployees.ItemsSource = emloyees;
+                DP_OrdersDate.IsEnabled = false;
             }
             else
             {
@@ -283,7 +284,7 @@ namespace CliningContoraFromValera.UI
             {
                 EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
                 int employeeId = employee.Id;
-                DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
+                DateTime date = (DateTime)DP_OrdersDate.SelectedDate!;
                 List<OrderModel> orders = orderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
                 DataGrid_CurrentOrders.ItemsSource = orders;
             }
@@ -309,7 +310,6 @@ namespace CliningContoraFromValera.UI
                 serviceTypes.Add(st);
             }
             CB_DesiredServiceType.ItemsSource = serviceTypes;
-
         }
 
         private void Button_ResetAll_Click(object sender, RoutedEventArgs e)
@@ -320,6 +320,7 @@ namespace CliningContoraFromValera.UI
             CB_DesiredWorkArea.SelectedItem = null;
             DataGrid_RelevantEmployees.ItemsSource = null;
             DataGrid_CurrentOrders.ItemsSource = null;
+            DP_OrdersDate.IsEnabled = true;
         }
 
         private void CB_DesiredServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)

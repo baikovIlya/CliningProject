@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CliningContoraFromValera.UI"
         mc:Ignorable="d"
-        Title="CliningFromValera" Height="580" Width="880" Background="White" ResizeMode="NoResize">
+        Title="CliningFromValera" Height="610" Width="880" Background="White" ResizeMode="NoResize">
     <Grid>
-        <TabControl x:Name="MainTabControl" Width="800">
+        <TabControl x:Name="MainTabControl" Width="800" Height="550">
 
             <TabItem Header="Клиенты">
                 <Grid Height="427" Margin="16,0,31,0">
@@ -355,7 +355,7 @@
                               Grid.Row="1" 
                               Grid.ColumnSpan="4" 
                               CanUserAddRows="False"
-                              AutoGenerateColumns="False" Margin="10,26,10,41" Grid.RowSpan="2">
+                              AutoGenerateColumns="False" Margin="10,26,10,10">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="150"/>
