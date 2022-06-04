@@ -27,35 +27,32 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        ClientManager ClientManager = new ClientManager();
-        EmployeeManager EmployeeManager = new EmployeeManager();
-        ClientModelManager ClientModelManager = new ClientModelManager();
-        EmployeeModelManager EmployeeModelManager = new EmployeeModelManager();
-        WorkTimeModelManager WorkTimeModelManager = new WorkTimeModelManager();
-        EmployeeWorkTimeModelManager EmployeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
-        OrderModelManager OrderModelManager = new OrderModelManager();
-
-
-
+        ClientModelManager clientModelManager = new ClientModelManager();
+        EmployeeModelManager employeeModelManager = new EmployeeModelManager();
+        WorkTimeModelManager workTimeModelManager = new WorkTimeModelManager();
+        EmployeeWorkTimeModelManager employeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+        OrderModelManager orderModelManager = new OrderModelManager();
+        WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
+        ServiceModelManager serviceModelManager = new ServiceModelManager();
 
         public MainWindow()
         {
             InitializeComponent();
+            Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
         }
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<ClientModel> clients = ClientModelManager.GetAllClients();
-            //DataGrid_Clients.ItemsSource = clients;
-
-            //List<OrderDTO> dto = OrderManager.GetOrdersSer();
-            //DataGrid_Clients.ItemsSource = dto;
+            List<ClientModel> clients = clientModelManager.GetAllClients();
+            DataGrid_Clients.ItemsSource = clients;
         }
+
+        //КЛИЕНТЫ
 
         private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
         {
             ClientModel client = (ClientModel)DataGrid_Clients.SelectedItem;
-            ClientModelManager.DeleteClientById(client.Id);
+            clientModelManager.DeleteClientById(client.Id);
         }
 
         private void DataGrid_Clients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -86,7 +83,7 @@ namespace CliningContoraFromValera.UI
                     client.Email = Element.Text;
                 }
 
-                ClientModelManager.UpdateClientById(client);
+                clientModelManager.UpdateClientById(client);
             }
         }
 
@@ -106,9 +103,15 @@ namespace CliningContoraFromValera.UI
                TextBox_LastName.Text,
                TextBox_Email.Text,
                TextBox_Phone.Text);
-             ClientModelManager.AddClient(client);
+             clientModelManager.AddClient(client);
              ClearClientAddTextBoxes();
            }
+        }
+
+        private void Button_ClientRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            List<ClientModel> clients = clientModelManager.GetAllClients();
+            DataGrid_Clients.ItemsSource = clients;
         }
 
         private void ClearClientAddTextBoxes()
@@ -124,28 +127,24 @@ namespace CliningContoraFromValera.UI
             MessageBox.Show("Все поля обязательны к заполнению!");
         }
 
+        //СОТРУДНИКИ
+
         private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
             DataGrid_Employees.ItemsSource = employees;
-        }
-
-        private void Button_ClientRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            List<ClientModel> clients = ClientModelManager.GetAllClients();
-            DataGrid_Clients.ItemsSource = clients;
         }
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeWorkTimeModel> datss = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            List<EmployeeWorkTimeModel> datss = employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = datss;
      
         }
 
         private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
             DataGrid_Employees.ItemsSource = employees;
         }
 
@@ -164,7 +163,7 @@ namespace CliningContoraFromValera.UI
                 EmployeeModel employee = new EmployeeModel(TB_FirstNameEmployee.Text,
                     TB_LastNameEmployee.Text,
                     TB_PhoneEmployee.Text);
-                EmployeeModelManager.AddEmployee(employee);
+                employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
             }
         }
@@ -172,7 +171,7 @@ namespace CliningContoraFromValera.UI
         private void Button_EmployeeDelete_Click(object sender, RoutedEventArgs e)
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-            EmployeeModelManager.DeleteEmployeeById(employee.Id);
+            employeeModelManager.DeleteEmployeeById(employee.Id);
         }
 
         private void ClearEmployeeAddTextBoxes()
@@ -205,14 +204,61 @@ namespace CliningContoraFromValera.UI
                     employee.Phone = element.Text;
                 }
 
-                EmployeeModelManager.UpdateEmployeeById(employee);
+                employeeModelManager.UpdateEmployeeById(employee);
             }
         }
 
+        private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = true;
+            if (DataGrid_Employees.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
+                DataGrid_EmployeesWorkAreas.ItemsSource = employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
+                DataGrid_EmployeesServices.ItemsSource = employeeModelManager.GetEmployeesServicesById(employee!.Id);
+            }
+            else
+            {
+                DataGrid_EmployeesWorkAreas.ItemsSource = null;
+                DataGrid_EmployeesServices.ItemsSource = null;
+                Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
+            }
+        }
+
+        private void Button_EmployeesWorkAreasAndServicesRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
+            DataGrid_EmployeesWorkAreas.ItemsSource = employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
+            DataGrid_EmployeesServices.ItemsSource = employeeModelManager.GetEmployeesServicesById(employee!.Id);
+        }
+
+        //ЗАКАЗЫ
+
         private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            List<OrderModel> o = OrderModelManager.GetAllOrder();
-            DataGrid_AllOrders.ItemsSource = o;
+            List<OrderModel> orders = orderModelManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = orders;
         }
+
+        //РАЙОНЫ
+
+        private void Button_EmployeesWorkAreasDelete_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
+            WorkAreaModel employeesWorkArea = (WorkAreaModel)DataGrid_EmployeesWorkAreas.SelectedItem;
+            workAreaModelManager.DeleteEmployeesWorkArea(employee.Id, employeesWorkArea.Id);
+        }
+
+
+        //СЕРВИСЫ
+
+        private void Button_EmployeesServicesDelete_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
+            ServiceModel employeesService = (ServiceModel)DataGrid_EmployeesServices.SelectedItem;
+            serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
+        }
+
+        
     }
 }

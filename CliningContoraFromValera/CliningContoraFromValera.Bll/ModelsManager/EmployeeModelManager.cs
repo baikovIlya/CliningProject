@@ -37,14 +37,16 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             employeeManager.DeleteEmployeeById(employeeId);
         }
 
-        public void GetEmployeesWorkAreasById(int employeeId)
+        public List<WorkAreaModel> GetEmployeesWorkAreasById(int employeeId)
         {
-            //employeeManager.DeleteEmployeeById(employeeId);
+            EmployeeDTO employeesWorkArea = employeeManager.GetAllEmployeesWorkAreasById(employeeId);
+            return MapperConfigStorage.GetInstance().Map<List<WorkAreaModel>>(employeesWorkArea.WorkAreas);
         }
 
-        public void GetEmployeesServicesById(int employeeId)
+        public List<ServiceModel> GetEmployeesServicesById(int employeeId)
         {
-            //employeeManager.DeleteEmployeeById(employeeId);
+            EmployeeDTO employeesService = employeeManager.GetAllEmployeesServicesById(employeeId);
+            return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(employeesService.Services);
         }
     }
 }
