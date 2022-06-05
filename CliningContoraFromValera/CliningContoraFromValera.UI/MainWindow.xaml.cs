@@ -157,6 +157,7 @@ namespace CliningContoraFromValera.UI
                 try
                 {
                     AddShift();
+                    AddShiftItemsClear();
                 }
                 catch (FormatException)
                 {
@@ -209,6 +210,14 @@ namespace CliningContoraFromValera.UI
             WorkTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
         }
 
+        private void AddShiftItemsClear()
+        {
+            TextBox_EmployeeStartTime.Clear();
+            TextBox_EmployeeFinishTime.Clear();
+
+        }
+
+
         private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             try
@@ -239,6 +248,12 @@ namespace CliningContoraFromValera.UI
             {
                 GetMessageBoxFormatException();
             }
+        }
+
+        private void ComboBox_EmployeeSchedule_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Label_ChooseEmployee.Visibility = Visibility.Hidden;
+            ComboBox_EmployeeSchedule.Items.Refresh();
         }
     }
 }
