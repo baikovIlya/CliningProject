@@ -180,7 +180,6 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                                 <Label Name="Label_ChooseEmployee" Content="Выбрать сотрудника: " Margin="26,60,489,39" Grid.Row="4" Grid.RowSpan="2" Visibility="Visible"/>
-                                <Button x:Name="Button_RefreshSchedule" Content="Обновить" Grid.Row="4" Height="30" Margin="473,54,10,43" Click="Button_RefreshSchedule_Click" Grid.RowSpan="2"/>
                                 <Button x:Name="Button_AddShift" Content="Добавить смену" Grid.Row="5" Margin="473,32,10,0" Click="Button_AddShift_Click"/>
                                 <Label Content="От :" HorizontalAlignment="Left" Height="24" Margin="15,9,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
                                     <Label.RenderTransform>

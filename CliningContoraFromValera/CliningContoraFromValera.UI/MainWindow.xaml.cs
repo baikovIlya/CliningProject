@@ -158,6 +158,7 @@ namespace CliningContoraFromValera.UI
                 {
                     AddShift();
                     AddShiftItemsClear();
+                    RefreshShifts();
                 }
                 catch (FormatException)
                 {
@@ -183,7 +184,7 @@ namespace CliningContoraFromValera.UI
         }
 
 
-        private void Button_RefreshSchedule_Click(object sender, RoutedEventArgs e)
+        private void RefreshShifts()
         {
             List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = employeesWorkTimes;
@@ -208,12 +209,14 @@ namespace CliningContoraFromValera.UI
         {
             EmployeeWorkTimeModel shift = DataGrid_Schedule.SelectedItem as EmployeeWorkTimeModel;
             WorkTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
+            RefreshShifts();
         }
 
         private void AddShiftItemsClear()
         {
             TextBox_EmployeeStartTime.Clear();
             TextBox_EmployeeFinishTime.Clear();
+            ComboBox_EmployeeSchedule.Items.Clear();
 
         }
 
