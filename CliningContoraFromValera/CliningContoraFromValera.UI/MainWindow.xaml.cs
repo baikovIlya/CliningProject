@@ -290,18 +290,17 @@ namespace CliningContoraFromValera.UI
 
         private void GetMessageBoxFormatDemical()
         {
-            MessageBox.Show("Введите чило в поля 'Цена', 'Коммерческая цена'");
+            MessageBox.Show("Введите чило в формате '10,0' в поля 'Цена', 'Коммерческая цена'");
         }
         private void GetMessageBoxFormatTime()
         {
-            MessageBox.Show("Формат заполнения времени 10:00");
+            MessageBox.Show("Формат заполнения времени '10:00'");
         }
 
         private void Button_ServiceAdd_Click(object sender, RoutedEventArgs e)
         {
-            string str = TB_Price.Text;
-            string str2 = TB_CommercialPrice.Text;
-            string str3 = TB_EstimatedTime.Text;
+            decimal decimalFormat;
+            TimeSpan estimatedTime;
             if (String.IsNullOrWhiteSpace(TB_Description.Text) || String.IsNullOrWhiteSpace(TB_Name.Text)
                 || String.IsNullOrWhiteSpace(TB_Price.Text) || String.IsNullOrWhiteSpace(TB_CommercialPrice.Text)
                 || String.IsNullOrWhiteSpace(TB_Unit.Text) || String.IsNullOrWhiteSpace(TB_EstimatedTime.Text)
@@ -309,29 +308,54 @@ namespace CliningContoraFromValera.UI
             {
                 GetMessageBoxEmptyTextBoxes();
             }
-            else if ((System.Text.RegularExpressions.Regex.IsMatch(str, @"[а-я]"))
-                || (System.Text.RegularExpressions.Regex.IsMatch(str2, @"[а-я]"))
-                || (System.Text.RegularExpressions.Regex.IsMatch(str, @"[А-Я]"))
-                || (System.Text.RegularExpressions.Regex.IsMatch(str2, @"[А-Я]")))
+            else if (!Decimal.TryParse(TB_Price.Text, out decimalFormat)
+                || !Decimal.TryParse(TB_CommercialPrice.Text, out decimalFormat))
             {
-                GetMessageBoxFormatDemical();
+                try
+                {
+                    AddService();                  
+                }
+                catch (FormatException)
+                {
+                    GetMessageBoxFormatDemical();
+                }
             }
-            else if ((System.Text.RegularExpressions.Regex.IsMatch(str3, @"[а-я]"))
-                || (System.Text.RegularExpressions.Regex.IsMatch(str3, @"[А-Я]"))
-                || (System.Text.RegularExpressions.Regex.IsMatch(str3, @"[.,;#$%&@!^*_]")))
+            else if (!TimeSpan.TryParse(TB_EstimatedTime.Text, out estimatedTime))
             {
-                GetMessageBoxFormatTime();
+                try
+                {
+                    AddService();
+                }
+                catch (FormatException)
+                {
+                    GetMessageBoxFormatTime();
+                }
             }
             else
             {
-                TimeSpan estimatedTime = TimeSpan.Parse(TB_EstimatedTime.Text);
-                ServiceModel employee = new ServiceModel((ServiceType)CB_ChooseServiceType.SelectedItem, TB_Name.Text, TB_Description.Text,
-                Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), TB_Unit.Text, estimatedTime);
-                serviceModelManager.AddService(employee);
-                ClearServiceAddTextBoxes();
-                List<ServiceModel> services = serviceModelManager.GetAllServices();
-                DataGrid_Services.ItemsSource = services;
+                string tmp = estimatedTime.ToString();
+                if (tmp.IndexOf('.') != -1)
+                {
+                    GetMessageBoxFormatTime();
+                    return;
+                }
+                AddService();
             }
+        }
+
+        private void AddService()
+        {
+            TimeSpan estimatedTime = TimeSpan.Parse(TB_EstimatedTime.Text);
+            ServiceModel employee = new ServiceModel((ServiceType)CB_ChooseServiceType.SelectedItem, TB_Name.Text, TB_Description.Text,
+            Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), TB_Unit.Text, estimatedTime);
+            serviceModelManager.AddService(employee);
+            ClearServiceAddTextBoxes();
+            RefreshService();
+        }
+        private void RefreshService()
+        {
+            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            DataGrid_Services.ItemsSource = services;
         }
 
         private void ClearServiceAddTextBoxes()
@@ -367,14 +391,6 @@ namespace CliningContoraFromValera.UI
             ServiceModel employeesService = (ServiceModel)DataGrid_Services.SelectedItem;
             if (employee != null)
             {
-                //if()
-                //{
-
-                //}
-                //else
-                //{
-                //    serviceModelManager.AddServiceToEmployee(employee.Id, employeesService.Id);
-                //}
                 serviceModelManager.AddServiceToEmployee(employee.Id, employeesService.Id);
             }
             else
@@ -388,6 +404,8 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Services_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+            decimal decimalFormat;
+            TimeSpan estimatedTime;
             ServiceModel service = (ServiceModel)e.Row.Item;
             var element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
@@ -407,10 +425,22 @@ namespace CliningContoraFromValera.UI
                 }
                 else if (String.Equals((string)e.Column.Header, "Цена"))
                 {
+                    if(!Decimal.TryParse(element.Text, out decimalFormat))
+                    {
+                        GetMessageBoxFormatDemical();
+                        RefreshService();
+                        return;
+                    }
                     service.Price = Convert.ToDecimal(element.Text);
                 }
                 else if (String.Equals((string)e.Column.Header, "Коммерч. цена"))
                 {
+                    if (!Decimal.TryParse(element.Text, out decimalFormat))
+                    {
+                        GetMessageBoxFormatDemical();
+                        RefreshService();
+                        return;
+                    }
                     service.CommercialPrice = Convert.ToDecimal(element.Text);
                 }
                 else if (String.Equals((string)e.Column.Header, "Ед. измер."))
@@ -419,9 +449,24 @@ namespace CliningContoraFromValera.UI
                 }
                 else if (String.Equals((string)e.Column.Header, "Ср. время."))
                 {
-                    service.EstimatedTime = TimeSpan.Parse(element.Text);
+                    if(!TimeSpan.TryParse(element.Text, out estimatedTime))
+                    {
+                        GetMessageBoxFormatTime();
+                        return;
+                    }
+                    else
+                    {
+                        string tmp = estimatedTime.ToString();
+                        if (tmp.IndexOf('.') != -1)
+                        {
+                            GetMessageBoxFormatTime();
+                            RefreshService();
+                            return;
+                        }
+                    }
                 }
-                serviceModelManager.UpdateServiceById(service);                
+                serviceModelManager.UpdateServiceById(service);
+                RefreshService();
             }
         }
 
