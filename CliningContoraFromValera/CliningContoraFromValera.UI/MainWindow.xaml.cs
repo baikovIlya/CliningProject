@@ -216,8 +216,9 @@ namespace CliningContoraFromValera.UI
         {
             TextBox_EmployeeStartTime.Clear();
             TextBox_EmployeeFinishTime.Clear();
-            ComboBox_EmployeeSchedule.Items.Clear();
-
+            DataPicker_EmployeeData.Text = null;
+            ComboBox_EmployeeSchedule.Text = null;
+            Label_ChooseEmployee.Visibility = Visibility.Visible;
         }
 
 
