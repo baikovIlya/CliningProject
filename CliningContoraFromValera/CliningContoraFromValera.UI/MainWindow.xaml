@@ -60,7 +60,45 @@
                     <TabControl Margin="0,0,0,-16">
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="10">
-                                <DataGrid x:Name="DataGrid_AllOrders" Loaded="DataGrid_AllOrders_Loaded" Margin="0,0,0,194"/>
+                                <DataGrid x:Name="DataGrid_AllOrders" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}" Loaded="DataGrid_AllOrders_Loaded" Margin="0,30,0,191">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="70"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Начало" Binding="{Binding StartTime}" Width="70"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Примерное окончание" Binding="{Binding EstimatedEndTime}" Width="140"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Конец" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Сумма" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="60"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Кол-во сотрудников" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия Клиента" Binding="{Binding LastName}" Width="120"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя Клиента" Binding="{Binding FirstName}" Width="110"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="85"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Район" Binding="{Binding Name}" Width="85"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="85"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Здание" Binding="{Binding Building}" Width="85"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Помещение" Binding="{Binding Room}" Width="85"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Комерция" Binding="{Binding IsCommercial}" Width="85"></DataGridTextColumn>
+
+
+
+
+
+                                        <DataGridTemplateColumn Header="Удалить" Width="60">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_ClientDelete" Content="Удалить" Click="Button_ClientDelete_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <ComboBox HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="260"/>
+                                <DataGrid HorizontalAlignment="Left" Height="158" Margin="0,237,0,0" VerticalAlignment="Top" Width="406" ItemsSource="{Binding ServiceOrder}"/>
+                                <Label Content="Услуги в заказе:" HorizontalAlignment="Left" Height="35" Margin="0,214,0,0" VerticalAlignment="Top" Width="187"/>
+                                <ComboBox HorizontalAlignment="Left" Height="25" Margin="422,237,0,0" VerticalAlignment="Top" Width="268"/>
+                                <Label Content="Добавить новую услугу в заказ" HorizontalAlignment="Left" Height="37" Margin="433,235,0,0" VerticalAlignment="Top" Width="201"/>
+                                <Button Content="+" HorizontalAlignment="Left" Height="25" Margin="695,237,0,0" VerticalAlignment="Top" Width="53"/>
+                                <Label Content="Статус заказа:" HorizontalAlignment="Left" Height="25" Margin="10,0,0,0" VerticalAlignment="Top" Width="177"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">
@@ -373,7 +411,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    
+
 
                     <DataGrid x:Name="DataGrid_CurrentOrders"
                               ItemsSource="{Binding OrderModel}"
@@ -414,7 +452,7 @@
             </TabItem>
 
         </TabControl>
-        
+
 
     </Grid>
 </Window>
