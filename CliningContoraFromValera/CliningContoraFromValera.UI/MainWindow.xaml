@@ -142,8 +142,8 @@
                                         <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="120"/>
                                         <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="60"/>
                                         <DataGridTextColumn Header="Коммерч. цена" Binding="{Binding CommercialPrice}" Width="95"/>
-                                        <DataGridTextColumn Header="Ед.измер." Binding="{Binding Unit}" Width="55"/>
-                                        <DataGridTextColumn Header="Ср.время." Binding="{Binding EstimatedTime}" Width="80"/>
+                                        <DataGridTextColumn Header="Ед. измер." Binding="{Binding Unit}" Width="65"/>
+                                        <DataGridTextColumn Header="Ср. время." Binding="{Binding EstimatedTime}" Width="80"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -225,7 +225,7 @@
             </TabItem>
 
             <!--услуги-->
-            <TabItem Header="Наши услуги">
+            <TabItem Header="Наши услуги" Height="20" VerticalAlignment="Bottom">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -239,16 +239,16 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Выбери сотрудника:" Margin="10,5,212,3"/>
-                    <ComboBox Name='CB_ChooseEmployee' VerticalAlignment="Top" Margin="10,35,212,0" Height="22" SelectionChanged="CB_ChooseEmployee_SelectionChanged"/>
+                    <ComboBox Name='CB_ChooseEmployee' VerticalAlignment="Top" Margin="10,35,212,0" Height="22" Loaded="CB_ChooseEmployee_Loaded"/>
                     <DataGrid Name="DataGrid_Services" Grid.Row="1"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ServiceModel}" IsReadOnly="False" CanUserAddRows="False"
-                              Margin="10,0,10,82" CellEditEnding="DataGrid_Services_CellEditEnding" Loaded="DataGrid_Services_Loaded">
+                              Margin="10,0,10,164" CellEditEnding="DataGrid_Services_CellEditEnding" Loaded="DataGrid_Services_Loaded" SelectionChanged="DataGrid_Services_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Тип сервиса" Binding="{Binding ServiceType}" Width="90"/>
-                            <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="120"/>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="60"/>
-                            <DataGridTextColumn Header="Коммерч. цена" Binding="{Binding CommercialPrice}" Width="95"/>
-                            <DataGridTextColumn Header="Ед. измер." Binding="{Binding Unit}" Width="65"/>
-                            <DataGridTextColumn Header="Ср. время." Binding="{Binding EstimatedTime}" Width="80"/>
+                            <DataGridTextColumn Header="Тип сервиса" Binding="{Binding ServiceType}" Width="90"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="120"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Коммерч. цена" Binding="{Binding CommercialPrice}" Width="95"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ед. измер." Binding="{Binding Unit}" Width="65"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ср. время." Binding="{Binding EstimatedTime}" Width="80"></DataGridTextColumn>
                             <DataGridTemplateColumn Header="Удалить" Width="60">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -274,11 +274,14 @@
                     <TextBox Name="TB_Unit" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,280,10,0" Height="25"/>
                     <Label  Grid.Row="1" Grid.Column="1" Content="Примерное время выполнения:" Margin="10,308,0,82"/>
                     <TextBox Name="TB_EstimatedTime" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,335,10,0" Height="25"/>
-                    <Button Name="Button_ServiceAdd" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="10,374,0,0" Grid.Row="1" VerticalAlignment="Top" Width="139" Height="31" Click="Button_ServiceAdd_Click"/>
-                    <Button Name="Button_ServiceClear" Grid.Column="1" Content="Очистить" HorizontalAlignment="Left" Margin="173,374,0,0" Grid.Row="1" VerticalAlignment="Top" Height="31" Width="135" Click="Button_ServiceClear_Click"/>
-                    <ComboBox Name='CB_ChooseServiceType' SelectedItem="{Binding ServiceType, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="298" SelectionChanged="CB_ChooseServiceType_SelectionChanged" Margin="0,60,0,0" Grid.RowSpan="2"/>
+                    <Button Name="Button_ServiceAdd" Grid.Column="1" Content="Добавить" HorizontalAlignment="Left" Margin="10,374,0,0" Grid.Row="1" VerticalAlignment="Top" Width="139" Height="30" Click="Button_ServiceAdd_Click"/>
+                    <Button Name="Button_ServiceClear" Grid.Column="1" Content="Очистить" HorizontalAlignment="Left" Margin="173,374,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="135" Click="Button_ServiceClear_Click"/>
+                    <ComboBox Name='CB_ChooseServiceType' Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="298" Loaded="CB_ChooseServiceType_Loaded" Margin="0,60,0,0" Grid.RowSpan="2"/>
                     <TextBox Name="TB_ServiceType" Grid.Row="1" VerticalAlignment="Top" Margin="10,377,226,0" Height="25"/>
-                    <Button Name="Button_ServiceTypeAdd" Content="Добавить новый тип сервиса" HorizontalAlignment="Left" Margin="265,374,0,0" Grid.Row="1" VerticalAlignment="Top" Height="31" Width="201"/>
+                    <Button Name="Button_ServiceTypeAdd" Content="Добавить новый тип сервиса" HorizontalAlignment="Left" Margin="265,374,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="201"/>
+                    <TextBox Name="TB_ServiceDescription" Grid.Row="1" VerticalAlignment="Top" Margin="10,308,10,0" Height="25"/>
+                    <Label  Grid.Row="1" Content="Описание выбранной услуги:" Margin="10,278,158,112"/>
+                    <Button Name="TB_ServiceDescriptionSave" Content="Сохранить измениения описания услуги" HorizontalAlignment="Center" Margin="0,340,0,0" Grid.Row="1" VerticalAlignment="Top" Height="29" Width="456" Click="TB_ServiceDescriptionSave_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

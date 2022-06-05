@@ -50,7 +50,7 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Price", opt => opt.MapFrom(c => c.Price))
                 .ForMember("CommercialPrice", opt => opt.MapFrom(c => c.CommercialPrice))
                 .ForMember("Unit", opt => opt.MapFrom(c => c.Unit))
-                .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime));
+                .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime)).ReverseMap();
 
                 cfg.CreateMap<AddressDTO, AddressModel>()
                 .ForMember("Street", opt => opt.MapFrom(c => c.Street))

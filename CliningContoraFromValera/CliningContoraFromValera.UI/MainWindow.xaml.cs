@@ -39,6 +39,10 @@ namespace CliningContoraFromValera.UI
         {
             InitializeComponent();
             Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
+            Button_ServiceToEmployeeAdd.IsEnabled = false;
+            CB_ChooseEmployee.IsEnabled = false;
+            TB_ServiceDescription.IsEnabled = false;
+            TB_ServiceDescriptionSave.IsEnabled = false;
         }
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
@@ -165,6 +169,8 @@ namespace CliningContoraFromValera.UI
                     TB_PhoneEmployee.Text);
                 employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
+                //List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+                //DataGrid_Employees.ItemsSource = employees;
             }
         }
 
@@ -262,34 +268,40 @@ namespace CliningContoraFromValera.UI
         {
             ServiceModel employee = (ServiceModel)DataGrid_Services.SelectedItem;
             serviceModelManager.DeleteServiceyId(employee.Id);
+            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            DataGrid_Services.ItemsSource = services;
         }
 
-        private void CB_ChooseEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CB_ChooseEmployee_Loaded(object sender, RoutedEventArgs e)
         {
-
+            List<EmployeeModel> employees =  employeeModelManager.GetAllEmployees();
+            CB_ChooseEmployee.ItemsSource = employees;
         }
-
-        private void CB_ChooseServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                
+        private void CB_ChooseServiceType_Loaded(object sender, RoutedEventArgs e)
         {
-            //CB_ChooseServiceType.ItemsSource = 
+            List<ServiceType> serviceTypes = new List<ServiceType>();
+            foreach (ServiceType st in Enum.GetValues(typeof(ServiceType)))
+            {
+                serviceTypes.Add(st);
+            }
+            CB_ChooseServiceType.ItemsSource = serviceTypes;
         }
+
         private void GetMessageBoxFormatDemical()
         {
-            MessageBox.Show("Все поля обязательны к заполнению!");
+            MessageBox.Show("Введите чило в поля 'Цена', 'Коммерческая цена'");
         }
         private void GetMessageBoxFormatTime()
         {
-            MessageBox.Show("Все поля обязательны к заполнению!");
+            MessageBox.Show("Формат заполнения времени 10:00");
         }
 
         private void Button_ServiceAdd_Click(object sender, RoutedEventArgs e)
         {
-            //char ch = '1';
             string str = TB_Price.Text;
-            string str2 = TB_Price.Text;
-            string str3 = TB_Price.Text;
-            bool hasLetters = str.Any(char.IsLetter);
-
+            string str2 = TB_CommercialPrice.Text;
+            string str3 = TB_EstimatedTime.Text;
             if (String.IsNullOrWhiteSpace(TB_Description.Text) || String.IsNullOrWhiteSpace(TB_Name.Text)
                 || String.IsNullOrWhiteSpace(TB_Price.Text) || String.IsNullOrWhiteSpace(TB_CommercialPrice.Text)
                 || String.IsNullOrWhiteSpace(TB_Unit.Text) || String.IsNullOrWhiteSpace(TB_EstimatedTime.Text)
@@ -298,14 +310,18 @@ namespace CliningContoraFromValera.UI
                 GetMessageBoxEmptyTextBoxes();
             }
             else if ((System.Text.RegularExpressions.Regex.IsMatch(str, @"[а-я]"))
-                || (System.Text.RegularExpressions.Regex.IsMatch(str2, @"[а-я]")))
+                || (System.Text.RegularExpressions.Regex.IsMatch(str2, @"[а-я]"))
+                || (System.Text.RegularExpressions.Regex.IsMatch(str, @"[А-Я]"))
+                || (System.Text.RegularExpressions.Regex.IsMatch(str2, @"[А-Я]")))
             {
                 GetMessageBoxFormatDemical();
             }
-            //else if (char.IsLetter(ch) || ch == '.' || ch == ',')
-            //{
-            //    GetMessageBoxFormatTime();
-            //}
+            else if ((System.Text.RegularExpressions.Regex.IsMatch(str3, @"[а-я]"))
+                || (System.Text.RegularExpressions.Regex.IsMatch(str3, @"[А-Я]"))
+                || (System.Text.RegularExpressions.Regex.IsMatch(str3, @"[.,;#$%&@!^*_]")))
+            {
+                GetMessageBoxFormatTime();
+            }
             else
             {
                 TimeSpan estimatedTime = TimeSpan.Parse(TB_EstimatedTime.Text);
@@ -313,6 +329,8 @@ namespace CliningContoraFromValera.UI
                 Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), TB_Unit.Text, estimatedTime);
                 serviceModelManager.AddService(employee);
                 ClearServiceAddTextBoxes();
+                List<ServiceModel> services = serviceModelManager.GetAllServices();
+                DataGrid_Services.ItemsSource = services;
             }
         }
 
@@ -324,22 +342,53 @@ namespace CliningContoraFromValera.UI
             TB_CommercialPrice.Clear();
             TB_Unit.Clear();
             TB_EstimatedTime.Clear();
-            CB_ChooseServiceType.SelectedIndex = 0;
+            CB_ChooseServiceType.SelectedItem = null;
         }
 
         private void Button_ServiceClear_Click(object sender, RoutedEventArgs e)
         {
+            TB_Description.Clear();
+            TB_Name.Clear();
+            TB_Price.Clear();
+            TB_CommercialPrice.Clear();
+            TB_Unit.Clear();
+            TB_EstimatedTime.Clear();
+            CB_ChooseServiceType.SelectedItem = null;
+        }
 
+        private void GetMessageBoxNoSelected()
+        {
+            MessageBox.Show("Сотрудник не выбран!");
         }
 
         private void Button_ServiceToEmployeeAdd_Click(object sender, RoutedEventArgs e)
         {
+            EmployeeModel employee = (EmployeeModel)CB_ChooseEmployee.SelectedItem;
+            ServiceModel employeesService = (ServiceModel)DataGrid_Services.SelectedItem;
+            if (employee != null)
+            {
+                //if()
+                //{
 
+                //}
+                //else
+                //{
+                //    serviceModelManager.AddServiceToEmployee(employee.Id, employeesService.Id);
+                //}
+                serviceModelManager.AddServiceToEmployee(employee.Id, employeesService.Id);
+            }
+            else
+            {
+                GetMessageBoxNoSelected();
+            }
+            CB_ChooseEmployee.SelectedItem = null;
+            DataGrid_Services.SelectedItem = null;
+            Button_ServiceToEmployeeAdd.IsEnabled = false;
         }
 
         private void DataGrid_Services_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            EmployeeModel service = (EmployeeModel)e.Row.Item;
+            ServiceModel service = (ServiceModel)e.Row.Item;
             var element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
@@ -349,36 +398,79 @@ namespace CliningContoraFromValera.UI
             {
                 if (String.Equals((string)e.Column.Header, "Тип сервиса"))
                 {
-                    service.FirstName = element.Text;
+                    ServiceType serviceType = (ServiceType)Enum.Parse(typeof(ServiceType), element.Text);
+                    service.ServiceType = serviceType;
                 }
-                if (String.Equals((string)e.Column.Header, "Услуга"))
+                else if (String.Equals((string)e.Column.Header, "Услуга"))
                 {
-                    service.LastName = element.Text;
+                    service.Name = element.Text;
                 }
                 else if (String.Equals((string)e.Column.Header, "Цена"))
                 {
-                    service.FirstName = element.Text;
+                    service.Price = Convert.ToDecimal(element.Text);
                 }
                 else if (String.Equals((string)e.Column.Header, "Коммерч. цена"))
                 {
-                    service.Phone = element.Text;
+                    service.CommercialPrice = Convert.ToDecimal(element.Text);
                 }
                 else if (String.Equals((string)e.Column.Header, "Ед. измер."))
                 {
-                    service.FirstName = element.Text;
+                    service.Unit = element.Text;
                 }
                 else if (String.Equals((string)e.Column.Header, "Ср. время."))
                 {
-                    service.FirstName = element.Text;
+                    service.EstimatedTime = TimeSpan.Parse(element.Text);
                 }
-                employeeModelManager.UpdateEmployeeById(service);
+                serviceModelManager.UpdateServiceById(service);                
             }
         }
 
         private void DataGrid_Services_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
-            DataGrid_Employees.ItemsSource = employees;
+            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            DataGrid_Services.ItemsSource = services;
+        }
+
+        private void DataGrid_Services_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ServiceModel service = (ServiceModel)DataGrid_Services.SelectedItem;
+            if (DataGrid_Services.SelectedItem != null)
+            {
+                Button_ServiceToEmployeeAdd.IsEnabled = true;
+                CB_ChooseEmployee.IsEnabled = true;
+                TB_ServiceDescriptionSave.IsEnabled = true;
+                TB_ServiceDescription.IsEnabled = true;
+                TB_ServiceDescription.Text = service.Description;
+            }
+            else
+            {
+                TB_ServiceDescription.Clear();
+                TB_ServiceDescription.IsEnabled = false;
+                CB_ChooseEmployee.IsEnabled = false;
+                Button_ServiceToEmployeeAdd.IsEnabled = false;
+                TB_ServiceDescriptionSave.IsEnabled = false;
+            }
+        }
+
+        private void GetMessageBoxNoDescription()
+        {
+            MessageBox.Show("Заполните поле описания услуги!");
+        }
+
+        private void TB_ServiceDescriptionSave_Click(object sender, RoutedEventArgs e)
+        {
+            if(String.IsNullOrWhiteSpace(TB_ServiceDescription.Text))
+            {
+                GetMessageBoxNoDescription();
+            }
+            else
+            {
+                ServiceModel service = (ServiceModel)DataGrid_Services.SelectedItem;
+                service.Description = TB_ServiceDescription.Text.Trim();
+                serviceModelManager.UpdateServiceById(service);
+                DataGrid_Services.SelectedItem = null;
+                TB_ServiceDescriptionSave.IsEnabled = false;
+            }
         }
     }
 }

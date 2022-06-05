@@ -15,5 +15,10 @@ namespace CliningContoraFromValera.Bll.Models
             LastName = lastName;
             Phone = phone;
         }
+
+        public override string ToString()
+        {
+            return $"{LastName} {FirstName}";
+        }
     }
 }
