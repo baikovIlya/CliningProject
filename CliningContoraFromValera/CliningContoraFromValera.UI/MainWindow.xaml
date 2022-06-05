@@ -136,7 +136,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="График">
-                            <Grid Height="382" Margin="80,0,80,0">
+                            <Grid Height="382" Margin="80,0,51,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
@@ -145,17 +145,17 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <DatePicker Name="DatePicker_FromDate" Width="125" Height="24" Margin="38,20,444,20" Grid.Row="0"/>
-                                <DatePicker Name="DatePicker_ToDate" Width="125" Height="24" Margin="213,20,270,20" Grid.Row="0"/>
-                                <Button x:Name="Button_ShowSchedule" Content="Показать график" Margin="473,20,10,20" Width="125" Height="24" Grid.Row="0" Click="Button_ShowSchedule_Click"/>
+                                <DatePicker Name="DatePicker_FromDate" Width="125" Height="24" Margin="47,8,465,32" Grid.Row="0"/>
+                                <DatePicker Name="DatePicker_ToDate" Width="125" Height="24" Margin="275,7,237,33" Grid.Row="0"/>
+                                <Button x:Name="Button_ShowSchedule" Content="Показать график" Margin="455,8,28,32" Width="125" Height="24" Grid.Row="0" Click="Button_ShowSchedule_Click"/>
                                 <DataGrid x:Name="DataGrid_Schedule"
-                                   AutoGenerateColumns="False" CanUserAddRows="False"  ItemsSource="{Binding EmployeeWorkTimeModel}"  Grid.RowSpan="4" Margin="10,0,10,10" Grid.Row="1" Loaded="DataGrid_Schedule_Loaded">
+                                   AutoGenerateColumns="False" CanUserAddRows="False"  ItemsSource="{Binding EmployeeWorkTimeModel}"  Grid.RowSpan="5" Margin="10,48,10,31" Loaded="DataGrid_Schedule_Loaded">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="90"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="60"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" Width="115"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="115"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100" IsReadOnly="true"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="90" IsReadOnly="true"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" IsReadOnly="true" Width="90"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
                                         <DataGridTemplateColumn Header="Удалить" Width="90">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -165,10 +165,10 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <TextBox x:Name="TextBox_EmployeeStartTime" Margin="213,2,213,32" Grid.Row="5" TextWrapping="Wrap" Text="Начало смены" Width="182" Height="30"/>
-                                <TextBox x:Name="TextBox_EmployeeFinishTime" Margin="213,34,213,0" Grid.Row="5" TextWrapping="Wrap" Text="Конец смены" Width="182" Height="30"/>
+                                <TextBox x:Name="TextBox_EmployeeStartTime" Margin="304,58,184,39" Grid.Row="4" TextWrapping="Wrap" Height="30" Grid.RowSpan="2" Text="{Binding StartTime}"/>
+                                <TextBox x:Name="TextBox_EmployeeFinishTime" Margin="304,34,184,0" Grid.Row="5" TextWrapping="Wrap" Height="30"/>
                                 <DatePicker Name ="DataPicker_EmployeeData" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="30" Margin="10,34,0,0"/>
-                                <ComboBox x:Name="ComboBox_EmployeeSchedule" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" Grid.Row="5" Width="182" Height="30" Margin="10,2,0,32" Loaded="ComboBox_EmployeeSchedule_Loaded">
+                                <ComboBox x:Name="ComboBox_EmployeeSchedule" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" Grid.Row="4" Width="182" Height="30" Margin="10,58,0,39" Loaded="ComboBox_EmployeeSchedule_Loaded" Grid.RowSpan="2">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
@@ -179,10 +179,10 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <Label Content="Выбрать сотрудника" Margin="10,2,460,35" Grid.Row="5"/>
-                                <Button x:Name="Button_RefreshSchedule" Content="Обновить" Grid.Row="5" Width="182" Height="30" Margin="416,2,10,32" Click="Button_RefreshSchedule_Click"/>
-                                <Button x:Name="Button_AddShift" Content="Добавить смену" Grid.Row="5" Width="182" Height="30" Margin="416,34,10,0" Click="Button_AddShift_Click"/>
-                                <Label Content="От :" HorizontalAlignment="Left" Height="24" Margin="8,0,0,0" VerticalAlignment="Center" Width="30" RenderTransformOrigin="0.5,0.5">
+                                <Label Content="Выбрать сотрудника: " Margin="26,60,489,39" Grid.Row="4" Grid.RowSpan="2"/>
+                                <Button x:Name="Button_RefreshSchedule" Content="Обновить" Grid.Row="4" Height="30" Margin="473,54,10,43" Click="Button_RefreshSchedule_Click" Grid.RowSpan="2"/>
+                                <Button x:Name="Button_AddShift" Content="Добавить смену" Grid.Row="5" Margin="473,32,10,0" Click="Button_AddShift_Click"/>
+                                <Label Content="От :" HorizontalAlignment="Left" Height="24" Margin="15,9,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
                                     <Label.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform/>
@@ -192,7 +192,9 @@
                                         </TransformGroup>
                                     </Label.RenderTransform>
                                 </Label>
-                                <Label Content="По:" HorizontalAlignment="Left" Height="24" Margin="185,0,0,0" VerticalAlignment="Center" Width="28"/>
+                                <Label Content="По:" HorizontalAlignment="Left" Height="24" Margin="240,8,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.157,0.078"/>
+                                <Label Content="Начало смены:" HorizontalAlignment="Left" Height="26" Margin="210,58,0,0" Grid.RowSpan="2" Grid.Row="4" VerticalAlignment="Top" Width="94"/>
+                                <Label Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="210,34,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

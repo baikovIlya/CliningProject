@@ -140,16 +140,47 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(TextBox_EmployeeStartTime.Text) || String.IsNullOrWhiteSpace(TextBox_EmployeeFinishTime.Text))
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else if (ComboBox_EmployeeSchedule.SelectedValue is null)
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else if (String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else
+            {
+                try
+                {
+                    AddShift();
+                }
+                catch (FormatException)
+                {
+                    GetMessageBoxFormatException();
+                }
+            }
+        }
+
+        private void AddShift()
+        {
             EmployeeModel employee = ComboBox_EmployeeSchedule.SelectedValue as EmployeeModel;
-
-
             TimeSpan newStartTime = TimeSpan.Parse(TextBox_EmployeeStartTime.Text);
             TimeSpan newFinishTime = TimeSpan.Parse(TextBox_EmployeeFinishTime.Text);
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
+
             WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
             WorkTimeModelManager.AddWorkTime(workTime);
-
         }
+
+        private void GetMessageBoxFormatException()
+        {
+            MessageBox.Show("Данные заполнены некорректно!");
+        }
+
 
         private void Button_RefreshSchedule_Click(object sender, RoutedEventArgs e)
         {
@@ -159,16 +190,55 @@ namespace CliningContoraFromValera.UI
 
         private void Button_ShowSchedule_Click(object sender, RoutedEventArgs e)
         {
-            DateTime startDate = DateTime.Parse(DatePicker_FromDate.Text);
-            DateTime endDate = DateTime.Parse(DatePicker_ToDate.Text);
-            List<EmployeeWorkTimeModel> employeesSchedule= EmployeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
-            DataGrid_Schedule.ItemsSource = employeesSchedule;  
+            if (String.IsNullOrWhiteSpace(DatePicker_FromDate.Text) || String.IsNullOrWhiteSpace(DatePicker_ToDate.Text))
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else
+            {
+                DateTime startDate = DateTime.Parse(DatePicker_FromDate.Text);
+                DateTime endDate = DateTime.Parse(DatePicker_ToDate.Text);
+                List<EmployeeWorkTimeModel> employeesSchedule = EmployeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
+                DataGrid_Schedule.ItemsSource = employeesSchedule;
+            }
         }
 
         private void Button_ShiftDelete_Click(object sender, RoutedEventArgs e)
         {
-            WorkTimeModel shift = DataGrid_Schedule.SelectedItem as WorkTimeModel;
-            WorkTimeModelManager.DeleteWorkTimeById(shift.Id);
+            EmployeeWorkTimeModel shift = DataGrid_Schedule.SelectedItem as EmployeeWorkTimeModel;
+            WorkTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
+        }
+
+        private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                WorkTimeModel shift = (WorkTimeModel)e.Row.Item;
+                var Element = (TextBox)e.EditingElement;
+                string nameColumnStartTime = "Начало смены";
+                string nameColumnFinishTime = "Конец смены";
+                if (String.IsNullOrWhiteSpace(Element.Text))
+                {
+                    GetMassegeBoxEmptyTextBoxes();
+                }
+                else
+                {
+                    if (String.Equals((string)e.Column.Header, nameColumnStartTime))
+                    {
+                        shift.StartTime = TimeSpan.Parse(Element.Text);
+                    }
+                    else if (String.Equals((string)e.Column.Header, nameColumnFinishTime))
+                    {
+                        shift.FinishTime = TimeSpan.Parse(Element.Text);
+                    }
+
+                    WorkTimeModelManager.UpdateWorkTimeById(shift);
+                }
+            }
+            catch (FormatException)
+            {
+                GetMessageBoxFormatException();
+            }
         }
     }
 }
