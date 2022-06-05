@@ -41,15 +41,18 @@ namespace CliningContoraFromValera.Bll
                 .ForMember(pts => pts.Name, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Name))
                 .ForMember(pts => pts.Street, opt => opt.MapFrom(ps => ps.Address!.Street))
                 .ForMember(pts => pts.Building, opt => opt.MapFrom(ps => ps.Address!.Building))
-                .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room));
+                .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room))
+                .ReverseMap();
 
                 cfg.CreateMap<ServiceDTO, ServiceModel>()
                 .ForMember("ServiceType", opt => opt.MapFrom(c => c.ServiceType))
                 .ForMember("Name", opt => opt.MapFrom(c => c.Name))
+                .ForMember("Description", opt => opt.MapFrom(c => c.Description))
                 .ForMember("Price", opt => opt.MapFrom(c => c.Price))
                 .ForMember("CommercialPrice", opt => opt.MapFrom(c => c.CommercialPrice))
                 .ForMember("Unit", opt => opt.MapFrom(c => c.Unit))
-                .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime));
+                .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime))
+                .ReverseMap();
 
                 cfg.CreateMap<ServiceOrderDTO, ServiceOrderModel>()
                 .ForMember("Id", opt => opt.MapFrom(c => c.Id))
@@ -62,20 +65,24 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Street", opt => opt.MapFrom(c => c.Street))
                 .ForMember("Building", opt => opt.MapFrom(c => c.Building))
                 .ForMember("Room", opt => opt.MapFrom(c => c.Room))
-                .ForMember("WorkArea", opt => opt.MapFrom(c => c.WorkArea));
+                .ForMember("WorkArea", opt => opt.MapFrom(c => c.WorkArea))
+                .ReverseMap();
 
                 cfg.CreateMap<WorkAreaDTO, WorkAreaModel>()
-                .ForMember("Name", opt => opt.MapFrom(c => c.Name));
+                .ForMember("Name", opt => opt.MapFrom(c => c.Name))
+                .ReverseMap();
 
                 cfg.CreateMap<EmployeeDTO, EmployeeModel>()
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
-                .ForMember("Phone", opt => opt.MapFrom(c => c.Phone)).ReverseMap();
+                .ForMember("Phone", opt => opt.MapFrom(c => c.Phone))
+                .ReverseMap();
 
                 cfg.CreateMap<WorkTimeDTO, WorkTimeModel>()
                 .ForMember("Date", opt => opt.MapFrom(c => c.Date))
                 .ForMember("StartTime", opt => opt.MapFrom(c => c.StartTime))
-                .ForMember("FinishTime", opt => opt.MapFrom(c => c.FinishTime));
+                .ForMember("FinishTime", opt => opt.MapFrom(c => c.FinishTime))
+                .ReverseMap();
 
                 cfg.CreateMap<EmployeeDTO, EmployeeWorkTimeModel>()
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
@@ -84,7 +91,8 @@ namespace CliningContoraFromValera.Bll
                 .ForMember(pts => pts.Date, opt => opt.MapFrom(ps => ps.WorkTime!.Date))
                 .ForMember(pts => pts.StartTime, opt => opt.MapFrom(ps => ps.WorkTime!.StartTime))
                 .ForMember(pts => pts.WorkTimeId, opt => opt.MapFrom(ps => ps.WorkTime!.Id))
-                .ForMember(pts => pts.FinishTime, opt => opt.MapFrom(ps => ps.WorkTime!.FinishTime));
+                .ForMember(pts => pts.FinishTime, opt => opt.MapFrom(ps => ps.WorkTime!.FinishTime))
+                .ReverseMap();
 
 
 

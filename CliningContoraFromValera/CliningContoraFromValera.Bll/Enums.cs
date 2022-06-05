@@ -2,6 +2,9 @@
 {
     public enum StatusType
     {
+        Processed,
+        InProgress,
+        Done,
         Обработка,
         Выполняется,
         Готов,
@@ -10,8 +13,13 @@
 
     public enum ServiceType
     {
+        DryCleaning,
+        Cleaning,
+        Disinsection,
         Сухая_уборка,
         Уборка,
         Дезинсекция
     }
+
+
 }
