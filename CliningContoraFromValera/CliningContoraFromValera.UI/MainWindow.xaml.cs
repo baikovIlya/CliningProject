@@ -220,8 +220,8 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<OrderModel> orders = orderModelManager.GetAllOrder();
-            //DataGrid_AllOrders.ItemsSource = orders;
+            List<OrderModel> orders = orderModelManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = orders;
         }
 
         //РАЙОНЫ
