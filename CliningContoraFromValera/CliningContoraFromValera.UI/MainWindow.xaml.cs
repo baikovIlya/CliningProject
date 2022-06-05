@@ -54,7 +54,6 @@ namespace CliningContoraFromValera.UI
                 if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
                 {
                     client.FirstName = Element.Text;
-
                 }
                 else if (String.Equals((string)e.Column.Header, UITextElements.LastName))
                 {
@@ -123,9 +122,8 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeWorkTimeModel> datss = employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
-            DataGrid_Schedule.ItemsSource = datss;
-     
+            List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
 
         private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
@@ -324,6 +322,134 @@ namespace CliningContoraFromValera.UI
                     (ServiceType)CB_DesiredServiceType.SelectedItem);
                 CB_DesiredService.ItemsSource = services;
             }
+        }
+
+        private void ComboBox_EmployeeSchedule_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            ComboBox_EmployeeSchedule.ItemsSource = employees;
+        }
+
+        private void Button_AddShift_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(TextBox_EmployeeStartTime.Text) || String.IsNullOrWhiteSpace(TextBox_EmployeeFinishTime.Text))
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else if (ComboBox_EmployeeSchedule.SelectedValue is null)
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else if (String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else
+            {
+                try
+                {
+                    AddShift();
+                    AddShiftItemsClear();
+                    RefreshShifts();
+                }
+                catch (FormatException)
+                {
+                    GetMessageBoxFormatException();
+                }
+            }
+        }
+
+        private void AddShift()
+        {
+            EmployeeModel employee = ComboBox_EmployeeSchedule.SelectedValue as EmployeeModel;
+            TimeSpan newStartTime = TimeSpan.Parse(TextBox_EmployeeStartTime.Text);
+            TimeSpan newFinishTime = TimeSpan.Parse(TextBox_EmployeeFinishTime.Text);
+            DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
+
+            WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
+            WorkTimeModelManager.AddWorkTime(workTime);
+        }
+
+        private void GetMessageBoxFormatException()
+        {
+            MessageBox.Show("Данные заполнены некорректно!");
+        }
+
+
+        private void RefreshShifts()
+        {
+            List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            DataGrid_Schedule.ItemsSource = employeesWorkTimes;
+        }
+
+        private void Button_ShowSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(DatePicker_FromDate.Text) || String.IsNullOrWhiteSpace(DatePicker_ToDate.Text))
+            {
+                GetMassegeBoxEmptyTextBoxes();
+            }
+            else
+            {
+                DateTime startDate = DateTime.Parse(DatePicker_FromDate.Text);
+                DateTime endDate = DateTime.Parse(DatePicker_ToDate.Text);
+                List<EmployeeWorkTimeModel> employeesSchedule = EmployeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
+                DataGrid_Schedule.ItemsSource = employeesSchedule;
+            }
+        }
+
+        private void Button_ShiftDelete_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeWorkTimeModel shift = DataGrid_Schedule.SelectedItem as EmployeeWorkTimeModel;
+            WorkTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
+            RefreshShifts();
+        }
+
+        private void AddShiftItemsClear()
+        {
+            TextBox_EmployeeStartTime.Clear();
+            TextBox_EmployeeFinishTime.Clear();
+            DataPicker_EmployeeData.Text = null;
+            ComboBox_EmployeeSchedule.Text = null;
+            Label_ChooseEmployee.Visibility = Visibility.Visible;
+        }
+
+
+        private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                WorkTimeModel shift = (WorkTimeModel)e.Row.Item;
+                var Element = (TextBox)e.EditingElement;
+                string nameColumnStartTime = "Начало смены";
+                string nameColumnFinishTime = "Конец смены";
+                if (String.IsNullOrWhiteSpace(Element.Text))
+                {
+                    GetMassegeBoxEmptyTextBoxes();
+                }
+                else
+                {
+                    if (String.Equals((string)e.Column.Header, nameColumnStartTime))
+                    {
+                        shift.StartTime = TimeSpan.Parse(Element.Text);
+                    }
+                    else if (String.Equals((string)e.Column.Header, nameColumnFinishTime))
+                    {
+                        shift.FinishTime = TimeSpan.Parse(Element.Text);
+                    }
+
+                    WorkTimeModelManager.UpdateWorkTimeById(shift);
+                }
+            }
+            catch (FormatException)
+            {
+                GetMessageBoxFormatException();
+            }
+        }
+
+        private void ComboBox_EmployeeSchedule_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Label_ChooseEmployee.Visibility = Visibility.Hidden;
+            ComboBox_EmployeeSchedule.Items.Refresh();
         }
     }
 }

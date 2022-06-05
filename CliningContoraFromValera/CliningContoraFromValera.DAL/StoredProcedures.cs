@@ -72,6 +72,7 @@
         public const string GetClientOrdersHistory = "GetClientOrdersHistory";
         public const string GetEmployyesAvailableForOrder = "GetEmployyesAvailableForOrder";
         public const string GetEmployeesAndWorkTimes = "GetEmployeesAndWorkTimes";
+        public const string GetEmployeesSchedule = "GetEmployeeSchedule";
         public const string GetOrdersService = "GetOrdersService";
         public const string GetEmployeesScheduleByIdByDate = "GetEmployeesScheduleByIdByDate";
     }

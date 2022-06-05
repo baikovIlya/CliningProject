@@ -83,6 +83,7 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Phone", opt => opt.MapFrom(c => c.Phone))
                 .ForMember(pts => pts.Date, opt => opt.MapFrom(ps => ps.WorkTime!.Date))
                 .ForMember(pts => pts.StartTime, opt => opt.MapFrom(ps => ps.WorkTime!.StartTime))
+                .ForMember(pts => pts.WorkTimeId, opt => opt.MapFrom(ps => ps.WorkTime!.Id))
                 .ForMember(pts => pts.FinishTime, opt => opt.MapFrom(ps => ps.WorkTime!.FinishTime));
 
 
