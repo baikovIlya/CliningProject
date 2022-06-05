@@ -260,20 +260,21 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60*"></ColumnDefinition>
-                        <ColumnDefinition Width="40*"></ColumnDefinition>
+                        <ColumnDefinition Width="355*"></ColumnDefinition>
+                        <ColumnDefinition Width="121*"/>
+                        <ColumnDefinition Width="318*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
 
-                    <Label Content="Выбери тип услуги:" Margin="10,5,0,0"></Label>
-                    <ComboBox VerticalAlignment="Top" Margin="10,34,10,0">
+                    <Label Content="Выбери тип услуги:" Margin="10,5,0,447" Grid.ColumnSpan="2" Grid.RowSpan="2"></Label>
+                    <ComboBox VerticalAlignment="Top" Margin="10,34,10,0" Grid.ColumnSpan="2">
 
                     </ComboBox>
 
 
                     <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="False"
                               CanUserAddRows="False"
-                              Margin="10,0,10,20">
+                              Margin="10,0,10,20" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Тип" Width="80"></DataGridTextColumn>
                             <DataGridTextColumn Header="Услуга" Width="95"></DataGridTextColumn>
@@ -292,48 +293,94 @@
 
                     </DataGrid>
 
-                    <Label Grid.Column="1" Content="Добавить новый тип услуг:" Margin="10,5,0,0"></Label>
-                    <TextBox VerticalAlignment="Top" Margin="10,36,30,0" Grid.Column="1" MaxLength="50"/>
-                    <Button Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"
+                    <Label Grid.Column="2" Content="Добавить новый тип услуг:" Margin="10,5,0,447" Grid.RowSpan="2"></Label>
+                    <TextBox VerticalAlignment="Top" Margin="10,36,30,0" Grid.Column="2" MaxLength="50"/>
+                    <Button Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"
                             Content="+" Width="20" Margin="0,34,10,0" />
 
-                    <Label Grid.Row="1" Grid.Column="1" Content="Добавить новую услугу:"
+                    <Label Grid.Row="1" Grid.Column="2" Content="Добавить новую услугу:"
                            Margin="10,0,0,0"/>
 
 
-                    <Label Grid.Row="1" Content="Название:" Margin="10,26,-5,10" Grid.Column="1" />
-                    <TextBox Grid.Row="1" VerticalAlignment="Top" Margin="10,58,10,0" Grid.Column="1"
+                    <Label Grid.Row="1" Content="Название:" Margin="10,26,-5,10" Grid.Column="2" />
+                    <TextBox Grid.Row="1" VerticalAlignment="Top" Margin="10,58,10,0" Grid.Column="2"
                              MaxLength="100" />
 
-                    <Label Grid.Row="1" Grid.Column="1" Content="Описание:" Margin="10,78,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,105,10,0"
+                    <Label Grid.Row="1" Grid.Column="2" Content="Описание:" Margin="10,78,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10,105,10,0"
                              AcceptsReturn="True" MaxLength="255" />
 
-                    <Label  Grid.Row="1" Grid.Column="1" Content="Цена:" Margin="10,128,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,158,10,0" />
+                    <Label  Grid.Row="1" Grid.Column="2" Content="Цена:" Margin="10,128,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10,158,10,0" />
 
 
-                    <Label  Grid.Row="1" Grid.Column="1" Content="Коммерческая цена:" Margin="10,178,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,208,10,0" />
+                    <Label  Grid.Row="1" Grid.Column="2" Content="Коммерческая цена:" Margin="10,178,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10,208,10,0" />
 
-                    <Label  Grid.Row="1" Grid.Column="1" Content="Единицы измерения:" Margin="10,228,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,258,10,0" />
+                    <Label  Grid.Row="1" Grid.Column="2" Content="Единицы измерения:" Margin="10,228,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10,258,10,0" />
 
 
-                    <Label  Grid.Row="1" Grid.Column="1" Content="Примерное время выполнения:" Margin="10,278,10,0"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,308,10,0" 
+                    <Label  Grid.Row="1" Grid.Column="2" Content="Примерное время выполнения:" Margin="10,278,10,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10,308,10,0" 
                              MaxLength="10"/>
 
 
-                    <Label  Grid.Row="1" Grid.Column="1" Content="Тип услуги:" Margin="10,333,230,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="93,338,10,49"/>
+                    <Label  Grid.Row="1" Grid.Column="2" Content="Тип услуги:" Margin="10,333,230,0"/>
+                    <ComboBox Grid.Row="1" Grid.Column="2" Margin="93,338,10,49"/>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="10,318,10,12" Height="20">
+                    <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Margin="10,415,10,0" Height="20">
                         <Button Content="Добавить" Margin="40,0,169,0" Width="86.7"/>
                         <Button Content="Очистить" Margin="100,-20,10,0" 
                                 Width="86.7"/>
                     </StackPanel>
 
+
+                </Grid>
+            </TabItem>
+
+
+            <!--добавление районов сотрудникам-->
+            <TabItem Header="Добавление районов сотрудникам">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="90*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Введите название для нового района:" Margin="10"
+                           VerticalAlignment="Top"
+                           Height="25"/>
+                    <TextBox Margin="10,0,140,10" 
+                             VerticalAlignment="Bottom"
+                             Height="25"/>
+                    <Button Content="Добавить" HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom" Margin="10,10,75,10"
+                            Width="60" Height="25"/>
+                    <Button Content="Очистить" HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom" Margin="10"
+                            Width="60" Height="25"/>
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="10"
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Все районы" Width="615"/>
+                            <DataGridTextColumn Header="Добавить" Width="80"/>
+                            <DataGridTextColumn Header="Удалить" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="Выбрать сотрудника:"
+                           Grid.Column="1" Margin="10"
+                           VerticalAlignment="Top" Height="25"/>
+                    <ComboBox Grid.Column="1" Height="25"
+                              VerticalAlignment="Bottom" Margin="10"/>
 
                 </Grid>
             </TabItem>
@@ -373,7 +420,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    
+
 
                     <DataGrid x:Name="DataGrid_CurrentOrders"
                               ItemsSource="{Binding OrderModel}"
@@ -414,7 +461,7 @@
             </TabItem>
 
         </TabControl>
-        
+
 
     </Grid>
 </Window>
