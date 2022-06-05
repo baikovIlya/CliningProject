@@ -10,5 +10,6 @@
         public TimeSpan StartTime { get; set; }
         public TimeSpan FinishTime { get; set; }
         public int WorkTimeId { get; set; }
+
     }
 }

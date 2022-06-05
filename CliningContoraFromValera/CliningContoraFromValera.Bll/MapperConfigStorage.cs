@@ -76,16 +76,18 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Date", opt => opt.MapFrom(c => c.Date))
                 .ForMember("StartTime", opt => opt.MapFrom(c => c.StartTime))
                 .ForMember("FinishTime", opt => opt.MapFrom(c => c.FinishTime))
+                .ForMember("EmployeeId", opt => opt.MapFrom(c => c.EmployeeId))
                 .ReverseMap();
 
                 cfg.CreateMap<EmployeeDTO, EmployeeWorkTimeModel>()
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
                 .ForMember("Phone", opt => opt.MapFrom(c => c.Phone))
+                .ForMember(pts => pts.WorkTimeId, opt => opt.MapFrom(ps => ps.WorkTime!.Id))
                 .ForMember(pts => pts.Date, opt => opt.MapFrom(ps => ps.WorkTime!.Date))
                 .ForMember(pts => pts.StartTime, opt => opt.MapFrom(ps => ps.WorkTime!.StartTime))
-                .ForMember(pts => pts.WorkTimeId, opt => opt.MapFrom(ps => ps.WorkTime!.Id))
                 .ForMember(pts => pts.FinishTime, opt => opt.MapFrom(ps => ps.WorkTime!.FinishTime))
+                .ForMember(pts => pts.Id, opt => opt.MapFrom(ps => ps.WorkTime!.EmployeeId))
                 .ReverseMap();
 
                 cfg.CreateMap<ServiceDTO, ServiceOrderModel>()

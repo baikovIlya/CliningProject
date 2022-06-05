@@ -412,35 +412,66 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            try
+            WorkTimeModel workTimes = (WorkTimeModel)e.Row.Item;
+            var Element = (TextBox)e.EditingElement;
+            TimeSpan finishTime;
+            TimeSpan startTime;
+            string nameColumnStartTime = "Начало смены";
+            string nameColumnFinishTime = "Конец смены";
+            if (String.IsNullOrWhiteSpace(Element.Text))
             {
-                WorkTimeModel shift = (WorkTimeModel)e.Row.Item;
-                var Element = (TextBox)e.EditingElement;
-                string nameColumnStartTime = "Начало смены";
-                string nameColumnFinishTime = "Конец смены";
-                if (String.IsNullOrWhiteSpace(Element.Text))
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else
+            {
+                if (String.Equals((string)e.Column.Header, nameColumnStartTime))
                 {
-                    GetMessageBoxEmptyTextBoxes();
-                }
-                else
-                {
-                    if (String.Equals((string)e.Column.Header, nameColumnStartTime))
+                    if (!TimeSpan.TryParse(Element.Text, out startTime))
                     {
-                        shift.StartTime = TimeSpan.Parse(Element.Text);
+                        GetMessageBoxFormatException();
+                        return;
                     }
-                    else if (String.Equals((string)e.Column.Header, nameColumnFinishTime))
+                    else
                     {
-                        shift.FinishTime = TimeSpan.Parse(Element.Text);
+                        string tmp = startTime.ToString();
+                        if (tmp.IndexOf('.') != -1)
+                        {
+                            GetMessageBoxFormatException();
+                            RefreshShifts();
+                            return;
+                        }
+                        workTimes.StartTime = TimeSpan.Parse(Element.Text);
                     }
 
-                    workTimeModelManager.UpdateWorkTimeById(shift);
                 }
+                else if (String.Equals((string)e.Column.Header, nameColumnFinishTime))
+                {
+                    if (!TimeSpan.TryParse(Element.Text, out finishTime))
+                    {
+                        GetMessageBoxFormatException();
+                        return;
+                    }
+                    else
+                    {
+                        string tmp = finishTime.ToString();
+                        if (tmp.IndexOf('.') != -1)
+                        {
+                            GetMessageBoxFormatException();
+                            RefreshShifts();
+                            return;
+                        }
+
+                        workTimes.FinishTime = TimeSpan.Parse(Element.Text);
+                    }
+
+                }
+
+                workTimeModelManager.UpdateWorkTimeById(workTimes);
+                RefreshShifts();
             }
-            catch (FormatException)
-            {
-                GetMessageBoxFormatException();
-            }
+
         }
+
 
         private void ComboBox_EmployeeSchedule_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -485,5 +516,6 @@ namespace CliningContoraFromValera.UI
             List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
             DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
         }
+
     }
 }
