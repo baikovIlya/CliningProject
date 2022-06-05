@@ -328,6 +328,8 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
+            TimeSpan startTime;
+            TimeSpan finishTime;
             if (String.IsNullOrWhiteSpace(TextBox_EmployeeStartTime.Text) || String.IsNullOrWhiteSpace(TextBox_EmployeeFinishTime.Text))
             {
                 GetMessageBoxEmptyTextBoxes();
@@ -340,7 +342,7 @@ namespace CliningContoraFromValera.UI
             {
                 GetMessageBoxEmptyTextBoxes();
             }
-            else
+            else if(!TimeSpan.TryParse(TextBox_EmployeeStartTime.Text, out startTime) || !TimeSpan.TryParse(TextBox_EmployeeFinishTime.Text, out finishTime))
             {
                 try
                 {
@@ -353,6 +355,9 @@ namespace CliningContoraFromValera.UI
                     GetMessageBoxFormatException();
                 }
             }
+            AddShift();
+            AddShiftItemsClear();
+            RefreshShifts();
         }
 
         private void AddShift()
@@ -412,7 +417,8 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            WorkTimeModel workTimes = (WorkTimeModel)e.Row.Item;
+            EmployeeWorkTimeModel crnt = (EmployeeWorkTimeModel)e.Row.Item;
+            WorkTimeModel workTimes = new WorkTimeModel(crnt.WorkTimeId, crnt.Date, crnt.StartTime, crnt.FinishTime, crnt.EmployeeId);
             var Element = (TextBox)e.EditingElement;
             TimeSpan finishTime;
             TimeSpan startTime;
@@ -501,8 +507,7 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
         {
-            ServiceOrderModel serviceOrder = ComboBox_AddNewService.SelectedItem as ServiceOrderModel;
-            serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+           
         }
 
         private void DataGrid_ServicesInOrder_Loaded(object sender, RoutedEventArgs e)
