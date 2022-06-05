@@ -26,6 +26,7 @@ namespace CliningContoraFromValera.UI
         OrderModelManager orderModelManager = new OrderModelManager();
         WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
         ServiceModelManager serviceModelManager = new ServiceModelManager();
+        ServiceOrderModelManager serviceOrderModelManager = new ServiceOrderModelManager();
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
@@ -459,6 +460,30 @@ namespace CliningContoraFromValera.UI
         {
             List<ServiceModel> services = serviceModelManager.GetAllServices();
             ComboBox_AddNewService.ItemsSource = services;
+        }
+
+        private void ComboBox_AddNewService_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Label_AddNewService.Visibility = Visibility.Hidden;
+            ComboBox_AddNewService.Items.Refresh();
+        }
+
+        private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrderModel serviceOrder = ComboBox_AddNewService.SelectedItem as ServiceOrderModel;
+            serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+        }
+
+        private void DataGrid_ServicesInOrder_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OrderModel order = DataGrid_AllOrders.SelectedItem as OrderModel;
+            List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
+            DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
         }
     }
 }
