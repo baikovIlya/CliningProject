@@ -122,7 +122,7 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            List<EmployeeWorkTimeModel> employeesWorkTimes = workTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
 
@@ -220,8 +220,8 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            List<OrderModel> orders = orderModelManager.GetAllOrder();
-            DataGrid_AllOrders.ItemsSource = orders;
+            //List<OrderModel> orders = orderModelManager.GetAllOrder();
+            //DataGrid_AllOrders.ItemsSource = orders;
         }
 
         //РАЙОНЫ
@@ -324,9 +324,12 @@ namespace CliningContoraFromValera.UI
             }
         }
 
+
+        //ГРАФИК 
+
         private void ComboBox_EmployeeSchedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = EmployeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
             ComboBox_EmployeeSchedule.ItemsSource = employees;
         }
 
@@ -334,15 +337,15 @@ namespace CliningContoraFromValera.UI
         {
             if (String.IsNullOrWhiteSpace(TextBox_EmployeeStartTime.Text) || String.IsNullOrWhiteSpace(TextBox_EmployeeFinishTime.Text))
             {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
             }
             else if (ComboBox_EmployeeSchedule.SelectedValue is null)
             {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
             }
             else if (String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
             {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
             }
             else
             {
@@ -367,7 +370,7 @@ namespace CliningContoraFromValera.UI
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
 
             WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
-            WorkTimeModelManager.AddWorkTime(workTime);
+            workTimeModelManager.AddWorkTime(workTime);
         }
 
         private void GetMessageBoxFormatException()
@@ -378,7 +381,7 @@ namespace CliningContoraFromValera.UI
 
         private void RefreshShifts()
         {
-            List<EmployeeWorkTimeModel> employeesWorkTimes = EmployeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            List<EmployeeWorkTimeModel> employeesWorkTimes = employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
 
@@ -386,13 +389,13 @@ namespace CliningContoraFromValera.UI
         {
             if (String.IsNullOrWhiteSpace(DatePicker_FromDate.Text) || String.IsNullOrWhiteSpace(DatePicker_ToDate.Text))
             {
-                GetMassegeBoxEmptyTextBoxes();
+                GetMessageBoxEmptyTextBoxes();
             }
             else
             {
                 DateTime startDate = DateTime.Parse(DatePicker_FromDate.Text);
                 DateTime endDate = DateTime.Parse(DatePicker_ToDate.Text);
-                List<EmployeeWorkTimeModel> employeesSchedule = EmployeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
+                List<EmployeeWorkTimeModel> employeesSchedule = employeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
                 DataGrid_Schedule.ItemsSource = employeesSchedule;
             }
         }
@@ -400,7 +403,7 @@ namespace CliningContoraFromValera.UI
         private void Button_ShiftDelete_Click(object sender, RoutedEventArgs e)
         {
             EmployeeWorkTimeModel shift = DataGrid_Schedule.SelectedItem as EmployeeWorkTimeModel;
-            WorkTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
+            workTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
             RefreshShifts();
         }
 
@@ -424,7 +427,7 @@ namespace CliningContoraFromValera.UI
                 string nameColumnFinishTime = "Конец смены";
                 if (String.IsNullOrWhiteSpace(Element.Text))
                 {
-                    GetMassegeBoxEmptyTextBoxes();
+                    GetMessageBoxEmptyTextBoxes();
                 }
                 else
                 {
@@ -437,7 +440,7 @@ namespace CliningContoraFromValera.UI
                         shift.FinishTime = TimeSpan.Parse(Element.Text);
                     }
 
-                    WorkTimeModelManager.UpdateWorkTimeById(shift);
+                    workTimeModelManager.UpdateWorkTimeById(shift);
                 }
             }
             catch (FormatException)

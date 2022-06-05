@@ -24,7 +24,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<EmployeeWorkTimeModel> GetEmployeesSchedule(DateTime minData, DateTime maxData)
         {
-            List<EmployeeDTO> workTimes = WorkTimeManager.GetEmployeesSchedule(minData, maxData);
+            List<EmployeeDTO> workTimes = workTimeManager.GetEmployeesSchedule(minData, maxData);
             return MapperConfigStorage.GetInstance().Map<List<EmployeeWorkTimeModel>>(workTimes);
         }
     }
