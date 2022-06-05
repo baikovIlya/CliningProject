@@ -216,14 +216,6 @@ namespace CliningContoraFromValera.UI
             DataGrid_EmployeesServices.ItemsSource = employeeModelManager.GetEmployeesServicesById(employee!.Id);
         }
 
-        //ЗАКАЗЫ
-
-        private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<OrderModel> orders = orderModelManager.GetAllOrder();
-            DataGrid_AllOrders.ItemsSource = orders;
-        }
-
         //РАЙОНЫ
 
         private void Button_EmployeesWorkAreasDelete_Click(object sender, RoutedEventArgs e)
@@ -453,6 +445,20 @@ namespace CliningContoraFromValera.UI
         {
             Label_ChooseEmployee.Visibility = Visibility.Hidden;
             ComboBox_EmployeeSchedule.Items.Refresh();
+        }
+
+        //ЗАКАЗЫ
+
+        private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<OrderModel> orders = orderModelManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = orders;
+        }
+
+        private void ComboBox_AddNewService_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            ComboBox_AddNewService.ItemsSource = services;
         }
     }
 }

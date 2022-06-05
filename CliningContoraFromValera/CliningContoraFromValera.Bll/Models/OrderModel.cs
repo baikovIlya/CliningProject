@@ -18,5 +18,6 @@
         public string Street { get; set; }
         public string Building { get; set; }
         public string? Room { get; set; }
+
     }
 }
