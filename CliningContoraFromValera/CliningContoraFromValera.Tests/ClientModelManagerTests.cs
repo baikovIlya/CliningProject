@@ -19,36 +19,51 @@ namespace CliningContoraFromValera.Tests
             _clientModelManager = new ClientModelManager(_clientManagerMock.Object);
         }
 
-        public ClientModel GetClientModelToFillMock(int key)
+        [TestCaseSource(typeof(UpdateClientByIdTestSource))]
+        public void UpdateClientByIdTest_ShouldUpdateClient(ClientModel clientModel, ClientDTO clientDto)
         {
-            ClientModel _clientModel;
-            switch (key)
-            {
-                case 0:
-                    _clientModel = new ClientModel
-                    {
-                        Id = 1,
-                        FirstName = "Milana",
-                        LastName = "Maksina",
-                        Email = "maksina@mail.ru",
-                        Phone = "88005553535"
-                    };
-                    break;
-                case 1:
-                    _clientModel = new ClientModel
-                    {
-                        Id = 2,
-                        FirstName = "Naruto",
-                        LastName = "Uzumaki",
-                        Email = "narutothegod@gmail.com",
-                        Phone = "88923723505"
-                    };
-                default:
-                    _clientModel = null;
-                    break;                    
-            }
-            return _clientModel;
+            _clientManagerMock.Setup(o => o.UpdateClientById(clientDto)).Verifiable();
+            _clientModelManager.UpdateClientById(clientModel);
+            _clientManagerMock.Verify();
         }
+
+        //[TestCase()]
+        //public void DeleteClientByIdTest_ShouldDeleteClient(int id)
+        //{
+        //    var expected = GetClientModelToFillMock(id);
+        //    _clientModelManager.DeleteClientById(expected);
+        //}
+
+        //public ClientModel GetClientModelToFillMock(int key)
+        //{
+        //    ClientModel _clientModel;
+        //    switch (key)
+        //    {
+        //        case 0:
+        //            _clientModel = new ClientModel
+        //            {
+        //                Id = 1,
+        //                FirstName = "Milana",
+        //                LastName = "Maksina",
+        //                Email = "maksina@mail.ru",
+        //                Phone = "88005553535"
+        //            };
+        //            break;
+        //        case 1:
+        //            _clientModel = new ClientModel
+        //            {
+        //                Id = 2,
+        //                FirstName = "Naruto",
+        //                LastName = "Uzumaki",
+        //                Email = "narutothegod@gmail.com",
+        //                Phone = "88923723505"
+        //            };
+        //        default:
+        //            _clientModel = null;
+        //            break;                    
+        //    }
+        //    return _clientModel;
+        //}
 
         //public void FillMockGetAllClients()
         //{
@@ -75,41 +90,25 @@ namespace CliningContoraFromValera.Tests
         //}
 
 
-        [TestCaseSource(1)]
-        public void GetClientByIdTest_ShouldReturnClient(int clientId, ClientDTO clientDto, ClientModel expected)
-        {
-            _clientManagerMock.Setup(o => o.GetClientByID(clientId)).Returns
-                (
-                    new ClientDTO
-                    {
-                        Id = 1,
-                        FirstName = "Milana",
-                        LastName = "Maksina",
-                        Email = "maksina@mail.ru",
-                        Phone = "88005553535"
-                    }
-                );
-            var actual = _clientModelManager.GetClientById(clientId);
-            _clientManagerMock.Verify();
+        //[TestCaseSource(1)]
+        //public void GetClientByIdTest_ShouldReturnClient(int clientId, ClientDTO clientDto, ClientModel expected)
+        //{
+        //    _clientManagerMock.Setup(o => o.GetClientByID(clientId)).Returns
+        //        (
+        //            new ClientDTO
+        //            {
+        //                Id = 1,
+        //                FirstName = "Milana",
+        //                LastName = "Maksina",
+        //                Email = "maksina@mail.ru",
+        //                Phone = "88005553535"
+        //            }
+        //        );
+        //    var actual = _clientModelManager.GetClientById(clientId);
+        //    _clientManagerMock.Verify();
 
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCaseSource(1)]
-        public void UpdateClientByIdTest_ShouldUpdateClient(ClientModel clientModel, ClientDTO clientDto)
-        {
-            _clientManagerMock.Setup(o => o.UpdateClientById(clientDto)).Verifiable();
-            _clientModelManager.UpdateClientById(clientModel);
-            _clientManagerMock.Verify();
-        }
-
-        [TestCase()]
-        public void DeleteClientByIdTest_ShouldDeleteClient(int id)
-        {
-            var expected = GetClientModelToFillMock(id);
-            _clientModelManager.DeleteClientById(expected);
-        }
-
+        //    Assert.AreEqual(expected, actual);
+        //}
 
     }
 }

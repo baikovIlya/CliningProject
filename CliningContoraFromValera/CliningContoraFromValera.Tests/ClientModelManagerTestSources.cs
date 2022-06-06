@@ -1,0 +1,99 @@
+﻿using CliningContoraFromValera.Bll.Models;
+using CliningContoraFromValera.DAL.DTOs;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CliningContoraFromValera.Tests
+{
+    public static class ClientTestModels
+    {
+        public static List<ClientModel> clientModels = new List<ClientModel>()
+        {
+            new ClientModel()
+            {
+                Id = 1,
+                FirstName = "Milana",
+                LastName = "Maksina",
+                Email = "maksina@mail.ru",
+                Phone = "88005553535"
+            },
+
+            new ClientModel()
+            {
+                Id = 2,
+                FirstName = "Naruto",
+                LastName = "Uzumaki",
+                Email = "narutothegod@gmail.com",
+                Phone = "88923723505"
+            }
+        };
+    }
+
+    public static class ClientTestDtos
+    {
+        public static List<ClientDTO> clientDTOs = new List<ClientDTO>()
+        {
+            new ClientDTO()
+            {
+                Id = 1,
+                FirstName = "Milana",
+                LastName = "Maksina",
+                Email = "maksina@mail.ru",
+                Phone = "88005553535"
+            },
+
+            new ClientDTO()
+            {
+                Id = 2,
+                FirstName = "Naruto",
+                LastName = "Uzumaki",
+                Email = "narutothegod@gmail.com",
+                Phone = "88923723505"
+            }
+        };
+    }
+
+    public class UpdateClientByIdTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+            {
+                ClientTestModels.clientModels[0],
+                ClientTestDtos.clientDTOs[0]
+            };
+        }
+    }
+
+    public class UpdateClientByIdTestSource2 : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+            {
+                new ClientModel()
+                {
+                    Id = 1,
+                    FirstName = "Milana",
+                    LastName = "Maksina",
+                    Email = "maksina@mail.ru",
+                    Phone = "88005553535",
+                },
+
+                new ClientDTO()
+                {
+                    Id = 1,
+                    FirstName = "Milana",
+                    LastName = "Maksina",
+                    Email = "maksina@mail.ru",
+                    Phone = "88005553535",
+                },
+            };
+
+        }
+    }
+}
