@@ -7,25 +7,20 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class ServiceModelManager
     {
-        ServiceManager serviceManager = new ServiceManager();
-        EmployeeManager employeeManager = new EmployeeManager();
+        ServiceManager _serviceManager = new ServiceManager();
+        EmployeeManager _employeeManager = new EmployeeManager();
 
         public List<ServiceModel> GetAllServices()
         {
-            List<ServiceDTO> serviceDTOs = serviceManager.GetAllServices();
+            List<ServiceDTO> serviceDTOs = _serviceManager.GetAllServices();
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(serviceDTOs);
         }
-        public ServiceModel GetServiceById(int id)
-        {
-            ServiceDTO serviceDTO = serviceManager.GetServiceById(id);
-            return MapperConfigStorage.GetInstance().Map<ServiceModel>(serviceDTO);
-        }
-
         public ServiceModel GetServiceById(int id)
         {
             ServiceDTO serviceDTO = _serviceManager.GetServiceById(id);
             return MapperConfigStorage.GetInstance().Map<ServiceModel>(serviceDTO);
         }
+
         public void AddService(ServiceModel service)
         {
             ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
@@ -56,28 +51,18 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         }
         public void DeleteEmployeesService(int employeeId, int serviceId)
         {
-            employeeManager.DeleteEmployeesService(employeeId, serviceId);
+            _employeeManager.DeleteEmployeesService(employeeId, serviceId);
         }
 
         public void AddServiceToEmployee(int employeeId, int serviceId)
         {
-            employeeManager.AddServiceToEmployee(employeeId, serviceId);
-        }
-
-        public void AddService(ServiceModel service)
-        {
-            ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
-            serviceManager.AddService(serviceDTO);
+            _employeeManager.AddServiceToEmployee(employeeId, serviceId);
         }
 
         public void UpdateServiceById(ServiceModel service)
         {
             ServiceDTO serviceDTO = MapperConfigStorage.GetInstance().Map<ServiceDTO>(service);
-            serviceManager.UpdateServiceById(serviceDTO);
-        }
-        public void DeleteServiceyId(int id)
-        {
-            serviceManager.DeleteServiceById(id);
+            _serviceManager.UpdateServiceById(serviceDTO);
         }
     }
 }
