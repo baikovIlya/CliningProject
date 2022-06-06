@@ -20,6 +20,7 @@ namespace CliningContoraFromValera.Bll
             _instance = new Mapper(new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ClientDTO, ClientModel>()
+                .ForMember("Id", opt => opt.MapFrom(c => c.Id))
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
                 .ForMember("Email", opt => opt.MapFrom(c => c.Email))

@@ -8,8 +8,9 @@
         public string? Email { get; set; }
         public string Phone { get; set; }
 
-        public ClientModel(string firstName, string lastName, string email, string phone)
+        public ClientModel(int id, string firstName, string lastName, string email, string phone)
         {
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
