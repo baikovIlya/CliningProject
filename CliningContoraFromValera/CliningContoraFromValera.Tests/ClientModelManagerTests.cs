@@ -3,18 +3,14 @@ using Moq;
 using CliningContoraFromValera.DAL.Interfaces;
 using CliningContoraFromValera.Bll.ModelsManager;
 using CliningContoraFromValera.Bll.Models;
+using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.Tests
 {
     public class ClientModelManagerTests
     {
         public ClientModelManager _clientModelManager;
-        private readonly Mock<IClientManager> _clientManagerMock;
-
-        public ClientModelManagerTests()
-        {
-            _clientManagerMock = new Mock<IClientManager>();
-        }
+        private Mock<IClientManager> _clientManagerMock;
 
         [SetUp]
         public void Setup(Mock<IClientManager> _clientManagerMock)
@@ -54,36 +50,37 @@ namespace CliningContoraFromValera.Tests
             return _clientModel;
         }
 
-        public void FillMockGetAllClients()
-        {
-            _clientManagerMock.Setup(o => o.GetAllClients()).Returns(new List<ClientModel>()
-            {
-                new ClientModel
-                {
-                        Id = 1,
-                        FirstName = "Milana",
-                        LastName = "Maksina",
-                        Email = "maksina@mail.ru",
-                        Phone = "88005553535"
-                },
+        //public void FillMockGetAllClients()
+        //{
+        //    _clientManagerMock.Setup(o => o.GetAllClients()).Returns(new List<ClientModel>()
+        //    {
+        //        new ClientModel
+        //        {
+        //                Id = 1,
+        //                FirstName = "Milana",
+        //                LastName = "Maksina",
+        //                Email = "maksina@mail.ru",
+        //                Phone = "88005553535"
+        //        },
 
-                new ClientModel
-                {
-                        Id = 2,
-                        FirstName = "Naruto",
-                        LastName = "Uzumaki",
-                        Email = "narutothegod@gmail.com",
-                        Phone = "88923723505"
-                }
-            });
-        }
+        //        new ClientModel
+        //        {
+        //                Id = 2,
+        //                FirstName = "Naruto",
+        //                LastName = "Uzumaki",
+        //                Email = "narutothegod@gmail.com",
+        //                Phone = "88923723505"
+        //        }
+        //    });
+        //}
 
-        [TestCase(1)]
-        public void GetClientByIdTest_ShouldReturnClient(int clientId)
+
+        [TestCaseSource(1)]
+        public void GetClientByIdTest_ShouldReturnClient(int clientId, ClientDTO clientDto, ClientModel expected)
         {
             _clientManagerMock.Setup(o => o.GetClientByID(clientId)).Returns
                 (
-                    new ClientModel
+                    new ClientDTO
                     {
                         Id = 1,
                         FirstName = "Milana",
@@ -93,20 +90,20 @@ namespace CliningContoraFromValera.Tests
                     }
                 );
             var actual = _clientModelManager.GetClientById(clientId);
-            _clientManagerMock.Verify(o => o.GetClientByID(clientId), Times.Once());
+            _clientManagerMock.Verify();
 
-            //Assert.IsTrue(actual.);
-            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(1)]
-        public void UpdateClientByIdTest_ShouldUpdateClient(int id)
+        [TestCaseSource(1)]
+        public void UpdateClientByIdTest_ShouldUpdateClient(ClientModel clientModel, ClientDTO clientDto)
         {
-            var expected = GetClientModelToFillMock(id);
-            var actual = _clientModelManager.UpdateClientById(expected);
-            Assert.AreEqual(actual, expected);
+            _clientManagerMock.Setup(o => o.UpdateClientById(clientDto)).Verifiable();
+            _clientModelManager.UpdateClientById(clientModel);
+            _clientManagerMock.Verify();
         }
 
+        [TestCase()]
         public void DeleteClientByIdTest_ShouldDeleteClient(int id)
         {
             var expected = GetClientModelToFillMock(id);
