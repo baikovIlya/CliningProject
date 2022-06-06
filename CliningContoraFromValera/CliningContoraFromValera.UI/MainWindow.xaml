@@ -271,8 +271,8 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <TextBox x:Name="TextBox_EmployeeStartTime" Margin="304,58,184,39" Grid.Row="4" TextWrapping="Wrap" Height="30" Grid.RowSpan="2" />
-                                <TextBox x:Name="TextBox_EmployeeFinishTime" Margin="304,34,184,0" Grid.Row="5" TextWrapping="Wrap" Height="30"/>
+
+
                                 <DatePicker Name ="DataPicker_EmployeeData" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="30" Margin="10,34,0,0"/>
                                 <ComboBox x:Name="ComboBox_EmployeeSchedule" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" Grid.Row="4" Width="182" Height="30" Margin="10,58,0,39" Loaded="ComboBox_EmployeeSchedule_Loaded" Grid.RowSpan="2" SelectionChanged="ComboBox_EmployeeSchedule_SelectionChanged">
                                     <ComboBox.ItemTemplate>
@@ -285,7 +285,7 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <Label Name="Label_ChooseEmployee" Content="Выбрать сотрудника: " Margin="26,60,489,39" Grid.Row="4" Grid.RowSpan="2" Visibility="Visible"/>
+                                <Label Name="Label_ChooseEmployee" Content="Выбрать сотрудника: " Margin="24,59,491,40" Grid.Row="4" Grid.RowSpan="2" Visibility="Visible"/>
                                 <Button x:Name="Button_AddShift" Content="Добавить смену" Grid.Row="5" Margin="473,32,10,0" Click="Button_AddShift_Click"/>
                                 <Label Content="От :" HorizontalAlignment="Left" Height="24" Margin="15,9,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
                                     <Label.RenderTransform>
@@ -298,8 +298,10 @@
                                     </Label.RenderTransform>
                                 </Label>
                                 <Label Content="По:" HorizontalAlignment="Left" Height="24" Margin="240,8,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.157,0.078"/>
-                                <Label Content="Начало смены:" HorizontalAlignment="Left" Height="26" Margin="210,58,0,0" Grid.RowSpan="2" Grid.Row="4" VerticalAlignment="Top" Width="94"/>
-                                <Label Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="210,34,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
+                                <ComboBox HorizontalAlignment="Left" Margin="246,58,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.RowSpan="2" Width="182" Height="30" />
+                                <ComboBox HorizontalAlignment="Left" Margin="246,33,0,0" Grid.Row="5" VerticalAlignment="Top" Width="182" Height="30" />
+                                <Label Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="255,35,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
+                                <Label Content="Начало смены:" HorizontalAlignment="Left" Height="46" Margin="255,59,0,0" Grid.Row="4" VerticalAlignment="Top" Width="110" Grid.RowSpan="2"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
