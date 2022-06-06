@@ -11,9 +11,10 @@
         public List<OrderDTO>? Orders { get; set; }
         public WorkTimeDTO? WorkTime { get; set; }
 
-        public override string ToString()
+        public EmployeeDTO()
         {
-            return $"Id={Id} FirstName={FirstName} LastName={LastName} Phone={Phone}";
+
         }
+
     }
 }

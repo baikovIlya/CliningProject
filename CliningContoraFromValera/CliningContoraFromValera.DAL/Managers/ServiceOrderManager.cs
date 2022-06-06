@@ -6,7 +6,7 @@ namespace CliningContoraFromValera.DAL.Managers
 {
     public class ServiceOrderManager
     {
-        public void AddServiceFromOrder(int orderId, int serviceId, int count)
+        public void AddServiceToOrder(ServiceOrderDTO serviceOrderDTO)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -14,7 +14,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
                 connection.QuerySingleOrDefault<OrderDTO>(
                     StoredProcedures.Service_Order_Add,
-                    param: new { OrderId = orderId, ServiceId = serviceId, Count = count },
+                    param: new { serviceOrderDTO.OrderId, serviceOrderDTO.ServiceId, serviceOrderDTO.Count },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }

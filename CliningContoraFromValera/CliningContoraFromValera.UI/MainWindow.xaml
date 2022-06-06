@@ -7,10 +7,9 @@
         xmlns:locall="clr-namespace:CliningContoraFromValera.Bll;assembly=CliningContoraFromValera.Bll" 
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="CliningFromValera" Height="560" Width="850" Background="White" ResizeMode="NoResize">
-
+        Title="CliningFromValera" Height="610" Width="880" Background="White" ResizeMode="NoResize">
     <Grid>
-        <TabControl x:Name="MainTabControl" Width="800">
+        <TabControl x:Name="MainTabControl" Width="800" Height="550">
 
             <TabItem Header="Клиенты">
                 <Grid Height="427" Margin="16,0,31,0">
@@ -188,7 +187,7 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="График">
-                            <Grid Height="382" Margin="80,0,80,0">
+                            <Grid Height="382" Margin="80,0,51,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
@@ -197,30 +196,55 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-
-                                <TextBox Margin="10,0,473,40" Text="Выбор времени" Height="24" Width="125" Grid.Row="0"/>
-                                <DatePicker Width="125" Height="24" Margin="10,35,473,5" Grid.Row="0"/>
-                                <ComboBox Height="24" Width="125" Margin="176,0,176,38" Grid.Row="0"/>
-                                <Label Content="Скилы" Margin="252,0,286,39" Grid.Row="0"/>
-                                <Button Content="Найти смену" Margin="473,0,10,39" Width="125" Height="24" Grid.Row="0"/>
-                                <Button Content="Найти сотрудника" Margin="473,35,10,5" Width="125" Height="24" Grid.Row="0"/>
+                                <DatePicker Name="DatePicker_FromDate" Width="125" Height="24" Margin="47,8,465,32" Grid.Row="0"/>
+                                <DatePicker Name="DatePicker_ToDate" Width="125" Height="24" Margin="275,7,237,33" Grid.Row="0"/>
+                                <Button x:Name="Button_ShowSchedule" Content="Показать график" Margin="455,8,28,32" Width="125" Height="24" Grid.Row="0" Click="Button_ShowSchedule_Click"/>
                                 <DataGrid x:Name="DataGrid_Schedule"
-                                   AutoGenerateColumns="False" CanUserAddRows="False"  ItemsSource="{Binding EmployeeWorkTimeModel}"  Grid.RowSpan="4" Margin="10,0,10,10" Grid.Row="1" Loaded="DataGrid_Schedule_Loaded">
+                                   AutoGenerateColumns="False" CanUserAddRows="False"  ItemsSource="{Binding EmployeeWorkTimeModel}"  Grid.RowSpan="5" Margin="10,48,10,31" Loaded="DataGrid_Schedule_Loaded">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="115"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="115"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="115"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" Width="115"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="115"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100" IsReadOnly="true"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="90" IsReadOnly="true"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" IsReadOnly="true" Width="90"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Удалить" Width="90">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_ShiftDelete" Content="Удалить" Click="Button_ShiftDelete_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <TextBox Margin="213,2,213,32" Grid.Row="5" TextWrapping="Wrap" Text="Начало смены" Width="182" Height="30"/>
-                                <TextBox Margin="213,34,213,0" Grid.Row="5" TextWrapping="Wrap" Text="Конец смены" Width="182" Height="30"/>
-                                <DatePicker Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="30" Margin="10,34,0,0"/>
-                                <ComboBox HorizontalAlignment="Left" Grid.Row="5" Width="182" Height="30" Margin="10,2,0,32"/>
-                                <Label Content="Выбрать сотрудника" Margin="10,2,460,35" Grid.Row="5"/>
-                                <Button Content="Редактировать смену" Grid.Row="5" Width="182" Height="30" Margin="416,2,10,32"/>
-                                <Button Content="Добавить смену" Grid.Row="5" Width="182" Height="30" Margin="416,34,10,0"/>
+                                <TextBox x:Name="TextBox_EmployeeStartTime" Margin="304,58,184,39" Grid.Row="4" TextWrapping="Wrap" Height="30" Grid.RowSpan="2" />
+                                <TextBox x:Name="TextBox_EmployeeFinishTime" Margin="304,34,184,0" Grid.Row="5" TextWrapping="Wrap" Height="30"/>
+                                <DatePicker Name ="DataPicker_EmployeeData" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="30" Margin="10,34,0,0"/>
+                                <ComboBox x:Name="ComboBox_EmployeeSchedule" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" Grid.Row="4" Width="182" Height="30" Margin="10,58,0,39" Loaded="ComboBox_EmployeeSchedule_Loaded" Grid.RowSpan="2" SelectionChanged="ComboBox_EmployeeSchedule_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                              <Run Text="{Binding FirstName}"/>
+                                              <Run Text="  "/>
+                                              <Run Text="{Binding LastName}"/>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Label Name="Label_ChooseEmployee" Content="Выбрать сотрудника: " Margin="26,60,489,39" Grid.Row="4" Grid.RowSpan="2" Visibility="Visible"/>
+                                <Button x:Name="Button_AddShift" Content="Добавить смену" Grid.Row="5" Margin="473,32,10,0" Click="Button_AddShift_Click"/>
+                                <Label Content="От :" HorizontalAlignment="Left" Height="24" Margin="15,9,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5">
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-0.339"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="По:" HorizontalAlignment="Left" Height="24" Margin="240,8,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.157,0.078"/>
+                                <Label Content="Начало смены:" HorizontalAlignment="Left" Height="26" Margin="210,58,0,0" Grid.RowSpan="2" Grid.Row="4" VerticalAlignment="Top" Width="94"/>
+                                <Label Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="210,34,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -284,8 +308,125 @@
 
                     <Label  Grid.Row="1" Content="Описание выбранной услуги:" Margin="10,278,158,112"/>
                     <Button Name="TB_ServiceDescriptionSave" Content="Сохранить измениения описания услуги" HorizontalAlignment="Center" Margin="0,339,0,0" Grid.Row="1" VerticalAlignment="Top" Height="29" Width="456" Click="TB_ServiceDescriptionSave_Click"/>
+            <!--добавление районов сотрудникам-->
+            <TabItem Header="Добавление районов сотрудникам">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="90*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Введите название для нового района:" Margin="10"
+                           VerticalAlignment="Top"
+                           Height="25"/>
+                    <TextBox Margin="10,0,140,10" 
+                             VerticalAlignment="Bottom"
+                             Height="25"/>
+                            VerticalAlignment="Bottom" Margin="10,10,75,10"
+                    <Button Content="Добавить" HorizontalAlignment="Right"
+                            Width="60" Height="25"/>
+                    <Button Content="Очистить" HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom" Margin="10"
+                            Width="60" Height="25"/>
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="10"
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Все районы" Width="615"/>
+                            <DataGridTextColumn Header="Добавить" Width="80"/>
+                            <DataGridTextColumn Header="Удалить" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                           Grid.Column="1" Margin="10"
+                    <Label Content="Выбрать сотрудника:"
+                           VerticalAlignment="Top" Height="25"/>
+                    <ComboBox Grid.Column="1" Height="25"
+                              VerticalAlignment="Bottom" Margin="10"/>
                 </Grid>
             </TabItem>
+
+
+
+            <TabItem Header="Подбор сотрудников">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="12*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.RowSpan="2" Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="10,30,0,0" Height="30"/>
+
+                    <DataGrid x:Name="DataGrid_RelevantEmployees" 
+                              ItemsSource="{Binding EmployeeWorkTimeModel}"
+                              Grid.ColumnSpan="4" 
+                              AutoGenerateColumns="False" 
+                              CanUserAddRows="False"
+                              Margin="10" SelectionChanged="DataGrid_RelevantEmployees_SelectionChanged">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="150"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="150"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="150"/>
+                            <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" Width="200"/>
+                            <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="114"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+
+
+                    <DataGrid x:Name="DataGrid_CurrentOrders"
+                              ItemsSource="{Binding OrderModel}"
+                              Grid.Row="1" 
+                              Grid.ColumnSpan="4" 
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False" Margin="10,26,10,10">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="150"/>
+                            <DataGridTextColumn Header="Приблиз. вр. выполнения" Binding="{Binding EstimatedEndTime}" Width="180"/>
+                            <DataGridTextColumn Header="Время окончания" Binding="{Binding FinishTime}" Width="150"/>
+                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="200"/>
+                            <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="84"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DatePicker x:Name="DP_OrdersDate" Grid.Row="3" Margin="10"/>
+
+                    <Label Grid.Column="1" Grid.Row="2" Margin="10,10,10,0"
+                           VerticalAlignment="Center" Content="Тип и услуга:"/>
+                    <ComboBox x:Name="CB_DesiredServiceType" Grid.Column="1" Grid.Row="2" Margin="100,10,10,10" Loaded="CB_DesiredServiceType_Loaded" SelectionChanged="CB_DesiredServiceType_SelectionChanged"/>
+                    <ComboBox x:Name="CB_DesiredService" Grid.Column="1" Grid.Row="3" Margin="10" Loaded="CB_DesiredService_Loaded"/>
+
+                    <Label Grid.Column="2" Grid.Row="2" Margin="10,10,10,0"
+                           VerticalAlignment="Center" Content="Районы:"/>
+                    <ComboBox x:Name="CB_DesiredWorkArea" Grid.Column="2" Grid.Row="3" Margin="10" Loaded="CB_DesiredWorkArea_Loaded"/>
+
+                    <Button x:Name="Button_EmployeeSelection" Grid.Column="3" 
+                            Grid.Row="2" Margin="10"
+                            Content="Подобрать" Click="Button_EmployeeSelection_Click"/>
+
+                    <Button x:Name="Button_ResetAll" Grid.Column="3" 
+                            Grid.Row="3" Margin="10"
+                            Content="Обнулить" Click="Button_ResetAll_Click"/>
+
+                </Grid>
+            </TabItem>
+
         </TabControl>
     </Grid>
 </Window>

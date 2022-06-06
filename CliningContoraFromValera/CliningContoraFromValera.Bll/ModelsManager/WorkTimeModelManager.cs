@@ -37,5 +37,11 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             workTimeManager.DeleteWorkTimeById(workTimeId);
         }
 
+        public List<EmployeeWorkTimeModel>GetEmployeesAndWorkTimes()
+        {
+            List<EmployeeDTO> workTimes = workTimeManager.GetEmployeesAndWorkTimes();
+            return MapperConfigStorage.GetInstance().Map<List<EmployeeWorkTimeModel>>(workTimes);
+        }
+
     }
 }

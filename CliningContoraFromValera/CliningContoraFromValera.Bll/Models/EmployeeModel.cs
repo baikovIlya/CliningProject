@@ -1,6 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
-
-namespace CliningContoraFromValera.Bll.Models
+﻿namespace CliningContoraFromValera.Bll.Models
 {
     public class EmployeeModel
     {
@@ -8,6 +6,11 @@ namespace CliningContoraFromValera.Bll.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+
+        public EmployeeModel()
+        {
+
+        }
 
         public EmployeeModel(string firstName, string lastName, string phone)
         {

@@ -1,6 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
-
-namespace CliningContoraFromValera.Bll.Models
+﻿namespace CliningContoraFromValera.Bll.Models
 {
     public class ServiceModel
     {
@@ -12,6 +10,15 @@ namespace CliningContoraFromValera.Bll.Models
         public decimal CommercialPrice { get; set; }
         public string Unit { get; set; }
         public TimeSpan EstimatedTime { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public ServiceModel()
+        {
+
+        }
 
         public ServiceModel(ServiceType serviceType, string name, string description, decimal price, decimal commercialPrice ,
             string unit, TimeSpan estimatedTime)

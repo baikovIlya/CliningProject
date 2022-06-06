@@ -1,6 +1,4 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
-
-namespace CliningContoraFromValera.Bll.Models
+﻿namespace CliningContoraFromValera.Bll.Models
 {
     public class AddressModel
     {
@@ -9,5 +7,10 @@ namespace CliningContoraFromValera.Bll.Models
         public string Building { get; set; }
         public string? Room { get; set; }
         public WorkAreaModel? WorkArea { get; set; }
+
+        public AddressModel()
+        {
+
+        }
     }
 }

@@ -1,10 +1,17 @@
-﻿using CliningContoraFromValera.DAL.DTOs;
-
-namespace CliningContoraFromValera.Bll.Models
+﻿namespace CliningContoraFromValera.Bll.Models
 {
     public class WorkAreaModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public WorkAreaModel()
+        {
+
+        }
     }
 }

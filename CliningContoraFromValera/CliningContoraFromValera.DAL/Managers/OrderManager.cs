@@ -44,21 +44,8 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        //public OrderDTO GetOrderById(int orderId)
-        //{
-        //    using (var connection = new SqlConnection(ServerSettings._connectionString))
-        //    {
-        //        connection.Open();
-
-        //        return connection.QuerySingle<OrderDTO>(
-        //            StoredProcedures.Order_GetById,
-        //            param: new { id = orderId },
-        //            commandType: System.Data.CommandType.StoredProcedure);
-        //    }
-        //}
-
         public void AddOrder(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder, int count)
+            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -90,11 +77,11 @@ namespace CliningContoraFromValera.DAL.Managers
             ServiceManager servicsManager = new ServiceManager();
             servicsManager.AddService(newService);
             ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
-            serviceOrderManager.AddServiceFromOrder(newOrder.Id, newService.Id, count);
+            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void UpdateOrderById(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder, int count)
+            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -128,7 +115,7 @@ namespace CliningContoraFromValera.DAL.Managers
             servicsManager.UpdateServiceById(newService);
             ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
             serviceOrderManager.DeleteServiceFromOrder(newOrder.Id, newService.Id);
-            serviceOrderManager.AddServiceFromOrder(newOrder.Id, newService.Id, count);
+            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void DeleteOrderById(int orderId)
@@ -190,5 +177,40 @@ namespace CliningContoraFromValera.DAL.Managers
                 return result;
             }
         }
+
+
+        public List<OrderDTO> GetEmployeesOrdersByEmployeeIdByDateNew(int employeeId, DateTime date)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
+
+                connection.Query<OrderDTO, AddressDTO, OrderDTO>(
+                    StoredProcedures.GetEmployeesScheduleByIdByDate,
+                    (order, address) => {
+                        if (!result.ContainsKey(order.Id))
+                        {
+                            result.Add(order.Id, order);
+                        }
+
+                        OrderDTO crnt = result[order.Id];
+
+                        if (address != null)
+                        {
+                            crnt.Address = address;
+                        }
+                        return crnt;
+                    },
+                    param: new { employeeId, date },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+
+                return result.Values.ToList();
+            }
+        }
+
     }
 }

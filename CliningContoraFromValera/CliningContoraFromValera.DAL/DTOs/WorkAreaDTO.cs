@@ -4,10 +4,11 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        
-        public override string ToString()
+
+        public WorkAreaDTO()
         {
-            return $"Id={Id} Name={Name}";
+
         }
+        
     }
 }
