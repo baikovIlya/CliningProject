@@ -11,15 +11,16 @@ namespace CliningContoraFromValera.Tests
     {
         public ClientModelManager _clientModelManager;
         private Mock<IClientManager> _clientManagerMock;
+        
 
         [SetUp]
-        public void Setup(Mock<IClientManager> _clientManagerMock)
+        public void Setup()
         {
             _clientManagerMock = new Mock<IClientManager>();
             _clientModelManager = new ClientModelManager(_clientManagerMock.Object);
         }
 
-        [TestCaseSource(typeof(UpdateClientByIdTestSource))]
+        [TestCaseSource(typeof(UpdateClientByIdTestSource2))]
         public void UpdateClientByIdTest_ShouldUpdateClient(ClientModel clientModel, ClientDTO clientDto)
         {
             _clientManagerMock.Setup(o => o.UpdateClientById(clientDto)).Verifiable();

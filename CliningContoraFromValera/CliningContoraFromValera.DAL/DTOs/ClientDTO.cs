@@ -12,6 +12,23 @@
         {
 
         }
-
+        public override bool Equals(object? obj)
+        {
+            bool flag = true;
+            if (obj == null || !(obj is ClientDTO))
+            {
+                flag = false;
+            }
+            ClientDTO clDto = (ClientDTO)obj;
+            if (clDto.Id != this.Id ||
+                clDto.FirstName != this.FirstName ||
+                clDto.FirstName != this.LastName ||
+                clDto.Email != this.Email ||
+                clDto.Phone != this.Phone)
+            {
+                flag = false;
+            }
+            return flag;
+        }
     }
 }

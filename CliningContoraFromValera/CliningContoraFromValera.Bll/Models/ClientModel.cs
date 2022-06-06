@@ -21,5 +21,27 @@
             Email = email;
             Phone = phone;
         }
+
+        public override bool Equals(object? obj)
+        {
+            bool flag = false;
+            if (obj == null || !(obj is ClientModel))
+            {
+                flag = false;
+            }
+            else
+            {
+                ClientModel clDto = (ClientModel)obj;
+                if (clDto.Id != this.Id ||
+                    clDto.FirstName != this.FirstName ||
+                    clDto.FirstName != this.LastName ||
+                    clDto.Email != this.Email ||
+                    clDto.Phone != this.Phone)
+                {
+                    flag = false;
+                }
+            }
+            return flag;
+        }
     }
 }

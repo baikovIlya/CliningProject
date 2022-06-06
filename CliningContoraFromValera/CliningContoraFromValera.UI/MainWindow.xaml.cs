@@ -84,10 +84,13 @@ namespace CliningContoraFromValera.UI
            }
            else
            {
-             ClientModel client = new ClientModel(TextBox_Name.Text,
-               TextBox_LastName.Text,
-               TextBox_Email.Text,
-               TextBox_Phone.Text);
+             ClientModel client = new ClientModel()
+             {
+                 FirstName = TextBox_Name.Text,
+                 LastName = TextBox_LastName.Text,
+                 Email = TextBox_Email.Text,
+                 Phone = TextBox_Phone.Text
+             };
              clientModelManager.AddClient(client);
              ClearClientAddTextBoxes();
            }
