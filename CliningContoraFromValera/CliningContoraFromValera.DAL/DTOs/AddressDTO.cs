@@ -9,5 +9,10 @@
         public int WorkAreaId { get; set; }
         public WorkAreaDTO? WorkArea { get; set; }
 
+        public AddressDTO()
+        {
+
+        }
+
     }
 }

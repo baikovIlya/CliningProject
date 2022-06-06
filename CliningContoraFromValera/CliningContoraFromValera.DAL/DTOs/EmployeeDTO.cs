@@ -11,5 +11,10 @@
         public List<OrderDTO>? Orders { get; set; }
         public WorkTimeDTO? WorkTime { get; set; }
 
+        public EmployeeDTO()
+        {
+
+        }
+
     }
 }
