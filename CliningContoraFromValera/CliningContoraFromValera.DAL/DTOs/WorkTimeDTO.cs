@@ -8,5 +8,10 @@
         public TimeSpan FinishTime { get; set; }
         public int EmployeeId { get; set; }
 
+        public WorkTimeDTO()
+        {
+
+        }
+
     }
 }

@@ -12,5 +12,10 @@
         public TimeSpan EstimatedTime { get; set; }
         public ServiceOrderDTO? ServiceOrder { get; set; }
 
+        public ServiceDTO()
+        {
+
+        }
+
     }
 }

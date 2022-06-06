@@ -8,7 +8,11 @@
         public TimeSpan FinishTime { get; set; }
         public int EmployeeId { get; set; }
 
-         
+        public WorkTimeModel()
+        {
+
+        } 
+
         public WorkTimeModel(DateTime date, TimeSpan startTime, TimeSpan finishTime, int employeeId)
         {
             Date = date;
