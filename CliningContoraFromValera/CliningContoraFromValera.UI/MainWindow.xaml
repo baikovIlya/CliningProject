@@ -298,10 +298,10 @@
                                     </Label.RenderTransform>
                                 </Label>
                                 <Label Content="По:" HorizontalAlignment="Left" Height="24" Margin="240,8,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.157,0.078"/>
-                                <ComboBox HorizontalAlignment="Left" Margin="246,58,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.RowSpan="2" Width="182" Height="30" />
-                                <ComboBox HorizontalAlignment="Left" Margin="246,33,0,0" Grid.Row="5" VerticalAlignment="Top" Width="182" Height="30" />
-                                <Label Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="255,35,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
-                                <Label Content="Начало смены:" HorizontalAlignment="Left" Height="46" Margin="255,59,0,0" Grid.Row="4" VerticalAlignment="Top" Width="110" Grid.RowSpan="2"/>
+                                <ComboBox x:Name="ComboBox_ShiftStartTime" HorizontalAlignment="Left" Margin="246,58,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.RowSpan="2" Width="182" Height="30" Loaded="ComboBox_ShiftStartTime__Loaded" SelectionChanged="ComboBox_ShiftStartTime_SelectionChanged" />
+                                <ComboBox x:Name="ComboBox_ShiftFinishTime" HorizontalAlignment="Left" Margin="246,33,0,0" Grid.Row="5" VerticalAlignment="Top" Width="182" Height="30" Loaded="ComboBox_ShiftFinishTime_Loaded" SelectionChanged="ComboBox_ShiftFinishTime_SelectionChanged" />
+                                <Label Name="Label_ShiftStart" Content="Начало смены:" HorizontalAlignment="Left" Height="46" Margin="255,59,0,0" Grid.Row="4" VerticalAlignment="Top" Width="110" Grid.RowSpan="2"/>
+                                <Label x:Name="Label_ShiftFinish" Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="255,35,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

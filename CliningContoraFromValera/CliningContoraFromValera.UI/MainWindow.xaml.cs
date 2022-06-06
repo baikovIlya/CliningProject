@@ -27,6 +27,7 @@ namespace CliningContoraFromValera.UI
         WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
         ServiceModelManager serviceModelManager = new ServiceModelManager();
         ServiceOrderModelManager serviceOrderModelManager = new ServiceOrderModelManager();
+        List<TimeSpan> employeesShifts = new List<TimeSpan>();
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
@@ -325,12 +326,18 @@ namespace CliningContoraFromValera.UI
             List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
             ComboBox_EmployeeSchedule.ItemsSource = employees;
         }
+        private void ComboBox_ShiftStartTime__Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBox_ShiftStartTime.ItemsSource = Times.employeesWorkTime;
+        }
+        private void ComboBox_ShiftFinishTime_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBox_ShiftFinishTime.ItemsSource = Times.employeesWorkTime;
+        }
 
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
-            TimeSpan startTime;
-            TimeSpan finishTime;
-            if (String.IsNullOrWhiteSpace(TextBox_EmployeeStartTime.Text) || String.IsNullOrWhiteSpace(TextBox_EmployeeFinishTime.Text))
+            if (String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text))
             {
                 GetMessageBoxEmptyTextBoxes();
             }
@@ -342,33 +349,37 @@ namespace CliningContoraFromValera.UI
             {
                 GetMessageBoxEmptyTextBoxes();
             }
-            else if(!TimeSpan.TryParse(TextBox_EmployeeStartTime.Text, out startTime) || !TimeSpan.TryParse(TextBox_EmployeeFinishTime.Text, out finishTime))
+            else 
             {
-                try
-                {
-                    AddShift();
-                    AddShiftItemsClear();
-                    RefreshShifts();
-                }
-                catch (FormatException)
-                {
-                    GetMessageBoxFormatException();
-                }
+                AddShift();
+                AddShiftItemsClear();
+                RefreshShifts();
+                StartAndFinishLabelVisibilities();
             }
-            AddShift();
-            AddShiftItemsClear();
-            RefreshShifts();
         }
+
+        private void StartAndFinishLabelVisibilities()
+        {
+            Label_ShiftStart.Visibility = Visibility.Visible;
+            Label_ShiftFinish.Visibility = Visibility.Visible;
+        }
+
 
         private void AddShift()
         {
             EmployeeModel employee = ComboBox_EmployeeSchedule.SelectedValue as EmployeeModel;
-            TimeSpan newStartTime = TimeSpan.Parse(TextBox_EmployeeStartTime.Text);
-            TimeSpan newFinishTime = TimeSpan.Parse(TextBox_EmployeeFinishTime.Text);
+            TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
+            TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
-
-            WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
-            workTimeModelManager.AddWorkTime(workTime);
+            if(newStartTime >= newFinishTime)
+            {
+                GetMessageBoxShiftTimeException();
+            }
+            else
+            {
+                WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
+                workTimeModelManager.AddWorkTime(workTime);
+            }
         }
 
         private void GetMessageBoxFormatException()
@@ -376,6 +387,10 @@ namespace CliningContoraFromValera.UI
             MessageBox.Show("Данные заполнены некорректно!");
         }
 
+        private void GetMessageBoxShiftTimeException()
+        {
+            MessageBox.Show("Смена не может закончиться раньше своего начала!");
+        }
 
         private void RefreshShifts()
         {
@@ -407,13 +422,12 @@ namespace CliningContoraFromValera.UI
 
         private void AddShiftItemsClear()
         {
-            TextBox_EmployeeStartTime.Clear();
-            TextBox_EmployeeFinishTime.Clear();
+            ComboBox_ShiftStartTime.Text = null;
+            ComboBox_ShiftFinishTime.Text = null;
             DataPicker_EmployeeData.Text = null;
             ComboBox_EmployeeSchedule.Text = null;
             Label_ChooseEmployee.Visibility = Visibility.Visible;
         }
-
 
         private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
@@ -478,11 +492,18 @@ namespace CliningContoraFromValera.UI
 
         }
 
-
         private void ComboBox_EmployeeSchedule_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Label_ChooseEmployee.Visibility = Visibility.Hidden;
             ComboBox_EmployeeSchedule.Items.Refresh();
+        }
+        private void ComboBox_ShiftStartTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Label_ShiftStart.Visibility = Visibility.Hidden;
+        }
+        private void ComboBox_ShiftFinishTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Label_ShiftFinish.Visibility = Visibility.Hidden;
         }
 
         //ЗАКАЗЫ
@@ -520,6 +541,11 @@ namespace CliningContoraFromValera.UI
             OrderModel order = DataGrid_AllOrders.SelectedItem as OrderModel;
             List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
             DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
+        }
+
+        private void ___ComboBox_ShiftStartTime__Loaded(object sender, RoutedEventArgs e)
+        {
+           
         }
 
     }
