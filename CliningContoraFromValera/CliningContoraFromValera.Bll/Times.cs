@@ -1,8 +1,10 @@
-﻿namespace CliningContoraFromValera.Bll
+﻿
+
+namespace CliningContoraFromValera.Bll
 {
     public static class Times
     {
-        public static List<TimeSpan> employeesWorkTime = new List<TimeSpan>() 
+        public static List<TimeSpan> employeesWorkTime = new List<TimeSpan>()
         {   new TimeSpan(08,00,00),
             new TimeSpan(09,00,00),
             new TimeSpan(10,00,00),

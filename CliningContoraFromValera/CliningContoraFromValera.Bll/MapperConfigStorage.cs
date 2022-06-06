@@ -54,12 +54,6 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime))
                 .ReverseMap();
 
-                cfg.CreateMap<ServiceOrderDTO, ServiceOrderModel>()
-                .ForMember("Id", opt => opt.MapFrom(c => c.Id))
-                .ForMember("OrderId", opt => opt.MapFrom(c => c.OrderId))
-                .ForMember("ServiceId", opt => opt.MapFrom(c => c.ServiceId))
-                .ForMember("Count", opt => opt.MapFrom(c => c.Count))
-                .ReverseMap();
 
                 cfg.CreateMap<AddressDTO, AddressModel>()
                 .ForMember("Street", opt => opt.MapFrom(c => c.Street))
@@ -82,6 +76,7 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Date", opt => opt.MapFrom(c => c.Date))
                 .ForMember("StartTime", opt => opt.MapFrom(c => c.StartTime))
                 .ForMember("FinishTime", opt => opt.MapFrom(c => c.FinishTime))
+                .ForMember("EmployeeId", opt => opt.MapFrom(c => c.EmployeeId))
                 .ReverseMap();
 
                 cfg.CreateMap<EmployeeDTO, EmployeeWorkTimeModel>()
@@ -90,11 +85,22 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Phone", opt => opt.MapFrom(c => c.Phone))
                 .ForMember(pts => pts.Date, opt => opt.MapFrom(ps => ps.WorkTime!.Date))
                 .ForMember(pts => pts.StartTime, opt => opt.MapFrom(ps => ps.WorkTime!.StartTime))
-                .ForMember(pts => pts.WorkTimeId, opt => opt.MapFrom(ps => ps.WorkTime!.Id))
                 .ForMember(pts => pts.FinishTime, opt => opt.MapFrom(ps => ps.WorkTime!.FinishTime))
+                .ForMember(pts => pts.WorkTimeId, opt => opt.MapFrom(ps => ps.WorkTime!.Id))
+                .ForMember(pts => pts.EmployeeId, opt => opt.MapFrom(ps => ps.Id))
                 .ReverseMap();
 
-
+                cfg.CreateMap<ServiceDTO, ServiceOrderModel>()
+                .ForMember("ServiceType", opt => opt.MapFrom(c => c.ServiceType))
+                .ForMember("Name", opt => opt.MapFrom(c => c.Name))
+                .ForMember("Description", opt => opt.MapFrom(c => c.Description))
+                .ForMember("Price", opt => opt.MapFrom(c => c.Price))
+                .ForMember("CommercialPrice", opt => opt.MapFrom(c => c.CommercialPrice))
+                .ForMember("Unit", opt => opt.MapFrom(c => c.Unit))
+                .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime))
+                .ForMember(pts => pts.OrderId, opt => opt.MapFrom(ps => ps.ServiceOrder!.OrderId))
+                .ForMember(pts => pts.ServiceId, opt => opt.MapFrom(ps => ps.ServiceOrder!.ServiceId))
+                .ForMember(pts => pts.Count, opt => opt.MapFrom(ps => ps.ServiceOrder!.Count));
 
             })); 
         }
