@@ -412,7 +412,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.RowSpan="2" Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="10,30,0,0" Height="30"/>
-                    <DataGrid x:Name="DataGrid_RelevantEmployees" 
+                    <DataGrid x:Name="DataGrid_RelevantEmployees" IsReadOnly="True"
                               ItemsSource="{Binding EmployeeWorkTimeModel}"
                               Grid.ColumnSpan="4" 
                               AutoGenerateColumns="False" 
@@ -427,7 +427,7 @@
                             <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="114"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid x:Name="DataGrid_CurrentOrders"
+                    <DataGrid x:Name="DataGrid_CurrentOrders" IsReadOnly="True"
                               ItemsSource="{Binding OrderModel}"
                               Grid.Row="1" 
                               Grid.ColumnSpan="4" 
