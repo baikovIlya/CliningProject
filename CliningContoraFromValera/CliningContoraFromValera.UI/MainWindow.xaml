@@ -355,12 +355,12 @@
                     <Label Content="Введите название для нового района:" Margin="10"
                            VerticalAlignment="Top"
                            Height="25"/>
-                    <TextBox Margin="10,0,140,10" 
+                    <TextBox x:Name="TB_NewWorkAreaName" Margin="10,0,140,10" 
                              VerticalAlignment="Bottom"
                              Height="25"/>
-                    <Button Content="Добавить" HorizontalAlignment="Right"
+                    <Button x:Name="Button_AddWorkArea" Content="Добавить" HorizontalAlignment="Right"
                             VerticalAlignment="Bottom" Margin="10,10,75,10"
-                            Width="60" Height="25"/>
+                            Width="60" Height="25" Click="Button_AddWorkArea_Click"/>
                     <Button Content="Очистить" HorizontalAlignment="Right"
                             VerticalAlignment="Bottom" Margin="10"
                             Width="60" Height="25"/>

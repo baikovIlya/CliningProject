@@ -454,5 +454,18 @@ namespace CliningContoraFromValera.UI
             Label_ChooseEmployee.Visibility = Visibility.Hidden;
             ComboBox_EmployeeSchedule.Items.Refresh();
         }
+
+        private void Button_AddWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (TB_NewWorkAreaName.Text != null || TB_NewWorkAreaName.Text.Trim() != "")
+            {
+                WorkAreaModel newWorkArea = new WorkAreaModel() { Name = TB_NewWorkAreaName.Text };
+                workAreaModelManager.AddWorkArea(newWorkArea);
+            }
+            else
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+        }
     }
 }
