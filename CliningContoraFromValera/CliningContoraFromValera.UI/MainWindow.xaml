@@ -264,8 +264,8 @@
                                 <DataGrid x:Name="DataGrid_Schedule"
                                    AutoGenerateColumns="False" CanUserAddRows="False"  ItemsSource="{Binding EmployeeWorkTimeModel}"  Grid.RowSpan="5" Margin="10,48,10,31" Loaded="DataGrid_Schedule_Loaded" CellEditEnding="DataGrid_Schedule_CellEditEnding" >
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100" IsReadOnly="true"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="90" IsReadOnly="true"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100" IsReadOnly="true"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата" Binding="{Binding Date}" IsReadOnly="true" Width="90"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
@@ -285,9 +285,9 @@
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
-                                              <Run Text="{Binding FirstName}"/>
-                                              <Run Text="  "/>
                                               <Run Text="{Binding LastName}"/>
+                                              <Run Text="  "/>
+                                              <Run Text="{Binding FirstName}"/>
                                             </TextBlock>
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>

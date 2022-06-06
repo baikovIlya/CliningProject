@@ -526,7 +526,8 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
         {
-           
+            ServiceOrderModel newServiceInOrder = (ServiceOrderModel)ComboBox_AddNewService.SelectedValue;
+            serviceOrderModelManager.AddServiceToOrder(newServiceInOrder);
         }
 
         private void DataGrid_ServicesInOrder_Loaded(object sender, RoutedEventArgs e)
@@ -541,7 +542,7 @@ namespace CliningContoraFromValera.UI
             DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
         }
 
-        
 
+        
     }
 }

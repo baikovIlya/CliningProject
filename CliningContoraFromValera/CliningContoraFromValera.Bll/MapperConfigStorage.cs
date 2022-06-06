@@ -98,6 +98,8 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("CommercialPrice", opt => opt.MapFrom(c => c.CommercialPrice))
                 .ForMember("Unit", opt => opt.MapFrom(c => c.Unit))
                 .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime))
+                .ForMember(pts => pts.OrderId, opt => opt.MapFrom(ps => ps.ServiceOrder!.OrderId))
+                .ForMember(pts => pts.ServiceId, opt => opt.MapFrom(ps => ps.ServiceOrder!.ServiceId))
                 .ForMember(pts => pts.Count, opt => opt.MapFrom(ps => ps.ServiceOrder!.Count));
 
             })); 
