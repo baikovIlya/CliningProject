@@ -365,23 +365,47 @@
                             VerticalAlignment="Bottom" Margin="10"
                             Width="60" Height="25"/>
 
-                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="10"
+                    <DataGrid x:Name="DG_ReadyToOrderWorkAreas" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,30,10,0"
+                              ItemsSource="{Binding WorkAreaModel}"
                               CanUserAddRows="False"
-                              AutoGenerateColumns="False">
+                              AutoGenerateColumns="False" Height="180" VerticalAlignment="Top">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Все районы" Binding="{Binding Name}" Width="615"/>
+                            <DataGridTemplateColumn Header="Удалить" Width="60">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="Button_DeleteEmployeesWorkArea" Content="Удалить"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid x:Name="DG_NotAvailablesWorkAreas" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,252,10,0"
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False" Height="185" VerticalAlignment="Top">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Все районы" Width="615"/>
                             <DataGridTextColumn Header="Добавить" Width="80"/>
-                            <DataGridTextColumn Header="Удалить" Width="80"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <Label Content="Выбрать сотрудника:"
                            Grid.Column="1" Margin="10"
                            VerticalAlignment="Top" Height="25"/>
-                    <ComboBox Grid.Column="1" Height="25"
-                              VerticalAlignment="Bottom" Margin="10"/>
-
+                    <ComboBox x:Name="CB_EmployeesWorkAreas" ItemsSource="{Binding EmployeeModel}" Grid.Column="1" Height="25"
+                              VerticalAlignment="Bottom" Margin="10" Loaded="CB_EmployeesWorkAreas_Loaded" SelectionChanged="CB_EmployeesWorkAreas_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                              <Run Text="{Binding FirstName}"/>
+                                              <Run Text="  "/>
+                                              <Run Text="{Binding LastName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </Grid>
             </TabItem>
 

@@ -467,5 +467,17 @@ namespace CliningContoraFromValera.UI
                 GetMessageBoxEmptyTextBoxes();
             }
         }
+
+        private void CB_EmployeesWorkAreas_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            CB_EmployeesWorkAreas.ItemsSource = employees;
+        }
+
+        private void CB_EmployeesWorkAreas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<WorkAreaModel> employeesWorkAreas = workAreaModelManager.GetAllWorkAreas();
+            DG_ReadyToOrderWorkAreas.ItemsSource = employeesWorkAreas;
+        }
     }
 }
