@@ -475,8 +475,9 @@ namespace CliningContoraFromValera.UI
         }
 
         private void CB_EmployeesWorkAreas_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<WorkAreaModel> employeesWorkAreas = workAreaModelManager.GetAllWorkAreas();
+        {            
+            EmployeeModel crntEmployee = (EmployeeModel)CB_EmployeesWorkAreas.SelectedItem;
+            List<WorkAreaModel> employeesWorkAreas = employeeModelManager.GetEmployeesWorkAreasById(crntEmployee.Id);
             DG_ReadyToOrderWorkAreas.ItemsSource = employeesWorkAreas;
         }
     }
