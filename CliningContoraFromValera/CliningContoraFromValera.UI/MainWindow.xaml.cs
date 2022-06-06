@@ -169,8 +169,6 @@ namespace CliningContoraFromValera.UI
                     TB_PhoneEmployee.Text);
                 employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
-                //List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
-                //DataGrid_Employees.ItemsSource = employees;
             }
         }
 
@@ -287,10 +285,24 @@ namespace CliningContoraFromValera.UI
             }
             CB_ChooseServiceType.ItemsSource = serviceTypes;
         }
+        private void CB_ChooseEstimatedTime_Loaded(object sender, RoutedEventArgs e)
+        {
+           CB_ChooseEstimatedTime.ItemsSource = EstimatedTime.employeesWorkTime;
+        }
+
+        private void CB_ChooseUnitType_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<UnitType> unitTypes = new List<UnitType>();
+            foreach (UnitType ut in Enum.GetValues(typeof(UnitType)))
+            {
+                unitTypes.Add(ut);
+            }
+            CB_ChooseUnitType.ItemsSource = unitTypes;
+        }
 
         private void GetMessageBoxFormatDemical()
         {
-            MessageBox.Show("Введите чило в формате '10,0' в поля 'Цена', 'Коммерческая цена'");
+            MessageBox.Show("Введите чило в формате '10,00 в поля 'Цена', 'Коммерческая цена'");
         }
         private void GetMessageBoxFormatTime()
         {
@@ -300,10 +312,9 @@ namespace CliningContoraFromValera.UI
         private void Button_ServiceAdd_Click(object sender, RoutedEventArgs e)
         {
             decimal decimalFormat;
-            TimeSpan estimatedTime;
             if (String.IsNullOrWhiteSpace(TB_Description.Text) || String.IsNullOrWhiteSpace(TB_Name.Text)
                 || String.IsNullOrWhiteSpace(TB_Price.Text) || String.IsNullOrWhiteSpace(TB_CommercialPrice.Text)
-                || String.IsNullOrWhiteSpace(TB_Unit.Text) || String.IsNullOrWhiteSpace(TB_EstimatedTime.Text)
+                || CB_ChooseUnitType.SelectedItem == null || CB_ChooseEstimatedTime.SelectedItem == null
                 || CB_ChooseServiceType.SelectedItem == null)
             {
                 GetMessageBoxEmptyTextBoxes();
@@ -320,34 +331,16 @@ namespace CliningContoraFromValera.UI
                     GetMessageBoxFormatDemical();
                 }
             }
-            else if (!TimeSpan.TryParse(TB_EstimatedTime.Text, out estimatedTime))
-            {
-                try
-                {
-                    AddService();
-                }
-                catch (FormatException)
-                {
-                    GetMessageBoxFormatTime();
-                }
-            }
             else
             {
-                string tmp = estimatedTime.ToString();
-                if (tmp.IndexOf('.') != -1)
-                {
-                    GetMessageBoxFormatTime();
-                    return;
-                }
                 AddService();
             }
         }
 
         private void AddService()
         {
-            TimeSpan estimatedTime = TimeSpan.Parse(TB_EstimatedTime.Text);
             ServiceModel employee = new ServiceModel((ServiceType)CB_ChooseServiceType.SelectedItem, TB_Name.Text, TB_Description.Text,
-            Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), TB_Unit.Text, estimatedTime);
+            Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), Convert.ToString(CB_ChooseUnitType.SelectedItem)!, (TimeSpan)CB_ChooseEstimatedTime.SelectedItem);
             serviceModelManager.AddService(employee);
             ClearServiceAddTextBoxes();
             RefreshService();
@@ -364,20 +357,14 @@ namespace CliningContoraFromValera.UI
             TB_Name.Clear();
             TB_Price.Clear();
             TB_CommercialPrice.Clear();
-            TB_Unit.Clear();
-            TB_EstimatedTime.Clear();
+            CB_ChooseUnitType.SelectedItem = null;
             CB_ChooseServiceType.SelectedItem = null;
+            CB_ChooseEstimatedTime.SelectedItem = null;
         }
 
         private void Button_ServiceClear_Click(object sender, RoutedEventArgs e)
         {
-            TB_Description.Clear();
-            TB_Name.Clear();
-            TB_Price.Clear();
-            TB_CommercialPrice.Clear();
-            TB_Unit.Clear();
-            TB_EstimatedTime.Clear();
-            CB_ChooseServiceType.SelectedItem = null;
+            ClearServiceAddTextBoxes();
         }
 
         private void GetMessageBoxNoSelected()
@@ -407,19 +394,14 @@ namespace CliningContoraFromValera.UI
             decimal decimalFormat;
             TimeSpan estimatedTime;
             ServiceModel service = (ServiceModel)e.Row.Item;
-            var element = (TextBox)e.EditingElement;
+            TextBox element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
                 GetMessageBoxEmptyTextBoxes();
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, "Тип сервиса"))
-                {
-                    ServiceType serviceType = (ServiceType)Enum.Parse(typeof(ServiceType), element.Text);
-                    service.ServiceType = serviceType;
-                }
-                else if (String.Equals((string)e.Column.Header, "Услуга"))
+                if (String.Equals((string)e.Column.Header, "Услуга"))
                 {
                     service.Name = element.Text;
                 }
@@ -463,10 +445,12 @@ namespace CliningContoraFromValera.UI
                             RefreshService();
                             return;
                         }
+                        service.EstimatedTime = TimeSpan.Parse(element.Text);
                     }
                 }
                 serviceModelManager.UpdateServiceById(service);
                 RefreshService();
+                DataGrid_Services.SelectedIndex = -1;
             }
         }
 
@@ -474,8 +458,9 @@ namespace CliningContoraFromValera.UI
         {
             List<ServiceModel> services = serviceModelManager.GetAllServices();
             DataGrid_Services.ItemsSource = services;
+            e.Source = DataGrid_Services;
         }
-
+                
         private void DataGrid_Services_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ServiceModel service = (ServiceModel)DataGrid_Services.SelectedItem;
@@ -516,6 +501,11 @@ namespace CliningContoraFromValera.UI
                 DataGrid_Services.SelectedItem = null;
                 TB_ServiceDescriptionSave.IsEnabled = false;
             }
+        }
+
+        private void Button_ServiceRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshService();
         }
     }
 }

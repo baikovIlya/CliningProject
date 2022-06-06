@@ -19,4 +19,10 @@ namespace CliningContoraFromValera.Bll
         Cleaning,
         Disinsection
     }
+
+    public enum UnitType
+    {
+        шт,
+        м2
+    }
 }
