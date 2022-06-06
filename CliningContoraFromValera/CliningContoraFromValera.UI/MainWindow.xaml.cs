@@ -334,7 +334,6 @@ namespace CliningContoraFromValera.UI
         {
             ComboBox_ShiftFinishTime.ItemsSource = Times.employeesWorkTime;
         }
-
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text))
@@ -363,7 +362,6 @@ namespace CliningContoraFromValera.UI
             Label_ShiftStart.Visibility = Visibility.Visible;
             Label_ShiftFinish.Visibility = Visibility.Visible;
         }
-
 
         private void AddShift()
         {
@@ -543,10 +541,7 @@ namespace CliningContoraFromValera.UI
             DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
         }
 
-        private void ___ComboBox_ShiftStartTime__Loaded(object sender, RoutedEventArgs e)
-        {
-           
-        }
+        
 
     }
 }
