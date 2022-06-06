@@ -12,7 +12,7 @@
         <TabControl x:Name="MainTabControl" Width="800" Height="550">
 
             <TabItem Header="Клиенты">
-                <Grid Height="427" Margin="16,0,31,0">
+                <Grid Height="438" Margin="16,0,31,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60*"></ColumnDefinition>
                         <ColumnDefinition Width="40*"></ColumnDefinition>
@@ -24,12 +24,12 @@
                     <Label Content="Телефон:" Margin="448,170,0,193" Grid.ColumnSpan="2"/>
                     <TextBox x:Name="TextBox_Phone" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
                     <Label Content="Почта:" Margin="448,240,0,123" Grid.ColumnSpan="2"/>
-                    <Button x:Name="Button_ClientAdd" Content="Добавить" Margin="54,345,51,17" Grid.Column="1" Click="Button_ClientAdd_Click"/>
+                    <Button x:Name="Button_ClientAdd" Content="Добавить" Margin="54,345,51,55" Grid.Column="1" Click="Button_ClientAdd_Click"/>
                     <TextBox  x:Name="TextBox_Email" Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
 
                     <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ClientModel}" IsReadOnly="False" 
                               CanUserAddRows="False"
-                              Margin="16,-2,14,75" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
+                              Margin="10,-2,10,55" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
                         <DataGrid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -52,7 +52,7 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="Button_ClientRefresh" Content="Обновить" Margin="306,379,15,-1" Click="Button_ClientRefresh_Click"></Button>
+                    <Button x:Name="Button_ClientRefresh" Content="Обновить список клиентов" Margin="10,400,10,10" Click="Button_ClientRefresh_Click"></Button>
                 </Grid>
             </TabItem>
 
@@ -233,7 +233,7 @@
                                 </DataGrid>
                                 <Button x:Name="Button_EmployeesWorkAreasAndServicesRefresh" Content="Обновить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="5" Width="110" Height="20" Click="Button_EmployeesWorkAreasAndServicesRefresh_Click" Grid.Column="1" Margin="0,0,0,37"/>
                                 <Button x:Name="Button_EmployeeAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeAdd_Click"/>
-                                <Button x:Name="Button_EmployeeRefresh" Content="Обновить" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeRefresh_Click"/>
+                                <Button x:Name="Button_EmployeeRefresh" Content="Обновить список сотрудников" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="4" Width="181" Height="34" Click="Button_EmployeeRefresh_Click"/>
                                 <TextBox x:Name="TB_LastNameEmployee" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="29"/>
                                 <TextBox x:Name="TB_FirstNameEmployee" HorizontalAlignment="Right" Margin="0,35,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="29"/>
                                 <TextBox x:Name="TB_PhoneEmployee" HorizontalAlignment="Left" Margin="10,35,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="354" Height="29" Grid.Row="5" Grid.Column="1"/>
@@ -376,12 +376,12 @@
                         <RowDefinition Height="15*"/>
                         <RowDefinition Height="90*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Введите название для нового района:" VerticalAlignment="Center" Height="55" Margin="10,0,373,0"/>
+                    <Label Content="Введите название района:" VerticalAlignment="Center" Height="55" Margin="10,0,373,0" FontWeight="Bold" FontSize="14" />
                     <TextBox Margin="10,0,373,10" VerticalAlignment="Bottom" Height="25"/>
                     <Button Content="Добавить" HorizontalAlignment="Left" Width="196" Margin="10,17,0,395" Grid.Row="1"/>
                     <Button Content="Очистить" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                            Width="189" Height="35" Margin="0,0,373,395" Grid.Row="1"/>
-                    <DataGrid Grid.Row="1" Margin="10,65,373,102" CanUserAddRows="False" AutoGenerateColumns="False">
+                            Width="196" Height="35" Margin="0,0,373,395" Grid.Row="1"/>
+                    <DataGrid Grid.Row="1" Margin="10,65,373,80" CanUserAddRows="False" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Все районы" Width="250"/>
                             <DataGridTextColumn Header="Добавить" Width="80"/>
@@ -389,10 +389,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Label Content="Выбрать сотрудника:" VerticalAlignment="Top" Height="52" Margin="435,10,10,0"/>
+                    <Label Content="Выбрать сотрудника:" VerticalAlignment="Top" Height="52" Margin="435,10,10,0" FontWeight="Bold" FontSize="14" />
                     <ComboBox Height="30" VerticalAlignment="Top" Margin="435,38,10,0"/>
-                    <Button Content="Добавить район сотруднику" HorizontalAlignment="Left" Margin="491,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="61" Width="237"/>
-                    <Button Content="Очистить список районов" HorizontalAlignment="Left" Margin="74,362,0,0" Grid.Row="1" VerticalAlignment="Top" Height="60" Width="284"/>
+                    <Button Content="Добавить район сотруднику" HorizontalAlignment="Left" Margin="491,17,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="237"/>
+                    <Button Content="Обновить список районов" HorizontalAlignment="Left" Margin="10,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="411"/>
                 </Grid>
             </TabItem>
 
