@@ -326,7 +326,7 @@
                     <Label Content="Выбрать сотрудника:" VerticalAlignment="Top" Height="52" Margin="435,10,10,0"/>
                     <ComboBox Height="30" VerticalAlignment="Top" Margin="435,38,10,0"/>
                     <Button Content="Добавить район сотруднику" HorizontalAlignment="Left" Margin="491,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="61" Width="237"/>
-                    <Button Content="J,yj" HorizontalAlignment="Left" Margin="74,362,0,0" Grid.Row="1" VerticalAlignment="Top" Height="60" Width="284"/>
+                    <Button Content="Очистить список районов" HorizontalAlignment="Left" Margin="74,362,0,0" Grid.Row="1" VerticalAlignment="Top" Height="60" Width="284"/>
                 </Grid>
             </TabItem>
 
