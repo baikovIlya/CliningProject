@@ -17,5 +17,10 @@
         public AddressDTO? Address { get; set; }
         public List<ServiceDTO>? Services { get; set; }
 
+        public OrderDTO()
+        {
+
+        }
+
     }
 }

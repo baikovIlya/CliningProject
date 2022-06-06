@@ -7,6 +7,11 @@
         public string LastName { get; set; }
         public string Phone { get; set; }
 
+        public EmployeeModel()
+        {
+
+        }
+
         public EmployeeModel(string firstName, string lastName, string phone)
         {
             FirstName = firstName;

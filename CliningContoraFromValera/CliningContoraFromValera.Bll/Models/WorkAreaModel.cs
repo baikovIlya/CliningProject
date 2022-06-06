@@ -8,5 +8,10 @@
         {
             return Name;
         }
+
+        public WorkAreaModel()
+        {
+
+        }
     }
 }

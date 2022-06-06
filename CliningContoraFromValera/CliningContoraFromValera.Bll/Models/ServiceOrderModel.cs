@@ -7,5 +7,10 @@ namespace CliningContoraFromValera.Bll.Models
         public int OrderId { get; set; }
         public int ServiceId { get; set; }
         public int Count { get; set; }
+
+        public ServiceOrderModel()
+        {
+
+        }
     }
 }

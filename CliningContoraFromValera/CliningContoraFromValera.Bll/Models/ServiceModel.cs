@@ -14,5 +14,10 @@
         {
             return Name;
         }
+
+        public ServiceModel()
+        {
+
+        }
     }
 }
