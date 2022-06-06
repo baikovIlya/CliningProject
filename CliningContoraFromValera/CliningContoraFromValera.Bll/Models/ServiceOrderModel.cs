@@ -15,5 +15,9 @@ namespace CliningContoraFromValera.Bll.Models
         public TimeSpan EstimatedTime { get; set; }
         public int Count { get; set; }
 
+        public ServiceOrderModel()
+        {
+
+        }
     }
 }

@@ -8,6 +8,11 @@
         public string? Email { get; set; }
         public string Phone { get; set; }
 
+        public ClientModel()
+        {
+
+        }
+
         public ClientModel(string firstName, string lastName, string email, string phone)
         {
             FirstName = firstName;

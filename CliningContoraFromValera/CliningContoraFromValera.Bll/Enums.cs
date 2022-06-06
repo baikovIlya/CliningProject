@@ -21,5 +21,9 @@
         Дезинсекция
     }
 
-
+    public enum UnitType
+    {
+        шт,
+        м2
+    }
 }

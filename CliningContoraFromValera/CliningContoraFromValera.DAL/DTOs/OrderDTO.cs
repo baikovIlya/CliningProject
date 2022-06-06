@@ -18,5 +18,10 @@
         public List<ServiceDTO>? Services { get; set; }
         public ServiceDTO OrdersServices { get; set; }
 
+        public OrderDTO()
+        {
+
+        }
+
     }
 }

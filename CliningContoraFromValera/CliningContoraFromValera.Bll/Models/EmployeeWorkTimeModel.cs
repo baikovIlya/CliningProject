@@ -13,5 +13,10 @@
         public int EmployeeId { get; set; }
 
 
+
+        public EmployeeWorkTimeModel()
+        {
+
+        }
     }
 }

@@ -14,5 +14,22 @@
         {
             return Name;
         }
+
+        public ServiceModel()
+        {
+
+        }
+
+        public ServiceModel(ServiceType serviceType, string name, string description, decimal price, decimal commercialPrice ,
+            string unit, TimeSpan estimatedTime)
+        {
+            ServiceType = serviceType;
+            Name = name;
+            Description = description;
+            Price = price;
+            CommercialPrice = commercialPrice;
+            Unit = unit;
+            EstimatedTime = estimatedTime;
+        }
     }
 }

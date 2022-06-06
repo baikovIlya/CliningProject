@@ -19,5 +19,9 @@
         public string Building { get; set; }
         public string? Room { get; set; }
 
+        public OrderModel()
+        {
+
+        }
     }
 }
