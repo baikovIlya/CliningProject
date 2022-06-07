@@ -1085,9 +1085,12 @@ namespace CliningContoraFromValera.UI
 
         private void CB_SelectOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
-            DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
-            Label_SortOrderByType.Visibility = Visibility.Hidden;
+            if (CB_SelectOrderStatus.SelectedItem != null)
+            {
+                StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
+                DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
+                Label_SortOrderByType.Visibility = Visibility.Hidden;
+            }
         }
 
         private void CB_SelectOrderStatus_Loaded(object sender, RoutedEventArgs e)
@@ -1098,6 +1101,7 @@ namespace CliningContoraFromValera.UI
                 statuses.Add(st);
             }
             CB_SelectOrderStatus.ItemsSource = statuses;
+            CB_SelectOrderStatus.SelectedItem = null;
             Label_SortOrderByType.Visibility= Visibility.Visible;
         }
     }
