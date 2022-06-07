@@ -75,5 +75,6 @@
         public const string GetEmployeesSchedule = "GetEmployeeSchedule";
         public const string GetOrdersService = "GetOrdersService";
         public const string GetEmployeesScheduleByIdByDate = "GetEmployeesScheduleByIdByDate";
+        public const string GetEmployeesInOrderByOrderId = "GetEmployeesInOrderByOrderId";
     }
 }

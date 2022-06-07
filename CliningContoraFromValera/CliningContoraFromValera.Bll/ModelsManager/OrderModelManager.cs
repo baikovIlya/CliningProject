@@ -20,5 +20,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             return MapperConfigStorage.GetInstance().Map<List<OrderModel>>(orders);
         }
 
+        
     }
 }

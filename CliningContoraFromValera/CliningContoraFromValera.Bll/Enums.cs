@@ -21,5 +21,14 @@
         Дезинсекция
     }
 
-
+    public enum UnitType
+    {
+        шт,
+        м2
+    }
+    public enum ClientOrderType
+    {
+        ЮрЛицо,
+        ФизЛицо
+    }
 }
