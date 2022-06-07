@@ -16,7 +16,6 @@
         public ClientDTO? Client { get; set; }
         public AddressDTO? Address { get; set; }
         public List<ServiceDTO>? Services { get; set; }
-        public ServiceDTO OrdersServices { get; set; }
 
         public OrderDTO()
         {
