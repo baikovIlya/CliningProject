@@ -111,6 +111,10 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             employeeManager.DeleteEmployeesOrder(employeeId, orderId);
         }
+        public void DeleteEmployeesWorkArea(int employeeId, int workAreaId)
+        {
+            employeeManager.DeleteEmployeesWorkArea(employeeId, workAreaId);
+        }
 
     }
 }

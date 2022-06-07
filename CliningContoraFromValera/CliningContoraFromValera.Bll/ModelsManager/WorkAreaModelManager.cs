@@ -7,7 +7,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class WorkAreaModelManager
     {
         WorkAreaManager workAreaManager = new WorkAreaManager();
-        EmployeeManager employeeManager = new EmployeeManager();
 
         public List<WorkAreaModel> GetAllWorkAreas()
         {
@@ -37,11 +36,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             workAreaManager.DeleteWorkAreaById(workAreaId);
         }
-
-        public void DeleteEmployeesWorkArea(int employeeId, int workAreaId)
-        {
-            employeeManager.DeleteEmployeesWorkArea(employeeId, workAreaId);
-        }
-        
+                
     }
 }
