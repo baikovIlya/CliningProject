@@ -1085,5 +1085,10 @@ namespace CliningContoraFromValera.UI
             CB_SelectOrderStatus.SelectedItem = null;
             Label_SortOrderByType.Visibility= Visibility.Visible;
         }
+
+        private void Button_OrderDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

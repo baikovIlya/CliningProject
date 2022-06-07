@@ -44,5 +44,10 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             }
             return result;
         }
+
+        public void DeleteOrderById(int orderId)
+        {
+            _orderManager.DeleteOrderById(orderId);
+        }
     }
 }
