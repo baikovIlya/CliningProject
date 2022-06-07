@@ -7,6 +7,8 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class EmployeeModelManager
     {
         EmployeeManager employeeManager = new EmployeeManager();
+        WorkAreaModelManager _workAreaManager = new WorkAreaModelManager();
+        ServiceModelManager _serviceManager = new ServiceModelManager();
 
         public List<EmployeeModel> GetAllEmployees()
         {
@@ -43,10 +45,51 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             return MapperConfigStorage.GetInstance().Map<List<WorkAreaModel>>(employeesWorkArea.WorkAreas);
         }
 
+        public List<WorkAreaModel> GetEmployeesUnableWorkAreasById(int employeeId)
+        {
+            List<WorkAreaModel> result = new List<WorkAreaModel>();
+            List<WorkAreaModel> allWorkAreas = _workAreaManager.GetAllWorkAreas();
+            List<WorkAreaModel> actualWorkAreas = GetEmployeesWorkAreasById(employeeId);
+            for(int i=0; i<allWorkAreas.Count; i++)
+            {
+                WorkAreaModel workAreaModel = allWorkAreas[i];
+                result.Add(workAreaModel);
+                for (int j=0; j<actualWorkAreas.Count; j++)
+                {
+                    if (workAreaModel.Id == actualWorkAreas[j].Id)
+                    {
+                        result.Remove(workAreaModel);
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
         public List<ServiceModel> GetEmployeesServicesById(int employeeId)
         {
             EmployeeDTO employeesService = employeeManager.GetAllEmployeesServicesById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(employeesService.Services);
+        }
+        public List<ServiceModel> GetEmployeesUnableServicesById(int employeeId)
+        {
+            List<ServiceModel> result = new List<ServiceModel>();
+            List<ServiceModel> allServices = _serviceManager.GetAllServices();
+            List<ServiceModel> actualServices = GetEmployeesServicesById(employeeId);
+            for (int i = 0; i < allServices.Count; i++)
+            {
+                ServiceModel service = allServices[i];
+                result.Add(service);
+                for (int j = 0; j < actualServices.Count; j++)
+                {
+                    if (service.Id == actualServices[j].Id)
+                    {
+                        result.Remove(service);
+                        break;
+                    }
+                }
+            }
+            return result;
         }
 
         public void AddOrderToEmployee(int employeeId, int orderId)
@@ -59,10 +102,19 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             List<EmployeeDTO> employees = employeeManager.GetEmployeesInOrderByOrderId(orderId);
             return MapperConfigStorage.GetInstance().Map<List<EmployeeModel>>(employees);
         }
+        public void AddWorkAreaToEmployee(int employeeID, int workAreaId)
+        {
+            employeeManager.AddWorkAreaToEmployee(employeeID, workAreaId);
+        }
 
         public void DeleteEmployeesFromOrder(int employeeId, int orderId)
         {
             employeeManager.DeleteEmployeesOrder(employeeId, orderId);
         }
+        public void DeleteEmployeesWorkArea(int employeeId, int workAreaId)
+        {
+            employeeManager.DeleteEmployeesWorkArea(employeeId, workAreaId);
+        }
+
     }
 }

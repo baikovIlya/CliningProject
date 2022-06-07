@@ -13,21 +13,19 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        ClientModelManager clientModelManager = new ClientModelManager();
-        EmployeeModelManager employeeModelManager = new EmployeeModelManager();
-        WorkTimeModelManager workTimeModelManager = new WorkTimeModelManager();
-        EmployeeWorkTimeModelManager employeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
-        OrderModelManager orderModelManager = new OrderModelManager();
-        WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
-        ServiceModelManager serviceModelManager = new ServiceModelManager();
-        ServiceOrderModelManager serviceOrderModelManager = new ServiceOrderModelManager();
-        AddressModelManager addressModelManager = new AddressModelManager();
+        private ClientModelManager _clientModelManager = new ClientModelManager();
+        private EmployeeModelManager _employeeModelManager = new EmployeeModelManager();
+        private WorkTimeModelManager _workTimeModelManager = new WorkTimeModelManager();
+        private EmployeeWorkTimeModelManager _employeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+        private OrderModelManager _orderModelManager = new OrderModelManager();
+        private WorkAreaModelManager _workAreaModelManager = new WorkAreaModelManager();
+        private ServiceModelManager _serviceModelManager = new ServiceModelManager();
+        private ServiceOrderModelManager _serviceOrderModelManager = new ServiceOrderModelManager();
+        private AddressModelManager _addressModelManager = new AddressModelManager();
 
         public MainWindow()
         {
             InitializeComponent();
-            Button_ServiceToEmployeeAdd.IsEnabled = false;
-            CB_ChooseEmployee.IsEnabled = false;
             TB_ServiceDescription.IsEnabled = false;
             TB_ServiceDescriptionSave.IsEnabled = false;
             ComboBox_OrderServiceCount.IsEnabled = false;
@@ -41,15 +39,15 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ClientModel> clients = clientModelManager.GetAllClients();
+            List<ClientModel> clients = _clientModelManager.GetAllClients();
             DataGrid_Clients.ItemsSource = clients;
         }
 
         private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
         {
             ClientModel client = (ClientModel)DataGrid_Clients.SelectedItem;
-            clientModelManager.DeleteClientById(client.Id);
-            List<ClientModel> clients = clientModelManager.GetAllClients();
+            _clientModelManager.DeleteClientById(client.Id);
+            List<ClientModel> clients = _clientModelManager.GetAllClients();
             DataGrid_Clients.ItemsSource = clients;
         }
 
@@ -80,7 +78,7 @@ namespace CliningContoraFromValera.UI
                     client.Email = Element.Text;
                 }
 
-                clientModelManager.UpdateClientById(client);
+                _clientModelManager.UpdateClientById(client);
             }
         }
 
@@ -104,16 +102,16 @@ namespace CliningContoraFromValera.UI
                TextBox_LastName.Text,
                TextBox_Email.Text,
                TextBox_Phone.Text);
-               clientModelManager.AddClient(client);
+               _clientModelManager.AddClient(client);
                ClearClientAddTextBoxes();
-               List<ClientModel> clients = clientModelManager.GetAllClients();
+               List<ClientModel> clients = _clientModelManager.GetAllClients();
                DataGrid_Clients.ItemsSource = clients;
            }
         }
 
         private void Button_ClientRefresh_Click(object sender, RoutedEventArgs e)
         {
-            List<ClientModel> clients = clientModelManager.GetAllClients();
+            List<ClientModel> clients = _clientModelManager.GetAllClients();
             DataGrid_Clients.ItemsSource = clients;
         }
 
@@ -129,19 +127,19 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             DataGrid_Employees.ItemsSource = employees;
         }
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeWorkTimeModel> employeesWorkTimes = workTimeModelManager.GetEmployeesAndWorkTimes();
+            List<EmployeeWorkTimeModel> employeesWorkTimes = _workTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
 
         private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             DataGrid_Employees.ItemsSource = employees;
         }
 
@@ -164,9 +162,9 @@ namespace CliningContoraFromValera.UI
                 EmployeeModel employee = new EmployeeModel(TB_FirstNameEmployee.Text,
                 TB_LastNameEmployee.Text,
                 TB_PhoneEmployee.Text);
-                employeeModelManager.AddEmployee(employee);
+                _employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
-                List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+                List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
                 DataGrid_Employees.ItemsSource = employees;
             }
         }
@@ -174,8 +172,8 @@ namespace CliningContoraFromValera.UI
         private void Button_EmployeeDelete_Click(object sender, RoutedEventArgs e)
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-            employeeModelManager.DeleteEmployeeById(employee.Id);
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            _employeeModelManager.DeleteEmployeeById(employee.Id);
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             DataGrid_Employees.ItemsSource = employees;
         }
 
@@ -209,7 +207,7 @@ namespace CliningContoraFromValera.UI
                     employee.Phone = element.Text;
                 }
 
-                employeeModelManager.UpdateEmployeeById(employee);
+                _employeeModelManager.UpdateEmployeeById(employee);
             }
         }
 
@@ -218,8 +216,8 @@ namespace CliningContoraFromValera.UI
             if (DataGrid_Employees.SelectedItem != null)
             {
                 EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-                DataGrid_EmployeesWorkAreas.ItemsSource = employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
-                DataGrid_EmployeesServices.ItemsSource = employeeModelManager.GetEmployeesServicesById(employee!.Id);
+                DataGrid_EmployeesWorkAreas.ItemsSource = _employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
+                DataGrid_EmployeesServices.ItemsSource = _employeeModelManager.GetEmployeesServicesById(employee!.Id);
             }
             else
             {
@@ -231,8 +229,8 @@ namespace CliningContoraFromValera.UI
         private void EmployeesWorkAreasAndServicesRefresh()
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-            DataGrid_EmployeesWorkAreas.ItemsSource = employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
-            DataGrid_EmployeesServices.ItemsSource = employeeModelManager.GetEmployeesServicesById(employee!.Id);
+            DataGrid_EmployeesWorkAreas.ItemsSource = _employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
+            DataGrid_EmployeesServices.ItemsSource = _employeeModelManager.GetEmployeesServicesById(employee!.Id);
         }
 
         //РАЙОНЫ
@@ -241,7 +239,7 @@ namespace CliningContoraFromValera.UI
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             WorkAreaModel employeesWorkArea = (WorkAreaModel)DataGrid_EmployeesWorkAreas.SelectedItem;
-            workAreaModelManager.DeleteEmployeesWorkArea(employee.Id, employeesWorkArea.Id);
+            _employeeModelManager.DeleteEmployeesWorkArea(employee.Id, employeesWorkArea.Id);
             EmployeesWorkAreasAndServicesRefresh();
         }
 
@@ -252,22 +250,18 @@ namespace CliningContoraFromValera.UI
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             ServiceModel employeesService = (ServiceModel)DataGrid_EmployeesServices.SelectedItem;
-            serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
+            _serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
             EmployeesWorkAreasAndServicesRefresh();
         }
         private void Button_ServicesDelete_Click(object sender, RoutedEventArgs e)
         {
             ServiceModel employee = (ServiceModel)DataGrid_Services.SelectedItem;
-            serviceModelManager.DeleteServiceyId(employee.Id);
-            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            _serviceModelManager.DeleteServiceyId(employee.Id);
+            List<ServiceModel> services = _serviceModelManager.GetAllServices();
             DataGrid_Services.ItemsSource = services;
         }
 
-        private void CB_ChooseEmployee_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<EmployeeModel> employees =  employeeModelManager.GetAllEmployees();
-            CB_ChooseEmployee.ItemsSource = employees;
-        }
+
                 
         private void CB_ChooseServiceType_Loaded(object sender, RoutedEventArgs e)
         {
@@ -325,13 +319,13 @@ namespace CliningContoraFromValera.UI
         {
             ServiceModel employee = new ServiceModel((ServiceType)CB_ChooseServiceType.SelectedItem, TB_Name.Text, TB_Description.Text,
             Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), Convert.ToString(CB_ChooseUnitType.SelectedItem)!, (TimeSpan)CB_ChooseEstimatedTime.SelectedItem);
-            serviceModelManager.AddService(employee);
+            _serviceModelManager.AddService(employee);
             ClearServiceAddTextBoxes();
             RefreshService();
         }
         private void RefreshService()
         {
-            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            List<ServiceModel> services = _serviceModelManager.GetAllServices();
             DataGrid_Services.ItemsSource = services;
         }
 
@@ -351,22 +345,6 @@ namespace CliningContoraFromValera.UI
             ClearServiceAddTextBoxes();
         }
 
-        private void Button_ServiceToEmployeeAdd_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeModel employee = (EmployeeModel)CB_ChooseEmployee.SelectedItem;
-            ServiceModel employeesService = (ServiceModel)DataGrid_Services.SelectedItem;
-            if (employee != null)
-            {
-                serviceModelManager.AddServiceToEmployee(employee.Id, employeesService.Id);
-            }
-            else
-            {
-                GetMessageBoxException(UITextElements.EmployeeDoesNotSelected);
-            }
-            CB_ChooseEmployee.SelectedItem = null;
-            DataGrid_Services.SelectedItem = null;
-            Button_ServiceToEmployeeAdd.IsEnabled = false;
-        }
 
         private void DataGrid_Services_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
@@ -427,7 +405,7 @@ namespace CliningContoraFromValera.UI
                         service.EstimatedTime = TimeSpan.Parse(element.Text);
                     }
                 }
-                serviceModelManager.UpdateServiceById(service);
+                _serviceModelManager.UpdateServiceById(service);
                 RefreshService();
                 DataGrid_Services.SelectedIndex = -1;
             }
@@ -435,7 +413,7 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Services_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            List<ServiceModel> services = _serviceModelManager.GetAllServices();
             DataGrid_Services.ItemsSource = services;
             e.Source = DataGrid_Services;
         }
@@ -445,8 +423,6 @@ namespace CliningContoraFromValera.UI
             ServiceModel service = (ServiceModel)DataGrid_Services.SelectedItem;
             if (DataGrid_Services.SelectedItem != null)
             {
-                Button_ServiceToEmployeeAdd.IsEnabled = true;
-                CB_ChooseEmployee.IsEnabled = true;
                 TB_ServiceDescriptionSave.IsEnabled = true;
                 TB_ServiceDescription.IsEnabled = true;
                 TB_ServiceDescription.Text = service.Description;
@@ -455,8 +431,6 @@ namespace CliningContoraFromValera.UI
             {
                 TB_ServiceDescription.Clear();
                 TB_ServiceDescription.IsEnabled = false;
-                CB_ChooseEmployee.IsEnabled = false;
-                Button_ServiceToEmployeeAdd.IsEnabled = false;
                 TB_ServiceDescriptionSave.IsEnabled = false;
             }
         }
@@ -471,7 +445,7 @@ namespace CliningContoraFromValera.UI
             {
                 ServiceModel service = (ServiceModel)DataGrid_Services.SelectedItem;
                 service.Description = TB_ServiceDescription.Text.Trim();
-                serviceModelManager.UpdateServiceById(service);
+                _serviceModelManager.UpdateServiceById(service);
                 DataGrid_Services.SelectedItem = null;
                 TB_ServiceDescriptionSave.IsEnabled = false;
             }
@@ -491,7 +465,7 @@ namespace CliningContoraFromValera.UI
                 DateTime date = (DateTime)DP_OrdersDate.SelectedDate;
                 WorkAreaModel wa = (WorkAreaModel)CB_DesiredWorkArea.SelectedItem;
                 ServiceModel sa = (ServiceModel)CB_DesiredService.SelectedItem;
-                List<EmployeeWorkTimeModel> emloyees = employeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
+                List<EmployeeWorkTimeModel> emloyees = _employeeWorkTimeModelManager.GetSuitableEmployees(date, sa.Id, wa.Id);
                 DataGrid_RelevantEmployees.ItemsSource = emloyees;
                 DP_OrdersDate.IsEnabled = false;
             }
@@ -508,20 +482,20 @@ namespace CliningContoraFromValera.UI
                 EmployeeWorkTimeModel employee = (EmployeeWorkTimeModel)DataGrid_RelevantEmployees.SelectedItem;
                 int employeeId = employee.Id;
                 DateTime date = (DateTime)DP_OrdersDate.SelectedDate!;
-                List<OrderModel> orders = orderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
+                List<OrderModel> orders = _orderModelManager.GetAllEmployeesOrdersByDate(employeeId, date);
                 DataGrid_CurrentOrders.ItemsSource = orders;
             }
         }
 
         private void CB_DesiredWorkArea_Loaded(object sender, RoutedEventArgs e)
         {
-            List<WorkAreaModel> workAreas = workAreaModelManager.GetAllWorkAreas();
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
             CB_DesiredWorkArea.ItemsSource = workAreas;
         }
 
         private void CB_DesiredService_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceModel> allServices = serviceModelManager.GetAllServices();
+            List<ServiceModel> allServices = _serviceModelManager.GetAllServices();
             CB_DesiredService.ItemsSource = allServices;
         }
 
@@ -549,14 +523,14 @@ namespace CliningContoraFromValera.UI
         private void CB_DesiredServiceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CB_DesiredService.ItemsSource = null;
-            List<ServiceModel> allServices = serviceModelManager.GetAllServices();
+            List<ServiceModel> allServices = _serviceModelManager.GetAllServices();
             if (CB_DesiredServiceType.SelectedItem == null)
             {
                 CB_DesiredService.ItemsSource = allServices;
             }
             else
             {
-                List<ServiceModel> services = serviceModelManager.GetServicesByType(allServices,
+                List<ServiceModel> services = _serviceModelManager.GetServicesByType(allServices,
                     (ServiceType)CB_DesiredServiceType.SelectedItem);
                 CB_DesiredService.ItemsSource = services;
             }
@@ -567,7 +541,7 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_EmployeeSchedule_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             ComboBox_EmployeeSchedule.ItemsSource = employees;
         }
         private void ComboBox_ShiftStartTime__Loaded(object sender, RoutedEventArgs e)
@@ -613,13 +587,13 @@ namespace CliningContoraFromValera.UI
             else
             {
                 WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
-                workTimeModelManager.AddWorkTime(workTime);
+                _workTimeModelManager.AddWorkTime(workTime);
             }
         }
 
         private void RefreshShifts()
         {
-            List<EmployeeWorkTimeModel> employeesWorkTimes = employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
+            List<EmployeeWorkTimeModel> employeesWorkTimes = _employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
             DataGrid_Schedule.ItemsSource = employeesWorkTimes;
         }
 
@@ -633,7 +607,7 @@ namespace CliningContoraFromValera.UI
             {
                 DateTime startDate = DateTime.Parse(DatePicker_FromDate.Text);
                 DateTime endDate = DateTime.Parse(DatePicker_ToDate.Text);
-                List<EmployeeWorkTimeModel> employeesSchedule = employeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
+                List<EmployeeWorkTimeModel> employeesSchedule = _employeeWorkTimeModelManager.GetEmployeesSchedule(startDate, endDate);
                 DataGrid_Schedule.ItemsSource = employeesSchedule;
             }
         }
@@ -641,7 +615,7 @@ namespace CliningContoraFromValera.UI
         private void Button_ShiftDelete_Click(object sender, RoutedEventArgs e)
         {
             EmployeeWorkTimeModel shift = (EmployeeWorkTimeModel)DataGrid_Schedule.SelectedItem;
-            workTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
+            _workTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
             RefreshShifts();
         }
 
@@ -708,7 +682,7 @@ namespace CliningContoraFromValera.UI
                         workTimes.FinishTime = TimeSpan.Parse(Element.Text);
                     }
                 }
-                workTimeModelManager.UpdateWorkTimeById(workTimes);
+                _workTimeModelManager.UpdateWorkTimeById(workTimes);
                 RefreshShifts();
             }
         }
@@ -731,13 +705,13 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            List<OrderModel> orders = orderModelManager.GetAllOrder();
+            List<OrderModel> orders = _orderModelManager.GetAllOrder();
             DataGrid_AllOrders.ItemsSource = orders;
         }
 
         private void ComboBox_AddNewService_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            List<ServiceModel> services = _serviceModelManager.GetAllServices();
             ComboBox_AddNewService.ItemsSource = services;
         }
 
@@ -799,7 +773,7 @@ namespace CliningContoraFromValera.UI
                     ServiceModel service = (ServiceModel)ComboBox_AddNewService.SelectedItem;
                     int count = (int)ComboBox_OrderServiceCount.SelectedItem;
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
-                    serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+                    _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
                     ClearServiceOrder();
                     Button_AddServiseToOrder.IsEnabled = false;
                     RefreshServiceOrder();
@@ -821,8 +795,8 @@ namespace CliningContoraFromValera.UI
             if(DataGrid_AllOrders.SelectedItem != null)
             {
                 OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-                List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
-                List<EmployeeModel> employeesInOrder = employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
+                List<ServiceOrderModel> servicesInOrder = _serviceOrderModelManager.GetOrdersServices(order.Id);
+                List<EmployeeModel> employeesInOrder = _employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
                 DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
                 DataGrid_EmployeesInOrder.ItemsSource = employeesInOrder;
                 ComboBox_AddNewEmployeeToOrder.IsEnabled = true;
@@ -844,8 +818,8 @@ namespace CliningContoraFromValera.UI
             if(DataGrid_AllOrders.SelectedItem != null)
             {
                 OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-                List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
-                List<EmployeeModel> employeesInOrder = employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
+                List<ServiceOrderModel> servicesInOrder = _serviceOrderModelManager.GetOrdersServices(order.Id);
+                List<EmployeeModel> employeesInOrder = _employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
                 DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
                 DataGrid_EmployeesInOrder.ItemsSource = employeesInOrder;
             }
@@ -857,7 +831,7 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_OrderClient_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ClientModel> clients = clientModelManager.GetAllClients();
+            List<ClientModel> clients = _clientModelManager.GetAllClients();
             ComboBox_OrderClient.ItemsSource = clients;
         }
         private void ComboBox_OrderStartTime_Loaded(object sender, RoutedEventArgs e)
@@ -876,7 +850,7 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_OrderWorkArea_Loaded(object sender, RoutedEventArgs e)
         {
-            List<WorkAreaModel> workAreas = workAreaModelManager.GetAllWorkAreas();
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
             ComboBox_OrderWorkArea.ItemsSource = workAreas;
         }                
 
@@ -898,28 +872,28 @@ namespace CliningContoraFromValera.UI
                 TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
                 StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
                 AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
-                addressModelManager.AddAddress(newAddress);
-                List<AddressModel> allAddress = addressModelManager.GetAllAddresses();
+                _addressModelManager.AddAddress(newAddress);
+                List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
                 AddressModel crntAddress = allAddress.Find(item => item.Street == street);
                 TimeSpan estimatedTime = new TimeSpan(10, 00, 00);
                 TimeSpan finishTime = new TimeSpan(12, 00, 00);
                 decimal price = 1000;
                 bool isCommercial = true;
                 OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
-                orderModelManager.AddOrder(orderModel);
+                _orderModelManager.AddOrder(orderModel);
             }
         }
 
         private void Button_ServiceFromOrderDelete_Click(object sender, RoutedEventArgs e)
         {
             ServiceOrderModel serviceOrder = (ServiceOrderModel)DataGrid_ServicesInOrder.SelectedItem;
-            serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
+            _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
             RefreshServiceOrder();
         }
         private void RefreshServiceOrder()
         {
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            List<ServiceOrderModel> servicesOrders = serviceOrderModelManager.GetOrdersServices(order.Id);
+            List<ServiceOrderModel> servicesOrders = _serviceOrderModelManager.GetOrdersServices(order.Id);
             DataGrid_ServicesInOrder.ItemsSource = servicesOrders;
         }
 
@@ -935,7 +909,7 @@ namespace CliningContoraFromValera.UI
             
         private void ComboBox_AddNewEmployeeToOrder_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             ComboBox_AddNewEmployeeToOrder.ItemsSource = employees;
         }
 
@@ -961,7 +935,7 @@ namespace CliningContoraFromValera.UI
                 {
                     OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
                     EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedItem!;
-                    employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
+                    _employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
                     ClearComboBoxWithEmployees();
                     RefreshOrdersDataGrids();
                 }
@@ -992,7 +966,7 @@ namespace CliningContoraFromValera.UI
         {
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             EmployeeModel employee = (EmployeeModel)DataGrid_EmployeesInOrder.SelectedItem;
-            employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
+            _employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
             RefreshOrdersDataGrids();
         }
 
@@ -1002,7 +976,7 @@ namespace CliningContoraFromValera.UI
             if (ComboBox_HistoryOfEmployeesOrders.SelectedItem != null)
             {
                 EmployeeModel selectedEmployee = (EmployeeModel)ComboBox_HistoryOfEmployeesOrders.SelectedItem;
-                List<OrderModel> employeesOrders = orderModelManager.GetOrderHistoryOfTheEmployeeById(selectedEmployee.Id);
+                List<OrderModel> employeesOrders = _orderModelManager.GetOrderHistoryOfTheEmployeeById(selectedEmployee.Id);
                 DataGrid_AllOrders.ItemsSource = employeesOrders;
                 RefreshOrdersDataGrids();
                 Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
@@ -1019,9 +993,87 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_HistoryOfEmployeesOrders_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             ComboBox_HistoryOfEmployeesOrders.ItemsSource = employees;
             Label_EmployeeOrdersHistory.Visibility = Visibility.Visible;
+        }
+
+        private void CB_SelectEmployee_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
+            CB_SelectEmployee.ItemsSource = employees;
+        }
+
+        private void RefreshEmployeesDG()
+        {
+            if (CB_SelectEmployee.SelectedItem != null)
+            {
+                EmployeeModel selectedEmployee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                List<ServiceModel> actualServices = _employeeModelManager.GetEmployeesServicesById(selectedEmployee.Id);
+                DG_EmployeesActualServices.ItemsSource = actualServices;
+                List<ServiceModel> unableServices = _employeeModelManager.GetEmployeesUnableServicesById(selectedEmployee.Id);
+                DG_EmployeesUnableServices.ItemsSource = unableServices;
+                List<WorkAreaModel> actualWorkAreas = _employeeModelManager.GetEmployeesWorkAreasById(selectedEmployee.Id);
+                DG_EmployeesActualWorkAreas.ItemsSource = actualWorkAreas;
+                List<WorkAreaModel> unableWorkAreas = _employeeModelManager.GetEmployeesUnableWorkAreasById(selectedEmployee.Id);
+                DG_EmployeesUnableWorkAreas.ItemsSource = unableWorkAreas;
+            }
+            else
+            {
+                DG_EmployeesActualServices.ItemsSource = null;
+                DG_EmployeesUnableServices.ItemsSource = null;
+                DG_EmployeesActualWorkAreas.ItemsSource = null;
+                DG_EmployeesUnableWorkAreas.ItemsSource = null;
+            }
+
+        }
+        private void CB_SelectEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshEmployeesDG();
+        }
+
+        private void Button_DeleteEmployeesService_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesActualServices.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                ServiceModel service = (ServiceModel)DG_EmployeesActualServices.SelectedItem;
+                _serviceModelManager.DeleteEmployeesService(employee.Id, service.Id);
+                RefreshEmployeesDG();
+            }
+        }
+
+        private void Button_DeleteWorkAreaFromEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesActualWorkAreas.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                WorkAreaModel workArea = (WorkAreaModel)DG_EmployeesActualWorkAreas.SelectedItem;
+                _employeeModelManager.DeleteEmployeesWorkArea(employee.Id, workArea.Id);
+                RefreshEmployeesDG();
+            }
+        }
+
+        private void Button_AddNewServiceToEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesUnableServices.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                ServiceModel service = (ServiceModel)DG_EmployeesUnableServices.SelectedItem;
+                _serviceModelManager.AddServiceToEmployee(employee.Id, service.Id);
+                RefreshEmployeesDG();
+            }
+        }
+
+        private void Button_DeleteEmployeesWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesUnableWorkAreas.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                WorkAreaModel workArea = (WorkAreaModel)DG_EmployeesUnableWorkAreas.SelectedItem;
+                _employeeModelManager.AddWorkAreaToEmployee(employee.Id, workArea.Id);
+                RefreshEmployeesDG();
+            }
         }
     }
 }

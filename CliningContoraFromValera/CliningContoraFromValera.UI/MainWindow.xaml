@@ -348,6 +348,83 @@
                                 <Label x:Name="Label_ShiftFinish" Content="Конец  смены:" HorizontalAlignment="Left" Height="26" Margin="255,35,0,0" Grid.Row="5" VerticalAlignment="Top" Width="89"/>
                             </Grid>
                         </TabItem>
+                        <TabItem Header="Редактирование районов и услуг">
+                            <Grid Height="382" Margin="20,0,21,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="45"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="CB_SelectEmployee" HorizontalAlignment="Center" Width="299" Height="22" VerticalAlignment="Center" Grid.Column="1" Loaded="CB_SelectEmployee_Loaded" SelectionChanged="CB_SelectEmployee_SelectionChanged"/>
+                                <Label Content="Выберите сотрудника:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="172" Height="40" FontSize="14" Margin="182,5,0,0"/>
+                                <DataGrid x:Name="DG_EmployeesActualServices" Grid.Row="1" 
+                                          ItemsSource="{Binding ServiceModel}" 
+                                          Margin="0,0,10,10"
+                                          CanUserAddRows="False"
+                                          AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Актуальные услуги" Binding="{Binding Name}" Width="273"></DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Удалить">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_DeleteEmployeesService" Content="Удалить" Click="Button_DeleteEmployeesService_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid x:Name="DG_EmployeesActualWorkAreas" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding WorkAreaModel}" 
+                                          Margin="10,0,10,10"
+                                          CanUserAddRows="False"
+                                          AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Актуальные районы" Binding="{Binding Name}" Width="273"></DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Удалить">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_DeleteWorkAreaFromEmployee" Content="Удалить" Click="Button_DeleteWorkAreaFromEmployee_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid x:Name="DG_EmployeesUnableServices" Grid.Row="2" ItemsSource="{Binding ServiceModel}" 
+                                          Margin="0,0,10,0"
+                                          CanUserAddRows="False"
+                                          AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Другие услуги" Binding="{Binding Name}" Width="273"></DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Добавить">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_AddNewServiceToEmployee" Content="Добавить" Click="Button_AddNewServiceToEmployee_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid x:Name="DG_EmployeesUnableWorkAreas" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding ServiceModel}" 
+                                          Margin="10,0,10,0"
+                                          CanUserAddRows="False"
+                                          AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Другие районы" Binding="{Binding Name}" Width="270"></DataGridTextColumn>
+                                        <DataGridTemplateColumn Header="Добавить">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="Button_DeleteEmployeesWorkArea" Content="Добавить" Click="Button_DeleteEmployeesWorkArea_Click"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </Grid>
+                        </TabItem>
                     </TabControl>
                 </Grid>
             </TabItem>
@@ -363,11 +440,8 @@
                         <ColumnDefinition Width="238*"></ColumnDefinition>
                         <ColumnDefinition Width="159*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-
-                    <Label Content="Выбрать сотрудника:" Margin="10,5,212,3"/>
-                    <ComboBox Name='CB_ChooseEmployee' VerticalAlignment="Top" Margin="10,35,212,0" Height="22" Loaded="CB_ChooseEmployee_Loaded"/>
-                    <DataGrid Name="DataGrid_Services" Grid.Row="1"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ServiceModel}" IsReadOnly="False" CanUserAddRows="False"
-                              Margin="10,0,10,164" CellEditEnding="DataGrid_Services_CellEditEnding" Loaded="DataGrid_Services_Loaded" SelectionChanged="DataGrid_Services_SelectionChanged">
+                    <DataGrid Name="DataGrid_Services"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ServiceModel}" IsReadOnly="False" CanUserAddRows="False"
+                              Margin="10,19,10,164" CellEditEnding="DataGrid_Services_CellEditEnding" Loaded="DataGrid_Services_Loaded" SelectionChanged="DataGrid_Services_SelectionChanged" Grid.RowSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Услуга" Binding="{Binding Name}" Width="120" IsReadOnly="True"></DataGridTextColumn>
                             <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
@@ -385,7 +459,6 @@
                     </DataGrid>
                     <Label Content="Описание услуги:" Margin="10,75,0,312" Grid.Row="1" Grid.Column="1"/>
                     <TextBox Name="TB_Description" VerticalAlignment="Top" Margin="10,106,10,0" Height="25" Grid.Row="1" Grid.Column="1"/>
-                    <Button Name="Button_ServiceToEmployeeAdd" Content="Добавить услугу сотруднику" HorizontalAlignment="Left" Margin="284,24,0,0" VerticalAlignment="Top" Height="33" Width="182" Click="Button_ServiceToEmployeeAdd_Click"/>
                     <Label Content="Добавить новую услугу:" Margin="10,6,0,433" Grid.Column="1" Grid.RowSpan="2"/>
                     <Label Content="Тип сервиса:" Margin="10,32,0,434" Grid.Column="1" Grid.RowSpan="2"/>
                     <Label Content="Название услуги:" Margin="10,14,0,371" Grid.Column="1" Grid.Row="1"/>
@@ -428,13 +501,8 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Все районы" Width="250"/>
                             <DataGridTextColumn Header="Добавить" Width="80"/>
-                            <DataGridTextColumn Header="Удалить" Width="80"/>
                         </DataGrid.Columns>
                     </DataGrid>
-
-                    <Label Content="Выбрать сотрудника:" VerticalAlignment="Top" Height="52" Margin="435,10,10,0" FontWeight="Bold" FontSize="14" />
-                    <ComboBox Height="30" VerticalAlignment="Top" Margin="435,38,10,0"/>
-                    <Button Content="Добавить район сотруднику" HorizontalAlignment="Left" Margin="491,17,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="237"/>
                     <Button Content="Обновить список районов" HorizontalAlignment="Left" Margin="10,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="411"/>
                 </Grid>
             </TabItem>
