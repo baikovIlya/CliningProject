@@ -894,6 +894,8 @@ namespace CliningContoraFromValera.UI
                 DataGrid_AllOrders.ItemsSource = employeesOrders;
                 RefreshOrdersDataGrids();
                 Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
+                DataGrid_ServicesInOrder.ItemsSource = null;
+                DataGrid_EmployeesInOrder.ItemsSource = null;
             }
             else
             {
