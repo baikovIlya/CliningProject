@@ -4,8 +4,7 @@
 AS 
 BEGIN 
  
-UPDATE dbo.WorkTime 
-SET IsDeleted = 1 
-WHERE Id = @Id 
+DELETE FROM dbo.WorkTime
+WHERE Id=@Id
  
 END 

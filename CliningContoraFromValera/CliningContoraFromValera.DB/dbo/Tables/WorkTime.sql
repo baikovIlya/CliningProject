@@ -6,6 +6,7 @@
     [EmployeeId] INT           NOT NULL,
     [IsDeleted] BIT DEFAULT 0  NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    FOREIGN KEY ([EmployeeId]) REFERENCES [dbo].[Employee]([Id])
+    FOREIGN KEY ([EmployeeId]) REFERENCES [dbo].[Employee]([Id]),
+    UNIQUE ([Date], EmployeeId)
 );
 

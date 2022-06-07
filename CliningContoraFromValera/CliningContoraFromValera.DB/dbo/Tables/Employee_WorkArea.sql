@@ -4,6 +4,7 @@
     [EmployeeId] INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([EmployeeId]) REFERENCES [dbo].[Employee] ([Id]),
-    FOREIGN KEY ([WorkAreaId]) REFERENCES [dbo].[WorkArea] ([id])
+    FOREIGN KEY ([WorkAreaId]) REFERENCES [dbo].[WorkArea] ([id]),
+    UNIQUE (WorkAreaId, EmployeeId)
 );
 
