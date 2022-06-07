@@ -38,7 +38,7 @@ namespace CliningContoraFromValera.Bll
                 .ForMember(pts => pts.FirstName, opt => opt.MapFrom(ps => ps.Client!.FirstName))
                 .ForMember(pts => pts.LastName, opt => opt.MapFrom(ps => ps.Client!.LastName))
                 .ForMember(pts => pts.Phone, opt => opt.MapFrom(ps => ps.Client!.Phone))
-                .ForMember(pts => pts.WorkAreaId, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Id))
+                .ForMember(pts => pts.Name, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Name))
                 .ForMember(pts => pts.Street, opt => opt.MapFrom(ps => ps.Address!.Street))
                 .ForMember(pts => pts.Building, opt => opt.MapFrom(ps => ps.Address!.Building))
                 .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room))
@@ -59,8 +59,7 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Street", opt => opt.MapFrom(c => c.Street))
                 .ForMember("Building", opt => opt.MapFrom(c => c.Building))
                 .ForMember("Room", opt => opt.MapFrom(c => c.Room))
-                .ForMember(pts => pts.WorkAreaId, opt => opt.MapFrom(ps => ps.WorkArea!.Id))
-                //.ForMember("WorkArea", opt => opt.MapFrom(c => c.WorkArea))
+                .ForMember(pts => pts.WorkAreaId, opt => opt.MapFrom(ps => ps.WorkAreaId))
                 .ReverseMap();
 
                 cfg.CreateMap<WorkAreaDTO, WorkAreaModel>()
@@ -101,9 +100,8 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("EstimatedTime", opt => opt.MapFrom(c => c.EstimatedTime))
                 .ForMember(pts => pts.OrderId, opt => opt.MapFrom(ps => ps.ServiceOrder!.OrderId))
                 .ForMember(pts => pts.ServiceId, opt => opt.MapFrom(ps => ps.ServiceOrder!.ServiceId))
-                .ForMember(pts => pts.Count, opt => opt.MapFrom(ps => ps.ServiceOrder!.Count)).ReverseMap();
-
-
+                .ForMember(pts => pts.Count, opt => opt.MapFrom(ps => ps.ServiceOrder!.Count))
+                .ReverseMap();
             }));
         }
 

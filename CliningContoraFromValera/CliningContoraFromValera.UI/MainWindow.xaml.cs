@@ -846,19 +846,18 @@ namespace CliningContoraFromValera.UI
             WorkAreaModel workArea = (WorkAreaModel)ComboBox_OrderWorkArea.SelectedItem;
             AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
             addressModelManager.AddAddress(newAddress);
+            List<AddressModel> allAddress =  addressModelManager.GetAllAddresses();
+            AddressModel crntAddress = allAddress.Find(item => item.Street == street);
             ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
             DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
             TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
             TimeSpan estimatedTime = new TimeSpan(10, 00, 00);
+            TimeSpan finishTime = new TimeSpan(12, 00, 00);
             decimal price = 1000;
             StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
             bool isCommercial = true;
-
-            OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, price, status, isCommercial, client.Id, newAddress.Id, newAddress.WorkAreaId);
-
+            OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
             orderModelManager.AddOrder(orderModel);
-
-
         }
     }
 }
