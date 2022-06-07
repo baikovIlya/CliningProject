@@ -389,7 +389,7 @@
                                         <DataGridTemplateColumn Header="Удалить">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_DeleteWorkAreaFromEmployee" Content="Удалить"/>
+                                                    <Button x:Name="Button_DeleteWorkAreaFromEmployee" Content="Удалить" Click="Button_DeleteWorkAreaFromEmployee_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>

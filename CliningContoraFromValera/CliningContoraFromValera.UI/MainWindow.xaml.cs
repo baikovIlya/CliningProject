@@ -928,5 +928,16 @@ namespace CliningContoraFromValera.UI
                 RefreshEmployeesDG();
             }
         }
+
+        private void Button_DeleteWorkAreaFromEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesActualWorkAreas.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                WorkAreaModel workArea = (WorkAreaModel)DG_EmployeesActualWorkAreas.SelectedItem;
+                workAreaModelManager.DeleteEmployeesWorkArea(employee.Id, workArea.Id);
+                RefreshEmployeesDG();
+            }
+        }
     }
 }
