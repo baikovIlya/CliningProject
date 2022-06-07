@@ -93,7 +93,7 @@
                                           VerticalAlignment="Top" Width="230" Margin="0,5,0,0" 
                                           Loaded="CB_SelectOrderStatus_Loaded"
                                           SelectionChanged="CB_SelectOrderStatus_SelectionChanged" />
-                                <DataGrid Name="DataGrid_ServicesInOrder" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="148" Margin="0,304,0,0"
+                                <DataGrid Name="DataGrid_ServicesInOrder" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="141" Margin="0,290,0,0"
                                           VerticalAlignment="Top" Width="385" ItemsSource="{Binding ServiceOrder}"  IsReadOnly="True">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="135"></DataGridTextColumn>
@@ -151,7 +151,7 @@
                                 <Label Content="Сотрудники выполняющие заказ:" HorizontalAlignment="Left" Margin="432,265,0,0" VerticalAlignment="Top" FontWeight ="Normal" />
                                 <Label x:Name="Label_AddNewEnployeeToOrder" Content="Добавить сотрудников в заказ" HorizontalAlignment="Left" Height="26" Margin="434,432,0,0" VerticalAlignment="Top" Width="181"/>
                                 <ComboBox Name="ComboBox_OrderServiceCount" Loaded="ComboBox_OrderServiceCount_Loaded" HorizontalAlignment="Left" Margin="243,458,0,0" VerticalAlignment="Top" Width="84" Height="25" SelectionChanged="ComboBox_OrderServiceCount_SelectionChanged"/>
-                                <Label Name="Label_ServiceCount" Content="Количество" HorizontalAlignment="Left" Height="28" Margin="243,431,0,0" VerticalAlignment="Top" Width="84"/>
+                                <Label Name="Label_ServiceCount" Content="Количество" HorizontalAlignment="Left" Height="28" Margin="243,432,0,0" VerticalAlignment="Top" Width="84"/>
                                 <ComboBox Name="ComboBox_HistoryOfEmployeesOrders" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ComboBox_HistoryOfEmployeesOrders_SelectionChanged" Loaded="ComboBox_HistoryOfEmployeesOrders_Loaded">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
