@@ -89,7 +89,7 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <ComboBox HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="308" Margin="0,5,0,0"/>
+                                <ComboBox HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="230" Margin="0,5,0,0"/>
                                 <DataGrid Name="DataGrid_ServicesInOrder" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Height="148" Margin="0,304,0,0"
                                           VerticalAlignment="Top" Width="385" ItemsSource="{Binding ServiceOrder}"  IsReadOnly="True">
                                     <DataGrid.Columns>
@@ -118,7 +118,7 @@
                                 <Label Name="Label_AddNewService" Content="Добавить новую услугу в заказ" HorizontalAlignment="Left" Height="37" Margin="29,458,0,0" VerticalAlignment="Top" Width="181" Visibility="Visible"/>
                                 <Button Name="Button_AddServiseToOrder" Content="+" HorizontalAlignment="Left" Height="25" Margin="332,458,0,0" VerticalAlignment="Top" Width="53" Click="Button_AddServiseToOrder_Click"/>
                                 <Button Name="Button_AddEmployeeToOrder" Content="+" HorizontalAlignment="Left" Height="25" Margin="700,458,0,0" VerticalAlignment="Top" Width="70" Click="Button_AddEmployeeToOrder_Click"/>
-                                <Label Content="Статус заказа:" HorizontalAlignment="Left" Height="30" Margin="16,2,0,0" VerticalAlignment="Top" Width="176"/>
+                                <Label Content="Сортировка по статусу заказа:" HorizontalAlignment="Left" Height="30" Margin="0,3,0,0" VerticalAlignment="Top" Width="192"/>
                                 <DataGrid x:Name="DataGrid_EmployeesInOrder" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" Height="148" Margin="432,304,0,0" VerticalAlignment="Top" Width="338">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
@@ -149,6 +149,18 @@
                                 <Label x:Name="Label_AddNewEnployeeToOrder" Content="Добавить сотрудников в заказ" HorizontalAlignment="Left" Height="26" Margin="476,457,0,0" VerticalAlignment="Top" Width="181"/>
                                 <ComboBox Name="ComboBox_OrderServiceCount" Loaded="ComboBox_OrderServiceCount_Loaded" HorizontalAlignment="Left" Margin="243,458,0,0" VerticalAlignment="Top" Width="84" Height="25" SelectionChanged="ComboBox_OrderServiceCount_SelectionChanged"/>
                                 <Label Name="Label_ServiceCount" Content="Кол-во" HorizontalAlignment="Left" Height="38" Margin="243,457,0,0" VerticalAlignment="Top" Width="48"/>
+                                <ComboBox Name="ComboBox_HistoryOfEmployeesOrders" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ComboBox_HistoryOfEmployeesOrders_SelectionChanged" Loaded="ComboBox_HistoryOfEmployeesOrders_Loaded">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                              <Run Text="{Binding LastName}"/>
+                                              <Run Text="  "/>
+                                              <Run Text="{Binding FirstName}"/>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Label Name="Label_EmployeeOrdersHistory" Content="История заказов сотрудника:" HorizontalAlignment="Left" Height="29" Margin="270,3,0,0" VerticalAlignment="Top" Width="180"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">

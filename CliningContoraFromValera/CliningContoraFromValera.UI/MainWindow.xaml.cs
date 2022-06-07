@@ -994,6 +994,34 @@ namespace CliningContoraFromValera.UI
             EmployeeModel employee = (EmployeeModel)DataGrid_EmployeesInOrder.SelectedItem;
             employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
             RefreshOrdersDataGrids();
-        }                
+        }
+
+
+        private void ComboBox_HistoryOfEmployeesOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ComboBox_HistoryOfEmployeesOrders.SelectedItem != null)
+            {
+                EmployeeModel selectedEmployee = (EmployeeModel)ComboBox_HistoryOfEmployeesOrders.SelectedItem;
+                List<OrderModel> employeesOrders = orderModelManager.GetOrderHistoryOfTheEmployeeById(selectedEmployee.Id);
+                DataGrid_AllOrders.ItemsSource = employeesOrders;
+                RefreshOrdersDataGrids();
+                Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
+                DataGrid_ServicesInOrder.ItemsSource = null;
+                DataGrid_EmployeesInOrder.ItemsSource = null;
+            }
+            else
+            {
+                return;
+            }
+            
+
+        }
+
+        private void ComboBox_HistoryOfEmployeesOrders_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            ComboBox_HistoryOfEmployeesOrders.ItemsSource = employees;
+            Label_EmployeeOrdersHistory.Visibility = Visibility.Visible;
+        }
     }
 }

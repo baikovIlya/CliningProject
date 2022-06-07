@@ -190,5 +190,43 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
+        public List<OrderDTO> GetOrderHistoryOfTheEmployeeById(int employeeId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
+
+                connection.Query<OrderDTO, AddressDTO, WorkAreaDTO, OrderDTO>(
+                    StoredProcedures.GetOrderHistoryOfTheEmployeeById,
+                    (order, address, workArea) => {
+                        if (!result.ContainsKey(order.Id))
+                        {
+                            result.Add(order.Id, order);
+                        }
+
+                        OrderDTO crnt = result[order.Id];
+
+                        if (address != null)
+                        {
+                            crnt.Address = address;
+                        }
+                        if (workArea != null)
+                        {
+                            crnt.Address.WorkArea = workArea;
+                        }
+                        return crnt;
+                    },
+                    param: new { employeeId },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+
+                return result.Values.ToList();
+            }
+        }
+
+
     }
 }

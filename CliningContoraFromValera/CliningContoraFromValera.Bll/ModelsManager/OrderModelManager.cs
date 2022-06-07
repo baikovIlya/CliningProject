@@ -26,5 +26,10 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             OrderDTO order = MapperConfigStorage.GetInstance().Map<OrderDTO>(orderModel);
             _orderManager.AddOrder(order);
         }
+        public List<OrderModel> GetOrderHistoryOfTheEmployeeById(int employeeId)
+        {
+            List<OrderDTO> orders = _orderManager.GetOrderHistoryOfTheEmployeeById(employeeId);
+            return MapperConfigStorage.GetInstance().Map<List<OrderModel>>(orders);
+        }
     }
 }
