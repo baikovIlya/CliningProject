@@ -554,8 +554,8 @@ namespace CliningContoraFromValera.UI
         }
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
-            if (ComboBox_ShiftStartTime == null || ComboBox_ShiftFinishTime == null
-                || ComboBox_EmployeeSchedule == null || DataPicker_EmployeeData == null)
+            if (String.IsNullOrWhiteSpace(ComboBox_EmployeeSchedule.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text)
+                || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text) || String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
             {
                 GetMessageBoxException(UITextElements.EmptyDiscription);
             }
@@ -571,23 +571,19 @@ namespace CliningContoraFromValera.UI
                 catch(System.Data.SqlClient.SqlException)
                 {
                     GetMessageBoxException(UITextElements.ShiftAlreadyExist);
+                    AddShiftItemsClear();
+                    StartAndFinishLabelVisibilities();
                 }
             }
         }
 
-        private void StartAndFinishLabelVisibilities()
-        {
-            Label_ShiftStart.Visibility = Visibility.Visible;
-            Label_ShiftFinish.Visibility = Visibility.Visible;
-        }
-
-        private void AddShift()
+        public void AddShift()
         {
             EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
             TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
             TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
-            if(newStartTime >= newFinishTime)
+            if (newStartTime >= newFinishTime)
             {
                 GetMessageBoxException(UITextElements.WrongScheduleStartEndTime);
             }
@@ -598,6 +594,13 @@ namespace CliningContoraFromValera.UI
             }
         }
 
+        private void StartAndFinishLabelVisibilities()
+        {
+            Label_ShiftStart.Visibility = Visibility.Visible;
+            Label_ShiftFinish.Visibility = Visibility.Visible;
+        }
+
+        
         private void RefreshShifts()
         {
             List<EmployeeWorkTimeModel> employeesWorkTimes = _employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
