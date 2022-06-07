@@ -22,5 +22,6 @@
         public const string CommercialPrice = "Коммерческая цена";
         public const string Unit = "Ед. измер.";
         public const string EstTime = "Ср. время";
+        public const string ShiftAlreadyExist = "В этот день сотрудник уже работает";
     }
 }

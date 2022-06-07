@@ -561,10 +561,17 @@ namespace CliningContoraFromValera.UI
             }
             else 
             {
-                AddShift();
-                AddShiftItemsClear();
-                RefreshShifts();
-                StartAndFinishLabelVisibilities();
+                try
+                {
+                    AddShift();
+                    AddShiftItemsClear();
+                    RefreshShifts();
+                    StartAndFinishLabelVisibilities();
+                }
+                catch(System.Data.SqlClient.SqlException)
+                {
+                    GetMessageBoxException(UITextElements.ShiftAlreadyExist);
+                }
             }
         }
 
