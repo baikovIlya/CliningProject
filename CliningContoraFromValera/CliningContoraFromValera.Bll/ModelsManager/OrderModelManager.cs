@@ -6,20 +6,26 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class OrderModelManager
     {
-        OrderManager orderManager = new OrderManager();
+        OrderManager _orderManager = new OrderManager();
+        ClientManager _clientManager = new ClientManager();
 
         public List<OrderModel> GetAllOrder()
         {
-            List<OrderDTO> orders = orderManager.GetAllOrder();
+            List<OrderDTO> orders = _orderManager.GetAllOrder();
             return MapperConfigStorage.GetInstance().Map<List<OrderModel>>(orders);
         }
 
         public List<OrderModel> GetAllEmployeesOrdersByDate(int employeeId, DateTime date)
         {
-            List<OrderDTO> orders = orderManager.GetEmployeesOrdersByEmployeeIdByDateNew(employeeId, date);
+            List<OrderDTO> orders = _orderManager.GetEmployeesOrdersByEmployeeIdByDateNew(employeeId, date);
             return MapperConfigStorage.GetInstance().Map<List<OrderModel>>(orders);
         }
 
+        public void AddOrder(OrderModel orderModel)
+        {
+            OrderDTO order = MapperConfigStorage.GetInstance().Map<OrderDTO>(orderModel);
+            _orderManager.AddOrder(order);
+        }
         public List<OrderModel> GetOrderHistoryOfTheEmployeeById(int employeeId)
         {
             List<OrderDTO> orders = orderManager.GetOrderHistoryOfTheEmployeeById(employeeId);

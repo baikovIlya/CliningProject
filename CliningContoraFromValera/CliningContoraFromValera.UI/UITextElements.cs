@@ -8,6 +8,7 @@
         public const string Email = "Почта";
         public const string EmptyFieldsError = "Все поля обязательны к заполнению!";
         public const string DoubleAddingEmployee = "Сотрудник уже занят на этом заказе!";
+        public const string DoubleAddingService = "Услуга уже есть в этом заказе!";
         public const string EmptyDiscription = "Заполните поле описания услуги!";
         public const string EmployeeDoesNotSelected = "Сотрудник не выбран!";
         public const string WrongScheduleStartEndTime = "Смена не может закончиться раньше своего начала!";

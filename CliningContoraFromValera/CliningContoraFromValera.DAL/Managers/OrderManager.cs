@@ -44,8 +44,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddOrder(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
+        public void AddOrder(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -68,16 +67,6 @@ namespace CliningContoraFromValera.DAL.Managers
                     },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
-            ClientManager clientManager = new ClientManager();
-            clientManager.AddClient(newClient);
-            AddressManager addressManager = new AddressManager();
-            addressManager.AddAddress(newAddress);
-            WorkAreaManager workAreaManager = new WorkAreaManager();
-            workAreaManager.AddWorkArea(newWorkArea);
-            ServiceManager servicsManager = new ServiceManager();
-            servicsManager.AddService(newService);
-            ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
-            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void UpdateOrderById(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
@@ -105,17 +94,6 @@ namespace CliningContoraFromValera.DAL.Managers
                     },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
-            ClientManager clientManager = new ClientManager();
-            clientManager.UpdateClientById(newClient);
-            AddressManager addressManager = new AddressManager();
-            addressManager.UpdateAddressById(newAddress);
-            WorkAreaManager workAreaManager = new WorkAreaManager();
-            workAreaManager.UpdateWorkAreaById(newWorkArea);
-            ServiceManager servicsManager = new ServiceManager();
-            servicsManager.UpdateServiceById(newService);
-            ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
-            serviceOrderManager.DeleteServiceFromOrder(newOrder.Id, newService.Id);
-            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void DeleteOrderById(int orderId)
