@@ -1060,5 +1060,27 @@ namespace CliningContoraFromValera.UI
                 RefreshEmployeesDG();
             }
         }
+
+        private void CB_SelectOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CB_SelectOrderStatus.SelectedItem != null)
+            {
+                StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
+                DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
+                Label_SortOrderByType.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CB_SelectOrderStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<StatusType> statuses = new List<StatusType> { };
+            foreach (StatusType st in Enum.GetValues(typeof(StatusType)))
+            {
+                statuses.Add(st);
+            }
+            CB_SelectOrderStatus.ItemsSource = statuses;
+            CB_SelectOrderStatus.SelectedItem = null;
+            Label_SortOrderByType.Visibility= Visibility.Visible;
+        }
     }
 }
