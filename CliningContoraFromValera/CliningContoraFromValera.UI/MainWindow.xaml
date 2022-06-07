@@ -9,9 +9,7 @@
         mc:Ignorable="d"
         Title="CliningFromValera" Height="610" Width="880" Background="White" ResizeMode="NoResize">
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/НОВЫЫЫЫЫЫ.jpg"/>
-        </Grid.Background>
+
         <TabControl x:Name="MainTabControl" Width="800" Height="550" Background="#FFC9E0E3">
 
             <TabItem Header="Клиенты" FontFamily="Segoe UI">
