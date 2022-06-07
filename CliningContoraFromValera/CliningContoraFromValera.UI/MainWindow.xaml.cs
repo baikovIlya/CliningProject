@@ -858,7 +858,7 @@ namespace CliningContoraFromValera.UI
             if ((String.IsNullOrWhiteSpace(TextBox_OrderStreet.Text)) || (String.IsNullOrWhiteSpace(TextBox_OrderBuilding.Text)
                 || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text))))
             {
-                GetMessageBoxEmptyTextBoxes();
+                GetMessageBoxException(UITextElements.EmptyDiscription);
             }
             else
             {
@@ -906,7 +906,7 @@ namespace CliningContoraFromValera.UI
             ComboBox_OrderServiceCount.ItemsSource = count;
         }                
             
-        }
+        
 
         private void ComboBox_AddNewEmployeeToOrder_Loaded(object sender, RoutedEventArgs e)
         {
