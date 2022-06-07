@@ -354,6 +354,18 @@ namespace CliningContoraFromValera.DAL.Managers
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
+        public List<EmployeeDTO> GetEmployeesInOrderByOrderId(int orderId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                return connection.Query<EmployeeDTO>(
+                    StoredProcedures.GetEmployeesInOrderByOrderId,
+                    commandType: System.Data.CommandType.StoredProcedure)
+                    .ToList();
+            }
+        }
 
     }
 
