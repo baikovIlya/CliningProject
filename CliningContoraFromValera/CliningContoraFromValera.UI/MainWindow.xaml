@@ -374,7 +374,7 @@
                                         <DataGridTemplateColumn Header="Удалить">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_DeleteEmployeesService" Content="Удалить"/>
+                                                    <Button x:Name="Button_DeleteEmployeesService" Content="Удалить" Click="Button_DeleteEmployeesService_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
