@@ -134,5 +134,6 @@
     <Build Include="dbo\Stored Procedures\GetEmployeesServicesById.sql" />
     <Build Include="dbo\Stored Procedures\GetOrdersService.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeesScheduleByIdByDate.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmployeesInOrderByOrderId.sql" />
   </ItemGroup>
 </Project>
