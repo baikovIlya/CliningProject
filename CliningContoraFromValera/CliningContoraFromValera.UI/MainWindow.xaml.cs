@@ -833,11 +833,6 @@ namespace CliningContoraFromValera.UI
             ComboBox_OrderService.ItemsSource = services;
         }
 
-        private void ComboBox_OrderStatus_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void Button_OrderAdd_Click(object sender, RoutedEventArgs e)
         {
             string street = TextBox_OrderStreet.Text;
@@ -858,6 +853,17 @@ namespace CliningContoraFromValera.UI
             bool isCommercial = true;
             OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
             orderModelManager.AddOrder(orderModel);
+        }
+
+        private void Button_AddEmployeesToOrder_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrderModel serviceOrder = (ServiceOrderModel)ComboBox_OrderService.SelectedItem;
+            serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+        }
+
+        private void Button_AddServicesToOrder_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

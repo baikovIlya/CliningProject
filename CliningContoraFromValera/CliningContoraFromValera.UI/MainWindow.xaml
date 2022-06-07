@@ -182,8 +182,8 @@
                                 <Label Grid.Column="1" Content="Улица:" HorizontalAlignment="Left" Height="30" Margin="10,57,0,0" VerticalAlignment="Top" Width="62" Grid.RowSpan="2"/>
                                 <Label Grid.Column="1" Content="Дом:" HorizontalAlignment="Left" Height="34" Margin="14,61,0,0" Grid.Row="1" VerticalAlignment="Top" Width="56" Grid.RowSpan="2"/>
                                 <Label Grid.Column="1" Content="Помещение:" HorizontalAlignment="Left" Height="31" Margin="10,60,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80" Grid.RowSpan="2"/>
-                                <Button Content="+" Grid.Column="1" Grid.Row="4" Margin="282,25,15,14" />
-                                <Button Content="+" Grid.Row="4" Margin="282,25,14,14" />
+                                <Button Name ="Button_AddEmployeesToOrder" Content="+" Grid.Column="1" Grid.Row="4" Margin="282,25,15,14" Click="Button_AddEmployeesToOrder_Click" />
+                                <Button Name ="Button_AddServicesToOrder" Content="+" Grid.Row="4" Margin="282,25,14,14" Click="Button_AddServicesToOrder_Click" />
                                 <Button x:Name="Button_OrderAdd" Content="Добавить" HorizontalAlignment="Left" Height="34" Margin="16,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="150" Grid.Column="1" Click="Button_OrderAdd_Click"/>
                                 <Button Content="Отменить" HorizontalAlignment="Left" Height="34" Margin="182,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="145" Grid.Column="1"/>
                             </Grid>
