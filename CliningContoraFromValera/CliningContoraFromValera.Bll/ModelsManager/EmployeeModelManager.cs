@@ -90,6 +90,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
                 }
             }
             return result;
+        }
 
         public void AddOrderToEmployee(int employeeId, int orderId)
         {
@@ -104,11 +105,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         public void AddWorkAreaToEmployee(int employeeID, int workAreaId)
         {
             employeeManager.AddWorkAreaToEmployee(employeeID, workAreaId);
-        }
-
-        public void DeleteEmployeesFromOrder(int employeeId, int orderId)
-        {
-            employeeManager.DeleteEmployeesOrder(employeeId, orderId);
         }
 
         public void DeleteEmployeesFromOrder(int employeeId, int orderId)

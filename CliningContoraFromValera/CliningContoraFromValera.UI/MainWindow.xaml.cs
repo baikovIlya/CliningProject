@@ -26,8 +26,6 @@ namespace CliningContoraFromValera.UI
         public MainWindow()
         {
             InitializeComponent();
-            Button_ServiceToEmployeeAdd.IsEnabled = false;
-            CB_ChooseEmployee.IsEnabled = false;
             TB_ServiceDescription.IsEnabled = false;
             TB_ServiceDescriptionSave.IsEnabled = false;
             ComboBox_OrderServiceCount.IsEnabled = false;
@@ -263,11 +261,7 @@ namespace CliningContoraFromValera.UI
             DataGrid_Services.ItemsSource = services;
         }
 
-        private void CB_ChooseEmployee_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<EmployeeModel> employees =  employeeModelManager.GetAllEmployees();
-            CB_ChooseEmployee.ItemsSource = employees;
-        }
+
                 
         private void CB_ChooseServiceType_Loaded(object sender, RoutedEventArgs e)
         {
@@ -351,22 +345,6 @@ namespace CliningContoraFromValera.UI
             ClearServiceAddTextBoxes();
         }
 
-        private void Button_ServiceToEmployeeAdd_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeModel employee = (EmployeeModel)CB_ChooseEmployee.SelectedItem;
-            ServiceModel employeesService = (ServiceModel)DataGrid_Services.SelectedItem;
-            if (employee != null)
-            {
-                serviceModelManager.AddServiceToEmployee(employee.Id, employeesService.Id);
-            }
-            else
-            {
-                GetMessageBoxException(UITextElements.EmployeeDoesNotSelected);
-            }
-            CB_ChooseEmployee.SelectedItem = null;
-            DataGrid_Services.SelectedItem = null;
-            Button_ServiceToEmployeeAdd.IsEnabled = false;
-        }
 
         private void DataGrid_Services_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
@@ -445,8 +423,6 @@ namespace CliningContoraFromValera.UI
             ServiceModel service = (ServiceModel)DataGrid_Services.SelectedItem;
             if (DataGrid_Services.SelectedItem != null)
             {
-                Button_ServiceToEmployeeAdd.IsEnabled = true;
-                CB_ChooseEmployee.IsEnabled = true;
                 TB_ServiceDescriptionSave.IsEnabled = true;
                 TB_ServiceDescription.IsEnabled = true;
                 TB_ServiceDescription.Text = service.Description;
@@ -455,8 +431,6 @@ namespace CliningContoraFromValera.UI
             {
                 TB_ServiceDescription.Clear();
                 TB_ServiceDescription.IsEnabled = false;
-                CB_ChooseEmployee.IsEnabled = false;
-                Button_ServiceToEmployeeAdd.IsEnabled = false;
                 TB_ServiceDescriptionSave.IsEnabled = false;
             }
         }
