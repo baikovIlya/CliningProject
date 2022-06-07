@@ -563,7 +563,19 @@ namespace CliningContoraFromValera.UI
             {
                 try
                 {
-                    AddShift();
+                    EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
+                    TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
+                    TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
+                    DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
+                    if (newStartTime >= newFinishTime)
+                    {
+                        GetMessageBoxException(UITextElements.WrongScheduleStartEndTime);
+                    }
+                    else
+                    {
+                        WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
+                        _workTimeModelManager.AddWorkTime(workTime);
+                    }
                     AddShiftItemsClear();
                     RefreshShifts();
                     StartAndFinishLabelVisibilities();
@@ -571,6 +583,8 @@ namespace CliningContoraFromValera.UI
                 catch(System.Data.SqlClient.SqlException)
                 {
                     GetMessageBoxException(UITextElements.ShiftAlreadyExist);
+                    AddShiftItemsClear();
+                    StartAndFinishLabelVisibilities();
                 }
             }
         }
@@ -581,23 +595,7 @@ namespace CliningContoraFromValera.UI
             Label_ShiftFinish.Visibility = Visibility.Visible;
         }
 
-        private void AddShift()
-        {
-            EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
-            TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
-            TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
-            DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
-            if(newStartTime >= newFinishTime)
-            {
-                GetMessageBoxException(UITextElements.WrongScheduleStartEndTime);
-            }
-            else
-            {
-                WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
-                _workTimeModelManager.AddWorkTime(workTime);
-            }
-        }
-
+        
         private void RefreshShifts()
         {
             List<EmployeeWorkTimeModel> employeesWorkTimes = _employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();

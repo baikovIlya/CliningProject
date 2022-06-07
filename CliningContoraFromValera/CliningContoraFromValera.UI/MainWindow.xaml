@@ -213,7 +213,7 @@
 
             <TabItem Header="Сотрудники">
                 <Grid Height="437" Margin="10">
-                    <TabControl>
+                    <TabControl Margin="0,-26,0,0">
                         <TabItem Header="Персональная информация">
                             <Grid Height="382" Margin="20,0,20,0">
                                 <Grid.RowDefinitions>
