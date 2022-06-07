@@ -30,6 +30,9 @@ namespace CliningContoraFromValera.UI
             CB_ChooseEmployee.IsEnabled = false;
             TB_ServiceDescription.IsEnabled = false;
             TB_ServiceDescriptionSave.IsEnabled = false;
+            ComboBox_OrderServiceCount.IsEnabled = false;
+            ComboBox_AddNewService.IsEnabled = false;
+            Button_AddServiseToOrder.IsEnabled = false;
         }
 
         //КЛИЕНТЫ
@@ -777,13 +780,50 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_AddNewService_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Label_AddNewService.Visibility = Visibility.Hidden;
-            ComboBox_AddNewService.Items.Refresh();
+            if (ComboBox_OrderServiceCount.SelectedItem != null)
+            {
+                Label_AddNewService.Visibility = Visibility.Collapsed;
+                Button_AddServiseToOrder.IsEnabled = true;
+            }
+            else
+            {
+                Label_AddNewService.Visibility = Visibility.Visible;
+                Button_AddServiseToOrder.IsEnabled = false;
+            }
+        }
+
+        private void ComboBox_OrderServiceCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ComboBox_OrderServiceCount.SelectedItem != null)
+            {
+                Label_ServiceCount.Visibility = Visibility.Collapsed;
+                Button_AddServiseToOrder.IsEnabled = true;
+            }
+            else
+            {
+                Label_ServiceCount.Visibility = Visibility.Visible;
+                Button_AddServiseToOrder.IsEnabled = false;
+            }
+        }
+
+        private void ClearServiceOrder()
+        {
+            ComboBox_OrderServiceCount.SelectedItem = null;
+            ComboBox_AddNewService.SelectedItem = null;
+            Label_AddNewService.Visibility = Visibility.Visible;
+            Label_ServiceCount.Visibility = Visibility.Visible;
         }
 
         private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
         {
-           
+            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            ServiceModel service = (ServiceModel)ComboBox_AddNewService.SelectedItem;
+            int count = (int)ComboBox_OrderServiceCount.SelectedItem;
+            ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count};
+            serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+            ClearServiceOrder();
+            Button_AddServiseToOrder.IsEnabled = false;
+            RefreshServiceOrder();
         }
 
         private void DataGrid_ServicesInOrder_Loaded(object sender, RoutedEventArgs e)
@@ -792,9 +832,20 @@ namespace CliningContoraFromValera.UI
         }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
-            DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
+            if(DataGrid_AllOrders.SelectedItem != null)
+            {
+                OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+                List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
+                DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
+                ComboBox_OrderServiceCount.IsEnabled = true;
+                ComboBox_AddNewService.IsEnabled = true;
+            }
+            else
+            {
+                DataGrid_ServicesInOrder.ItemsSource = null;
+                ComboBox_OrderServiceCount.IsEnabled = false;
+                ComboBox_AddNewService.IsEnabled = false;
+            }
         }
         private void ComboBox_OrderClient_Loaded(object sender, RoutedEventArgs e)
         {
@@ -815,65 +866,63 @@ namespace CliningContoraFromValera.UI
             ComboBox_OrderIsCommercial.ItemsSource = clientOrderTypes;
         }
 
-        private void ComboBox_OrderEmployees_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
-            ComboBox_OrderEmployees.ItemsSource = employees;
-        }
-
         private void ComboBox_OrderWorkArea_Loaded(object sender, RoutedEventArgs e)
         {
             List<WorkAreaModel> workAreas = workAreaModelManager.GetAllWorkAreas();
             ComboBox_OrderWorkArea.ItemsSource = workAreas;
-        }
-
-        private void ComboBox_OrderService_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<ServiceModel> services = serviceModelManager.GetAllServices();
-            ComboBox_OrderService.ItemsSource = services;
-        }
+        }                
 
         private void Button_OrderAdd_Click(object sender, RoutedEventArgs e)
         {
-            string street = TextBox_OrderStreet.Text;
-            string building = TextBox_OrderBuilding.Text;
-            string room = TextBox_OrderRoom.Text;
-            WorkAreaModel workArea = (WorkAreaModel)ComboBox_OrderWorkArea.SelectedItem;
-            AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
-            addressModelManager.AddAddress(newAddress);
-            List<AddressModel> allAddress =  addressModelManager.GetAllAddresses();
-            AddressModel crntAddress = allAddress.Find(item => item.Street == street);
-            ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
-            DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
-            TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
-            TimeSpan estimatedTime = new TimeSpan(10, 00, 00);
-            TimeSpan finishTime = new TimeSpan(12, 00, 00);
-            decimal price = 1000;
-            StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
-            bool isCommercial = true;
-            OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
-            orderModelManager.AddOrder(orderModel);
+            if ((String.IsNullOrWhiteSpace(TextBox_OrderStreet.Text)) || (String.IsNullOrWhiteSpace(TextBox_OrderBuilding.Text)
+                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text))))
+            {
+                GetMessageBoxEmptyTextBoxes();
+            }
+            else
+            {
+                string street = TextBox_OrderStreet.Text;
+                string building = TextBox_OrderBuilding.Text;
+                string room = TextBox_OrderRoom.Text;
+                WorkAreaModel workArea = (WorkAreaModel)ComboBox_OrderWorkArea.SelectedItem;
+                ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
+                DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
+                TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
+                StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
+                AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
+                addressModelManager.AddAddress(newAddress);
+                List<AddressModel> allAddress = addressModelManager.GetAllAddresses();
+                AddressModel crntAddress = allAddress.Find(item => item.Street == street);
+                TimeSpan estimatedTime = new TimeSpan(10, 00, 00);
+                TimeSpan finishTime = new TimeSpan(12, 00, 00);
+                decimal price = 1000;
+                bool isCommercial = true;
+                OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
+                orderModelManager.AddOrder(orderModel);
+            }
         }
 
-        private void Button_AddEmployeesToOrder_Click(object sender, RoutedEventArgs e)
+        private void Button_ServiceFromOrderDelete_Click(object sender, RoutedEventArgs e)
         {
-            ServiceOrderModel serviceOrder = (ServiceOrderModel)ComboBox_OrderService.SelectedItem;
-            serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+            ServiceOrderModel serviceOrder = (ServiceOrderModel)DataGrid_ServicesInOrder.SelectedItem;
+            serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
+            RefreshServiceOrder();
         }
-
-        private void Button_AddServicesToOrder_Click(object sender, RoutedEventArgs e)
+        private void RefreshServiceOrder()
         {
-
+            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            List<ServiceOrderModel> servicesOrders = serviceOrderModelManager.GetOrdersServices(order.Id);
+            DataGrid_ServicesInOrder.ItemsSource = servicesOrders;
         }
 
-        private void VisibilityAddingEmployeesAndServicesToOrder()
+        private void ComboBox_OrderServiceCount_Loaded(object sender, RoutedEventArgs e)
         {
-            Label_OrderEmployees.Visibility = Visibility.Visible;
-            ComboBox_OrderEmployees.Visibility = Visibility.Visible;
-            Label_OrderServices.Visibility = Visibility.Visible;
-            ComboBox_OrderService.Visibility = Visibility.Visible;
-            Button_AddEmployeesToOrder.Visibility = Visibility.Visible;
-            Button_AddServicesToOrder.Visibility = Visibility.Visible;
-        }
+            int[] count = new int[30];
+            for(int i = 0; i < count.Length; i++)
+            {
+                count[i] = i + 1;
+            }
+            ComboBox_OrderServiceCount.ItemsSource = count;
+        }                
     }
 }
