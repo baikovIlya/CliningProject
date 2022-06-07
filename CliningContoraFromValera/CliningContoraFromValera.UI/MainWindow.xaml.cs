@@ -836,5 +836,30 @@ namespace CliningContoraFromValera.UI
         {
             
         }
+
+        private void ComboBox_AddNewEmployeeToOrder_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            ComboBox_AddNewEmployeeToOrder.ItemsSource = employees;
+        }
+
+        private void ComboBox_AddNewEmployeeToOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Label_AddNewEnployeeToOrder.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_AddEmployeeToOrder_Click(object sender, RoutedEventArgs e)
+        {
+            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedValue;
+            employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
+            ComboBox_AddNewEmployeeToOrder.Text = null;
+            Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
+        }
+
+        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employeesInOrder = employeeModelManager. 
+        }
     }
 }

@@ -48,5 +48,13 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             EmployeeDTO employeesService = employeeManager.GetAllEmployeesServicesById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(employeesService.Services);
         }
+
+        public void AddOrderToEmployee(int employeeId, int orderId)
+        {
+            //EmployeeDTO employee = MapperConfigStorage.GetInstance().Map<EmployeeDTO>(employeeId);
+            //OrderDTO order = MapperConfigStorage.GetInstance().Map<OrderDTO>(orderId);
+            employeeManager.AddOrderToEmployee(employeeId, orderId);
+
+        }
     }
 }
