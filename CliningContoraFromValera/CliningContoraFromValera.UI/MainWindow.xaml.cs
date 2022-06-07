@@ -554,8 +554,8 @@ namespace CliningContoraFromValera.UI
         }
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
-            if (ComboBox_ShiftStartTime == null || ComboBox_ShiftFinishTime == null
-                || ComboBox_EmployeeSchedule == null || DataPicker_EmployeeData == null)
+            if (String.IsNullOrWhiteSpace(ComboBox_EmployeeSchedule.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text)
+                || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text) || String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
             {
                 GetMessageBoxException(UITextElements.EmptyDiscription);
             }
@@ -563,19 +563,7 @@ namespace CliningContoraFromValera.UI
             {
                 try
                 {
-                    EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
-                    TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
-                    TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
-                    DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
-                    if (newStartTime >= newFinishTime)
-                    {
-                        GetMessageBoxException(UITextElements.WrongScheduleStartEndTime);
-                    }
-                    else
-                    {
-                        WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
-                        _workTimeModelManager.AddWorkTime(workTime);
-                    }
+                    AddShift();
                     AddShiftItemsClear();
                     RefreshShifts();
                     StartAndFinishLabelVisibilities();
@@ -586,6 +574,23 @@ namespace CliningContoraFromValera.UI
                     AddShiftItemsClear();
                     StartAndFinishLabelVisibilities();
                 }
+            }
+        }
+
+        public void AddShift()
+        {
+            EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
+            TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
+            TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
+            DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
+            if (newStartTime >= newFinishTime)
+            {
+                GetMessageBoxException(UITextElements.WrongScheduleStartEndTime);
+            }
+            else
+            {
+                WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
+                _workTimeModelManager.AddWorkTime(workTime);
             }
         }
 
