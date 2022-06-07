@@ -21,7 +21,6 @@ namespace CliningContoraFromValera.UI
         WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
         ServiceModelManager serviceModelManager = new ServiceModelManager();
         ServiceOrderModelManager serviceOrderModelManager = new ServiceOrderModelManager();
-        List<TimeSpan> employeesShifts = new List<TimeSpan>();
 
         public MainWindow()
         {
@@ -33,13 +32,13 @@ namespace CliningContoraFromValera.UI
             TB_ServiceDescriptionSave.IsEnabled = false;
         }
 
+        //КЛИЕНТЫ
+
         private void DataGrid_Clients_Loaded(object sender, RoutedEventArgs e)
         {
             List<ClientModel> clients = clientModelManager.GetAllClients();
             DataGrid_Clients.ItemsSource = clients;
         }
-
-        //КЛИЕНТЫ
 
         private void Button_ClientDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -781,15 +780,52 @@ namespace CliningContoraFromValera.UI
         {
             
         }
-
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderModel order = DataGrid_AllOrders.SelectedItem as OrderModel;
             List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
             DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
         }
+        private void ComboBox_OrderClient_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ClientModel> clients = clientModelManager.GetAllClients();
+            ComboBox_OrderClient.ItemsSource = clients;
+        }
+        private void ComboBox_OrderStartTime_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBox_OrderStartTime.ItemsSource = Times.ordersStartTimes;
+        }
+        private void ComboBox_OrderIsCommercial_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ClientOrderType> clientOrderTypes = new List<ClientOrderType> { };
+            foreach (ClientOrderType clientOT in Enum.GetValues(typeof(ClientOrderType)))
+            {
+                clientOrderTypes.Add(clientOT);
+            }
+            ComboBox_OrderIsCommercial.ItemsSource = clientOrderTypes;
+        }
 
+        private void ComboBox_OrderEmployees_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            ComboBox_OrderEmployees.ItemsSource = employees;
+        }
 
-        
+        private void ComboBox_OrderWorkArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<WorkAreaModel> workAreas = workAreaModelManager.GetAllWorkAreas();
+            ComboBox_OrderWorkArea.ItemsSource = workAreas;
+        }
+
+        private void ComboBox_OrderService_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ServiceModel> services = serviceModelManager.GetAllServices();
+            ComboBox_OrderService.ItemsSource = services;
+        }
+
+        private void ComboBox_OrderStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
