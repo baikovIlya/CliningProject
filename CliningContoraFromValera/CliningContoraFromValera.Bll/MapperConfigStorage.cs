@@ -67,6 +67,7 @@ namespace CliningContoraFromValera.Bll
                 .ReverseMap();
 
                 cfg.CreateMap<EmployeeDTO, EmployeeModel>()
+                .ForMember("Id", opt => opt.MapFrom(c => c.Id))
                 .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
                 .ForMember("Phone", opt => opt.MapFrom(c => c.Phone))
