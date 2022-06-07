@@ -890,17 +890,43 @@ namespace CliningContoraFromValera.UI
             CB_SelectEmployee.ItemsSource = employees;
         }
 
+        private void RefreshEmployeesDG()
+        {
+            if (CB_SelectEmployee.SelectedItem != null)
+            {
+                EmployeeModel selectedEmployee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                List<ServiceModel> actualServices = employeeModelManager.GetEmployeesServicesById(selectedEmployee.Id);
+                DG_EmployeesActualServices.ItemsSource = actualServices;
+                List<ServiceModel> unableServices = employeeModelManager.GetEmployeesUnableServicesById(selectedEmployee.Id);
+                DG_EmployeesUnableServices.ItemsSource = unableServices;
+                List<WorkAreaModel> actualWorkAreas = employeeModelManager.GetEmployeesWorkAreasById(selectedEmployee.Id);
+                DG_EmployeesActualWorkAreas.ItemsSource = actualWorkAreas;
+                List<WorkAreaModel> unableWorkAreas = employeeModelManager.GetEmployeesUnableWorkAreasById(selectedEmployee.Id);
+                DG_EmployeesUnableWorkAreas.ItemsSource = unableWorkAreas;
+            }
+            else
+            {
+                DG_EmployeesActualServices.ItemsSource = null;
+                DG_EmployeesUnableServices.ItemsSource = null;
+                DG_EmployeesActualWorkAreas.ItemsSource = null;
+                DG_EmployeesUnableWorkAreas.ItemsSource = null;
+            }
+
+        }
         private void CB_SelectEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EmployeeModel selectedEmployee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
-            List<ServiceModel> actualServices = employeeModelManager.GetEmployeesServicesById(selectedEmployee.Id);
-            DG_EmployeesActualServices.ItemsSource = actualServices;
-            List<ServiceModel> unableServices = employeeModelManager.GetEmployeesUnableServicesById(selectedEmployee.Id);
-            DG_EmployeesUnableServices.ItemsSource = unableServices;
-            List<WorkAreaModel> actualWorkAreas = employeeModelManager.GetEmployeesWorkAreasById(selectedEmployee.Id);
-            DG_EmployeesActualWorkAreas.ItemsSource = actualWorkAreas;
-            List<WorkAreaModel> unableWorkAreas = employeeModelManager.GetEmployeesUnableWorkAreasById(selectedEmployee.Id);
-            DG_EmployeesUnableWorkAreas.ItemsSource = unableWorkAreas;
+            RefreshEmployeesDG();
+        }
+
+        private void Button_DeleteEmployeesService_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesActualServices.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                ServiceModel service = (ServiceModel)DG_EmployeesActualServices.SelectedItem;
+                serviceModelManager.DeleteEmployeesService(employee.Id, service.Id);
+                RefreshEmployeesDG();
+            }
         }
     }
 }
