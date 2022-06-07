@@ -838,7 +838,7 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddEmployeeToOrder_Click(object sender, RoutedEventArgs e)
         {   
-            if (ComboBox_AddNewEmployeeToOrder.SelectedItem != null || DataGrid_AllOrders.SelectedItem != null)
+            if (DataGrid_AllOrders.SelectedItem != null)
             {
                 try
                 {
