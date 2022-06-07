@@ -939,5 +939,27 @@ namespace CliningContoraFromValera.UI
                 RefreshEmployeesDG();
             }
         }
+
+        private void Button_AddNewServiceToEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesUnableServices.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                ServiceModel service = (ServiceModel)DG_EmployeesUnableServices.SelectedItem;
+                serviceModelManager.AddServiceToEmployee(employee.Id, service.Id);
+                RefreshEmployeesDG();
+            }
+        }
+
+        private void Button_DeleteEmployeesWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (CB_SelectEmployee.SelectedItem != null && DG_EmployeesUnableWorkAreas.SelectedItem != null)
+            {
+                EmployeeModel employee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+                WorkAreaModel workArea = (WorkAreaModel)DG_EmployeesUnableWorkAreas.SelectedItem;
+                employeeModelManager.AddWorkAreaToEmployee(employee.Id, workArea.Id);
+                RefreshEmployeesDG();
+            }
+        }
     }
 }

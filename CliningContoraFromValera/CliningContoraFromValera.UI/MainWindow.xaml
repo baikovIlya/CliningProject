@@ -404,7 +404,7 @@
                                         <DataGridTemplateColumn Header="Добавить">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_AddNewServiceToEmployee" Content="Добавить"/>
+                                                    <Button x:Name="Button_AddNewServiceToEmployee" Content="Добавить" Click="Button_AddNewServiceToEmployee_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -419,7 +419,7 @@
                                         <DataGridTemplateColumn Header="Добавить">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_DeleteEmployeesWorkArea" Content="Добавить"/>
+                                                    <Button x:Name="Button_DeleteEmployeesWorkArea" Content="Добавить" Click="Button_DeleteEmployeesWorkArea_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
