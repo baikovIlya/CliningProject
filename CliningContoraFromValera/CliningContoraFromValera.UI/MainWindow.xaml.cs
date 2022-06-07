@@ -724,41 +724,25 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_AddNewService_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ComboBox_AddNewService.SelectedItem != null)
+            if (ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
             {
-                Label_AddNewService.Visibility = Visibility.Collapsed;
-                if(ComboBox_OrderServiceCount != null)
-                {
-                    Button_AddServiseToOrder.IsEnabled = true;
-                }
-                else
-                {
-                    Button_AddServiseToOrder.IsEnabled = false;
-                }
+                Button_AddServiseToOrder.IsEnabled = true;
             }
             else
             {
-                Label_AddNewService.Visibility = Visibility.Visible;
+                Button_AddServiseToOrder.IsEnabled = false;
             }
         }
 
         private void ComboBox_OrderServiceCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(ComboBox_OrderServiceCount.SelectedItem != null)
+            if(ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
             {
-                Label_ServiceCount.Visibility = Visibility.Collapsed;
-                if(ComboBox_AddNewService.SelectedItem != null)
-                {
-                    Button_AddServiseToOrder.IsEnabled = true;
-                }
-                else
-                {
-                    Button_AddServiseToOrder.IsEnabled = false;
-                }
+                Button_AddServiseToOrder.IsEnabled = true;
             }
             else
             {
-                Label_ServiceCount.Visibility = Visibility.Visible;
+                Button_AddServiseToOrder.IsEnabled = false;
             }
         }
 
@@ -766,13 +750,11 @@ namespace CliningContoraFromValera.UI
         {
             ComboBox_OrderServiceCount.SelectedItem = null;
             ComboBox_AddNewService.SelectedItem = null;
-            Label_AddNewService.Visibility = Visibility.Visible;
-            Label_ServiceCount.Visibility = Visibility.Visible;
         }
 
         private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
         {
-            if (DataGrid_AllOrders.SelectedItem != null && ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
+            if (DataGrid_AllOrders.SelectedItem != null)
             {
                 try
                 {
@@ -924,19 +906,17 @@ namespace CliningContoraFromValera.UI
         {
             if (ComboBox_AddNewEmployeeToOrder.SelectedItem != null)
             {
-                Label_AddNewEnployeeToOrder.Visibility = Visibility.Collapsed;
                 Button_AddEmployeeToOrder.IsEnabled = true;
             }
             else
             {
-                Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
                 Button_AddEmployeeToOrder.IsEnabled = false;
             }
         }
 
         private void Button_AddEmployeeToOrder_Click(object sender, RoutedEventArgs e)
         {   
-            if (DataGrid_AllOrders.SelectedItem != null && ComboBox_AddNewEmployeeToOrder != null)
+            if (DataGrid_AllOrders.SelectedItem != null)
             {
                 try
                 {
@@ -961,7 +941,6 @@ namespace CliningContoraFromValera.UI
         public void ClearComboBoxWithEmployees()
         {
             ComboBox_AddNewEmployeeToOrder.Text = null;
-            Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
         }
 
         public void GetMessageBoxException(string message)
@@ -976,7 +955,6 @@ namespace CliningContoraFromValera.UI
             _employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
             RefreshOrdersDataGrids();
         }
-
 
         private void ComboBox_HistoryOfEmployeesOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

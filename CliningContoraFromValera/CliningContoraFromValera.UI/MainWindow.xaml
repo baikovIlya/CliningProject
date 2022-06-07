@@ -62,7 +62,7 @@
                     <TabControl Margin="0,-26,0,-36">
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="0,0,-2,0" Height="486">
-                                <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}" Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,206" SelectionChanged="DataGrid_AllOrders_SelectionChanged">
+                                <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}" Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="100"></DataGridTextColumn>
@@ -108,7 +108,7 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Label Content="Услуги в заказе:" HorizontalAlignment="Left" Height="36" Margin="0,280,0,0" VerticalAlignment="Top" Width="187" FontWeight ="DemiBold" />
+                                <Label Content="Услуги в заказе:" HorizontalAlignment="Left" Height="36" Margin="0,266,0,0" VerticalAlignment="Top" Width="187" FontWeight ="Normal" />
                                 <ComboBox Name="ComboBox_AddNewService" ItemsSource="{Binding ServiceModel}" HorizontalAlignment="Left" Height="25" Margin="0,458,0,0" VerticalAlignment="Top" Width="240" Loaded="ComboBox_AddNewService_Loaded" SelectionChanged="ComboBox_AddNewService_SelectionChanged">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
@@ -118,11 +118,11 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <Label Name="Label_AddNewService" Content="Добавить новую услугу в заказ" HorizontalAlignment="Left" Height="37" Margin="29,458,0,0" VerticalAlignment="Top" Width="181" Visibility="Visible"/>
+                                <Label Name="Label_AddNewService" Content="Добавить новую услугу в заказ" HorizontalAlignment="Left" Height="28" Margin="2,431,0,0" VerticalAlignment="Top" Width="181" Visibility="Visible"/>
                                 <Button Name="Button_AddServiseToOrder" Content="+" HorizontalAlignment="Left" Height="25" Margin="332,458,0,0" VerticalAlignment="Top" Width="53" Click="Button_AddServiseToOrder_Click"/>
                                 <Button Name="Button_AddEmployeeToOrder" Content="+" HorizontalAlignment="Left" Height="25" Margin="700,458,0,0" VerticalAlignment="Top" Width="70" Click="Button_AddEmployeeToOrder_Click"/>
                                 <Label x:Name="Label_SortOrderByType" Content="Сортировка по статусу заказа:" HorizontalAlignment="Left" Height="30" Margin="0,3,0,0" VerticalAlignment="Top" Width="192"/>
-                                <DataGrid x:Name="DataGrid_EmployeesInOrder" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" Height="148" Margin="432,304,0,0" VerticalAlignment="Top" Width="338">
+                                <DataGrid x:Name="DataGrid_EmployeesInOrder" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" Height="142" Margin="432,290,0,0" VerticalAlignment="Top" Width="338">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="90"></DataGridTextColumn>
@@ -148,10 +148,10 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
 
-                                <Label Content="Сотрудники выполняющие заказ:" HorizontalAlignment="Left" Margin="432,280,0,0" VerticalAlignment="Top" FontWeight ="DemiBold" />
-                                <Label x:Name="Label_AddNewEnployeeToOrder" Content="Добавить сотрудников в заказ" HorizontalAlignment="Left" Height="26" Margin="476,457,0,0" VerticalAlignment="Top" Width="181"/>
+                                <Label Content="Сотрудники выполняющие заказ:" HorizontalAlignment="Left" Margin="432,265,0,0" VerticalAlignment="Top" FontWeight ="Normal" />
+                                <Label x:Name="Label_AddNewEnployeeToOrder" Content="Добавить сотрудников в заказ" HorizontalAlignment="Left" Height="26" Margin="434,432,0,0" VerticalAlignment="Top" Width="181"/>
                                 <ComboBox Name="ComboBox_OrderServiceCount" Loaded="ComboBox_OrderServiceCount_Loaded" HorizontalAlignment="Left" Margin="243,458,0,0" VerticalAlignment="Top" Width="84" Height="25" SelectionChanged="ComboBox_OrderServiceCount_SelectionChanged"/>
-                                <Label Name="Label_ServiceCount" Content="Кол-во" HorizontalAlignment="Left" Height="38" Margin="243,457,0,0" VerticalAlignment="Top" Width="48"/>
+                                <Label Name="Label_ServiceCount" Content="Количество" HorizontalAlignment="Left" Height="28" Margin="243,431,0,0" VerticalAlignment="Top" Width="84"/>
                                 <ComboBox Name="ComboBox_HistoryOfEmployeesOrders" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Center" Height="25" Margin="0,5,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ComboBox_HistoryOfEmployeesOrders_SelectionChanged" Loaded="ComboBox_HistoryOfEmployeesOrders_Loaded">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
