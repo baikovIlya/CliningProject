@@ -883,5 +883,22 @@ namespace CliningContoraFromValera.UI
             employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
             RefreshOrdersDataGrids();
         }
+
+        private void CB_SelectEmployee_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            CB_SelectEmployee.ItemsSource = employees;
+        }
+
+        private void CB_SelectEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EmployeeModel selectedEmployee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
+            List<ServiceModel> actualServices = employeeModelManager.GetEmployeesServicesById(selectedEmployee.Id);
+            DG_EmployeesActualServices.ItemsSource = actualServices;
+            List<WorkAreaModel> actualWorkAreas = employeeModelManager.GetEmployeesWorkAreasById(selectedEmployee.Id);
+            DG_EmployeesActualWorkAreas.ItemsSource = actualWorkAreas;
+            List<WorkAreaModel> unableWorkAreas = employeeModelManager.GetEmployeesUnableWorkAreasById(selectedEmployee.Id);
+            DG_EmployeesUnableWorkAreas.ItemsSource = unableWorkAreas;
+        }
     }
 }

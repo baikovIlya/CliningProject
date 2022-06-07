@@ -7,6 +7,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class EmployeeModelManager
     {
         EmployeeManager employeeManager = new EmployeeManager();
+        WorkAreaModelManager _workAreaManager = new WorkAreaModelManager();
 
         public List<EmployeeModel> GetAllEmployees()
         {
@@ -41,6 +42,24 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             EmployeeDTO employeesWorkArea = employeeManager.GetAllEmployeesWorkAreasById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<WorkAreaModel>>(employeesWorkArea.WorkAreas);
+        }
+
+        public List<WorkAreaModel> GetEmployeesUnableWorkAreasById(int employeeId)
+        {
+            List<WorkAreaModel> result = _workAreaManager.GetAllWorkAreas();
+            List<WorkAreaModel> allWorkAreas = _workAreaManager.GetAllWorkAreas();
+            List<WorkAreaModel> actualWorkAreas = GetEmployeesWorkAreasById(employeeId);
+            foreach (WorkAreaModel workArea in allWorkAreas)
+            {
+                foreach(WorkAreaModel workAreaModel in actualWorkAreas)
+                {
+                    if(workArea.Name != workAreaModel.Name)
+                    {
+                        ;
+                    }
+                }
+            }
+            return result;
         }
 
         public List<ServiceModel> GetEmployeesServicesById(int employeeId)
