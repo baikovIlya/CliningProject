@@ -727,41 +727,25 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_AddNewService_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ComboBox_AddNewService.SelectedItem != null)
+            if (ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
             {
-                Label_AddNewService.Visibility = Visibility.Collapsed;
-                if(ComboBox_OrderServiceCount != null)
-                {
-                    Button_AddServiseToOrder.IsEnabled = true;
-                }
-                else
-                {
-                    Button_AddServiseToOrder.IsEnabled = false;
-                }
+                Button_AddServiseToOrder.IsEnabled = true;
             }
             else
             {
-                Label_AddNewService.Visibility = Visibility.Visible;
+                Button_AddServiseToOrder.IsEnabled = false;
             }
         }
 
         private void ComboBox_OrderServiceCount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(ComboBox_OrderServiceCount.SelectedItem != null)
+            if(ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
             {
-                Label_ServiceCount.Visibility = Visibility.Collapsed;
-                if(ComboBox_AddNewService.SelectedItem != null)
-                {
-                    Button_AddServiseToOrder.IsEnabled = true;
-                }
-                else
-                {
-                    Button_AddServiseToOrder.IsEnabled = false;
-                }
+                Button_AddServiseToOrder.IsEnabled = true;
             }
             else
             {
-                Label_ServiceCount.Visibility = Visibility.Visible;
+                Button_AddServiseToOrder.IsEnabled = false;
             }
         }
 
@@ -769,13 +753,11 @@ namespace CliningContoraFromValera.UI
         {
             ComboBox_OrderServiceCount.SelectedItem = null;
             ComboBox_AddNewService.SelectedItem = null;
-            Label_AddNewService.Visibility = Visibility.Visible;
-            Label_ServiceCount.Visibility = Visibility.Visible;
         }
 
         private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
         {
-            if (DataGrid_AllOrders.SelectedItem != null && ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
+            if (DataGrid_AllOrders.SelectedItem != null)
             {
                 try
                 {
@@ -927,19 +909,17 @@ namespace CliningContoraFromValera.UI
         {
             if (ComboBox_AddNewEmployeeToOrder.SelectedItem != null)
             {
-                Label_AddNewEnployeeToOrder.Visibility = Visibility.Collapsed;
                 Button_AddEmployeeToOrder.IsEnabled = true;
             }
             else
             {
-                Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
                 Button_AddEmployeeToOrder.IsEnabled = false;
             }
         }
 
         private void Button_AddEmployeeToOrder_Click(object sender, RoutedEventArgs e)
         {   
-            if (DataGrid_AllOrders.SelectedItem != null && ComboBox_AddNewEmployeeToOrder != null)
+            if (DataGrid_AllOrders.SelectedItem != null)
             {
                 try
                 {
@@ -964,7 +944,6 @@ namespace CliningContoraFromValera.UI
         public void ClearComboBoxWithEmployees()
         {
             ComboBox_AddNewEmployeeToOrder.Text = null;
-            Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
         }
 
         public void GetMessageBoxException(string message)
@@ -979,7 +958,6 @@ namespace CliningContoraFromValera.UI
             _employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
             RefreshOrdersDataGrids();
         }
-
 
         private void ComboBox_HistoryOfEmployeesOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1084,6 +1062,28 @@ namespace CliningContoraFromValera.UI
                 _employeeModelManager.AddWorkAreaToEmployee(employee.Id, workArea.Id);
                 RefreshEmployeesDG();
             }
+        }
+
+        private void CB_SelectOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CB_SelectOrderStatus.SelectedItem != null)
+            {
+                StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
+                DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
+                Label_SortOrderByType.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CB_SelectOrderStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<StatusType> statuses = new List<StatusType> { };
+            foreach (StatusType st in Enum.GetValues(typeof(StatusType)))
+            {
+                statuses.Add(st);
+            }
+            CB_SelectOrderStatus.ItemsSource = statuses;
+            CB_SelectOrderStatus.SelectedItem = null;
+            Label_SortOrderByType.Visibility= Visibility.Visible;
         }
     }
 }
