@@ -859,7 +859,7 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            EmployeeModel employeesInOrder = employeeModelManager. 
+            
         }
     }
 }
