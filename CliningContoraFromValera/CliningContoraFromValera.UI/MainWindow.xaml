@@ -121,7 +121,7 @@
                                 <Label Name="Label_AddNewService" Content="Добавить новую услугу в заказ" HorizontalAlignment="Left" Height="37" Margin="29,458,0,0" VerticalAlignment="Top" Width="181" Visibility="Visible"/>
                                 <Button Name="Button_AddServiseToOrder" Content="+" HorizontalAlignment="Left" Height="25" Margin="332,458,0,0" VerticalAlignment="Top" Width="53" Click="Button_AddServiseToOrder_Click"/>
                                 <Button Name="Button_AddEmployeeToOrder" Content="+" HorizontalAlignment="Left" Height="25" Margin="700,458,0,0" VerticalAlignment="Top" Width="70" Click="Button_AddEmployeeToOrder_Click"/>
-                                <Label Content="Сортировка по статусу заказа:" HorizontalAlignment="Left" Height="30" Margin="0,3,0,0" VerticalAlignment="Top" Width="192"/>
+                                <Label x:Name="Label_SortOrderByType" Content="Сортировка по статусу заказа:" HorizontalAlignment="Left" Height="30" Margin="0,3,0,0" VerticalAlignment="Top" Width="192"/>
                                 <DataGrid x:Name="DataGrid_EmployeesInOrder" ItemsSource="{Binding EmployeeModel}" HorizontalAlignment="Left" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" Height="148" Margin="432,304,0,0" VerticalAlignment="Top" Width="338">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
