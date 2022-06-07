@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="PhonePicture.jpg" />
     <None Remove="НОВЫЫЫЫЫЫ.jpg" />
     <None Remove="фонпроекта.jpg" />
   </ItemGroup>
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="PhonePicture.jpg" />
     <Resource Include="НОВЫЫЫЫЫЫ.jpg" />
     <Resource Include="фонпроекта.jpg" />
   </ItemGroup>
