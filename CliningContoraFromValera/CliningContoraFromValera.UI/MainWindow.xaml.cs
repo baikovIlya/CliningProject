@@ -25,7 +25,6 @@ namespace CliningContoraFromValera.UI
         public MainWindow()
         {
             InitializeComponent();
-            Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
             Button_ServiceToEmployeeAdd.IsEnabled = false;
             CB_ChooseEmployee.IsEnabled = false;
             TB_ServiceDescription.IsEnabled = false;
@@ -44,6 +43,8 @@ namespace CliningContoraFromValera.UI
         {
             ClientModel client = (ClientModel)DataGrid_Clients.SelectedItem;
             clientModelManager.DeleteClientById(client.Id);
+            List<ClientModel> clients = clientModelManager.GetAllClients();
+            DataGrid_Clients.ItemsSource = clients;
         }
 
         private void DataGrid_Clients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -77,24 +78,35 @@ namespace CliningContoraFromValera.UI
             }
         }
 
+        private void GetMessageBoxFormatPhone()
+        {
+            MessageBox.Show("Введите номер по примеру '+7(951) 123-45-67'");
+        }
+
         private void Button_ClientAdd_Click(object sender, RoutedEventArgs e)
         {
-           if (String.IsNullOrWhiteSpace(TextBox_Name.Text) || String.IsNullOrWhiteSpace(TextBox_LastName.Text))
+            string phone = TextBox_Phone.Text;
+           if (String.IsNullOrWhiteSpace(TextBox_Name.Text) || String.IsNullOrWhiteSpace(TextBox_LastName.Text)
+                || String.IsNullOrWhiteSpace(TextBox_Email.Text) || String.IsNullOrWhiteSpace(TextBox_Phone.Text))
            {
                 GetMessageBoxEmptyTextBoxes();
            }
-           else if(String.IsNullOrWhiteSpace(TextBox_Email.Text) || String.IsNullOrWhiteSpace(TextBox_Phone.Text))
+           else if(System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
+                || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
+                || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
            {
-                GetMessageBoxEmptyTextBoxes();
+                GetMessageBoxFormatPhone();
            }
            else
            {
-             ClientModel client = new ClientModel(TextBox_Name.Text,
+               ClientModel client = new ClientModel(TextBox_Name.Text,
                TextBox_LastName.Text,
                TextBox_Email.Text,
                TextBox_Phone.Text);
-             clientModelManager.AddClient(client);
-             ClearClientAddTextBoxes();
+               clientModelManager.AddClient(client);
+               ClearClientAddTextBoxes();
+               List<ClientModel> clients = clientModelManager.GetAllClients();
+               DataGrid_Clients.ItemsSource = clients;
            }
         }
 
@@ -139,21 +151,27 @@ namespace CliningContoraFromValera.UI
 
         private void Button_EmployeeAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text))
+            String phone = TB_PhoneEmployee.Text;
+            if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text)
+                || String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
             {
                 GetMessageBoxEmptyTextBoxes();
             }
-            else if (String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
+            else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
+                || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
+                || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
             {
-                GetMessageBoxEmptyTextBoxes();
+                GetMessageBoxFormatPhone();
             }
             else
             {
                 EmployeeModel employee = new EmployeeModel(TB_FirstNameEmployee.Text,
-                    TB_LastNameEmployee.Text,
-                    TB_PhoneEmployee.Text);
+                TB_LastNameEmployee.Text,
+                TB_PhoneEmployee.Text);
                 employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
+                List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+                DataGrid_Employees.ItemsSource = employees;
             }
         }
 
@@ -161,6 +179,8 @@ namespace CliningContoraFromValera.UI
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             employeeModelManager.DeleteEmployeeById(employee.Id);
+            List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
+            DataGrid_Employees.ItemsSource = employees;
         }
 
         private void ClearEmployeeAddTextBoxes()
@@ -199,7 +219,6 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = true;
             if (DataGrid_Employees.SelectedItem != null)
             {
                 EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
@@ -210,11 +229,10 @@ namespace CliningContoraFromValera.UI
             {
                 DataGrid_EmployeesWorkAreas.ItemsSource = null;
                 DataGrid_EmployeesServices.ItemsSource = null;
-                Button_EmployeesWorkAreasAndServicesRefresh.IsEnabled = false;
             }
         }
 
-        private void Button_EmployeesWorkAreasAndServicesRefresh_Click(object sender, RoutedEventArgs e)
+        private void EmployeesWorkAreasAndServicesRefresh()
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             DataGrid_EmployeesWorkAreas.ItemsSource = employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
@@ -228,6 +246,7 @@ namespace CliningContoraFromValera.UI
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             WorkAreaModel employeesWorkArea = (WorkAreaModel)DataGrid_EmployeesWorkAreas.SelectedItem;
             workAreaModelManager.DeleteEmployeesWorkArea(employee.Id, employeesWorkArea.Id);
+            EmployeesWorkAreasAndServicesRefresh();
         }
 
 
@@ -238,6 +257,7 @@ namespace CliningContoraFromValera.UI
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             ServiceModel employeesService = (ServiceModel)DataGrid_EmployeesServices.SelectedItem;
             serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
+            EmployeesWorkAreasAndServicesRefresh();
         }
         private void Button_ServicesDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -583,15 +603,8 @@ namespace CliningContoraFromValera.UI
         }
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text))
-            {
-                GetMessageBoxEmptyTextBoxes();
-            }
-            else if (ComboBox_EmployeeSchedule.SelectedValue is null)
-            {
-                GetMessageBoxEmptyTextBoxes();
-            }
-            else if (String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
+            if (ComboBox_ShiftStartTime == null || ComboBox_ShiftFinishTime == null
+                || ComboBox_EmployeeSchedule == null || DataPicker_EmployeeData == null)
             {
                 GetMessageBoxEmptyTextBoxes();
             }
@@ -612,7 +625,7 @@ namespace CliningContoraFromValera.UI
 
         private void AddShift()
         {
-            EmployeeModel employee = ComboBox_EmployeeSchedule.SelectedValue as EmployeeModel;
+            EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
             TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
             TimeSpan newFinishTime = TimeSpan.Parse(ComboBox_ShiftFinishTime.Text);
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
@@ -660,7 +673,7 @@ namespace CliningContoraFromValera.UI
 
         private void Button_ShiftDelete_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeWorkTimeModel shift = DataGrid_Schedule.SelectedItem as EmployeeWorkTimeModel;
+            EmployeeWorkTimeModel shift = (EmployeeWorkTimeModel)DataGrid_Schedule.SelectedItem;
             workTimeModelManager.DeleteWorkTimeById(shift.WorkTimeId);
             RefreshShifts();
         }
@@ -693,7 +706,7 @@ namespace CliningContoraFromValera.UI
                 {
                     if (!TimeSpan.TryParse(Element.Text, out startTime))
                     {
-                        GetMessageBoxFormatException();
+                        GetMessageBoxFormatTime();
                         return;
                     }
                     else
@@ -701,19 +714,18 @@ namespace CliningContoraFromValera.UI
                         string tmp = startTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxFormatException();
+                            GetMessageBoxFormatTime();
                             RefreshShifts();
                             return;
                         }
                         workTimes.StartTime = TimeSpan.Parse(Element.Text);
                     }
-
                 }
                 else if (String.Equals((string)e.Column.Header, nameColumnFinishTime))
                 {
                     if (!TimeSpan.TryParse(Element.Text, out finishTime))
                     {
-                        GetMessageBoxFormatException();
+                        GetMessageBoxFormatTime();
                         return;
                     }
                     else
@@ -721,20 +733,17 @@ namespace CliningContoraFromValera.UI
                         string tmp = finishTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxFormatException();
+                            GetMessageBoxFormatTime();
                             RefreshShifts();
                             return;
                         }
 
                         workTimes.FinishTime = TimeSpan.Parse(Element.Text);
                     }
-
                 }
-
                 workTimeModelManager.UpdateWorkTimeById(workTimes);
                 RefreshShifts();
             }
-
         }
 
         private void ComboBox_EmployeeSchedule_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -782,7 +791,7 @@ namespace CliningContoraFromValera.UI
         }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrderModel order = DataGrid_AllOrders.SelectedItem as OrderModel;
+            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
             DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
         }
