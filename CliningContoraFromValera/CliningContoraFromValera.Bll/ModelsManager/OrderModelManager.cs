@@ -31,5 +31,18 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             List<OrderDTO> orders = _orderManager.GetOrderHistoryOfTheEmployeeById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<OrderModel>>(orders);
         }
+        public List<OrderModel> GetAllOrdersByStatus(StatusType status)
+        {
+            List<OrderModel> allOrders = GetAllOrder();
+            List<OrderModel> result = new List<OrderModel>();
+            foreach (var ord in allOrders)
+            {
+                if(ord.Status == status)
+                {
+                    result.Add(ord);
+                }
+            }
+            return result;
+        }
     }
 }
