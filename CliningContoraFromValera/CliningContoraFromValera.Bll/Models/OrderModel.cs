@@ -23,5 +23,18 @@
         {
 
         }
+
+        public OrderModel(DateTime date, TimeSpan startTime, TimeSpan estimatedEndTime, decimal price, StatusType status, bool isCommercial, int clientId, int addressId, int workAreaId)
+        {
+            Date = date;
+            StartTime = startTime;
+            EstimatedEndTime = estimatedEndTime;
+            Price = price;
+            Status = status;
+            IsCommercial = isCommercial;
+            Client!.Id = clientId;
+            Address!.Id = addressId;
+            Address.WorkAreaId = workAreaId;
+        }
     }
 }

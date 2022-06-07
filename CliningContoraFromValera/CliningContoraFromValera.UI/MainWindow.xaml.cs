@@ -21,6 +21,7 @@ namespace CliningContoraFromValera.UI
         WorkAreaModelManager workAreaModelManager = new WorkAreaModelManager();
         ServiceModelManager serviceModelManager = new ServiceModelManager();
         ServiceOrderModelManager serviceOrderModelManager = new ServiceOrderModelManager();
+        AddressModelManager addressModelManager = new AddressModelManager();
 
         public MainWindow()
         {
@@ -835,6 +836,29 @@ namespace CliningContoraFromValera.UI
         private void ComboBox_OrderStatus_Loaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Button_OrderAdd_Click(object sender, RoutedEventArgs e)
+        {
+            string street = TextBox_OrderStreet.Text;
+            string building = TextBox_OrderBuilding.Text;
+            string room = TextBox_OrderRoom.Text;
+            WorkAreaModel workArea = (WorkAreaModel)ComboBox_OrderWorkArea.SelectedItem;
+            AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
+            addressModelManager.AddAddress(newAddress);
+            ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
+            DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
+            TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
+            TimeSpan estimatedTime = new TimeSpan(10, 00, 00);
+            decimal price = 1000;
+            StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
+            bool isCommercial = true;
+
+            OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, price, status, isCommercial, client.Id, newAddress.Id, newAddress.WorkAreaId);
+
+            orderModelManager.AddOrder(orderModel);
+
+
         }
     }
 }
