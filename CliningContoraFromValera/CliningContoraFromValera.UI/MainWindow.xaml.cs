@@ -32,6 +32,8 @@ namespace CliningContoraFromValera.UI
             TB_ServiceDescriptionSave.IsEnabled = false;
             ComboBox_OrderServiceCount.IsEnabled = false;
             ComboBox_AddNewService.IsEnabled = false;
+            ComboBox_AddNewEmployeeToOrder.IsEnabled = false;
+            Button_AddEmployeeToOrder.IsEnabled = false;
             Button_AddServiseToOrder.IsEnabled = false;
         }
 
@@ -741,15 +743,21 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_AddNewService_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ComboBox_OrderServiceCount.SelectedItem != null)
+            if (ComboBox_AddNewService.SelectedItem != null)
             {
                 Label_AddNewService.Visibility = Visibility.Collapsed;
-                Button_AddServiseToOrder.IsEnabled = true;
+                if(ComboBox_OrderServiceCount != null)
+                {
+                    Button_AddServiseToOrder.IsEnabled = true;
+                }
+                else
+                {
+                    Button_AddServiseToOrder.IsEnabled = false;
+                }
             }
             else
             {
                 Label_AddNewService.Visibility = Visibility.Visible;
-                Button_AddServiseToOrder.IsEnabled = false;
             }
         }
 
@@ -758,12 +766,18 @@ namespace CliningContoraFromValera.UI
             if(ComboBox_OrderServiceCount.SelectedItem != null)
             {
                 Label_ServiceCount.Visibility = Visibility.Collapsed;
-                Button_AddServiseToOrder.IsEnabled = true;
+                if(ComboBox_AddNewService.SelectedItem != null)
+                {
+                    Button_AddServiseToOrder.IsEnabled = true;
+                }
+                else
+                {
+                    Button_AddServiseToOrder.IsEnabled = false;
+                }
             }
             else
             {
                 Label_ServiceCount.Visibility = Visibility.Visible;
-                Button_AddServiseToOrder.IsEnabled = false;
             }
         }
 
@@ -777,20 +791,31 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddServiseToOrder_Click(object sender, RoutedEventArgs e)
         {
-            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            ServiceModel service = (ServiceModel)ComboBox_AddNewService.SelectedItem;
-            int count = (int)ComboBox_OrderServiceCount.SelectedItem;
-            ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count};
-            serviceOrderModelManager.AddServiceToOrder(serviceOrder);
-            ClearServiceOrder();
-            Button_AddServiseToOrder.IsEnabled = false;
-            RefreshServiceOrder();
+            if (DataGrid_AllOrders.SelectedItem != null && ComboBox_AddNewService.SelectedItem != null && ComboBox_OrderServiceCount.SelectedItem != null)
+            {
+                try
+                {
+                    OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+                    ServiceModel service = (ServiceModel)ComboBox_AddNewService.SelectedItem;
+                    int count = (int)ComboBox_OrderServiceCount.SelectedItem;
+                    ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
+                    serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+                    ClearServiceOrder();
+                    Button_AddServiseToOrder.IsEnabled = false;
+                    RefreshServiceOrder();
+                }
+                catch (System.Data.SqlClient.SqlException)
+                {
+                    GetMessageBoxException(UITextElements.DoubleAddingService);
+                    ClearServiceOrder();
+                }
+            }
+            else
+            {
+                return;
+            }            
         }
 
-        private void DataGrid_ServicesInOrder_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(DataGrid_AllOrders.SelectedItem != null)
@@ -800,14 +825,17 @@ namespace CliningContoraFromValera.UI
                 List<EmployeeModel> employeesInOrder = employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
                 DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
                 DataGrid_EmployeesInOrder.ItemsSource = employeesInOrder;
+                ComboBox_AddNewEmployeeToOrder.IsEnabled = true;
                 ComboBox_OrderServiceCount.IsEnabled = true;
                 ComboBox_AddNewService.IsEnabled = true;
             }
             else
             {
                 DataGrid_ServicesInOrder.ItemsSource = null;
+                DataGrid_EmployeesInOrder.ItemsSource= null;
                 ComboBox_OrderServiceCount.IsEnabled = false;
                 ComboBox_AddNewService.IsEnabled = false;
+                ComboBox_AddNewEmployeeToOrder.IsEnabled = false;
             }
         }
 
@@ -826,7 +854,6 @@ namespace CliningContoraFromValera.UI
                 return;
             }
         }
-
 
         private void ComboBox_OrderClient_Loaded(object sender, RoutedEventArgs e)
         {
@@ -906,8 +933,6 @@ namespace CliningContoraFromValera.UI
             ComboBox_OrderServiceCount.ItemsSource = count;
         }                
             
-        
-
         private void ComboBox_AddNewEmployeeToOrder_Loaded(object sender, RoutedEventArgs e)
         {
             List<EmployeeModel> employees = employeeModelManager.GetAllEmployees();
@@ -916,17 +941,26 @@ namespace CliningContoraFromValera.UI
 
         private void ComboBox_AddNewEmployeeToOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Label_AddNewEnployeeToOrder.Visibility = Visibility.Hidden;
+            if (ComboBox_AddNewEmployeeToOrder.SelectedItem != null)
+            {
+                Label_AddNewEnployeeToOrder.Visibility = Visibility.Collapsed;
+                Button_AddEmployeeToOrder.IsEnabled = true;
+            }
+            else
+            {
+                Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
+                Button_AddEmployeeToOrder.IsEnabled = false;
+            }
         }
 
         private void Button_AddEmployeeToOrder_Click(object sender, RoutedEventArgs e)
         {   
-            if (ComboBox_AddNewEmployeeToOrder.SelectedItem != null || DataGrid_AllOrders.SelectedItem != null)
+            if (DataGrid_AllOrders.SelectedItem != null && ComboBox_AddNewEmployeeToOrder != null)
             {
                 try
                 {
                     OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-                    EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedItem;
+                    EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedItem!;
                     employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
                     ClearComboBoxWithEmployees();
                     RefreshOrdersDataGrids();
@@ -954,17 +988,12 @@ namespace CliningContoraFromValera.UI
             MessageBox.Show(message);
         }
 
-        private void DataGrid_EmployeesIdOrder_Loaded(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
         private void Button_DeleteEmployeeInOrder_Click(object sender, RoutedEventArgs e)
         {
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             EmployeeModel employee = (EmployeeModel)DataGrid_EmployeesInOrder.SelectedItem;
             employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
             RefreshOrdersDataGrids();
-        }
+        }                
     }
 }
