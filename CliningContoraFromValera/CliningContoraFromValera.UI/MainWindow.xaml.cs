@@ -859,5 +859,15 @@ namespace CliningContoraFromValera.UI
             OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
             orderModelManager.AddOrder(orderModel);
         }
+
+        private void VisibilityAddingEmployeesAndServicesToOrder()
+        {
+            Label_OrderEmployees.Visibility = Visibility.Visible;
+            ComboBox_OrderEmployees.Visibility = Visibility.Visible;
+            Label_OrderServices.Visibility = Visibility.Visible;
+            ComboBox_OrderService.Visibility = Visibility.Visible;
+            Button_AddEmployeesToOrder.Visibility = Visibility.Visible;
+            Button_AddServicesToOrder.Visibility = Visibility.Visible;
+        }
     }
 }
