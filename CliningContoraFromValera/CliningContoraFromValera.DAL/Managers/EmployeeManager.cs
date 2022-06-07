@@ -362,6 +362,7 @@ namespace CliningContoraFromValera.DAL.Managers
 
                 return connection.Query<EmployeeDTO>(
                     StoredProcedures.GetEmployeesInOrderByOrderId,
+                    param: new {OrderId = orderId},
                     commandType: System.Data.CommandType.StoredProcedure)
                     .ToList();
             }

@@ -59,5 +59,10 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             List<EmployeeDTO> employees = employeeManager.GetEmployeesInOrderByOrderId(orderId);
             return MapperConfigStorage.GetInstance().Map<List<EmployeeModel>>(employees);
         }
+
+        public void DeleteEmployeesFromOrder(int employeeId, int orderId)
+        {
+            employeeManager.DeleteEmployeesOrder(employeeId, orderId);
+        }
     }
 }

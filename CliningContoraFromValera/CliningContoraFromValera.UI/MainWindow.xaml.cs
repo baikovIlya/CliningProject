@@ -791,10 +791,37 @@ namespace CliningContoraFromValera.UI
         }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
-            DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
+            if(DataGrid_AllOrders.SelectedItem != null)
+            {
+                OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+                List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
+                List<EmployeeModel> employeesInOrder = employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
+                DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
+                DataGrid_EmployeesInOrder.ItemsSource = employeesInOrder;
+            }
+            else
+            {
+                return;
+            }
         }
+
+        private void RefreshOrdersDataGrids()
+        {
+            if(DataGrid_AllOrders.SelectedItem != null)
+            {
+                OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+                List<ServiceOrderModel> servicesInOrder = serviceOrderModelManager.GetOrdersServices(order.Id);
+                List<EmployeeModel> employeesInOrder = employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id);
+                DataGrid_ServicesInOrder.ItemsSource = servicesInOrder;
+                DataGrid_EmployeesInOrder.ItemsSource = employeesInOrder;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+
         private void ComboBox_OrderClient_Loaded(object sender, RoutedEventArgs e)
         {
             List<ClientModel> clients = clientModelManager.GetAllClients();
@@ -849,17 +876,51 @@ namespace CliningContoraFromValera.UI
         }
 
         private void Button_AddEmployeeToOrder_Click(object sender, RoutedEventArgs e)
+        {   
+            if (ComboBox_AddNewEmployeeToOrder.SelectedItem != null || DataGrid_AllOrders.SelectedItem != null)
+            {
+                try
+                {
+                    OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+                    EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedItem;
+                    employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
+                    ClearComboBoxWithEmployees();
+                    RefreshOrdersDataGrids();
+                }
+                catch (System.Data.SqlClient.SqlException)
+                {
+                    GetMessageBoxException(UITextElements.DoubleAddingEmployee);
+                    ClearComboBoxWithEmployees();
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        public void ClearComboBoxWithEmployees()
         {
-            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedValue;
-            employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
             ComboBox_AddNewEmployeeToOrder.Text = null;
             Label_AddNewEnployeeToOrder.Visibility = Visibility.Visible;
         }
 
-        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
+        public void GetMessageBoxException(string message)
         {
-            
+            MessageBox.Show(message);
+        }
+
+        private void DataGrid_EmployeesIdOrder_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void Button_DeleteEmployeeInOrder_Click(object sender, RoutedEventArgs e)
+        {
+            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            EmployeeModel employee = (EmployeeModel)DataGrid_EmployeesInOrder.SelectedItem;
+            employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
+            RefreshOrdersDataGrids();
         }
     }
 }
