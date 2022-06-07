@@ -6,11 +6,20 @@
         public string Street { get; set; }
         public string Building { get; set; }
         public string? Room { get; set; }
-        public WorkAreaModel? WorkArea { get; set; }
+        public int WorkAreaId { get; set; }
 
         public AddressModel()
         {
 
         }
+
+        public AddressModel(string street, string building, string room, int workAreaId)
+        {
+            Street = street;
+            Building = building;
+            Room = room;
+            WorkAreaId = workAreaId;
+        }
+
     }
 }
