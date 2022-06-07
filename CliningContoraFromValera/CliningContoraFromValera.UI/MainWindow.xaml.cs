@@ -895,6 +895,8 @@ namespace CliningContoraFromValera.UI
             EmployeeModel selectedEmployee = (EmployeeModel)CB_SelectEmployee.SelectedItem;
             List<ServiceModel> actualServices = employeeModelManager.GetEmployeesServicesById(selectedEmployee.Id);
             DG_EmployeesActualServices.ItemsSource = actualServices;
+            List<ServiceModel> unableServices = employeeModelManager.GetEmployeesUnableServicesById(selectedEmployee.Id);
+            DG_EmployeesUnableServices.ItemsSource = unableServices;
             List<WorkAreaModel> actualWorkAreas = employeeModelManager.GetEmployeesWorkAreasById(selectedEmployee.Id);
             DG_EmployeesActualWorkAreas.ItemsSource = actualWorkAreas;
             List<WorkAreaModel> unableWorkAreas = employeeModelManager.GetEmployeesUnableWorkAreasById(selectedEmployee.Id);

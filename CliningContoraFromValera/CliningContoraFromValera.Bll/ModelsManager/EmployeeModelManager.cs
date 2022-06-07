@@ -8,6 +8,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     {
         EmployeeManager employeeManager = new EmployeeManager();
         WorkAreaModelManager _workAreaManager = new WorkAreaModelManager();
+        ServiceModelManager _serviceManager = new ServiceModelManager();
 
         public List<EmployeeModel> GetAllEmployees()
         {
@@ -46,16 +47,19 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<WorkAreaModel> GetEmployeesUnableWorkAreasById(int employeeId)
         {
-            List<WorkAreaModel> result = _workAreaManager.GetAllWorkAreas();
+            List<WorkAreaModel> result = new List<WorkAreaModel>();
             List<WorkAreaModel> allWorkAreas = _workAreaManager.GetAllWorkAreas();
             List<WorkAreaModel> actualWorkAreas = GetEmployeesWorkAreasById(employeeId);
-            foreach (WorkAreaModel workArea in allWorkAreas)
+            for(int i=0; i<allWorkAreas.Count; i++)
             {
-                foreach(WorkAreaModel workAreaModel in actualWorkAreas)
+                WorkAreaModel workAreaModel = allWorkAreas[i];
+                result.Add(workAreaModel);
+                for (int j=0; j<actualWorkAreas.Count; j++)
                 {
-                    if(workArea.Name != workAreaModel.Name)
+                    if (workAreaModel.Id == actualWorkAreas[j].Id)
                     {
-                        ;
+                        result.Remove(workAreaModel);
+                        break;
                     }
                 }
             }
@@ -67,6 +71,28 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             EmployeeDTO employeesService = employeeManager.GetAllEmployeesServicesById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(employeesService.Services);
         }
+        public List<ServiceModel> GetEmployeesUnableServicesById(int employeeId)
+        {
+            List<ServiceModel> result = new List<ServiceModel>();
+            List<ServiceModel> allServices = _serviceManager.GetAllServices();
+            List<ServiceModel> actualServices = GetEmployeesServicesById(employeeId);
+            for (int i = 0; i < allServices.Count; i++)
+            {
+                ServiceModel service = allServices[i];
+                result.Add(service);
+                for (int j = 0; j < actualServices.Count; j++)
+                {
+                    if (service.Id == actualServices[j].Id)
+                    {
+                        result.Remove(service);
+                        break;
+                    }
+                }
+            }
+            return result;
+
+        }
+
 
         public void AddOrderToEmployee(int employeeId, int orderId)
         {
