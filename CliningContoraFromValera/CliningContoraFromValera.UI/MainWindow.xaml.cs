@@ -47,39 +47,35 @@ namespace CliningContoraFromValera.UI
         {
             ClientModel client = (ClientModel)DataGrid_Clients.SelectedItem;
             _clientModelManager.DeleteClientById(client.Id);
-            List<ClientModel> clients = _clientModelManager.GetAllClients();
-            DataGrid_Clients.ItemsSource = clients;
+            ClientRefresh();
         }
 
         private void DataGrid_Clients_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             ClientModel client = (ClientModel)e.Row.Item;
-            var Element = (TextBox)e.EditingElement;
-            if (String.IsNullOrWhiteSpace(Element.Text))
+            var element = (TextBox)e.EditingElement;
+            if (String.IsNullOrWhiteSpace(element.Text))
             {
                 GetMessageBoxException(UITextElements.EmptyFieldsError);
+                ClientRefresh();
+                return;
             }
-            else
+            if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
             {
-                if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
+                if (System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[а-я]")
+                 || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[a-z]")
+                 || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
                 {
-                    client.FirstName = Element.Text;
+                    GetMessageBoxException(UITextElements.WrongPhoneFormat);
+                    ClientRefresh();
+                    return;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.LastName))
+                else
                 {
-                    client.LastName = Element.Text;
+                    client.Phone = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
-                {
-                    client.Phone = Element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Email))
-                {
-                    client.Email = Element.Text;
-                }
-
-                _clientModelManager.UpdateClientById(client);
             }
+            _clientModelManager.UpdateClientById(client);
         }
 
         private void Button_ClientAdd_Click(object sender, RoutedEventArgs e)
@@ -104,12 +100,15 @@ namespace CliningContoraFromValera.UI
                 TextBox_Phone.Text);
                 _clientModelManager.AddClient(client);
                 ClearClientAddTextBoxes();
-                List<ClientModel> clients = _clientModelManager.GetAllClients();
-                DataGrid_Clients.ItemsSource = clients;
+                ClientRefresh();
             }
         }
 
         private void Button_ClientRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            ClientRefresh();
+        }
+        private void ClientRefresh()
         {
             List<ClientModel> clients = _clientModelManager.GetAllClients();
             DataGrid_Clients.ItemsSource = clients;
