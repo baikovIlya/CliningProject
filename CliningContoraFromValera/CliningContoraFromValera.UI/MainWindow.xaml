@@ -33,11 +33,11 @@
                     <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ClientModel}" IsReadOnly="False" CanUserAddRows="False"
                               Margin="10,-2,10,55" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Фамилия" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=LastName}"/>
-                            <DataGridTextColumn Header="Имя" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FirstName}"/>
-                            <DataGridTextColumn Header="Телефон" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Phone}"/>
+                            <DataGridTextColumn Header="Фамилия" Width="88" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=LastName}"/>
+                            <DataGridTextColumn Header="Имя" Width="88" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FirstName}"/>
+                            <DataGridTextColumn Header="Телефон" Width="95" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Phone}"/>
                             <DataGridTextColumn Header="Почта" Width="90" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Email}"/>
-                            <DataGridTemplateColumn Header="Удалить" Width="60">
+                            <DataGridTemplateColumn Header="Удалить" Width="55">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button x:Name="Button_ClientDelete" Content="Удалить" Click="Button_ClientDelete_Click"/>
