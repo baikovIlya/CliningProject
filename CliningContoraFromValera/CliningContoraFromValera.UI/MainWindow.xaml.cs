@@ -273,7 +273,7 @@ namespace CliningContoraFromValera.UI
         }
         private void CB_ChooseEstimatedTime_Loaded(object sender, RoutedEventArgs e)
         {
-            CB_ChooseEstimatedTime.ItemsSource = EstimatedTime.employeesWorkTime;
+            CB_ChooseEstimatedTime.ItemsSource = Times.serviceDurationTime;
         }
 
         private void CB_ChooseUnitType_Loaded(object sender, RoutedEventArgs e)

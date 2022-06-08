@@ -1,6 +1,4 @@
-﻿
-
-namespace CliningContoraFromValera.Bll
+﻿namespace CliningContoraFromValera.Bll
 {
     public static class Times
     {
@@ -19,7 +17,9 @@ namespace CliningContoraFromValera.Bll
             new TimeSpan(19,00,00),
             new TimeSpan(20,00,00),
             new TimeSpan(21,00,00),
-            new TimeSpan(22,00,00)
+            new TimeSpan(22,00,00),
+            new TimeSpan(23,00,00),
+            new TimeSpan(00,00,00)
         };
 
         public static List<TimeSpan> ordersStartTimes = new List<TimeSpan>()
@@ -48,9 +48,25 @@ namespace CliningContoraFromValera.Bll
             new TimeSpan(19,00,00),
             new TimeSpan(19,30,00),
             new TimeSpan(20,00,00),
+            new TimeSpan(21,00,00),
+            new TimeSpan(22,00,00)
+        };
 
+        public static List<TimeSpan> serviceDurationTime = new List<TimeSpan>()
+        {   new TimeSpan(00,01,00),
+            new TimeSpan(00,02,00),
+            new TimeSpan(00,03,00),
+            new TimeSpan(00,05,00),
+            new TimeSpan(00,10,00),
+            new TimeSpan(00,15,00),
+            new TimeSpan(00,30,00),
+            new TimeSpan(01,00,00),
+            new TimeSpan(01,30,00),
+            new TimeSpan(02,00,00),
+            new TimeSpan(02,30,00),
+            new TimeSpan(03,00,00),
+            new TimeSpan(03,30,00),
+            new TimeSpan(04,00,00)
         };
     }
-
-
 }
