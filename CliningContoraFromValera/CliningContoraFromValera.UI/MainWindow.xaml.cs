@@ -851,7 +851,9 @@ namespace CliningContoraFromValera.UI
         private void Button_OrderAdd_Click(object sender, RoutedEventArgs e)
         {
             if ((String.IsNullOrWhiteSpace(TextBox_OrderStreet.Text)) || (String.IsNullOrWhiteSpace(TextBox_OrderBuilding.Text)
-                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text))))
+                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text)) || ComboBox_OrderClient.SelectedItem == null
+                || ComboBox_OrderWorkArea.SelectedItem ==null || ComboBox_OrderStartTime.SelectedItem == null
+                || ComboBox_OrderIsCommercial.SelectedItem == null || DatePicker_OrderDate.SelectedDate == null))
             {
                 GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
@@ -864,7 +866,7 @@ namespace CliningContoraFromValera.UI
                 ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
                 DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
                 TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
-                StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
+                StatusType status = CliningContoraFromValera.Bll.StatusType.Новый;
                 AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
                 _addressModelManager.AddAddress(newAddress);
                 List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
@@ -1169,8 +1171,7 @@ namespace CliningContoraFromValera.UI
         private void DataGrid_AllOrders_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             OrderModel order = (OrderModel)e.Row.Item;
-            TextBox element = (TextBox)e.EditingElement;
-            DateTime date;
+            TextBox element = (TextBox)e.EditingElement; ;
             TimeSpan startTime;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
@@ -1178,26 +1179,7 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, UiTextElements.Date))
-                {
-                    if (!DateTime.TryParse(element.Text, out date))
-                    {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                        return;
-                    }
-                    else
-                    {
-                        string tmp = date.ToString();
-                        if (tmp.IndexOf('.') != -1)
-                        {
-                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                            RefreshShifts();
-                            return;
-                        }
-                        order.Date= DateTime.Parse(element.Text);
-                    }
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
+                if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
                 {
                     if (!TimeSpan.TryParse(element.Text, out startTime))
                     {
@@ -1210,53 +1192,25 @@ namespace CliningContoraFromValera.UI
                         if (tmp.IndexOf('.') != -1)
                         {
                             GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                            RefreshShifts();
+                            DataGridAllOrdersRefresh();
                             return;
                         }
-
                         order.StartTime = TimeSpan.Parse(element.Text);
                     }
                 }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Status))
-                {
-                    //order.Status = (StatusType)element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.LastNameClient))
-                {
-                    order.LastName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.FirstNameClient))
-                {
-                    order.FirstName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.PhoneNomer))
-                {
-                    order.Phone = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Area))
-                {
-                    order.Name = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Street))
-                {
-                    order.Street = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Building))
-                {
-                    order.Building = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Room))
-                {
-                    order.Room = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Commerce))
-                {
-                    //order.IsCommercial = (bool)element.Text;
-                }
-                //_orderModelManager.(order);
-                RefreshShifts();
+                _orderModelManager.UpdateOrder(order);
+                DataGridAllOrdersRefresh();
             }
+        }
 
+        private void ComboBox_OrderStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<StatusType> statuses = new List<StatusType> { };
+            foreach (StatusType st in Enum.GetValues(typeof(StatusType)))
+            {
+                statuses.Add(st);
+            }
+            ComboBox_OrderStatus.ItemsSource = statuses;
         }
     }
 }
