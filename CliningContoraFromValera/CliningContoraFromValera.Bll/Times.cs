@@ -2,7 +2,7 @@
 {
     public static class Times
     {
-        public static List<TimeSpan> employeesWorkTime = new List<TimeSpan>()
+        public static List<TimeSpan> _employeesWorkTime = new List<TimeSpan>()
         {   new TimeSpan(08,00,00),
             new TimeSpan(09,00,00),
             new TimeSpan(10,00,00),
@@ -22,7 +22,7 @@
             new TimeSpan(00,00,00)
         };
 
-        public static List<TimeSpan> ordersStartTimes = new List<TimeSpan>()
+        public static List<TimeSpan> _ordersStartTimes = new List<TimeSpan>()
         {   new TimeSpan(08,00,00),
             new TimeSpan(08,30,00),
             new TimeSpan(09,00,00),
@@ -52,7 +52,7 @@
             new TimeSpan(22,00,00)
         };
 
-        public static List<TimeSpan> serviceDurationTime = new List<TimeSpan>()
+        public static List<TimeSpan> _serviceDurationTime = new List<TimeSpan>()
         {   new TimeSpan(00,01,00),
             new TimeSpan(00,02,00),
             new TimeSpan(00,03,00),

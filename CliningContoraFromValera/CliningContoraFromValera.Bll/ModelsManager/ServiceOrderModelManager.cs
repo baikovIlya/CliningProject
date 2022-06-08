@@ -7,7 +7,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class ServiceOrderModelManager
     {
         ServiceOrderManager _serviceOrderManager = new ServiceOrderManager();
-        OrderManager orderManager = new OrderManager();
+        OrderManager _orderManager = new OrderManager();
 
         public void AddServiceToOrder(ServiceOrderModel serviceOrderModel)
         {
@@ -21,7 +21,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<ServiceOrderModel> GetOrdersServices(int orderId)
         {
-            OrderDTO orderService = orderManager.GetOrdersServices(orderId);
+            OrderDTO orderService = _orderManager.GetOrdersServices(orderId);
             return MapperConfigStorage.GetInstance().Map<List<ServiceOrderModel>>(orderService.Services);
         }
 

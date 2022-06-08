@@ -273,7 +273,7 @@ namespace CliningContoraFromValera.UI
         }
         private void CB_ChooseEstimatedTime_Loaded(object sender, RoutedEventArgs e)
         {
-            CB_ChooseEstimatedTime.ItemsSource = Times.serviceDurationTime;
+            CB_ChooseEstimatedTime.ItemsSource = Times._serviceDurationTime;
         }
 
         private void CB_ChooseUnitType_Loaded(object sender, RoutedEventArgs e)
@@ -511,11 +511,11 @@ namespace CliningContoraFromValera.UI
         }
         private void ComboBox_ShiftStartTime__Loaded(object sender, RoutedEventArgs e)
         {
-            ComboBox_ShiftStartTime.ItemsSource = Times.employeesWorkTime;
+            ComboBox_ShiftStartTime.ItemsSource = Times._employeesWorkTime;
         }
         private void ComboBox_ShiftFinishTime_Loaded(object sender, RoutedEventArgs e)
         {
-            ComboBox_ShiftFinishTime.ItemsSource = Times.employeesWorkTime;
+            ComboBox_ShiftFinishTime.ItemsSource = Times._employeesWorkTime;
         }
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
@@ -813,7 +813,7 @@ namespace CliningContoraFromValera.UI
         }
         private void ComboBox_OrderStartTime_Loaded(object sender, RoutedEventArgs e)
         {
-            ComboBox_OrderStartTime.ItemsSource = Times.ordersStartTimes;
+            ComboBox_OrderStartTime.ItemsSource = Times._ordersStartTimes;
         }
         private void ComboBox_OrderIsCommercial_Loaded(object sender, RoutedEventArgs e)
         {

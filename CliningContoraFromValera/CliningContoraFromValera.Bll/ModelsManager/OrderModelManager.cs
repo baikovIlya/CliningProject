@@ -7,7 +7,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class OrderModelManager
     {
         OrderManager _orderManager = new OrderManager();
-        ClientManager _clientManager = new ClientManager();
 
         public List<OrderModel> GetAllOrder()
         {

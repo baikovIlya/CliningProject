@@ -6,42 +6,42 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class EmployeeModelManager
     {
-        EmployeeManager employeeManager = new EmployeeManager();
+        EmployeeManager _employeeManager = new EmployeeManager();
         WorkAreaModelManager _workAreaManager = new WorkAreaModelManager();
         ServiceModelManager _serviceManager = new ServiceModelManager();
 
         public List<EmployeeModel> GetAllEmployees()
         {
-            List<EmployeeDTO> employees = employeeManager.GetAllEmployees();
+            List<EmployeeDTO> employees = _employeeManager.GetAllEmployees();
             return MapperConfigStorage.GetInstance().Map<List<EmployeeModel>>(employees);
         }
 
         public EmployeeModel GetEmployeeById(int employeeId)
         {
-            EmployeeDTO employee = employeeManager.GetEmployeeByID(employeeId);
+            EmployeeDTO employee = _employeeManager.GetEmployeeByID(employeeId);
             return MapperConfigStorage.GetInstance().Map<EmployeeModel>(employee);
         }
 
         public void UpdateEmployeeById(EmployeeModel employeeModel)
         {
             EmployeeDTO employee = MapperConfigStorage.GetInstance().Map<EmployeeDTO>(employeeModel);
-            employeeManager.UpdateEmployeeById(employee);
+            _employeeManager.UpdateEmployeeById(employee);
         }
 
         public void AddEmployee(EmployeeModel employeeModel)
         {
             EmployeeDTO employee = MapperConfigStorage.GetInstance().Map<EmployeeDTO>(employeeModel);
-            employeeManager.AddEmployee(employee);
+            _employeeManager.AddEmployee(employee);
         }
 
         public void DeleteEmployeeById(int employeeId)
         {
-            employeeManager.DeleteEmployeeById(employeeId);
+            _employeeManager.DeleteEmployeeById(employeeId);
         }
 
         public List<WorkAreaModel> GetEmployeesWorkAreasById(int employeeId)
         {
-            EmployeeDTO employeesWorkArea = employeeManager.GetAllEmployeesWorkAreasById(employeeId);
+            EmployeeDTO employeesWorkArea = _employeeManager.GetAllEmployeesWorkAreasById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<WorkAreaModel>>(employeesWorkArea.WorkAreas);
         }
 
@@ -68,7 +68,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public List<ServiceModel> GetEmployeesServicesById(int employeeId)
         {
-            EmployeeDTO employeesService = employeeManager.GetAllEmployeesServicesById(employeeId);
+            EmployeeDTO employeesService = _employeeManager.GetAllEmployeesServicesById(employeeId);
             return MapperConfigStorage.GetInstance().Map<List<ServiceModel>>(employeesService.Services);
         }
         public List<ServiceModel> GetEmployeesUnableServicesById(int employeeId)
@@ -94,26 +94,26 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 
         public void AddOrderToEmployee(int employeeId, int orderId)
         {
-            employeeManager.AddOrderToEmployee(employeeId, orderId);
+            _employeeManager.AddOrderToEmployee(employeeId, orderId);
         }
 
         public List<EmployeeModel> GetEmployeesInOrderByOrdeerId(int orderId)
         {
-            List<EmployeeDTO> employees = employeeManager.GetEmployeesInOrderByOrderId(orderId);
+            List<EmployeeDTO> employees = _employeeManager.GetEmployeesInOrderByOrderId(orderId);
             return MapperConfigStorage.GetInstance().Map<List<EmployeeModel>>(employees);
         }
         public void AddWorkAreaToEmployee(int employeeID, int workAreaId)
         {
-            employeeManager.AddWorkAreaToEmployee(employeeID, workAreaId);
+            _employeeManager.AddWorkAreaToEmployee(employeeID, workAreaId);
         }
 
         public void DeleteEmployeesFromOrder(int employeeId, int orderId)
         {
-            employeeManager.DeleteEmployeesOrder(employeeId, orderId);
+            _employeeManager.DeleteEmployeesOrder(employeeId, orderId);
         }
         public void DeleteEmployeesWorkArea(int employeeId, int workAreaId)
         {
-            employeeManager.DeleteEmployeesWorkArea(employeeId, workAreaId);
+            _employeeManager.DeleteEmployeesWorkArea(employeeId, workAreaId);
         }
 
     }
