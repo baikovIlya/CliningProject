@@ -856,7 +856,7 @@ namespace CliningContoraFromValera.UI
                 TimeSpan finishTime = startTime;
                 decimal price = 0;
                 bool isCommercial;
-                if((ClientOrderType)ComboBox_OrderIsCommercial.SelectedItem == ClientOrderType.ЮрЛицо)
+                if((ClientOrderType)ComboBox_OrderIsCommercial.SelectedItem == ClientOrderType.Юр_Лицо)
                 {
                     isCommercial = true;
                 }
