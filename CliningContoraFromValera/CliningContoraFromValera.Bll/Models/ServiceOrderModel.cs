@@ -1,5 +1,4 @@
-﻿
-namespace CliningContoraFromValera.Bll.Models
+﻿namespace CliningContoraFromValera.Bll.Models
 {
     public class ServiceOrderModel
     {

@@ -44,5 +44,27 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             }
             return result;
         }
+        public void GetOrdersPrice(OrderModel order, List<ServiceOrderModel> services)
+        {
+            decimal price = 0;
+            if (services != null)
+            {
+                if (order.IsCommercial)
+                {
+                    for (int i = 0; i < services.Count; i++)
+                    {
+                        price = price + (services[i].CommercialPrice * services[i].Count);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < services.Count; i++)
+                    {
+                        price = price + (services[i].Price * services[i].Count);
+                    }
+                }
+            }
+            order.Price = price;
+        }
     }
 }
