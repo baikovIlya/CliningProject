@@ -66,7 +66,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             }
             order.Price = price;
         }
-        public void UPDTEORDER(OrderModel order)
+        public void UpdateOrder(OrderModel order)
         {
             OrderDTO orderDTO = MapperConfigStorage.GetInstance().Map<OrderDTO>(order);
             _orderManager.UpdateOrderById(orderDTO);

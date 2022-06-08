@@ -149,7 +149,7 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text)
                 || String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyDiscription);
+                GetMessageBoxException(UITextElements.AllFieldsSholdBeFilled);
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
                 || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
@@ -771,9 +771,7 @@ namespace CliningContoraFromValera.UI
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
                     List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-                    _orderModelManager.GetOrdersPrice(order, services);
-                    _orderModelManager.UPDTEORDER(order);
-                    DataGridAllOrdersRefresh();
+                    UpdateOrdersPriceAndRefresh(order, services);
                     ClearServiceOrder();
                     Button_AddServiseToOrder.IsEnabled = false;
                     RefreshServiceOrder();
@@ -788,6 +786,12 @@ namespace CliningContoraFromValera.UI
             {
                 return;
             }            
+        }
+        private void UpdateOrdersPriceAndRefresh(OrderModel order, List<ServiceOrderModel> services)
+        {
+            _orderModelManager.GetOrdersPrice(order, services);
+            _orderModelManager.UpdateOrder(order);
+            DataGridAllOrdersRefresh();
         }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -915,9 +919,7 @@ namespace CliningContoraFromValera.UI
             _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-            _orderModelManager.GetOrdersPrice(order, services);
-            _orderModelManager.UPDTEORDER(order);
-            RefreshServiceOrder();
+            UpdateOrdersPriceAndRefresh(order, services);
             DataGridAllOrdersRefresh();
         }
         private void RefreshServiceOrder()
