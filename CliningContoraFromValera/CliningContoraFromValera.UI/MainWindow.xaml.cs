@@ -1129,5 +1129,32 @@ namespace CliningContoraFromValera.UI
             Label_SortOrderByType.Visibility= Visibility.Visible;
         }
 
+        private void DG_WorkArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas; 
+        }
+
+        private void Button_AddWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            WorkAreaModel workArea = new WorkAreaModel() {Name = TB_AddWorkArea.Text };
+            _workAreaModelManager.AddWorkArea(workArea);
+            TB_AddWorkArea.Clear();
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas;
+        }
+
+        private void Button_DeleteWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            WorkAreaModel workArea = (WorkAreaModel)DG_WorkArea.SelectedItem;
+            _workAreaModelManager.DeleteWorkAreaById(workArea.Id);
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas;
+        }
+
+        private void DG_WorkAreaRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            DG_WorkArea_Loaded(sender, e);
+        }
     }
 }
