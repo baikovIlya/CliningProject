@@ -62,18 +62,19 @@
                     <TabControl Margin="0,-26,0,-36">
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="0,0,-2,0" Height="486">
-                                <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}" Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged">
+                                <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}"
+                                          Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged" CellEditEnding="DataGrid_AllOrders_CellEditEnding">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Номер" IsReadOnly="True" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Начало" Binding="{Binding StartTime}" Width="70"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Время на выполнение услуг" Binding="{Binding EstimatedEndTime}" Width="165"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Конец" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Сумма" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Время на выполнение услуг" IsReadOnly="True" Binding="{Binding EstimatedEndTime}" Width="165"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Конец" IsReadOnly="True" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Сумма" IsReadOnly="True" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="120"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Кол-во сотрудников" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Фамилия Клиента" Binding="{Binding LastName}" Width="120"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя Клиента" Binding="{Binding FirstName}" Width="120"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Кол-во сотрудников" IsReadOnly="True" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия клиента" Binding="{Binding LastName}" Width="120"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя клиента" Binding="{Binding FirstName}" Width="120"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Район" Binding="{Binding Name}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="170"></DataGridTextColumn>

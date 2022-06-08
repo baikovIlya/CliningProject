@@ -22,6 +22,16 @@
         public const string CommercialPrice = "Коммерческая цена";
         public const string Unit = "Ед. измер.";
         public const string EstTime = "Ср. время";
+        public const string Date = "Дата";
+        public const string StartTime = "Начало";
+        public const string Status = "Статус";
+        public const string FirstNameClient = "Имя клиента";
+        public const string LastNameClient = "Фамилия клиента";
+        public const string Area = "Район";
+        public const string Street = "Улица";
+        public const string Building = "Здание";
+        public const string Room = "Помещение";
+        public const string Commerce = "Коммерция";
         public const string ShiftAlreadyExist = "В этот день сотрудник уже работает";
     }
 }
