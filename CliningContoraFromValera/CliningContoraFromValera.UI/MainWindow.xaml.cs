@@ -762,10 +762,21 @@ namespace CliningContoraFromValera.UI
         }
         private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order, List<ServiceOrderModel> services)
         {
+            int index = DataGrid_AllOrders.SelectedIndex;
             _orderModelManager.GetOrdersPrice(order, services);
             _orderModelManager.UpdateOrdersTimes(order, services);
             _orderModelManager.UpdateOrder(order);
             DataGridAllOrdersRefresh();
+            DataGrid_AllOrders.SelectedIndex = index;
+        }
+        private void UpdateOrdersCountOfEmployees(OrderModel order)
+        {
+            int index = DataGrid_AllOrders.SelectedIndex;
+            order.CountOfEmployees = 0;
+            order.CountOfEmployees = _employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id).Count;
+            _orderModelManager.UpdateOrder(order);
+            DataGridAllOrdersRefresh();
+            DataGrid_AllOrders.SelectedIndex = index;
         }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -943,6 +954,7 @@ namespace CliningContoraFromValera.UI
                     OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
                     EmployeeModel employee = (EmployeeModel)ComboBox_AddNewEmployeeToOrder.SelectedItem!;
                     _employeeModelManager.AddOrderToEmployee(employee.Id, order.Id);
+                    UpdateOrdersCountOfEmployees(order);
                     ClearComboBoxWithEmployees();
                     RefreshOrdersDataGrids();
                 }
@@ -973,6 +985,7 @@ namespace CliningContoraFromValera.UI
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             EmployeeModel employee = (EmployeeModel)DataGrid_EmployeesInOrder.SelectedItem;
             _employeeModelManager.DeleteEmployeesFromOrder(employee.Id, order.Id);
+            UpdateOrdersCountOfEmployees(order);
             RefreshOrdersDataGrids();
         }
 
