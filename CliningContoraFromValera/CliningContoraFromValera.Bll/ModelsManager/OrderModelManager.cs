@@ -80,7 +80,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
                 {
                     estTime = estTime + (services[i].EstimatedTime * services[i].Count);
                 }
-
                 TimeSpan startTime = order.StartTime;
                 TimeSpan endTime = startTime + estTime;
                 order.EstimatedEndTime = estTime;

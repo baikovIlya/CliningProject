@@ -771,7 +771,15 @@ namespace CliningContoraFromValera.UI
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
                     List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-                    UpdateOrdersPriceAndTimeAndRefresh(order, services);
+                    try
+                    {
+                        UpdateOrdersPriceAndTimeAndRefresh(order, services);
+                    }
+                    catch(OverflowException)
+                    {
+                        GetMessageBoxException(UITextElements.TooManyServicesInOrder);
+                        _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
+                    }
                     ClearServiceOrder();
                     Button_AddServiseToOrder.IsEnabled = false;
                     RefreshServiceOrder();
