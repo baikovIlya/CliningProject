@@ -553,7 +553,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="150"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="150"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="250"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="230"/>
                             <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" Width="111"/>
                             <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="110"/>
                         </DataGrid.Columns>
@@ -568,7 +568,7 @@
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="130"/>
                             <DataGridTextColumn Header="Приблиз. вр. выполнения" Binding="{Binding EstimatedEndTime}" Width="130"/>
                             <DataGridTextColumn Header="Время окончания" Binding="{Binding FinishTime}" Width="130"/>
-                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="300"/>
+                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="280"/>
                             <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="81"/>
                         </DataGrid.Columns>
                     </DataGrid>
