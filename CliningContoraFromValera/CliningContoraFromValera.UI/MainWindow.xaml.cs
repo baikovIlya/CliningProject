@@ -771,7 +771,7 @@ namespace CliningContoraFromValera.UI
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
                     List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-                    UpdateOrdersPriceAndRefresh(order, services);
+                    UpdateOrdersPriceAndTimeAndRefresh(order, services);
                     ClearServiceOrder();
                     Button_AddServiseToOrder.IsEnabled = false;
                     RefreshServiceOrder();
@@ -787,9 +787,10 @@ namespace CliningContoraFromValera.UI
                 return;
             }            
         }
-        private void UpdateOrdersPriceAndRefresh(OrderModel order, List<ServiceOrderModel> services)
+        private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order, List<ServiceOrderModel> services)
         {
             _orderModelManager.GetOrdersPrice(order, services);
+            _orderModelManager.UpdateOrdersTimes(order, services);
             _orderModelManager.UpdateOrder(order);
             DataGridAllOrdersRefresh();
         }
@@ -919,7 +920,7 @@ namespace CliningContoraFromValera.UI
             _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-            UpdateOrdersPriceAndRefresh(order, services);
+            UpdateOrdersPriceAndTimeAndRefresh(order, services);
             DataGridAllOrdersRefresh();
         }
         private void RefreshServiceOrder()
