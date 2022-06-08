@@ -500,25 +500,30 @@
             <!--добавление районов сотрудникам-->
             <TabItem Header="Районы">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*"/>
                         <RowDefinition Height="90*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Введите название района:" VerticalAlignment="Center" Height="55" Margin="10,0,373,0" FontWeight="Bold" FontSize="14" />
-                    <TextBox Margin="10,0,373,10" VerticalAlignment="Bottom" Height="25"/>
-                    <Button Content="Добавить" HorizontalAlignment="Left" Width="196" Margin="10,17,0,395" Grid.Row="1"/>
-                    <Button Content="Очистить" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                            Width="196" Height="35" Margin="0,0,373,395" Grid.Row="1"/>
-                    <DataGrid Grid.Row="1" Margin="10,65,373,80" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <Label Content="Введите название района:" VerticalAlignment="Center" Height="55" Margin="192,0,191,0" FontWeight="Bold" FontSize="14" />
+                    <TextBox x:Name="TB_AddWorkArea" Margin="191,40,192,0" VerticalAlignment="Top" Height="25"/>
+                    <Button x:Name="Button_AddWorkArea" Content="Добавить" HorizontalAlignment="Center" Width="196" Margin="0,0,0,412" Grid.Row="1" Click="Button_AddWorkArea_Click"/>
+
+                    <DataGrid x:Name="DG_WorkArea" Grid.Row="1" Margin="192,46,191,74" AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                              ItemsSource="{Binding WorkAreaModel}" 
+                              IsReadOnly="False" 
+                              CanUserAddRows="False" Loaded="DG_WorkArea_Loaded">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Все районы" Width="250"/>
-                            <DataGridTextColumn Header="Добавить" Width="80"/>
+                            <DataGridTextColumn Header="Все районы" Binding="{Binding Name}" Width="280"/>
+                            <DataGridTemplateColumn Header="Удалить" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="Button_DeleteWorkArea" Content="Удалить" Click="Button_DeleteWorkArea_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Обновить список районов" HorizontalAlignment="Left" Margin="10,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="411"/>
+                    <Button x:Name="DG_WorkAreaRefresh" Content="Обновить список районов" HorizontalAlignment="Center" Margin="0,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="412" Click="DG_WorkAreaRefresh_Click"/>
                 </Grid>
             </TabItem>
 
