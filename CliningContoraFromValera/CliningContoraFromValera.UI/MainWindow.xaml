@@ -30,22 +30,13 @@
                     <Button x:Name="Button_ClientAdd" Content="Добавить" Margin="54,345,51,55" Grid.Column="1" Click="Button_ClientAdd_Click"/>
                     <TextBox  x:Name="TextBox_Email" Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
 
-                    <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ClientModel}" IsReadOnly="False" 
-                              CanUserAddRows="False"
+                    <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ClientModel}" IsReadOnly="False" CanUserAddRows="False"
                               Margin="10,-2,10,55" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
-                        <DataGrid.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="0"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </DataGrid.RenderTransform>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="70"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Почта" Binding="{Binding Email}" Width="90"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Фамилия" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=LastName}"/>
+                            <DataGridTextColumn Header="Имя" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FirstName}"/>
+                            <DataGridTextColumn Header="Телефон" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Phone}"/>
+                            <DataGridTextColumn Header="Почта" Width="90" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Email}"/>
                             <DataGridTemplateColumn Header="Удалить" Width="60">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -68,21 +59,19 @@
                         </TabControl.Background>
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="0,0,-2,0" Height="486">
-                                <Grid.Background>
-                                    <ImageBrush/>
-                                </Grid.Background>
-                                <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}" Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged">
+                                <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}"
+                                          Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged" CellEditEnding="DataGrid_AllOrders_CellEditEnding">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Номер" IsReadOnly="True" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Начало" Binding="{Binding StartTime}" Width="70"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Время на выполнение услуг" Binding="{Binding EstimatedEndTime}" Width="165"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Конец" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Сумма" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Время на выполнение услуг" IsReadOnly="True" Binding="{Binding EstimatedEndTime}" Width="165"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Конец" IsReadOnly="True" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Сумма" IsReadOnly="True" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="120"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Кол-во сотрудников" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Фамилия Клиента" Binding="{Binding LastName}" Width="120"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя Клиента" Binding="{Binding FirstName}" Width="120"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Кол-во сотрудников" IsReadOnly="True" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия клиента" Binding="{Binding LastName}" Width="120"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Имя клиента" Binding="{Binding FirstName}" Width="120"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Район" Binding="{Binding Name}" Width="100"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="170"></DataGridTextColumn>
@@ -247,9 +236,9 @@
                                 <DataGrid x:Name="DataGrid_Employees" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding EmployeeModel}" IsReadOnly="False" 
                                           CanUserAddRows="False" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="0,0,365,34" Loaded="DataGrid_Employees_Loaded" CellEditEnding="DataGrid_Employees_CellEditEnding" SelectionChanged="DataGrid_Employees_SelectionChanged">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=LastName}"/>
+                                        <DataGridTextColumn Header="Имя" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FirstName}"/>
+                                        <DataGridTextColumn Header="Телефон" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Phone}"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -445,7 +434,7 @@
             </TabItem>
 
             <!--услуги-->
-            <TabItem Header="Наши услуги" Height="20" VerticalAlignment="Bottom" FontWeight="Normal">
+            <TabItem Header="Наши услуги">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*"></RowDefinition>
@@ -458,11 +447,12 @@
                     <DataGrid Name="DataGrid_Services"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ServiceModel}" IsReadOnly="False" CanUserAddRows="False"
                               Margin="10,19,10,164" CellEditEnding="DataGrid_Services_CellEditEnding" Loaded="DataGrid_Services_Loaded" SelectionChanged="DataGrid_Services_SelectionChanged" Grid.RowSpan="2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Услуга" Binding="{Binding Name}" Width="120" IsReadOnly="True"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Коммерч. цена" Binding="{Binding CommercialPrice}" Width="95"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Ед. измер." Binding="{Binding Unit}" Width="65"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Ср. время." Binding="{Binding EstimatedTime}" Width="80"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Тип сервиса" Binding="{Binding ServiceType}" Width="120" IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Услуга" Width="120" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Name}"/>
+                            <DataGridTextColumn Header="Цена" Width="90" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Price}"/>
+                            <DataGridTextColumn Header="Коммерч. цена" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=CommercialPrice}"/>
+                            <DataGridTextColumn Header="Ед. измер." Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Unit}"/>
+                            <DataGridTextColumn Header="Ср. время" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=EstimatedTime}"/>
                             <DataGridTemplateColumn Header="Удалить" Width="60">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
