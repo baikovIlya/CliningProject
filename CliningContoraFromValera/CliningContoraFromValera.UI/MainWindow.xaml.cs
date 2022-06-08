@@ -56,17 +56,17 @@ namespace CliningContoraFromValera.UI
             var element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
                 ClientRefresh();
                 return;
             }
-            if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
+            if (String.Equals((string)e.Column.Header, UiTextElements.PhoneNomer))
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[а-я]")
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[a-z]")
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
                 {
-                    GetMessageBoxException(UITextElements.WrongPhoneFormat);
+                    GetMessageBoxException(UiTextElements.WrongPhoneFormat);
                     ClientRefresh();
                     return;
                 }
@@ -84,13 +84,13 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(TextBox_Name.Text) || String.IsNullOrWhiteSpace(TextBox_LastName.Text)
                  || String.IsNullOrWhiteSpace(TextBox_Email.Text) || String.IsNullOrWhiteSpace(TextBox_Phone.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
                  || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
                  || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
             {
-                GetMessageBoxException(UITextElements.WrongPhoneFormat);
+                GetMessageBoxException(UiTextElements.WrongPhoneFormat);
             }
             else
             {
@@ -151,13 +151,13 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text)
                 || String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
             {
-                GetMessageBoxException(UITextElements.AllFieldsSholdBeFilled);
+                GetMessageBoxException(UiTextElements.AllFieldsSholdBeFilled);
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
                 || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
                 || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
             {
-                GetMessageBoxException(UITextElements.WrongPhoneFormat);
+                GetMessageBoxException(UiTextElements.WrongPhoneFormat);
             }
             else
             {
@@ -190,17 +190,17 @@ namespace CliningContoraFromValera.UI
             var element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
                 EmployeeRefresh();
                 return;
             }
-            if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
+            if (String.Equals((string)e.Column.Header, UiTextElements.PhoneNomer))
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[а-я]")
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[a-z]")
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
                 {
-                    GetMessageBoxException(UITextElements.WrongPhoneFormat);
+                    GetMessageBoxException(UiTextElements.WrongPhoneFormat);
                     EmployeeRefresh();
                     return;
                 }
@@ -294,7 +294,7 @@ namespace CliningContoraFromValera.UI
                 || CB_ChooseUnitType.SelectedItem == null || CB_ChooseEstimatedTime.SelectedItem == null
                 || CB_ChooseServiceType.SelectedItem == null)
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else if (!Decimal.TryParse(TB_Price.Text, out decimalFormat)
                 || !Decimal.TryParse(TB_CommercialPrice.Text, out decimalFormat))
@@ -305,7 +305,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (FormatException)
                 {
-                    GetMessageBoxException(UITextElements.WrongPriceFormat);
+                    GetMessageBoxException(UiTextElements.WrongPriceFormat);
                 }
             }
             else
@@ -352,15 +352,15 @@ namespace CliningContoraFromValera.UI
             TextBox element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
                 RefreshService();
                 return;
             }
-            if (String.Equals((string)e.Column.Header, UITextElements.EstTime))
+            if (String.Equals((string)e.Column.Header, UiTextElements.EstTime))
             {
                 if (!TimeSpan.TryParse(element.Text, out estimatedTime))
                 {
-                    GetMessageBoxException(UITextElements.WrongTimeFormat);
+                    GetMessageBoxException(UiTextElements.WrongTimeFormat);
                     return;
                 }
                 else
@@ -368,7 +368,7 @@ namespace CliningContoraFromValera.UI
                     string tmp = estimatedTime.ToString();
                     if (tmp.IndexOf('.') != -1)
                     {
-                        GetMessageBoxException(UITextElements.WrongTimeFormat);
+                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
                         RefreshService();
                         return;
                     }
@@ -404,7 +404,7 @@ namespace CliningContoraFromValera.UI
         {
             if (String.IsNullOrWhiteSpace(TB_ServiceDescription.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyDiscription);
+                GetMessageBoxException(UiTextElements.EmptyDiscription);
             }
             else
             {
@@ -436,7 +436,7 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                GetMessageBoxException(UITextElements.AllFieldsSholdBeFilled);
+                GetMessageBoxException(UiTextElements.AllFieldsSholdBeFilled);
             }
         }
 
@@ -522,7 +522,7 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(ComboBox_EmployeeSchedule.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text)
                 || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text) || String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else
             {
@@ -535,7 +535,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    GetMessageBoxException(UITextElements.ShiftAlreadyExist);
+                    GetMessageBoxException(UiTextElements.ShiftAlreadyExist);
                     AddShiftItemsClear();
                     StartAndFinishLabelVisibilities();
                 }
@@ -550,7 +550,7 @@ namespace CliningContoraFromValera.UI
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
             if (newStartTime >= newFinishTime)
             {
-                GetMessageBoxException(UITextElements.WrongScheduleStartEndTime);
+                GetMessageBoxException(UiTextElements.StartTimeMustBeLessThanEndTime);
             }
             else
             {
@@ -576,7 +576,7 @@ namespace CliningContoraFromValera.UI
         {
             if (String.IsNullOrWhiteSpace(DatePicker_FromDate.Text) || String.IsNullOrWhiteSpace(DatePicker_ToDate.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else
             {
@@ -610,11 +610,11 @@ namespace CliningContoraFromValera.UI
             var Element = (TextBox)e.EditingElement;
             TimeSpan finishTime;
             TimeSpan startTime;
-            string nameColumnStartTime = UITextElements.SheduleStart;
-            string nameColumnFinishTime = UITextElements.SheduleEnd;
+            string nameColumnStartTime = UiTextElements.SheduleStart;
+            string nameColumnFinishTime = UiTextElements.SheduleEnd;
             if (String.IsNullOrWhiteSpace(Element.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else
             {
@@ -622,7 +622,7 @@ namespace CliningContoraFromValera.UI
                 {
                     if (!TimeSpan.TryParse(Element.Text, out startTime))
                     {
-                        GetMessageBoxException(UITextElements.WrongTimeFormat);
+                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
                         return;
                     }
                     else
@@ -630,7 +630,7 @@ namespace CliningContoraFromValera.UI
                         string tmp = startTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxException(UITextElements.WrongTimeFormat);
+                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
                             RefreshShifts();
                             return;
                         }
@@ -641,7 +641,7 @@ namespace CliningContoraFromValera.UI
                 {
                     if (!TimeSpan.TryParse(Element.Text, out finishTime))
                     {
-                        GetMessageBoxException(UITextElements.WrongTimeFormat);
+                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
                         return;
                     }
                     else
@@ -649,7 +649,7 @@ namespace CliningContoraFromValera.UI
                         string tmp = finishTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxException(UITextElements.WrongTimeFormat);
+                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
                             RefreshShifts();
                             return;
                         }
@@ -742,7 +742,7 @@ namespace CliningContoraFromValera.UI
                     }
                     catch(OverflowException)
                     {
-                        GetMessageBoxException(UITextElements.TooManyServicesInOrder);
+                        GetMessageBoxException(UiTextElements.TooManyServicesInOrder);
                         _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
                     }
                     ClearServiceOrder();
@@ -751,7 +751,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    GetMessageBoxException(UITextElements.DoubleAddingService);
+                    GetMessageBoxException(UiTextElements.DoubleAddingService);
                     ClearServiceOrder();
                 }
             }
@@ -836,7 +836,7 @@ namespace CliningContoraFromValera.UI
             if ((String.IsNullOrWhiteSpace(TextBox_OrderStreet.Text)) || (String.IsNullOrWhiteSpace(TextBox_OrderBuilding.Text)
                 || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text))))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else
             {
@@ -866,7 +866,7 @@ namespace CliningContoraFromValera.UI
                 }
                 OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
                 _orderModelManager.AddOrder(orderModel);
-                GetMessageBoxException(UITextElements.NewOrderIsAdded);
+                GetMessageBoxException(UiTextElements.OrderСreated);
                 ClrearAllFieldsInNewOrder();
 
             }
@@ -948,7 +948,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    GetMessageBoxException(UITextElements.DoubleAddingEmployee);
+                    GetMessageBoxException(UiTextElements.EmployeeNotUnique);
                     ClearComboBoxWithEmployees();
                 }
             }
@@ -1149,15 +1149,15 @@ namespace CliningContoraFromValera.UI
             TimeSpan startTime;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UiTextElements.EmptyFieldsError);
             }
             else
             {
-                if (String.Equals((string)e.Column.Header, UITextElements.Date))
+                if (String.Equals((string)e.Column.Header, UiTextElements.Date))
                 {
                     if (!DateTime.TryParse(element.Text, out date))
                     {
-                        GetMessageBoxException(UITextElements.WrongTimeFormat);
+                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
                         return;
                     }
                     else
@@ -1165,18 +1165,18 @@ namespace CliningContoraFromValera.UI
                         string tmp = date.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxException(UITextElements.WrongTimeFormat);
+                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
                             RefreshShifts();
                             return;
                         }
                         order.Date= DateTime.Parse(element.Text);
                     }
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.StartTime))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
                 {
                     if (!TimeSpan.TryParse(element.Text, out startTime))
                     {
-                        GetMessageBoxException(UITextElements.WrongTimeFormat);
+                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
                         return;
                     }
                     else
@@ -1184,7 +1184,7 @@ namespace CliningContoraFromValera.UI
                         string tmp = startTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxException(UITextElements.WrongTimeFormat);
+                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
                             RefreshShifts();
                             return;
                         }
@@ -1192,39 +1192,39 @@ namespace CliningContoraFromValera.UI
                         order.StartTime = TimeSpan.Parse(element.Text);
                     }
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Status))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.Status))
                 {
                     //order.Status = (StatusType)element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.LastNameClient))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.LastNameClient))
                 {
                     order.LastName = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.FirstNameClient))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.FirstNameClient))
                 {
                     order.FirstName = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.PhoneNomer))
                 {
                     order.Phone = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Area))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.Area))
                 {
                     order.Name = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Street))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.Street))
                 {
                     order.Street = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Building))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.Building))
                 {
                     order.Building = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Room))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.Room))
                 {
                     order.Room = element.Text;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Commerce))
+                else if (String.Equals((string)e.Column.Header, UiTextElements.Commerce))
                 {
                     //order.IsCommercial = (bool)element.Text;
                 }
