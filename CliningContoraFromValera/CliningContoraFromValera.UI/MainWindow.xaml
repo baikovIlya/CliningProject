@@ -9,9 +9,12 @@
         mc:Ignorable="d"
         Title="CliningFromValera" Height="610" Width="880" Background="White" ResizeMode="NoResize">
     <Grid>
-        <TabControl x:Name="MainTabControl" Width="800" Height="550">
+        <Grid.Background>
+            <ImageBrush ImageSource="/PhonePicture.jpg"/>
+        </Grid.Background>
+        <TabControl x:Name="MainTabControl" Width="800" Height="550" Background="#FFC9E0E3">
 
-            <TabItem Header="Клиенты">
+            <TabItem Header="Клиенты" FontFamily="Segoe UI">
                 <Grid Height="438" Margin="16,0,31,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60*"></ColumnDefinition>
@@ -60,8 +63,14 @@
             <TabItem Header="Заказы">
                 <Grid Height="450" Margin="10,0,10,0">
                     <TabControl Margin="0,-26,0,-36">
+                        <TabControl.Background>
+                            <ImageBrush/>
+                        </TabControl.Background>
                         <TabItem Header="Актуальные заказы">
                             <Grid Margin="0,0,-2,0" Height="486">
+                                <Grid.Background>
+                                    <ImageBrush/>
+                                </Grid.Background>
                                 <DataGrid x:Name="DataGrid_AllOrders" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OrderModel}" Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
@@ -217,6 +226,9 @@
             <TabItem Header="Сотрудники">
                 <Grid Height="437" Margin="10">
                     <TabControl Margin="0,-26,0,0">
+                        <TabControl.Background>
+                            <ImageBrush/>
+                        </TabControl.Background>
                         <TabItem Header="Персональная информация">
                             <Grid Height="382" Margin="20,0,20,0">
                                 <Grid.RowDefinitions>

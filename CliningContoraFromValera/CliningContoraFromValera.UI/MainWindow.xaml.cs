@@ -471,7 +471,7 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                GetMessageBoxException(UITextElements.EmptyDiscription);
+                GetMessageBoxException(UITextElements.AllFieldsSholdBeFilled);
             }
         }
 
