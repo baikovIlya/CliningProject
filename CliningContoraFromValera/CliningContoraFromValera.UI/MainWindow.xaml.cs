@@ -126,8 +126,7 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Employees_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
-            DataGrid_Employees.ItemsSource = employees;
+            EmployeeRefresh();
         }
 
         private void DataGrid_Schedule_Loaded(object sender, RoutedEventArgs e)
@@ -137,6 +136,10 @@ namespace CliningContoraFromValera.UI
         }
 
         private void Button_EmployeeRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeRefresh();
+        }
+        private void EmployeeRefresh()
         {
             List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
             DataGrid_Employees.ItemsSource = employees;
@@ -163,8 +166,7 @@ namespace CliningContoraFromValera.UI
                 TB_PhoneEmployee.Text);
                 _employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
-                List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
-                DataGrid_Employees.ItemsSource = employees;
+                EmployeeRefresh();
             }
         }
 
@@ -172,8 +174,7 @@ namespace CliningContoraFromValera.UI
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
             _employeeModelManager.DeleteEmployeeById(employee.Id);
-            List<EmployeeModel> employees = _employeeModelManager.GetAllEmployees();
-            DataGrid_Employees.ItemsSource = employees;
+            EmployeeRefresh();
         }
 
         private void ClearEmployeeAddTextBoxes()
@@ -190,33 +191,32 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(element.Text))
             {
                 GetMessageBoxException(UITextElements.EmptyFieldsError);
+                EmployeeRefresh();
+                return;
             }
-            else
+            if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
             {
-                if (String.Equals((string)e.Column.Header, UITextElements.LastName))
+                if (System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[а-я]")
+                 || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[a-z]")
+                 || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
                 {
-                    employee.LastName = element.Text;
+                    GetMessageBoxException(UITextElements.WrongPhoneFormat);
+                    EmployeeRefresh();
+                    return;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.FirstName))
-                {
-                    employee.FirstName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UITextElements.PhoneNomer))
+                else
                 {
                     employee.Phone = element.Text;
                 }
-
-                _employeeModelManager.UpdateEmployeeById(employee);
             }
+            _employeeModelManager.UpdateEmployeeById(employee);
         }
 
         private void DataGrid_Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DataGrid_Employees.SelectedItem != null)
             {
-                EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-                DataGrid_EmployeesWorkAreas.ItemsSource = _employeeModelManager.GetEmployeesWorkAreasById(employee!.Id);
-                DataGrid_EmployeesServices.ItemsSource = _employeeModelManager.GetEmployeesServicesById(employee!.Id);
+                EmployeesWorkAreasAndServicesRefresh();
             }
             else
             {
@@ -259,8 +259,6 @@ namespace CliningContoraFromValera.UI
             List<ServiceModel> services = _serviceModelManager.GetAllServices();
             DataGrid_Services.ItemsSource = services;
         }
-
-
 
         private void CB_ChooseServiceType_Loaded(object sender, RoutedEventArgs e)
         {
