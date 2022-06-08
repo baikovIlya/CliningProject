@@ -736,6 +736,9 @@ namespace CliningContoraFromValera.UI
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
                     List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
+                    TimeSpan oldEstTime = order.EstimatedEndTime;
+                    TimeSpan? oldFinishTime = order.FinishTime;
+                    decimal oldPrice = order.Price;
                     try
                     {
                         UpdateOrdersPriceAndTimeAndRefresh(order, services);
@@ -743,6 +746,9 @@ namespace CliningContoraFromValera.UI
                     catch(OverflowException)
                     {
                         GetMessageBoxException(UiTextElements.TooManyServicesInOrder);
+                        order.EstimatedEndTime = oldEstTime;
+                        order.FinishTime = oldFinishTime;
+                        order.Price = oldPrice;
                         _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
                     }
                     ClearServiceOrder();
@@ -905,7 +911,6 @@ namespace CliningContoraFromValera.UI
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
             List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
             UpdateOrdersPriceAndTimeAndRefresh(order, services);
-            DataGridAllOrdersRefresh();
         }
         private void RefreshServiceOrder()
         {
