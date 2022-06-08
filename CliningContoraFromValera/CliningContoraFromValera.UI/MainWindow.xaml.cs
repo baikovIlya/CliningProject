@@ -1121,11 +1121,18 @@ namespace CliningContoraFromValera.UI
 
         private void Button_AddWorkArea_Click(object sender, RoutedEventArgs e)
         {
-            WorkAreaModel workArea = new WorkAreaModel() {Name = TB_AddWorkArea.Text };
-            _workAreaModelManager.AddWorkArea(workArea);
-            TB_AddWorkArea.Clear();
-            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
-            DG_WorkArea.ItemsSource = workAreas;
+            if (TB_AddWorkArea.Text == "" || TB_AddWorkArea.Text == null)
+            {
+                GetMessageBoxException(UiTextElements.EmptyWorkAreaName);
+            }
+            else
+            {
+                WorkAreaModel workArea = new WorkAreaModel() { Name = TB_AddWorkArea.Text };
+                _workAreaModelManager.AddWorkArea(workArea);
+                TB_AddWorkArea.Clear();
+                List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+                DG_WorkArea.ItemsSource = workAreas;
+            }
         }
 
         private void Button_DeleteWorkArea_Click(object sender, RoutedEventArgs e)
