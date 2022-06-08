@@ -225,6 +225,22 @@ namespace CliningContoraFromValera.UI
             }
         }
 
+        private void Button_EmployeesWorkAreasDelete_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
+            WorkAreaModel employeesWorkArea = (WorkAreaModel)DataGrid_EmployeesWorkAreas.SelectedItem;
+            _employeeModelManager.DeleteEmployeesWorkArea(employee.Id, employeesWorkArea.Id);
+            EmployeesWorkAreasAndServicesRefresh();
+        }
+
+        private void Button_EmployeesServicesDelete_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
+            ServiceModel employeesService = (ServiceModel)DataGrid_EmployeesServices.SelectedItem;
+            _serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
+            EmployeesWorkAreasAndServicesRefresh();
+        }
+
         private void EmployeesWorkAreasAndServicesRefresh()
         {
             EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
@@ -234,30 +250,16 @@ namespace CliningContoraFromValera.UI
 
         //РАЙОНЫ
 
-        private void Button_EmployeesWorkAreasDelete_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-            WorkAreaModel employeesWorkArea = (WorkAreaModel)DataGrid_EmployeesWorkAreas.SelectedItem;
-            _employeeModelManager.DeleteEmployeesWorkArea(employee.Id, employeesWorkArea.Id);
-            EmployeesWorkAreasAndServicesRefresh();
-        }
+        
 
 
         //СЕРВИСЫ
 
-        private void Button_EmployeesServicesDelete_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeModel employee = (EmployeeModel)DataGrid_Employees.SelectedItem;
-            ServiceModel employeesService = (ServiceModel)DataGrid_EmployeesServices.SelectedItem;
-            _serviceModelManager.DeleteEmployeesService(employee.Id, employeesService.Id);
-            EmployeesWorkAreasAndServicesRefresh();
-        }
         private void Button_ServicesDelete_Click(object sender, RoutedEventArgs e)
         {
             ServiceModel employee = (ServiceModel)DataGrid_Services.SelectedItem;
             _serviceModelManager.DeleteServiceyId(employee.Id);
-            List<ServiceModel> services = _serviceModelManager.GetAllServices();
-            DataGrid_Services.ItemsSource = services;
+            RefreshService();
         }
 
         private void CB_ChooseServiceType_Loaded(object sender, RoutedEventArgs e)
@@ -345,74 +347,40 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_Services_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            decimal decimalFormat;
             TimeSpan estimatedTime;
             ServiceModel service = (ServiceModel)e.Row.Item;
             TextBox element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
                 GetMessageBoxException(UITextElements.EmptyFieldsError);
+                RefreshService();
+                return;
             }
-            else
+            if (String.Equals((string)e.Column.Header, UITextElements.EstTime))
             {
-                if (String.Equals((string)e.Column.Header, UITextElements.Service))
+                if (!TimeSpan.TryParse(element.Text, out estimatedTime))
                 {
-                    service.Name = element.Text;
+                    GetMessageBoxException(UITextElements.WrongTimeFormat);
+                    return;
                 }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Price))
+                else
                 {
-                    if (!Decimal.TryParse(element.Text, out decimalFormat))
-                    {
-                        GetMessageBoxException(UITextElements.WrongPriceFormat);
-                        RefreshService();
-                        return;
-                    }
-                    service.Price = Convert.ToDecimal(element.Text);
-                }
-                else if (String.Equals((string)e.Column.Header, UITextElements.CommercialPrice))
-                {
-                    if (!Decimal.TryParse(element.Text, out decimalFormat))
-                    {
-                        GetMessageBoxException(UITextElements.WrongPriceFormat);
-                        RefreshService();
-                        return;
-                    }
-                    service.CommercialPrice = Convert.ToDecimal(element.Text);
-                }
-                else if (String.Equals((string)e.Column.Header, UITextElements.Unit))
-                {
-                    service.Unit = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UITextElements.EstTime))
-                {
-                    if (!TimeSpan.TryParse(element.Text, out estimatedTime))
+                    string tmp = estimatedTime.ToString();
+                    if (tmp.IndexOf('.') != -1)
                     {
                         GetMessageBoxException(UITextElements.WrongTimeFormat);
+                        RefreshService();
                         return;
                     }
-                    else
-                    {
-                        string tmp = estimatedTime.ToString();
-                        if (tmp.IndexOf('.') != -1)
-                        {
-                            GetMessageBoxException(UITextElements.WrongTimeFormat);
-                            RefreshService();
-                            return;
-                        }
-                        service.EstimatedTime = TimeSpan.Parse(element.Text);
-                    }
+                    service.EstimatedTime = TimeSpan.Parse(element.Text);
                 }
-                _serviceModelManager.UpdateServiceById(service);
-                RefreshService();
-                DataGrid_Services.SelectedIndex = -1;
             }
+            _serviceModelManager.UpdateServiceById(service);
         }
 
         private void DataGrid_Services_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ServiceModel> services = _serviceModelManager.GetAllServices();
-            DataGrid_Services.ItemsSource = services;
-            e.Source = DataGrid_Services;
+            RefreshService();
         }
 
         private void DataGrid_Services_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -471,6 +439,8 @@ namespace CliningContoraFromValera.UI
                 GetMessageBoxException(UITextElements.EmptyDiscription);
             }
         }
+
+        //ПОДБОР СОТРУДНИКОВ
 
         private void DataGrid_RelevantEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
