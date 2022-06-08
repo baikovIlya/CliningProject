@@ -151,7 +151,7 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text)
                 || String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
             {
-                GetMessageBoxException(UITextElements.EmptyFieldsError);
+                GetMessageBoxException(UITextElements.AllFieldsSholdBeFilled);
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
                 || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
@@ -436,7 +436,7 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                GetMessageBoxException(UITextElements.EmptyDiscription);
+                GetMessageBoxException(UITextElements.AllFieldsSholdBeFilled);
             }
         }
 
@@ -519,8 +519,8 @@ namespace CliningContoraFromValera.UI
         }
         private void Button_AddShift_Click(object sender, RoutedEventArgs e)
         {
-            if (ComboBox_ShiftStartTime == null || ComboBox_ShiftFinishTime == null
-                || ComboBox_EmployeeSchedule == null || DataPicker_EmployeeData == null)
+            if (String.IsNullOrWhiteSpace(ComboBox_EmployeeSchedule.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text)
+                || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text) || String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
             {
                 GetMessageBoxException(UITextElements.EmptyFieldsError);
             }
@@ -536,17 +536,13 @@ namespace CliningContoraFromValera.UI
                 catch (System.Data.SqlClient.SqlException)
                 {
                     GetMessageBoxException(UITextElements.ShiftAlreadyExist);
+                    AddShiftItemsClear();
+                    StartAndFinishLabelVisibilities();
                 }
             }
         }
 
-        private void StartAndFinishLabelVisibilities()
-        {
-            Label_ShiftStart.Visibility = Visibility.Visible;
-            Label_ShiftFinish.Visibility = Visibility.Visible;
-        }
-
-        private void AddShift()
+        public void AddShift()
         {
             EmployeeModel employee = (EmployeeModel)ComboBox_EmployeeSchedule.SelectedValue;
             TimeSpan newStartTime = TimeSpan.Parse(ComboBox_ShiftStartTime.Text);
@@ -563,6 +559,13 @@ namespace CliningContoraFromValera.UI
             }
         }
 
+        private void StartAndFinishLabelVisibilities()
+        {
+            Label_ShiftStart.Visibility = Visibility.Visible;
+            Label_ShiftFinish.Visibility = Visibility.Visible;
+        }
+
+        
         private void RefreshShifts()
         {
             List<EmployeeWorkTimeModel> employeesWorkTimes = _employeeWorkTimeModelManager.GetEmployeesAndWorkTimes();
@@ -677,10 +680,14 @@ namespace CliningContoraFromValera.UI
 
         private void DataGrid_AllOrders_Loaded(object sender, RoutedEventArgs e)
         {
+            DataGridAllOrdersRefresh();
+        }
+
+        private void DataGridAllOrdersRefresh()
+        {
             List<OrderModel> orders = _orderModelManager.GetAllOrder();
             DataGrid_AllOrders.ItemsSource = orders;
         }
-
         private void ComboBox_AddNewService_Loaded(object sender, RoutedEventArgs e)
         {
             List<ServiceModel> services = _serviceModelManager.GetAllServices();
@@ -728,6 +735,16 @@ namespace CliningContoraFromValera.UI
                     int count = (int)ComboBox_OrderServiceCount.SelectedItem;
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
+                    List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
+                    try
+                    {
+                        UpdateOrdersPriceAndTimeAndRefresh(order, services);
+                    }
+                    catch(OverflowException)
+                    {
+                        GetMessageBoxException(UITextElements.TooManyServicesInOrder);
+                        _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
+                    }
                     ClearServiceOrder();
                     Button_AddServiseToOrder.IsEnabled = false;
                     RefreshServiceOrder();
@@ -743,7 +760,13 @@ namespace CliningContoraFromValera.UI
                 return;
             }
         }
-
+        private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order, List<ServiceOrderModel> services)
+        {
+            _orderModelManager.GetOrdersPrice(order, services);
+            _orderModelManager.UpdateOrdersTimes(order, services);
+            _orderModelManager.UpdateOrder(order);
+            DataGridAllOrdersRefresh();
+        }
         private void DataGrid_AllOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DataGrid_AllOrders.SelectedItem != null)
@@ -829,26 +852,58 @@ namespace CliningContoraFromValera.UI
                 _addressModelManager.AddAddress(newAddress);
                 List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
                 AddressModel crntAddress = allAddress.Find(item => item.Street == street);
-                TimeSpan estimatedTime = new TimeSpan(10, 00, 00);
-                TimeSpan finishTime = new TimeSpan(12, 00, 00);
-                decimal price = 1000;
-                bool isCommercial = true;
+                TimeSpan estimatedTime = new TimeSpan(00, 00, 00);
+                TimeSpan finishTime = startTime;
+                decimal price = 0;
+                bool isCommercial;
+                if((ClientOrderType)ComboBox_OrderIsCommercial.SelectedItem == ClientOrderType.ЮрЛицо)
+                {
+                    isCommercial = true;
+                }
+                else
+                {
+                    isCommercial = false;
+                }
                 OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
                 _orderModelManager.AddOrder(orderModel);
+                GetMessageBoxException(UITextElements.NewOrderIsAdded);
+                ClrearAllFieldsInNewOrder();
+
             }
+        }
+        private void Button_ClearNewOrderFields_Click(object sender, RoutedEventArgs e)
+        {
+            ClrearAllFieldsInNewOrder();
+        }
+        private void ClrearAllFieldsInNewOrder()
+        {
+            TextBox_OrderStreet.Text = null;
+            TextBox_OrderBuilding.Text = null;
+            TextBox_OrderRoom.Text = null;
+            ComboBox_OrderWorkArea.SelectedItem = null;
+            ComboBox_OrderClient.SelectedItem = null;
+            DatePicker_OrderDate.Text = null;
+            ComboBox_OrderStartTime.SelectedItem = null;
+            ComboBox_OrderIsCommercial.SelectedItem = null;
         }
 
         private void Button_ServiceFromOrderDelete_Click(object sender, RoutedEventArgs e)
         {
             ServiceOrderModel serviceOrder = (ServiceOrderModel)DataGrid_ServicesInOrder.SelectedItem;
             _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
-            RefreshServiceOrder();
+            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
+            UpdateOrdersPriceAndTimeAndRefresh(order, services);
+            DataGridAllOrdersRefresh();
         }
         private void RefreshServiceOrder()
         {
-            OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            List<ServiceOrderModel> servicesOrders = _serviceOrderModelManager.GetOrdersServices(order.Id);
-            DataGrid_ServicesInOrder.ItemsSource = servicesOrders;
+            if (DataGrid_AllOrders.SelectedItem != null)
+            {
+                OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
+                List<ServiceOrderModel> servicesOrders = _serviceOrderModelManager.GetOrdersServices(order.Id);
+                DataGrid_ServicesInOrder.ItemsSource = servicesOrders;
+            }
         }
 
         private void ComboBox_OrderServiceCount_Loaded(object sender, RoutedEventArgs e)
@@ -938,6 +993,18 @@ namespace CliningContoraFromValera.UI
                 return;
             }
         }
+        private void Button_OrderDelete_Click(object sender, RoutedEventArgs e)
+        {
+            OrderModel selectedOrder = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            _orderModelManager.DeleteOrderById(selectedOrder.Id);
+            UpdateAllOrdersDataGrid();
+        }
+
+        public void UpdateAllOrdersDataGrid()
+        {
+            List<OrderModel> orders = _orderModelManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = orders;
+        }
 
         private void ComboBox_HistoryOfEmployeesOrders_Loaded(object sender, RoutedEventArgs e)
         {
@@ -1022,6 +1089,56 @@ namespace CliningContoraFromValera.UI
                 _employeeModelManager.AddWorkAreaToEmployee(employee.Id, workArea.Id);
                 RefreshEmployeesDG();
             }
+        }
+
+        private void CB_SelectOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CB_SelectOrderStatus.SelectedItem != null)
+            {
+                StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
+                DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
+                Label_SortOrderByType.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CB_SelectOrderStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<StatusType> statuses = new List<StatusType> { };
+            foreach (StatusType st in Enum.GetValues(typeof(StatusType)))
+            {
+                statuses.Add(st);
+            }
+            CB_SelectOrderStatus.ItemsSource = statuses;
+            CB_SelectOrderStatus.SelectedItem = null;
+            Label_SortOrderByType.Visibility= Visibility.Visible;
+        }
+
+        private void DG_WorkArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas; 
+        }
+
+        private void Button_AddWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            WorkAreaModel workArea = new WorkAreaModel() {Name = TB_AddWorkArea.Text };
+            _workAreaModelManager.AddWorkArea(workArea);
+            TB_AddWorkArea.Clear();
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas;
+        }
+
+        private void Button_DeleteWorkArea_Click(object sender, RoutedEventArgs e)
+        {
+            WorkAreaModel workArea = (WorkAreaModel)DG_WorkArea.SelectedItem;
+            _workAreaModelManager.DeleteWorkAreaById(workArea.Id);
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas;
+        }
+
+        private void DG_WorkAreaRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            DG_WorkArea_Loaded(sender, e);
         }
 
         private void DataGrid_AllOrders_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)

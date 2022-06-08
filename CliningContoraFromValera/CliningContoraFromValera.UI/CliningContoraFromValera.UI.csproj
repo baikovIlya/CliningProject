@@ -8,11 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="PhonePicture.jpg" />
+    <None Remove="НОВЫЫЫЫЫЫ.jpg" />
+    <None Remove="фонпроекта.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Theme\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CliningContoraFromValera.Bll\CliningContoraFromValera.Bll.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="PhonePicture.jpg" />
   </ItemGroup>
 
 </Project>

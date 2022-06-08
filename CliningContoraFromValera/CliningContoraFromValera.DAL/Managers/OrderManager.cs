@@ -197,9 +197,9 @@ namespace CliningContoraFromValera.DAL.Managers
 
                 Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
 
-                connection.Query<OrderDTO, AddressDTO, WorkAreaDTO, OrderDTO>(
+                connection.Query<OrderDTO, AddressDTO, WorkAreaDTO, ClientDTO, OrderDTO>(
                     StoredProcedures.GetOrderHistoryOfTheEmployeeById,
-                    (order, address, workArea) => {
+                    (order, address, workArea, client) => {
                         if (!result.ContainsKey(order.Id))
                         {
                             result.Add(order.Id, order);
@@ -213,7 +213,11 @@ namespace CliningContoraFromValera.DAL.Managers
                         }
                         if (workArea != null)
                         {
-                            crnt.Address.WorkArea = workArea;
+                            crnt.Address!.WorkArea = workArea;
+                        }
+                        if (client != null)
+                        {
+                            crnt.Client = client;
                         }
                         return crnt;
                     },

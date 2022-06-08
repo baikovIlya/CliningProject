@@ -33,5 +33,8 @@
         public const string Room = "Помещение";
         public const string Commerce = "Коммерция";
         public const string ShiftAlreadyExist = "В этот день сотрудник уже работает";
+        public const string AllFieldsSholdBeFilled = "Все поля должны быть заполнены";
+        public const string NewOrderIsAdded = "Заказ создан";
+        public const string TooManyServicesInOrder = "Слишком много, до ночи не успеем";
     }
 }
