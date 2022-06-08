@@ -1021,6 +1021,18 @@ namespace CliningContoraFromValera.UI
             
 
         }
+        private void Button_OrderDelete_Click(object sender, RoutedEventArgs e)
+        {
+            OrderModel selectedOrder = (OrderModel)DataGrid_AllOrders.SelectedItem;
+            _orderModelManager.DeleteOrderById(selectedOrder.Id);
+            UpdateAllOrdersDataGrid();
+        }
+
+        public void UpdateAllOrdersDataGrid()
+        {
+            List<OrderModel> orders = _orderModelManager.GetAllOrder();
+            DataGrid_AllOrders.ItemsSource = orders;
+        }
 
         private void ComboBox_HistoryOfEmployeesOrders_Loaded(object sender, RoutedEventArgs e)
         {

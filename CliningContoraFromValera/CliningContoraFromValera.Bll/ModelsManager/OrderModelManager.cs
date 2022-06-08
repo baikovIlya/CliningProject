@@ -44,6 +44,11 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             }
             return result;
         }
+
+        public void DeleteOrderById(int orderId)
+        {
+            _orderManager.DeleteOrderById(orderId);
+        }
         public void GetOrdersPrice(OrderModel order, List<ServiceOrderModel> services)
         {
             decimal price = 0;
