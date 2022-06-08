@@ -92,7 +92,7 @@
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_ClientDelete" Content="Удалить" Click="Button_ClientDelete_Click"/>
+                                                    <Button x:Name="Button_OrderDelete" Content="Удалить" Click="Button_OrderDelete_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -216,7 +216,7 @@
                                 <Label Grid.Column="1" Content="Дом:" HorizontalAlignment="Left" Height="34" Margin="14,61,0,0" Grid.Row="1" VerticalAlignment="Top" Width="56" Grid.RowSpan="2"/>
                                 <Label Grid.Column="1" Content="Помещение:" HorizontalAlignment="Left" Height="31" Margin="10,60,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80" Grid.RowSpan="2"/>
                                 <Button x:Name="Button_OrderAdd" Content="Добавить заказ" HorizontalAlignment="Left" Height="34" Margin="16,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="150" Click="Button_OrderAdd_Click" Grid.Column="1"/>
-                                <Button Content="Отменить" HorizontalAlignment="Left" Height="34" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="146" Grid.Column="1"/>
+                                <Button x:Name="Button_ClearNewOrderFields" Content="Очистить" HorizontalAlignment="Left" Height="34" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="146" Grid.Column="1" Click="Button_ClearNewOrderFields_Click"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -553,7 +553,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="150"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="150"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="250"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="230"/>
                             <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" Width="111"/>
                             <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" Width="110"/>
                         </DataGrid.Columns>
@@ -568,7 +568,7 @@
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="130"/>
                             <DataGridTextColumn Header="Приблиз. вр. выполнения" Binding="{Binding EstimatedEndTime}" Width="130"/>
                             <DataGridTextColumn Header="Время окончания" Binding="{Binding FinishTime}" Width="130"/>
-                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="300"/>
+                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="280"/>
                             <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="81"/>
                         </DataGrid.Columns>
                     </DataGrid>

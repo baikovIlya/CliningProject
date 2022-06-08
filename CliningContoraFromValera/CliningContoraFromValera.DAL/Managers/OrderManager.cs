@@ -69,8 +69,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void UpdateOrderById(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
+        public void UpdateOrderById(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
