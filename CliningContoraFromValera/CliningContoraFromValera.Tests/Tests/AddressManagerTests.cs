@@ -47,8 +47,25 @@ namespace CliningContoraFromValera.Tests
             _addressManagerMock.Verify();
         }
 
+        [TestCaseSource(typeof(DeleteAddressByIdTestSource))]
+        public void DeleteAddressByIdTest(AddressModel addressModel, AddressDTO addressDto)
+        {
+            _addressManagerMock.Setup(o => o.DeleteAddressById(addressDto.Id)).Verifiable();
 
+            _addressModelManager.DeleteAddressById(addressModel.Id);
 
+            _addressManagerMock.Verify();
+        }
 
+        [TestCaseSource(typeof(GetAllAddressTestSource))]
+        public void GetAllWorkAreasTest(List<AddressDTO> addressResult, List<AddressModel> expected)
+        {
+            _addressManagerMock.Setup(o => o.GetAllAddresses()).Returns(addressResult).Verifiable();
+
+            List<AddressModel> actual = _addressModelManager.GetAllAddresses();
+            Assert.AreEqual(expected, actual);
+
+            _addressManagerMock.Verify();
+        }
     }
 }
