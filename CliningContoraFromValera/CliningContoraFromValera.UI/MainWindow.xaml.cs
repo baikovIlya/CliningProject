@@ -1171,7 +1171,7 @@ namespace CliningContoraFromValera.UI
                 TimeSpan startTime;
                 if (String.IsNullOrWhiteSpace(element.Text))
                 {
-                    GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                    ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
                 }
                 else
                 {
@@ -1179,7 +1179,7 @@ namespace CliningContoraFromValera.UI
                     {
                         if (!TimeSpan.TryParse(element.Text, out startTime))
                         {
-                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                            ShowMessageBox(UiTextElements.WrongTimeFormat);
                             return;
                         }
                         else
@@ -1187,12 +1187,12 @@ namespace CliningContoraFromValera.UI
                             string tmp = startTime.ToString();
                             if (tmp.IndexOf('.') != -1)
                             {
-                                GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                                ShowMessageBox(UiTextElements.WrongTimeFormat);
                                 DataGridAllOrdersRefresh();
                                 return;
                             }
                             order.StartTime = TimeSpan.Parse(element.Text);
-                            UpdateOrdersPriceAndTimeAndRefresh(order, _serviceOrderModelManager.GetOrdersServices(order.Id));
+                            UpdateOrdersPriceAndTimeAndRefresh(order);
                         }
                     }
                 }
