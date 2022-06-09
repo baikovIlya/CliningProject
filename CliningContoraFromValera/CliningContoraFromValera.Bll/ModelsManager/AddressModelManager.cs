@@ -36,7 +36,5 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             AddressDTO addressDTO = _addressManager.GetAddressById(addressId);
             return MapperConfigStorage.GetInstance().Map<AddressModel>(addressDTO);
         }
-
-
     }
 }

@@ -320,8 +320,8 @@
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="105" IsReadOnly="true"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100" IsReadOnly="true"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата" Binding="{Binding Date}" IsReadOnly="true" Width="90"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Начало смены" Width="155" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=StartTime}"/>
-                                        <DataGridTextColumn Header="Конец смены" Width="155" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FinishTime}"/>
+                                        <DataGridTextColumn Header="Начало смены" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=StartTime}"/>
+                                        <DataGridTextColumn Header="Конец смены" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FinishTime}"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="90">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
