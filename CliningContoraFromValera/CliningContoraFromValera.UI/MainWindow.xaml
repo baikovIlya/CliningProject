@@ -25,28 +25,28 @@
         <TabControl x:Name="MainTabControl" Width="800" Height="550" Background="#FFC9E0E3">
 
             <TabItem Header="Клиенты" FontFamily="Segoe UI">
-                <Grid Height="438" Margin="16,0,31,0">
+                <Grid Height="438" Margin="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60*"></ColumnDefinition>
                         <ColumnDefinition Width="40*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Имя:" Margin="448,88,0,277" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="TextBox_Name" Grid.Column="1" VerticalAlignment="Top" Margin="10,119,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
-                    <Label Content="Фамилия:" Margin="448,13,0,352" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="TextBox_LastName" Grid.Column="1" VerticalAlignment="Top" Margin="10,43,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
-                    <Label Content="Телефон: (+7(951) 123-45-67)" Margin="448,170,0,193" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="TextBox_Phone" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
-                    <Label Content="Почта:" Margin="448,240,0,123" Grid.ColumnSpan="2"/>
-                    <Button x:Name="Button_ClientAdd" Content="Добавить" Margin="54,345,51,55" Grid.Column="1" Click="Button_ClientAdd_Click"/>
-                    <TextBox  x:Name="TextBox_Email" Grid.Column="1" VerticalAlignment="Top" Margin="10,276,10,0" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
 
-                    <DataGrid x:Name="DataGrid_Clients" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ClientModel}" IsReadOnly="False" CanUserAddRows="False"
-                              Margin="10,-2,10,55" RenderTransformOrigin="0.5,0.5" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
+                    <DataGrid x:Name="DataGrid_Clients" Grid.RowSpan="5"
+                              AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding ClientModel}" IsReadOnly="False" CanUserAddRows="False"
+                              Margin="10,0,10,0" Loaded="DataGrid_Clients_Loaded" CellEditEnding="DataGrid_Clients_CellEditEnding">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Фамилия" Width="88" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=LastName}"/>
-                            <DataGridTextColumn Header="Имя" Width="88" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FirstName}"/>
+                            <DataGridTextColumn Header="Фамилия" Width="101" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=LastName}"/>
+                            <DataGridTextColumn Header="Имя" Width="90" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FirstName}"/>
                             <DataGridTextColumn Header="Телефон" Width="95" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Phone}"/>
-                            <DataGridTextColumn Header="Почта" Width="90" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Email}"/>
+                            <DataGridTextColumn Header="Почта" Width="95" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Email}"/>
                             <DataGridTemplateColumn Header="Удалить" Width="55">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -56,7 +56,33 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="Button_ClientRefresh" Content="Обновить список клиентов" Margin="10,400,10,10" Click="Button_ClientRefresh_Click"></Button>
+
+                    <Label Content="Имя:" Grid.Column="1" Margin="10,0,10,40" VerticalAlignment="Bottom"/>
+                    <TextBox x:Name="TextBox_Name" Grid.Column="1" VerticalAlignment="Bottom"
+                             Margin="10" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    
+                    <Label Content="Фамилия:" Grid.Column="1" Grid.Row="1" 
+                           Margin="10,0,10,40" VerticalAlignment="Bottom"/>
+                    <TextBox x:Name="TextBox_LastName" Grid.Column="1" Grid.Row="1"
+                             VerticalAlignment="Bottom" Margin="10" AcceptsReturn="True" MaxLength="255" Height="28" />
+                    
+                    <Label Content="Телефон в формате +7(951) 123-45-67:" VerticalAlignment="Bottom"
+                           Grid.Column="1" Grid.Row="2" Margin="10,0,10,40"/>
+                    <TextBox x:Name="TextBox_Phone" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2"
+                             Margin="10" AcceptsReturn="True" MaxLength="255" Height="28" />
+
+                    <Label Content="Почта:" Grid.Column="1" Grid.Row="3"
+                           Margin="10,0,10,40" VerticalAlignment="Bottom" />
+                    <TextBox  x:Name="TextBox_Email" Grid.Column="1" Grid.Row="3"
+                              VerticalAlignment="Bottom" Margin="10" AcceptsReturn="True" MaxLength="255" Height="28" />
+
+                    <Button x:Name="Button_ClientAdd" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top"
+                            Content="Добавить клиента" Margin="10" Height="28" HorizontalAlignment="Center"
+                            Width="150" Click="Button_ClientAdd_Click"/>
+
+                    <Button x:Name="Button_ClientRefresh"  Grid.Row="6"
+                            Content="Обновить список клиентов" Margin="10" 
+                            Click="Button_ClientRefresh_Click"/>
                 </Grid>
             </TabItem>
 
