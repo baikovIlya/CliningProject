@@ -999,6 +999,8 @@ namespace CliningContoraFromValera.UI
                 Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
                 DataGrid_ServicesInOrder.ItemsSource = null;
                 DataGrid_EmployeesInOrder.ItemsSource = null;
+                Button_EmployeeSelection.Visibility = Visibility.Visible;
+                Button_EmployeeSelection.IsEnabled = true;
             }
             else
             {
@@ -1110,6 +1112,8 @@ namespace CliningContoraFromValera.UI
                 StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
                 DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
                 Label_SortOrderByType.Visibility = Visibility.Hidden;
+                Button_ResetStatusSelection.Visibility = Visibility.Visible;
+                Button_ResetStatusSelection.IsEnabled = true;
             }
         }
 
@@ -1197,15 +1201,29 @@ namespace CliningContoraFromValera.UI
                     }
                 }
                 _orderModelManager.UpdateOrder(order);
-                DataGridAllOrdersRefresh();
             }
             catch (InvalidCastException)
             {
+                UpdateOrdersPriceAndTimeAndRefresh(order);
                 _orderModelManager.UpdateOrder(order);
-                DataGridAllOrdersRefresh();
-
             }
+            DataGridAllOrdersRefresh();
         }
 
+        private void Button_ResetStatusSelection_Click(object sender, RoutedEventArgs e)
+        {
+            CB_SelectOrderStatus.SelectedItem = null;
+            DataGridAllOrdersRefresh();
+            Button_ResetStatusSelection.Visibility = Visibility.Hidden;
+            Button_ResetStatusSelection.IsEnabled = false;
+        }
+
+        private void Button_ResetEmployeeSelection_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBox_HistoryOfEmployeesOrders.SelectedItem = null;
+            DataGridAllOrdersRefresh();
+            Button_EmployeeSelection.Visibility = Visibility.Hidden;
+            Button_EmployeeSelection.IsEnabled = false;
+        }
     }
 }

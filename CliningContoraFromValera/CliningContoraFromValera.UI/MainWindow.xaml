@@ -87,7 +87,7 @@
                                         <DataGridTextColumn Header="Улица" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Street}"/>
                                         <DataGridTextColumn Header="Здание" Width="50" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Building}"/>
                                         <DataGridTextColumn Header="Помещение" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Room}"/>
-                                        <DataGridTextColumn Header="Коммерция" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=IsCommercial}"/>
+                                        <DataGridCheckBoxColumn Header="Коммерция" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=IsCommercial}"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -172,6 +172,8 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                                 <Label Name="Label_EmployeeOrdersHistory" Content="История заказов сотрудника:" HorizontalAlignment="Left" Height="29" Margin="270,3,0,0" VerticalAlignment="Top" Width="180"/>
+                                <Button x:Name="Button_ResetEmployeeSelection" Content="-" HorizontalAlignment="Left" Margin="504,5,0,0" VerticalAlignment="Top" Height="25" Width="20" Click="Button_ResetEmployeeSelection_Click" IsEnabled="False" Visibility="Hidden"/>
+                                <Button x:Name="Button_ResetStatusSelection" Content="-" HorizontalAlignment="Left" Margin="235,5,0,0" VerticalAlignment="Top" Height="24" Width="21" Click="Button_ResetStatusSelection_Click" IsEnabled="False" Visibility="Hidden"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">
