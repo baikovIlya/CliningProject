@@ -70,34 +70,18 @@ namespace CliningContoraFromValera.Tests.TestSources
             }
         }
 
-        public class UpdateAddressTestSourceTwo : IEnumerable
+        public class GetAllAddressTestSource: IEnumerable
         {
             public IEnumerator GetEnumerator()
             {
                 yield return new object[]
                 {
-                new AddressModel()
-                {
-                Id = 1,
-                Street = "Колотушкина",
-                Building = "50",
-                Room = "10A",
-                WorkAreaId = 1
-                },
-                new AddressDTO()
-                {
-                Id = 1,
-                Street = "Колотушкина",
-                Building = "50",
-                Room = "10A",
-                WorkAreaId = 1
-                }
+                1,
+                AddressTestDtos.addressDto[0],
+                AddressTestModels.addressModels[0]
                 };
-
             }
-
-
-
         }
+       
     }
 }

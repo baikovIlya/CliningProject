@@ -21,7 +21,7 @@ namespace CliningContoraFromValera.Tests
             _addressModelManager = new AddressModelManager(_addressManagerMock.Object);
         }
 
-        [TestCaseSource(typeof(UpdateAddressTestSourceTwo))]
+        [TestCaseSource(typeof(UpdateAddressTestSource))]
         public void UpdateAddressTest(AddressModel addressModel, AddressDTO addressDto)
         {
             _addressManagerMock.Setup(o => o.UpdateAddressById(addressDto)).Verifiable();
@@ -29,7 +29,19 @@ namespace CliningContoraFromValera.Tests
             _addressManagerMock.Verify();
         }
 
-        
-        
+        [TestCaseSource(typeof(GetAllAddressTestSource))]
+        public void GetAddressByIdAddressTest(int addressId, AddressDTO addressDto, AddressModel expectedAddress)
+        {
+            _addressManagerMock.Setup(o => o.GetAddressById(addressId)).Returns(addressDto).Verifiable();
+            AddressModel actualAddress = _addressModelManager.GetAddressById(addressId);
+            //Assert.AreEqual(expectedAddress, actualAddress);
+            _addressManagerMock.Verify();
+        }
+
+
+
+
+
+
     }
 }
