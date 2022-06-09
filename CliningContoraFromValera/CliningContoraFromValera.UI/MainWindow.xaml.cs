@@ -999,8 +999,8 @@ namespace CliningContoraFromValera.UI
                 Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
                 DataGrid_ServicesInOrder.ItemsSource = null;
                 DataGrid_EmployeesInOrder.ItemsSource = null;
-                Button_EmployeeSelection.Visibility = Visibility.Visible;
-                Button_EmployeeSelection.IsEnabled = true;
+                Button_ResetEmployeeSelection.Visibility = Visibility.Visible;
+                Button_ResetEmployeeSelection.IsEnabled = true;
             }
             else
             {
@@ -1222,8 +1222,8 @@ namespace CliningContoraFromValera.UI
         {
             ComboBox_HistoryOfEmployeesOrders.SelectedItem = null;
             DataGridAllOrdersRefresh();
-            Button_EmployeeSelection.Visibility = Visibility.Hidden;
-            Button_EmployeeSelection.IsEnabled = false;
+            Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
+            Button_ResetEmployeeSelection.IsEnabled = false;
         }
     }
 }
