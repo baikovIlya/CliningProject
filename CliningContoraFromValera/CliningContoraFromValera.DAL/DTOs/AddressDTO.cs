@@ -22,7 +22,7 @@
                 flag = false;
             }
             AddressDTO addressDto = (AddressDTO)obj;
-            if (addressDto.Id != this.Id ||
+            if (    addressDto.Id != this.Id ||
                     addressDto.Street != this.Street ||
                     addressDto.Building != this.Building ||
                     addressDto.Room != this.Room ||

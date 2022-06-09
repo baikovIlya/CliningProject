@@ -23,7 +23,7 @@
 
         public override bool Equals(object? obj)
         {
-            bool flag = false;
+            bool flag = true;
             if (obj == null || !(obj is AddressModel))
             {
                 flag = false;
