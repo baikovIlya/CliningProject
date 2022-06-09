@@ -64,7 +64,6 @@
         public const string WorkTime_GetById = "WorkTime_GetById";
         public const string WorkTime_UpdateById = "WorkTime_UpdateById";
 
-        public const string ChangeEmployeeScheduleByEmployeeIdByDate = "ChangeEmployeeScheduleByEmployeeIdByDate";
         public const string GetEmployeesWorkAreasById = "GetEmployeesWorkAreasById";
         public const string GetEmployeesServicesById = "GetEmployeesServicesById";
         public const string GetEmployeeSchedule = "GetEmployeeSchedule";

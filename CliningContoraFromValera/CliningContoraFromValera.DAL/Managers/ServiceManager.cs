@@ -93,8 +93,5 @@ namespace CliningContoraFromValera.DAL.Managers
                     );
             }
         }
-
-
-
     }
 }

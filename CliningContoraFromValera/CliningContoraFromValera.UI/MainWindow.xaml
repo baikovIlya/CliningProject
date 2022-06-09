@@ -7,7 +7,17 @@
         xmlns:locall="clr-namespace:CliningContoraFromValera.Bll;assembly=CliningContoraFromValera.Bll" 
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
+        
         Title="CliningFromValera" Height="610" Width="880" Background="White" ResizeMode="NoResize">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="StatusType" 
+                MethodName="GetValues"  
+                ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="locall:StatusType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/PhonePicture.jpg"/>
@@ -63,21 +73,21 @@
                                           Loaded="DataGrid_AllOrders_Loaded" Margin="0,39,0,221" SelectionChanged="DataGrid_AllOrders_SelectionChanged" CellEditEnding="DataGrid_AllOrders_CellEditEnding">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Номер" IsReadOnly="True" Binding="{Binding Id}" Width="50"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="62"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Начало" Binding="{Binding StartTime}" Width="70"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Дата" Width="62" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Date}"/>
+                                        <DataGridTextColumn Header="Начало" Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=StartTime}"/>
                                         <DataGridTextColumn Header="Время на выполнение услуг" IsReadOnly="True" Binding="{Binding EstimatedEndTime}" Width="165"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Конец" IsReadOnly="True" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Сумма" IsReadOnly="True" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="120"></DataGridTextColumn>
+                                        <DataGridComboBoxColumn Header="Статус" SelectedItemBinding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Status}" ItemsSource="{Binding Source={StaticResource StatusType}}" />
                                         <DataGridTextColumn Header="Кол-во сотрудников" IsReadOnly="True" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Фамилия клиента" Binding="{Binding LastName}" Width="110"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Имя клиента" Binding="{Binding FirstName}" Width="90"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Район" Binding="{Binding Name}" Width="70"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="100"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Здание" Binding="{Binding Building}" Width="50"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Помещение" Binding="{Binding Room}" Width="80"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Коммерция" Binding="{Binding IsCommercial}" Width="78"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Фамилия клиента"  IsReadOnly="True" Width="110" Binding="{Binding LastName}"/>
+                                        <DataGridTextColumn Header="Имя клиента" IsReadOnly="True" Width="110" Binding="{Binding FirstName}"/>
+                                        <DataGridTextColumn Header="Телефон" IsReadOnly="True" Width="100" Binding="{Binding Phone}"/>
+                                        <DataGridTextColumn Header="Район" Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Name}"/>
+                                        <DataGridTextColumn Header="Улица" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Street}"/>
+                                        <DataGridTextColumn Header="Здание" Width="50" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Building}"/>
+                                        <DataGridTextColumn Header="Помещение" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Room}"/>
+                                        <DataGridCheckBoxColumn Header="Коммерция" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=IsCommercial}"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -100,7 +110,7 @@
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_ServiceFromOrderDelete" Content="Удалить" Click="Button_ServiceFromOrderDelete_Click"/>
+                                                    <Button x:Name="Button_ServiceFromOrderDelete" Content="Удалить" Click="Button_DeleteServiceFromOrder_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -162,6 +172,8 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                                 <Label Name="Label_EmployeeOrdersHistory" Content="История заказов сотрудника:" HorizontalAlignment="Left" Height="29" Margin="270,3,0,0" VerticalAlignment="Top" Width="180"/>
+                                <Button x:Name="Button_ResetEmployeeSelection" Content="-" HorizontalAlignment="Left" Margin="504,5,0,0" VerticalAlignment="Top" Height="25" Width="20" Click="Button_ResetEmployeeSelection_Click" IsEnabled="False" Visibility="Hidden"/>
+                                <Button x:Name="Button_ResetStatusSelection" Content="-" HorizontalAlignment="Left" Margin="235,5,0,0" VerticalAlignment="Top" Height="24" Width="21" Click="Button_ResetStatusSelection_Click" IsEnabled="False" Visibility="Hidden"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Добавить заказ">
@@ -308,8 +320,8 @@
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="105" IsReadOnly="true"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100" IsReadOnly="true"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата" Binding="{Binding Date}" IsReadOnly="true" Width="90"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Начало смены" Binding="{Binding StartTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Конец смены" Binding="{Binding FinishTime}" IsReadOnly="False" Width="115"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Начало смены" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=StartTime}"/>
+                                        <DataGridTextColumn Header="Конец смены" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=FinishTime}"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="90">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -503,7 +515,7 @@
                               IsReadOnly="False" 
                               CanUserAddRows="False" Loaded="DG_WorkArea_Loaded">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Все районы" Binding="{Binding Name}" Width="280"/>
+                            <DataGridTextColumn Header="Все районы" IsReadOnly="True" Binding="{Binding Name}" Width="280"/>
                             <DataGridTemplateColumn Header="Удалить" Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -513,7 +525,7 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="DG_WorkAreaRefresh" Content="Обновить список районов" HorizontalAlignment="Center" Margin="0,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="412" Click="DG_WorkAreaRefresh_Click"/>
+                    <Button x:Name="Button_WorkAreaRefresh" Content="Обновить список районов" HorizontalAlignment="Center" Margin="0,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="412" Click="Button_WorkAreaRefresh_Click"/>
                 </Grid>
             </TabItem>
 

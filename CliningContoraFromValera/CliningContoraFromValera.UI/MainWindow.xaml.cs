@@ -13,16 +13,6 @@ namespace CliningContoraFromValera.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ClientModelManager _clientModelManager = new ClientModelManager();
-        private EmployeeModelManager _employeeModelManager = new EmployeeModelManager();
-        private WorkTimeModelManager _workTimeModelManager = new WorkTimeModelManager();
-        private EmployeeWorkTimeModelManager _employeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
-        private OrderModelManager _orderModelManager = new OrderModelManager();
-        private WorkAreaModelManager _workAreaModelManager = new WorkAreaModelManager();
-        private ServiceModelManager _serviceModelManager = new ServiceModelManager();
-        private ServiceOrderModelManager _serviceOrderModelManager = new ServiceOrderModelManager();
-        private AddressModelManager _addressModelManager = new AddressModelManager();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +24,16 @@ namespace CliningContoraFromValera.UI
             Button_AddEmployeeToOrder.IsEnabled = false;
             Button_AddServiseToOrder.IsEnabled = false;
         }
+
+        private ClientModelManager _clientModelManager = new ClientModelManager();
+        private EmployeeModelManager _employeeModelManager = new EmployeeModelManager();
+        private WorkTimeModelManager _workTimeModelManager = new WorkTimeModelManager();
+        private EmployeeWorkTimeModelManager _employeeWorkTimeModelManager = new EmployeeWorkTimeModelManager();
+        private OrderModelManager _orderModelManager = new OrderModelManager();
+        private WorkAreaModelManager _workAreaModelManager = new WorkAreaModelManager();
+        private ServiceModelManager _serviceModelManager = new ServiceModelManager();
+        private ServiceOrderModelManager _serviceOrderModelManager = new ServiceOrderModelManager();
+        private AddressModelManager _addressModelManager = new AddressModelManager();
 
         //КЛИЕНТЫ
 
@@ -56,7 +56,7 @@ namespace CliningContoraFromValera.UI
             var element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
                 ClientRefresh();
                 return;
             }
@@ -66,7 +66,7 @@ namespace CliningContoraFromValera.UI
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[a-z]")
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
                 {
-                    GetMessageBoxException(UiTextElements.WrongPhoneFormat);
+                    ShowMessageBox(UiTextElements.WrongPhoneFormat);
                     ClientRefresh();
                     return;
                 }
@@ -84,13 +84,13 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(TextBox_Name.Text) || String.IsNullOrWhiteSpace(TextBox_LastName.Text)
                  || String.IsNullOrWhiteSpace(TextBox_Email.Text) || String.IsNullOrWhiteSpace(TextBox_Phone.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
                  || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
                  || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
             {
-                GetMessageBoxException(UiTextElements.WrongPhoneFormat);
+                ShowMessageBox(UiTextElements.WrongPhoneFormat);
             }
             else
             {
@@ -151,13 +151,13 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(TB_LastNameEmployee.Text) || String.IsNullOrWhiteSpace(TB_FirstNameEmployee.Text)
                 || String.IsNullOrWhiteSpace(TB_PhoneEmployee.Text))
             {
-                GetMessageBoxException(UiTextElements.AllFieldsSholdBeFilled);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(phone, @"[а-я]")
                 || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[a-z]")
                 || System.Text.RegularExpressions.Regex.IsMatch(phone, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
             {
-                GetMessageBoxException(UiTextElements.WrongPhoneFormat);
+                ShowMessageBox(UiTextElements.WrongPhoneFormat);
             }
             else
             {
@@ -190,7 +190,7 @@ namespace CliningContoraFromValera.UI
             var element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
                 EmployeeRefresh();
                 return;
             }
@@ -200,7 +200,7 @@ namespace CliningContoraFromValera.UI
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[a-z]")
                  || System.Text.RegularExpressions.Regex.IsMatch(element.Text, @"[\/\@\#\%\^\*\(\)\;\:\'\<\>\$]$"))
                 {
-                    GetMessageBoxException(UiTextElements.WrongPhoneFormat);
+                    ShowMessageBox(UiTextElements.WrongPhoneFormat);
                     EmployeeRefresh();
                     return;
                 }
@@ -248,11 +248,6 @@ namespace CliningContoraFromValera.UI
             DataGrid_EmployeesServices.ItemsSource = _employeeModelManager.GetEmployeesServicesById(employee!.Id);
         }
 
-        //РАЙОНЫ
-
-        
-
-
         //СЕРВИСЫ
 
         private void Button_ServicesDelete_Click(object sender, RoutedEventArgs e)
@@ -294,7 +289,7 @@ namespace CliningContoraFromValera.UI
                 || CB_ChooseUnitType.SelectedItem == null || CB_ChooseEstimatedTime.SelectedItem == null
                 || CB_ChooseServiceType.SelectedItem == null)
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else if (!Decimal.TryParse(TB_Price.Text, out decimalFormat)
                 || !Decimal.TryParse(TB_CommercialPrice.Text, out decimalFormat))
@@ -305,7 +300,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (FormatException)
                 {
-                    GetMessageBoxException(UiTextElements.WrongPriceFormat);
+                    ShowMessageBox(UiTextElements.WrongPriceFormat);
                 }
             }
             else
@@ -352,7 +347,7 @@ namespace CliningContoraFromValera.UI
             TextBox element = (TextBox)e.EditingElement;
             if (String.IsNullOrWhiteSpace(element.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
                 RefreshService();
                 return;
             }
@@ -360,7 +355,7 @@ namespace CliningContoraFromValera.UI
             {
                 if (!TimeSpan.TryParse(element.Text, out estimatedTime))
                 {
-                    GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                    ShowMessageBox(UiTextElements.WrongTimeFormat);
                     return;
                 }
                 else
@@ -368,7 +363,7 @@ namespace CliningContoraFromValera.UI
                     string tmp = estimatedTime.ToString();
                     if (tmp.IndexOf('.') != -1)
                     {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                        ShowMessageBox(UiTextElements.WrongTimeFormat);
                         RefreshService();
                         return;
                     }
@@ -404,7 +399,7 @@ namespace CliningContoraFromValera.UI
         {
             if (String.IsNullOrWhiteSpace(TB_ServiceDescription.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyDiscription);
+                ShowMessageBox(UiTextElements.EmptyDiscription);
             }
             else
             {
@@ -436,7 +431,7 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                GetMessageBoxException(UiTextElements.AllFieldsSholdBeFilled);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
         }
 
@@ -522,7 +517,7 @@ namespace CliningContoraFromValera.UI
             if (String.IsNullOrWhiteSpace(ComboBox_EmployeeSchedule.Text) || String.IsNullOrWhiteSpace(ComboBox_ShiftStartTime.Text)
                 || String.IsNullOrWhiteSpace(ComboBox_ShiftFinishTime.Text) || String.IsNullOrWhiteSpace(DataPicker_EmployeeData.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else
             {
@@ -535,7 +530,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    GetMessageBoxException(UiTextElements.ShiftAlreadyExist);
+                    ShowMessageBox(UiTextElements.ShiftAlreadyExist);
                     AddShiftItemsClear();
                     StartAndFinishLabelVisibilities();
                 }
@@ -550,7 +545,7 @@ namespace CliningContoraFromValera.UI
             DateTime dateTime = DateTime.Parse(DataPicker_EmployeeData.Text);
             if (newStartTime >= newFinishTime)
             {
-                GetMessageBoxException(UiTextElements.StartTimeMustBeLessThanEndTime);
+                ShowMessageBox(UiTextElements.StartTimeMustBeLessThanEndTime);
             }
             else
             {
@@ -576,7 +571,7 @@ namespace CliningContoraFromValera.UI
         {
             if (String.IsNullOrWhiteSpace(DatePicker_FromDate.Text) || String.IsNullOrWhiteSpace(DatePicker_ToDate.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else
             {
@@ -614,7 +609,7 @@ namespace CliningContoraFromValera.UI
             string nameColumnFinishTime = UiTextElements.SheduleEnd;
             if (String.IsNullOrWhiteSpace(Element.Text))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else
             {
@@ -622,7 +617,7 @@ namespace CliningContoraFromValera.UI
                 {
                     if (!TimeSpan.TryParse(Element.Text, out startTime))
                     {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                        ShowMessageBox(UiTextElements.WrongTimeFormat);
                         return;
                     }
                     else
@@ -630,7 +625,7 @@ namespace CliningContoraFromValera.UI
                         string tmp = startTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                            ShowMessageBox(UiTextElements.WrongTimeFormat);
                             RefreshShifts();
                             return;
                         }
@@ -641,7 +636,7 @@ namespace CliningContoraFromValera.UI
                 {
                     if (!TimeSpan.TryParse(Element.Text, out finishTime))
                     {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                        ShowMessageBox(UiTextElements.WrongTimeFormat);
                         return;
                     }
                     else
@@ -649,7 +644,7 @@ namespace CliningContoraFromValera.UI
                         string tmp = finishTime.ToString();
                         if (tmp.IndexOf('.') != -1)
                         {
-                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                            ShowMessageBox(UiTextElements.WrongTimeFormat);
                             RefreshShifts();
                             return;
                         }
@@ -687,6 +682,10 @@ namespace CliningContoraFromValera.UI
         {
             List<OrderModel> orders = _orderModelManager.GetAllOrder();
             DataGrid_AllOrders.ItemsSource = orders;
+            Button_ResetStatusSelection.Visibility = Visibility.Hidden;
+            Button_ResetStatusSelection.IsEnabled = false;
+            Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
+            Button_ResetEmployeeSelection.IsEnabled = false;
         }
         private void ComboBox_AddNewService_Loaded(object sender, RoutedEventArgs e)
         {
@@ -735,17 +734,16 @@ namespace CliningContoraFromValera.UI
                     int count = (int)ComboBox_OrderServiceCount.SelectedItem;
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
-                    List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
                     TimeSpan oldEstTime = order.EstimatedEndTime;
                     TimeSpan? oldFinishTime = order.FinishTime;
                     decimal oldPrice = order.Price;
                     try
                     {
-                        UpdateOrdersPriceAndTimeAndRefresh(order, services);
+                        UpdateOrdersPriceAndTimeAndRefresh(order);
                     }
                     catch(OverflowException)
                     {
-                        GetMessageBoxException(UiTextElements.TooManyServicesInOrder);
+                        ShowMessageBox(UiTextElements.TooManyServicesInOrder);
                         order.EstimatedEndTime = oldEstTime;
                         order.FinishTime = oldFinishTime;
                         order.Price = oldPrice;
@@ -757,7 +755,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    GetMessageBoxException(UiTextElements.DoubleAddingService);
+                    ShowMessageBox(UiTextElements.DoubleAddingService);
                     ClearServiceOrder();
                 }
             }
@@ -766,11 +764,11 @@ namespace CliningContoraFromValera.UI
                 return;
             }
         }
-        private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order, List<ServiceOrderModel> services)
+        private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order)
         {
             int index = DataGrid_AllOrders.SelectedIndex;
-            _orderModelManager.GetOrdersPrice(order, services);
-            _orderModelManager.UpdateOrdersTimes(order, services);
+            _orderModelManager.GetOrdersPrice(order);
+            _orderModelManager.UpdateOrdersTimes(order);
             _orderModelManager.UpdateOrder(order);
             DataGridAllOrdersRefresh();
             DataGrid_AllOrders.SelectedIndex = index;
@@ -778,7 +776,6 @@ namespace CliningContoraFromValera.UI
         private void UpdateOrdersCountOfEmployees(OrderModel order)
         {
             int index = DataGrid_AllOrders.SelectedIndex;
-            order.CountOfEmployees = 0;
             order.CountOfEmployees = _employeeModelManager.GetEmployeesInOrderByOrdeerId(order.Id).Count;
             _orderModelManager.UpdateOrder(order);
             DataGridAllOrdersRefresh();
@@ -851,9 +848,11 @@ namespace CliningContoraFromValera.UI
         private void Button_OrderAdd_Click(object sender, RoutedEventArgs e)
         {
             if ((String.IsNullOrWhiteSpace(TextBox_OrderStreet.Text)) || (String.IsNullOrWhiteSpace(TextBox_OrderBuilding.Text)
-                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text))))
+                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text)) || ComboBox_OrderClient.SelectedItem == null
+                || ComboBox_OrderWorkArea.SelectedItem ==null || ComboBox_OrderStartTime.SelectedItem == null
+                || ComboBox_OrderIsCommercial.SelectedItem == null || DatePicker_OrderDate.SelectedDate == null))
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
             else
             {
@@ -864,7 +863,7 @@ namespace CliningContoraFromValera.UI
                 ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
                 DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
                 TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
-                StatusType status = CliningContoraFromValera.Bll.StatusType.Выполняется;
+                StatusType status = CliningContoraFromValera.Bll.StatusType.Новый;
                 AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
                 _addressModelManager.AddAddress(newAddress);
                 List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
@@ -883,7 +882,7 @@ namespace CliningContoraFromValera.UI
                 }
                 OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
                 _orderModelManager.AddOrder(orderModel);
-                GetMessageBoxException(UiTextElements.OrderСreated);
+                ShowMessageBox(UiTextElements.OrderСreated);
                 ClrearAllFieldsInNewOrder();
 
             }
@@ -904,13 +903,12 @@ namespace CliningContoraFromValera.UI
             ComboBox_OrderIsCommercial.SelectedItem = null;
         }
 
-        private void Button_ServiceFromOrderDelete_Click(object sender, RoutedEventArgs e)
+        private void Button_DeleteServiceFromOrder_Click(object sender, RoutedEventArgs e)
         {
             ServiceOrderModel serviceOrder = (ServiceOrderModel)DataGrid_ServicesInOrder.SelectedItem;
             _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-            UpdateOrdersPriceAndTimeAndRefresh(order, services);
+            UpdateOrdersPriceAndTimeAndRefresh(order);
         }
         private void RefreshServiceOrder()
         {
@@ -965,7 +963,7 @@ namespace CliningContoraFromValera.UI
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    GetMessageBoxException(UiTextElements.EmployeeNotUnique);
+                    ShowMessageBox(UiTextElements.EmployeeNotUnique);
                     ClearComboBoxWithEmployees();
                 }
             }
@@ -980,7 +978,7 @@ namespace CliningContoraFromValera.UI
             ComboBox_AddNewEmployeeToOrder.Text = null;
         }
 
-        public void GetMessageBoxException(string message)
+        public void ShowMessageBox(string message)
         {
             MessageBox.Show(message);
         }
@@ -1005,6 +1003,8 @@ namespace CliningContoraFromValera.UI
                 Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
                 DataGrid_ServicesInOrder.ItemsSource = null;
                 DataGrid_EmployeesInOrder.ItemsSource = null;
+                Button_ResetEmployeeSelection.Visibility = Visibility.Visible;
+                Button_ResetEmployeeSelection.IsEnabled = true;
             }
             else
             {
@@ -1116,6 +1116,8 @@ namespace CliningContoraFromValera.UI
                 StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
                 DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
                 Label_SortOrderByType.Visibility = Visibility.Hidden;
+                Button_ResetStatusSelection.Visibility = Visibility.Visible;
+                Button_ResetStatusSelection.IsEnabled = true;
             }
         }
 
@@ -1131,6 +1133,8 @@ namespace CliningContoraFromValera.UI
             Label_SortOrderByType.Visibility= Visibility.Visible;
         }
 
+        //РАЙОНЫ
+
         private void DG_WorkArea_Loaded(object sender, RoutedEventArgs e)
         {
             List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
@@ -1141,7 +1145,7 @@ namespace CliningContoraFromValera.UI
         {
             if (TB_AddWorkArea.Text == "" || TB_AddWorkArea.Text == null)
             {
-                GetMessageBoxException(UiTextElements.EmptyWorkAreaName);
+                ShowMessageBox(UiTextElements.EmptyWorkAreaName);
             }
             else
             {
@@ -1161,7 +1165,7 @@ namespace CliningContoraFromValera.UI
             DG_WorkArea.ItemsSource = workAreas;
         }
 
-        private void DG_WorkAreaRefresh_Click(object sender, RoutedEventArgs e)
+        private void Button_WorkAreaRefresh_Click(object sender, RoutedEventArgs e)
         {
             DG_WorkArea_Loaded(sender, e);
         }
@@ -1169,94 +1173,63 @@ namespace CliningContoraFromValera.UI
         private void DataGrid_AllOrders_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             OrderModel order = (OrderModel)e.Row.Item;
-            TextBox element = (TextBox)e.EditingElement;
-            DateTime date;
-            TimeSpan startTime;
-            if (String.IsNullOrWhiteSpace(element.Text))
+            try
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
-            }
-            else
-            {
-                if (String.Equals((string)e.Column.Header, UiTextElements.Date))
+                TextBox element = (TextBox)e.EditingElement;
+                TimeSpan startTime;
+                if (String.IsNullOrWhiteSpace(element.Text))
                 {
-                    if (!DateTime.TryParse(element.Text, out date))
+                    ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
+                }
+                else
+                {
+                    if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
                     {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                        return;
-                    }
-                    else
-                    {
-                        string tmp = date.ToString();
-                        if (tmp.IndexOf('.') != -1)
+                        if (!TimeSpan.TryParse(element.Text, out startTime))
                         {
-                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                            RefreshShifts();
+                            ShowMessageBox(UiTextElements.WrongTimeFormat);
                             return;
                         }
-                        order.Date= DateTime.Parse(element.Text);
-                    }
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
-                {
-                    if (!TimeSpan.TryParse(element.Text, out startTime))
-                    {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                        return;
-                    }
-                    else
-                    {
-                        string tmp = startTime.ToString();
-                        if (tmp.IndexOf('.') != -1)
+                        else
                         {
-                            GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                            RefreshShifts();
-                            return;
+                            string tmp = startTime.ToString();
+                            if (tmp.IndexOf('.') != -1)
+                            {
+                                ShowMessageBox(UiTextElements.WrongTimeFormat);
+                                DataGridAllOrdersRefresh();
+                                return;
+                            }
+                            order.StartTime = TimeSpan.Parse(element.Text);
+                            UpdateOrdersPriceAndTimeAndRefresh(order);
                         }
-
-                        order.StartTime = TimeSpan.Parse(element.Text);
                     }
                 }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Status))
-                {
-                    //order.Status = (StatusType)element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.LastNameClient))
-                {
-                    order.LastName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.FirstNameClient))
-                {
-                    order.FirstName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.PhoneNomer))
-                {
-                    order.Phone = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Area))
-                {
-                    order.Name = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Street))
-                {
-                    order.Street = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Building))
-                {
-                    order.Building = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Room))
-                {
-                    order.Room = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Commerce))
-                {
-                    //order.IsCommercial = (bool)element.Text;
-                }
-                //_orderModelManager.(order);
-                RefreshShifts();
+                _orderModelManager.UpdateOrder(order);
             }
+            catch (InvalidCastException)
+            {
+                UpdateOrdersPriceAndTimeAndRefresh(order);
+                _orderModelManager.UpdateOrder(order);
+            }
+            DataGridAllOrdersRefresh();
+        }
 
+        private void Button_ResetStatusSelection_Click(object sender, RoutedEventArgs e)
+        {
+            CB_SelectOrderStatus.SelectedItem = null;
+            DataGridAllOrdersRefresh();
+            Button_ResetStatusSelection.Visibility = Visibility.Hidden;
+            Button_ResetStatusSelection.IsEnabled = false;
+            Label_SortOrderByType.Visibility = Visibility.Visible;
+        }
+
+        private void Button_ResetEmployeeSelection_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBox_HistoryOfEmployeesOrders.SelectedItem = null;
+            DataGridAllOrdersRefresh();
+            Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
+            Button_ResetEmployeeSelection.IsEnabled = false;
+            Label_EmployeeOrdersHistory.Visibility = Visibility.Visible;
         }
     }
 }
