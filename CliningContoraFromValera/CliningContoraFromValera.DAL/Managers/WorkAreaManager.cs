@@ -1,10 +1,11 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
 using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Managers.ManagersInterfaces;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
-    public class WorkAreaManager
+    public class WorkAreaManager : IWorkAreaManager
     {
         public List<WorkAreaDTO> GetAllWorkAreas()
         {
