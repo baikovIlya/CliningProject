@@ -57,6 +57,32 @@ namespace CliningContoraFromValera.Tests
         };
     }
 
+    public class GetClientByIdTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+            {
+                1,
+                new ClientDTO()
+                {
+                    Id = 1,
+                    FirstName = "Milana",
+                    LastName = "Maksina",
+                    Email = "maksina@mail.ru",
+                    Phone = "88005553535"
+                },
+                new ClientModel()
+                {
+                    Id = 1,
+                    FirstName = "Milana",
+                    LastName = "Maksina",
+                    Email = "maksina@mail.ru",
+                    Phone = "88005553535"
+                },
+            };
+        }
+    }
     public class UpdateClientByIdTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
@@ -66,34 +92,12 @@ namespace CliningContoraFromValera.Tests
                 ClientTestModels.clientModels[0],
                 ClientTestDtos.clientDTOs[0]
             };
-        }
-    }
 
-    public class UpdateClientByIdTestSource2 : IEnumerable
-    {
-        public IEnumerator GetEnumerator()
-        {
             yield return new object[]
             {
-                new ClientModel()
-                {
-                    Id = 1,
-                    FirstName = "Milana",
-                    LastName = "Maksina",
-                    Email = "maksina@mail.ru",
-                    Phone = "88005553535",
-                },
-
-                new ClientDTO()
-                {
-                    Id = 1,
-                    FirstName = "Milana",
-                    LastName = "Maksina",
-                    Email = "maksina@mail.ru",
-                    Phone = "88005553535",
-                },
+                ClientTestModels.clientModels[1],
+                ClientTestDtos.clientDTOs[1]
             };
-
         }
     }
 }
