@@ -682,6 +682,10 @@ namespace CliningContoraFromValera.UI
         {
             List<OrderModel> orders = _orderModelManager.GetAllOrder();
             DataGrid_AllOrders.ItemsSource = orders;
+            Button_ResetStatusSelection.Visibility = Visibility.Hidden;
+            Button_ResetStatusSelection.IsEnabled = false;
+            Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
+            Button_ResetEmployeeSelection.IsEnabled = false;
         }
         private void ComboBox_AddNewService_Loaded(object sender, RoutedEventArgs e)
         {
@@ -1216,6 +1220,7 @@ namespace CliningContoraFromValera.UI
             DataGridAllOrdersRefresh();
             Button_ResetStatusSelection.Visibility = Visibility.Hidden;
             Button_ResetStatusSelection.IsEnabled = false;
+            Label_SortOrderByType.Visibility = Visibility.Visible;
         }
 
         private void Button_ResetEmployeeSelection_Click(object sender, RoutedEventArgs e)
@@ -1224,6 +1229,7 @@ namespace CliningContoraFromValera.UI
             DataGridAllOrdersRefresh();
             Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
             Button_ResetEmployeeSelection.IsEnabled = false;
+            Label_EmployeeOrdersHistory.Visibility = Visibility.Visible;
         }
     }
 }
