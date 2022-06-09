@@ -175,7 +175,6 @@
                                         <DataTemplate>
                                             <TextBlock>
                                               <Run Text="{Binding LastName}"/>
-                                              <Run Text="  "/>
                                               <Run Text="{Binding FirstName}"/>
                                             </TextBlock>
                                         </DataTemplate>
@@ -190,8 +189,7 @@
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
-                                              <Run Text="{Binding LastName}"/>
-                                              <Run Text="  "/>
+                                              <Run Text="{Binding LastName}"/>                            
                                               <Run Text="{Binding FirstName}"/>
                                             </TextBlock>
                                         </DataTemplate>
@@ -222,7 +220,6 @@
                                         <DataTemplate>
                                             <TextBlock>
                                               <Run Text="{Binding LastName}"/>
-                                              <Run Text="  "/>
                                               <Run Text="{Binding FirstName}"/>
                                             </TextBlock>
                                         </DataTemplate>
@@ -365,7 +362,6 @@
                                         <DataTemplate>
                                             <TextBlock>
                                               <Run Text="{Binding LastName}"/>
-                                              <Run Text="  "/>
                                               <Run Text="{Binding FirstName}"/>
                                             </TextBlock>
                                         </DataTemplate>
