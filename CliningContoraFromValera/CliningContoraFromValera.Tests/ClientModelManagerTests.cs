@@ -20,7 +20,7 @@ namespace CliningContoraFromValera.Tests
             _clientModelManager = new ClientModelManager(_clientManagerMock.Object);
         }
 
-        [TestCaseSource(typeof(UpdateClientByIdTestSource2))]
+        [TestCaseSource(typeof(UpdateClientByIdTestSource))]
         public void UpdateClientByIdTest_ShouldUpdateClient(ClientModel clientModel, ClientDTO clientDto)
         {
             _clientManagerMock.Setup(o => o.UpdateClientById(clientDto)).Verifiable();

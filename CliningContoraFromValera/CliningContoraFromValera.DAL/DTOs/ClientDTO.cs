@@ -22,7 +22,7 @@
             ClientDTO clDto = (ClientDTO)obj;
             if (clDto.Id != this.Id ||
                 clDto.FirstName != this.FirstName ||
-                clDto.FirstName != this.LastName ||
+                clDto.LastName != this.LastName ||
                 clDto.Email != this.Email ||
                 clDto.Phone != this.Phone)
             {
