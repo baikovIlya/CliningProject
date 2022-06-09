@@ -1,12 +1,23 @@
 ﻿using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
+using CliningContoraFromValera.DAL.Managers.ManagersInterfaces;
 using CliningContoraFromValera.DAL.DTOs;
 
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class WorkAreaModelManager
     {
-        WorkAreaManager _workAreaManager = new WorkAreaManager();
+        private IWorkAreaManager _workAreaManager;
+
+        public WorkAreaModelManager()
+        {
+            _workAreaManager = new WorkAreaManager();
+        }
+
+        public WorkAreaModelManager(IWorkAreaManager workAreaManager)
+        {
+            _workAreaManager = workAreaManager;
+        }
 
         public List<WorkAreaModel> GetAllWorkAreas()
         {
