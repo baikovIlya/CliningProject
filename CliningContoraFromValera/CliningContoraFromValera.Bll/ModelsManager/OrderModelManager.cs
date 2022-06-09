@@ -7,6 +7,7 @@ namespace CliningContoraFromValera.Bll.ModelsManager
     public class OrderModelManager
     {
         OrderManager _orderManager = new OrderManager();
+        ServiceOrderModelManager _serviceOrderModelManager = new ServiceOrderModelManager();
 
         public List<OrderModel> GetAllOrder()
         {
@@ -48,10 +49,11 @@ namespace CliningContoraFromValera.Bll.ModelsManager
         {
             _orderManager.DeleteOrderById(orderId);
         }
-        public void GetOrdersPrice(OrderModel order, List<ServiceOrderModel> services)
+        public void GetOrdersPrice(OrderModel order)
         {
+            List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
             decimal price = 0;
-            if (services != null)
+            if (services != null && order != null)
             {
                 if (order.IsCommercial)
                 {
@@ -70,8 +72,9 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             }
             order.Price = price;
         }
-        public void UpdateOrdersTimes(OrderModel order, List<ServiceOrderModel> services)
+        public void UpdateOrdersTimes(OrderModel order)
         {
+            List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
             TimeSpan estTime = new TimeSpan(0,0,0);
             if (services != null && order != null)
             {
