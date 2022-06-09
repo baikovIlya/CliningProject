@@ -1138,7 +1138,13 @@ namespace CliningContoraFromValera.UI
         private void DG_WorkArea_Loaded(object sender, RoutedEventArgs e)
         {
             List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
-            DG_WorkArea.ItemsSource = workAreas; 
+            DG_WorkArea.ItemsSource = workAreas;
+        }
+
+        private void WorkAreaRefresh()
+        {
+            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
+            DG_WorkArea.ItemsSource = workAreas;
         }
 
         private void Button_AddWorkArea_Click(object sender, RoutedEventArgs e)
@@ -1152,8 +1158,7 @@ namespace CliningContoraFromValera.UI
                 WorkAreaModel workArea = new WorkAreaModel() { Name = TB_AddWorkArea.Text };
                 _workAreaModelManager.AddWorkArea(workArea);
                 TB_AddWorkArea.Clear();
-                List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
-                DG_WorkArea.ItemsSource = workAreas;
+                WorkAreaRefresh();
             }
         }
 
@@ -1161,13 +1166,25 @@ namespace CliningContoraFromValera.UI
         {
             WorkAreaModel workArea = (WorkAreaModel)DG_WorkArea.SelectedItem;
             _workAreaModelManager.DeleteWorkAreaById(workArea.Id);
-            List<WorkAreaModel> workAreas = _workAreaModelManager.GetAllWorkAreas();
-            DG_WorkArea.ItemsSource = workAreas;
+            WorkAreaRefresh();
         }
 
         private void Button_WorkAreaRefresh_Click(object sender, RoutedEventArgs e)
         {
-            DG_WorkArea_Loaded(sender, e);
+            WorkAreaRefresh();
+        }
+
+        private void DG_WorkArea_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            WorkAreaModel workArea = (WorkAreaModel)e.Row.Item;
+            var element = (TextBox)e.EditingElement;
+            if (String.IsNullOrWhiteSpace(element.Text))
+            {
+                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
+                EmployeeRefresh();
+                return;
+            }
+            _workAreaModelManager.UpdateWorkAreaById(workArea);
         }
 
         private void DataGrid_AllOrders_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -1203,6 +1220,38 @@ namespace CliningContoraFromValera.UI
                             UpdateOrdersPriceAndTimeAndRefresh(order);
                         }
                     }
+                }
+                List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
+                AddressModel crntAddress = allAddress.Find(item => item.Street == order.Street);
+                if (String.Equals((string)e.Column.Header, UiTextElements.Building))
+                {
+                    crntAddress = new AddressModel() { Id = crntAddress!.Id, Street = crntAddress.Street, Building = element.Text,
+                        Room = crntAddress.Room, WorkAreaId = crntAddress.WorkAreaId };
+                    _addressModelManager.UpdateAddressById(crntAddress!);
+                }
+                if (String.Equals((string)e.Column.Header, UiTextElements.Building))
+                {
+                    crntAddress = new AddressModel()
+                    {
+                        Id = crntAddress!.Id,
+                        Street = crntAddress.Street,
+                        Building = element.Text,
+                        Room = crntAddress.Room,
+                        WorkAreaId = crntAddress.WorkAreaId
+                    };
+                    _addressModelManager.UpdateAddressById(crntAddress!);
+                }
+                if (String.Equals((string)e.Column.Header, UiTextElements.Room))
+                {
+                    crntAddress = new AddressModel()
+                    {
+                        Id = crntAddress!.Id,
+                        Street = crntAddress.Street,
+                        Building = crntAddress.Building,
+                        Room = element.Text,
+                        WorkAreaId = crntAddress.WorkAreaId
+                    };
+                    _addressModelManager.UpdateAddressById(crntAddress!);
                 }
                 _orderModelManager.UpdateOrder(order);
             }

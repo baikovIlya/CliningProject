@@ -83,8 +83,8 @@
                                         <DataGridTextColumn Header="Фамилия клиента"  IsReadOnly="True" Width="110" Binding="{Binding LastName}"/>
                                         <DataGridTextColumn Header="Имя клиента" IsReadOnly="True" Width="110" Binding="{Binding FirstName}"/>
                                         <DataGridTextColumn Header="Телефон" IsReadOnly="True" Width="100" Binding="{Binding Phone}"/>
-                                        <DataGridTextColumn Header="Район" Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Name}"/>
-                                        <DataGridTextColumn Header="Улица" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Street}"/>
+                                        <DataGridTextColumn Header="Район" IsReadOnly="True" Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Name}"/>
+                                        <DataGridTextColumn Header="Улица" IsReadOnly="True" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Street}"/>
                                         <DataGridTextColumn Header="Здание" Width="50" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Building}"/>
                                         <DataGridTextColumn Header="Помещение" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Room}"/>
                                         <DataGridCheckBoxColumn Header="Коммерция" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=IsCommercial}"/>
@@ -511,11 +511,9 @@
                     <Button x:Name="Button_AddWorkArea" Content="Добавить" HorizontalAlignment="Center" Width="196" Margin="0,0,0,412" Grid.Row="1" Click="Button_AddWorkArea_Click"/>
 
                     <DataGrid x:Name="DG_WorkArea" Grid.Row="1" Margin="192,46,191,74" AutoGenerateColumns="False" EnableRowVirtualization="True" 
-                              ItemsSource="{Binding WorkAreaModel}" 
-                              IsReadOnly="False" 
-                              CanUserAddRows="False" Loaded="DG_WorkArea_Loaded">
+                              ItemsSource="{Binding WorkAreaModel}" IsReadOnly="False" CanUserAddRows="False" Loaded="DG_WorkArea_Loaded" CellEditEnding="DG_WorkArea_CellEditEnding">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Все районы" IsReadOnly="True" Binding="{Binding Name}" Width="280"/>
+                            <DataGridTextColumn Header="Все районы" Width="280" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Name}"/>
                             <DataGridTemplateColumn Header="Удалить" Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

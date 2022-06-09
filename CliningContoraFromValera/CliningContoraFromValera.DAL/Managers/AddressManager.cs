@@ -53,11 +53,11 @@ namespace CliningContoraFromValera.DAL.Managers
                         StoredProcedures.Address_UpdateById,
                         param: new
                         {
-                            newAddress.Id,
-                            newAddress.Street,
-                            newAddress.Building,
-                            newAddress.Room,
-                            newAddress.WorkAreaId
+                            Id = newAddress.Id,
+                            Street = newAddress.Street,
+                            Building = newAddress.Building,
+                            Room = newAddress.Room,
+                            WorkAreaId = newAddress.WorkAreaId
                         },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
