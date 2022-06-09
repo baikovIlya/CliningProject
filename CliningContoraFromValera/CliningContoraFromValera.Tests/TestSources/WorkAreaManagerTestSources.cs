@@ -7,22 +7,8 @@ using System.Threading.Tasks;
 using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.DTOs;
 
-namespace CliningContoraFromValera.Tests
+namespace CliningContoraFromValera.Tests.TestSources
 {
-    public class WorkAreaTestData
-    {
-        public WorkAreaModel GetWorkAreaModelForTests()
-        {
-            WorkAreaModel workAreaModel = new WorkAreaModel()
-            {
-                Id = 1,
-                Name = "Moskovskiy"
-            };
-
-            return workAreaModel;
-        }
-    }
-
     public class GetWorkAreaByIdTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
@@ -43,7 +29,7 @@ namespace CliningContoraFromValera.Tests
                     Name = "Moskovskiy"
                 },
             };
-            
+
             yield return new object[]
             {
                 2,
@@ -80,7 +66,7 @@ namespace CliningContoraFromValera.Tests
                     Name = "Frunzenskiy"
                 },
             };
-            
+
             yield return new object[]
             {
                 new WorkAreaModel()
@@ -115,7 +101,7 @@ namespace CliningContoraFromValera.Tests
                     Name = "Frunzenskiy"
                 },
             };
-            
+
             yield return new object[]
             {
                 new WorkAreaModel()
@@ -150,7 +136,7 @@ namespace CliningContoraFromValera.Tests
                     Name = "Frunzenskiy"
                 },
             };
-            
+
             yield return new object[]
             {
                 new WorkAreaModel()
@@ -166,7 +152,7 @@ namespace CliningContoraFromValera.Tests
                 },
             };
         }
-    } 
+    }
     public class GetAllWorkAreasTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
