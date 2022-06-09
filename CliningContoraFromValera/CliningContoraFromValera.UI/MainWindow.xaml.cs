@@ -682,6 +682,10 @@ namespace CliningContoraFromValera.UI
         {
             List<OrderModel> orders = _orderModelManager.GetAllOrder();
             DataGrid_AllOrders.ItemsSource = orders;
+            Button_ResetStatusSelection.Visibility = Visibility.Hidden;
+            Button_ResetStatusSelection.IsEnabled = false;
+            Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
+            Button_ResetEmployeeSelection.IsEnabled = false;
         }
         private void ComboBox_AddNewService_Loaded(object sender, RoutedEventArgs e)
         {
@@ -844,7 +848,9 @@ namespace CliningContoraFromValera.UI
         private void Button_OrderAdd_Click(object sender, RoutedEventArgs e)
         {
             if ((String.IsNullOrWhiteSpace(TextBox_OrderStreet.Text)) || (String.IsNullOrWhiteSpace(TextBox_OrderBuilding.Text)
-                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text))))
+                || (String.IsNullOrWhiteSpace(TextBox_OrderRoom.Text)) || ComboBox_OrderClient.SelectedItem == null
+                || ComboBox_OrderWorkArea.SelectedItem ==null || ComboBox_OrderStartTime.SelectedItem == null
+                || ComboBox_OrderIsCommercial.SelectedItem == null || DatePicker_OrderDate.SelectedDate == null))
             {
                 ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
             }
@@ -857,7 +863,7 @@ namespace CliningContoraFromValera.UI
                 ClientModel client = (ClientModel)ComboBox_OrderClient.SelectedItem;
                 DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
                 TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
-                StatusType status = StatusType.Выполняется;
+                StatusType status = CliningContoraFromValera.Bll.StatusType.Новый;
                 AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
                 _addressModelManager.AddAddress(newAddress);
                 List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
@@ -997,6 +1003,8 @@ namespace CliningContoraFromValera.UI
                 Label_EmployeeOrdersHistory.Visibility = Visibility.Hidden;
                 DataGrid_ServicesInOrder.ItemsSource = null;
                 DataGrid_EmployeesInOrder.ItemsSource = null;
+                Button_ResetEmployeeSelection.Visibility = Visibility.Visible;
+                Button_ResetEmployeeSelection.IsEnabled = true;
             }
             else
             {
@@ -1108,6 +1116,8 @@ namespace CliningContoraFromValera.UI
                 StatusType status = (StatusType)CB_SelectOrderStatus.SelectedItem;
                 DataGrid_AllOrders.ItemsSource = _orderModelManager.GetAllOrdersByStatus(status);
                 Label_SortOrderByType.Visibility = Visibility.Hidden;
+                Button_ResetStatusSelection.Visibility = Visibility.Visible;
+                Button_ResetStatusSelection.IsEnabled = true;
             }
         }
 
@@ -1163,95 +1173,63 @@ namespace CliningContoraFromValera.UI
         private void DataGrid_AllOrders_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             OrderModel order = (OrderModel)e.Row.Item;
-            TextBox element = (TextBox)e.EditingElement;
-            DateTime date;
-            TimeSpan startTime;
-            if (String.IsNullOrWhiteSpace(element.Text))
+            try
             {
-                ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
-            }
-            else
-            {
-                if (String.Equals((string)e.Column.Header, UiTextElements.Date))
+                TextBox element = (TextBox)e.EditingElement;
+                TimeSpan startTime;
+                if (String.IsNullOrWhiteSpace(element.Text))
                 {
-                    if (!DateTime.TryParse(element.Text, out date))
+                    ShowMessageBox(UiTextElements.AllFieldsSholdBeFilled);
+                }
+                else
+                {
+                    if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
                     {
-                        ShowMessageBox(UiTextElements.WrongTimeFormat);
-                        return;
-                    }
-                    else
-                    {
-                        string tmp = date.ToString();
-                        if (tmp.IndexOf('.') != -1)
+                        if (!TimeSpan.TryParse(element.Text, out startTime))
                         {
                             ShowMessageBox(UiTextElements.WrongTimeFormat);
-                            RefreshShifts();
                             return;
                         }
-                        order.Date= DateTime.Parse(element.Text);
-                    }
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
-                {
-                    if (!TimeSpan.TryParse(element.Text, out startTime))
-                    {
-                        ShowMessageBox(UiTextElements.WrongTimeFormat);
-                        return;
-                    }
-                    else
-                    {
-                        string tmp = startTime.ToString();
-                        if (tmp.IndexOf('.') != -1)
+                        else
                         {
-                            ShowMessageBox(UiTextElements.WrongTimeFormat);
-                            RefreshShifts();
-                            return;
+                            string tmp = startTime.ToString();
+                            if (tmp.IndexOf('.') != -1)
+                            {
+                                ShowMessageBox(UiTextElements.WrongTimeFormat);
+                                DataGridAllOrdersRefresh();
+                                return;
+                            }
+                            order.StartTime = TimeSpan.Parse(element.Text);
+                            UpdateOrdersPriceAndTimeAndRefresh(order);
                         }
-
-                        order.StartTime = TimeSpan.Parse(element.Text);
                     }
                 }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Status))
-                {
-                    //order.Status = (StatusType)element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.LastNameClient))
-                {
-                    order.LastName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.FirstNameClient))
-                {
-                    order.FirstName = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.PhoneNomer))
-                {
-                    order.Phone = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Area))
-                {
-                    order.Name = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Street))
-                {
-                    order.Street = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Building))
-                {
-                    order.Building = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Room))
-                {
-                    order.Room = element.Text;
-                }
-                else if (String.Equals((string)e.Column.Header, UiTextElements.Commerce))
-                {
-                    //order.IsCommercial = (bool)element.Text;
-                }
-                //_orderModelManager.(order);
-                RefreshShifts();
+                _orderModelManager.UpdateOrder(order);
             }
-
+            catch (InvalidCastException)
+            {
+                UpdateOrdersPriceAndTimeAndRefresh(order);
+                _orderModelManager.UpdateOrder(order);
+            }
+            DataGridAllOrdersRefresh();
         }
 
+        private void Button_ResetStatusSelection_Click(object sender, RoutedEventArgs e)
+        {
+            CB_SelectOrderStatus.SelectedItem = null;
+            DataGridAllOrdersRefresh();
+            Button_ResetStatusSelection.Visibility = Visibility.Hidden;
+            Button_ResetStatusSelection.IsEnabled = false;
+            Label_SortOrderByType.Visibility = Visibility.Visible;
+        }
+
+        private void Button_ResetEmployeeSelection_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBox_HistoryOfEmployeesOrders.SelectedItem = null;
+            DataGridAllOrdersRefresh();
+            Button_ResetEmployeeSelection.Visibility = Visibility.Hidden;
+            Button_ResetEmployeeSelection.IsEnabled = false;
+            Label_EmployeeOrdersHistory.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -88,27 +88,6 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void ChangeEmployeeScheduleByEmployeeIdByDate(int employeeId, DateTime date,
-            TimeSpan startTime, TimeSpan finishTime)
-        {
-            using (var connection = new SqlConnection(ServerSettings._connectionString))
-            {
-                connection.Open();
-
-                connection.QuerySingleOrDefault<WorkTimeDTO>(
-                    StoredProcedures.ChangeEmployeeScheduleByEmployeeIdByDate,
-                    param: new
-                    {
-                        EmployeeId = employeeId,
-                        Date = date,
-                        StartTime = startTime,
-                        FinishTime = finishTime
-                    },
-                    commandType: System.Data.CommandType.StoredProcedure
-                    );
-            }
-        }
-
         public List<EmployeeDTO> GetEmployeesAndWorkTimes()
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
