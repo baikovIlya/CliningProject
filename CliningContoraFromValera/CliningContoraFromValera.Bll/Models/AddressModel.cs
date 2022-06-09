@@ -21,5 +21,26 @@
             WorkAreaId = workAreaId;
         }
 
+        public override bool Equals(object? obj)
+        {
+            bool flag = true;
+            if (obj == null || !(obj is AddressModel))
+            {
+                flag = false;
+            }
+            else
+            {
+                AddressModel addressDto = (AddressModel)obj;
+                if (addressDto.Id != this.Id ||
+                    addressDto.Street != this.Street ||
+                    addressDto.Building != this.Building ||
+                    addressDto.Room != this.Room ||
+                    addressDto.WorkAreaId != this.WorkAreaId)
+                {
+                    flag = false;
+                }
+            }
+            return flag;
+        }
     }
 }

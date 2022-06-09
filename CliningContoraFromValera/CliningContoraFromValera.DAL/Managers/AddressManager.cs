@@ -1,10 +1,11 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
 using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.ManagersInterfaces;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
-    public class AddressManager
+    public class AddressManager: IAddressManager
     {
         public void AddAddress(AddressDTO newAddress)
         {
