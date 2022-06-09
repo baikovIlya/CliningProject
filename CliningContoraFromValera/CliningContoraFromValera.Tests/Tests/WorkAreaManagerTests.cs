@@ -7,7 +7,7 @@ using CliningContoraFromValera.DAL.DTOs;
 using System.Collections.Generic;
 using CliningContoraFromValera.Tests.TestSources;
 
-namespace CliningContoraFromValera.Tests.Tests
+namespace CliningContoraFromValera.Tests
 {
     public class WorkAreaManagerTests
     {

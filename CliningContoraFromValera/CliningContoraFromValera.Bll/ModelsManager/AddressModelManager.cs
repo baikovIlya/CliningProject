@@ -19,7 +19,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
             _addressManager = addressManager;
         }
 
-
         public void AddAddress(AddressModel newAddress)
         {
             AddressDTO addressDTO = MapperConfigStorage.GetInstance().Map<AddressDTO>(newAddress);
