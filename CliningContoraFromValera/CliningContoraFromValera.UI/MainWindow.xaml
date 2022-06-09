@@ -513,7 +513,7 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="DG_WorkAreaRefresh" Content="Обновить список районов" HorizontalAlignment="Center" Margin="0,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="412" Click="DG_WorkAreaRefresh_Click"/>
+                    <Button x:Name="Button_WorkAreaRefresh" Content="Обновить список районов" HorizontalAlignment="Center" Margin="0,387,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="412" Click="Button_WorkAreaRefresh_Click"/>
                 </Grid>
             </TabItem>
 

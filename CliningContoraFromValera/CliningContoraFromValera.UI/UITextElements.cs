@@ -6,7 +6,6 @@
         public const string LastName = "Фамилия";
         public const string PhoneNomer = "Телефон";
         public const string Email = "Почта";
-        public const string EmptyFieldsError = "Все поля обязательны к заполнению!";
         public const string EmptyWorkAreaName = "Заполните название района";
         public const string EmployeeNotUnique = "Сотрудник уже занят на этом заказе!";
         public const string DoubleAddingService = "Услуга уже есть в этом заказе!";
