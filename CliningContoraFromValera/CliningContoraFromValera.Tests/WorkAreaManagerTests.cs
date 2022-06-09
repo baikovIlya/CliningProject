@@ -9,7 +9,7 @@ namespace CliningContoraFromValera.Tests
 {
     public class WorkAreaManagerTests
     {
-        public WorkAreaModelManager _workAreaModelManager;
+        private WorkAreaModelManager _workAreaModelManager;
         private Mock<IWorkAreaManager> _workAreaManagerMock;
 
         [SetUp]
@@ -19,6 +19,25 @@ namespace CliningContoraFromValera.Tests
             _workAreaModelManager = new WorkAreaModelManager(_workAreaManagerMock.Object);
         }
 
+        [TestCaseSource(typeof(GetWorkAreaByIdTestSource))]
+        public void GetWorkAreaByIdTest(int id, WorkAreaDTO GetWorkAreaByIdResult, WorkAreaModel expected)
+        {
+            _workAreaManagerMock.Setup(o => o.GetWorkAreaByID(id)).Returns(GetWorkAreaByIdResult).Verifiable();
 
+            WorkAreaModel actual = _workAreaModelManager.GetWorkAreaById(id);
+         
+            _workAreaManagerMock.Verify();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCaseSource(typeof(AddWorkAreaTestSource))]
+        public void AddWorkAreaTest(WorkAreaModel workArea, WorkAreaDTO expected)
+        {
+            _workAreaManagerMock.Setup(o => o.AddWorkArea(expected)).Verifiable();
+
+            _workAreaModelManager.AddWorkArea(workArea);
+
+            _workAreaManagerMock.Verify();
+        }
     }
 }

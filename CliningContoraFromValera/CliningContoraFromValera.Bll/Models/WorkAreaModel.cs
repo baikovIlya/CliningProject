@@ -12,12 +12,12 @@
 
         public override string ToString()
         {
-            return Name;
+            return $"{Id} {Name}";
         }
 
         public override bool Equals(object? obj)
         {
-            bool flag = false;
+            bool flag = true;
 
             if(obj == null || !(obj is WorkAreaModel))
             {
@@ -25,8 +25,8 @@
             }
             else
             {
-                WorkAreaModel waDto = (WorkAreaModel)obj;
-                if (waDto.Id != this.Id || waDto.Name != this.Name)
+                WorkAreaModel waModel = (WorkAreaModel)obj;
+                if (waModel.Id != this.Id || waModel.Name != this.Name)
                 {
                     flag = false;
                 }

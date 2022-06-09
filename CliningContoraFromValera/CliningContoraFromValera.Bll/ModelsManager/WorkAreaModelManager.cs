@@ -2,7 +2,6 @@
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.Managers.ManagersInterfaces;
 using CliningContoraFromValera.DAL.DTOs;
-using CliningContoraFromValera.Bll.ModelsManager.ModelManagerInterfaces;
 
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
