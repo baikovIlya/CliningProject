@@ -83,6 +83,33 @@ namespace CliningContoraFromValera.Tests
             };
         }
     }
+
+    public class AddClientTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+            {
+                
+                new ClientModel()
+                {
+                    Id = 1,
+                    FirstName = "Milana",
+                    LastName = "Maksina",
+                    Email = "maksina@mail.ru",
+                    Phone = "88005553535"
+                },
+                new ClientDTO()
+                {
+                    Id = 1,
+                    FirstName = "Milana",
+                    LastName = "Maksina",
+                    Email = "maksina@mail.ru",
+                    Phone = "88005553535"
+                },
+            };
+        }
+    }
     public class UpdateClientByIdTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()

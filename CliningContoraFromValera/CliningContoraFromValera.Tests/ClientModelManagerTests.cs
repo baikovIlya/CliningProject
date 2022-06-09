@@ -45,6 +45,14 @@ namespace CliningContoraFromValera.Tests
             _clientManagerMock.Verify();
         }
 
+        [TestCaseSource(typeof(AddClientTestSource))]
+        public void AddClientTest(ClientModel client, ClientDTO expected)
+        {
+            _clientManagerMock.Setup(o => o.AddClient(expected)).Verifiable();
+            _clientModelManager.AddClient(client);
+            _clientManagerMock.Verify();
+        }
+
         //public ClientModel GetClientModelToFillMock(int key)
         //{
         //    ClientModel _clientModel;
@@ -99,27 +107,5 @@ namespace CliningContoraFromValera.Tests
         //        }
         //    });
         //}
-
-
-        //[TestCaseSource(1)]
-        //public void GetClientByIdTest_ShouldReturnClient(int clientId, ClientDTO clientDto, ClientModel expected)
-        //{
-        //    _clientManagerMock.Setup(o => o.GetClientByID(clientId)).Returns
-        //        (
-        //            new ClientDTO
-        //            {
-        //                Id = 1,
-        //                FirstName = "Milana",
-        //                LastName = "Maksina",
-        //                Email = "maksina@mail.ru",
-        //                Phone = "88005553535"
-        //            }
-        //        );
-        //    var actual = _clientModelManager.GetClientById(clientId);
-        //    _clientManagerMock.Verify();
-
-        //    Assert.AreEqual(expected, actual);
-        //}
-
     }
 }
