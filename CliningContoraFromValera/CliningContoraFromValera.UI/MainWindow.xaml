@@ -78,14 +78,7 @@
                                         <DataGridTextColumn Header="Время на выполнение услуг" IsReadOnly="True" Binding="{Binding EstimatedEndTime}" Width="165"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Конец" IsReadOnly="True" Binding="{Binding FinishTime}" Width="70"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Сумма" IsReadOnly="True" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
-                                        
-                                        <DataGridTemplateColumn Header="Статус" Width="100">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <ComboBox Name="ComboBox_OrderStatus" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged, Path=Status}" Loaded="ComboBox_OrderStatus_Loaded"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
+                                        <DataGridComboBoxColumn Header="Статус" SelectedItemBinding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Status}" ItemsSource="{Binding Source={StaticResource StatusType}}" />
                                         <DataGridTextColumn Header="Кол-во сотрудников" IsReadOnly="True" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Фамилия клиента"  IsReadOnly="True" Width="110" Binding="{Binding LastName}"/>
                                         <DataGridTextColumn Header="Имя клиента" IsReadOnly="True" Width="110" Binding="{Binding FirstName}"/>

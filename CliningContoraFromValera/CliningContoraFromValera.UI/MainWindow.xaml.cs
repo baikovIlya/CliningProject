@@ -1171,46 +1171,46 @@ namespace CliningContoraFromValera.UI
         private void DataGrid_AllOrders_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             OrderModel order = (OrderModel)e.Row.Item;
-            TextBox element = (TextBox)e.EditingElement; ;
-            TimeSpan startTime;
-            if (String.IsNullOrWhiteSpace(element.Text))
+            try
             {
-                GetMessageBoxException(UiTextElements.EmptyFieldsError);
-            }
-            else
-            {
-                if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
+                TextBox element = (TextBox)e.EditingElement;
+                TimeSpan startTime;
+                if (String.IsNullOrWhiteSpace(element.Text))
                 {
-                    if (!TimeSpan.TryParse(element.Text, out startTime))
+                    GetMessageBoxException(UiTextElements.EmptyFieldsError);
+                }
+                else
+                {
+                    if (String.Equals((string)e.Column.Header, UiTextElements.StartTime))
                     {
-                        GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                        return;
-                    }
-                    else
-                    {
-                        string tmp = startTime.ToString();
-                        if (tmp.IndexOf('.') != -1)
+                        if (!TimeSpan.TryParse(element.Text, out startTime))
                         {
                             GetMessageBoxException(UiTextElements.WrongTimeFormat);
-                            DataGridAllOrdersRefresh();
                             return;
                         }
-                        order.StartTime = TimeSpan.Parse(element.Text);
+                        else
+                        {
+                            string tmp = startTime.ToString();
+                            if (tmp.IndexOf('.') != -1)
+                            {
+                                GetMessageBoxException(UiTextElements.WrongTimeFormat);
+                                DataGridAllOrdersRefresh();
+                                return;
+                            }
+                            order.StartTime = TimeSpan.Parse(element.Text);
+                            UpdateOrdersPriceAndTimeAndRefresh(order, _serviceOrderModelManager.GetOrdersServices(order.Id));
+                        }
                     }
                 }
                 _orderModelManager.UpdateOrder(order);
                 DataGridAllOrdersRefresh();
             }
-        }
-
-        private void ComboBox_OrderStatus_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<StatusType> statuses = new List<StatusType> { };
-            foreach (StatusType st in Enum.GetValues(typeof(StatusType)))
+            catch (InvalidCastException)
             {
-                statuses.Add(st);
+                _orderModelManager.UpdateOrder(order);
+                DataGridAllOrdersRefresh();
+
             }
-            ComboBox_OrderStatus.ItemsSource = statuses;
         }
     }
 }
