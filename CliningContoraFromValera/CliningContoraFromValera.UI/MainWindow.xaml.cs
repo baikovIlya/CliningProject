@@ -735,13 +735,12 @@ namespace CliningContoraFromValera.UI
                     int count = (int)ComboBox_OrderServiceCount.SelectedItem;
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
-                    List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
                     TimeSpan oldEstTime = order.EstimatedEndTime;
                     TimeSpan? oldFinishTime = order.FinishTime;
                     decimal oldPrice = order.Price;
                     try
                     {
-                        UpdateOrdersPriceAndTimeAndRefresh(order, services);
+                        UpdateOrdersPriceAndTimeAndRefresh(order);
                     }
                     catch(OverflowException)
                     {
@@ -766,11 +765,11 @@ namespace CliningContoraFromValera.UI
                 return;
             }
         }
-        private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order, List<ServiceOrderModel> services)
+        private void UpdateOrdersPriceAndTimeAndRefresh(OrderModel order)
         {
             int index = DataGrid_AllOrders.SelectedIndex;
-            _orderModelManager.GetOrdersPrice(order, services);
-            _orderModelManager.UpdateOrdersTimes(order, services);
+            _orderModelManager.GetOrdersPrice(order);
+            _orderModelManager.UpdateOrdersTimes(order);
             _orderModelManager.UpdateOrder(order);
             DataGridAllOrdersRefresh();
             DataGrid_AllOrders.SelectedIndex = index;
@@ -904,13 +903,12 @@ namespace CliningContoraFromValera.UI
             ComboBox_OrderIsCommercial.SelectedItem = null;
         }
 
-        private void Button_ServiceFromOrderDelete_Click(object sender, RoutedEventArgs e)
+        private void Button_DeleteServiceFromOrder_Click(object sender, RoutedEventArgs e)
         {
             ServiceOrderModel serviceOrder = (ServiceOrderModel)DataGrid_ServicesInOrder.SelectedItem;
             _serviceOrderModelManager.DeleteServiceFromOrder(serviceOrder);
             OrderModel order = (OrderModel)DataGrid_AllOrders.SelectedItem;
-            List<ServiceOrderModel> services = _serviceOrderModelManager.GetOrdersServices(order.Id);
-            UpdateOrdersPriceAndTimeAndRefresh(order, services);
+            UpdateOrdersPriceAndTimeAndRefresh(order);
         }
         private void RefreshServiceOrder()
         {

@@ -100,7 +100,7 @@
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="Button_ServiceFromOrderDelete" Content="Удалить" Click="Button_ServiceFromOrderDelete_Click"/>
+                                                    <Button x:Name="Button_ServiceFromOrderDelete" Content="Удалить" Click="Button_DeleteServiceFromOrder_Click"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
