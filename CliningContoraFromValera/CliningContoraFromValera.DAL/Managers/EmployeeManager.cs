@@ -194,83 +194,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public EmployeeDTO GetOrderHistoryOfTheEmployeeById(int employeeId)
-        {
-            using (var connection = new SqlConnection(ServerSettings._connectionString))
-            {
-                connection.Open();
-                EmployeeDTO result = new EmployeeDTO();
-                List<int> orderId = new List<int>();
-                List<int> serviceId = new List<int>();
-                connection.Query<EmployeeDTO, OrderDTO, ClientDTO, AddressDTO, WorkAreaDTO, ServiceDTO, ServiceOrderDTO, EmployeeDTO>(
-                    StoredProcedures.GetOrderHistoryOfTheEmployeeById,
-                    (employee, order, client, address, workArea, service, serviceOrder) =>
-                    {
-                        if (employee != null && result.Id != employee.Id)
-                        {
-                            result = employee;
-                        }
-                        if (result.Orders == null)
-                        {
-                            result.Orders = new List<OrderDTO>();
-                        }
-                        if (order != null && !orderId.Contains(order.Id))
-                        {
-                            orderId.Add(order.Id);
-                            result.Orders!.Add(order);
-                            serviceId.Clear();
-                        }
-                        for (int i = 0; i <= result.Orders.Count-1; i++)
-                        {
-                            if (order != null && result.Orders[i].Id == order.Id)
-                            {
-                                OrderDTO employeeOrder = result.Orders[i];
-                                if (employeeOrder.Services == null)
-                                {
-                                    employeeOrder.Services = new List<ServiceDTO>();
-                                }
-                                if (order != null && client != null && employeeOrder.Client == null)
-                                {
-                                    employeeOrder.Client = client;
-                                }
-                                if (order != null && address != null && employeeOrder.Address == null)
-                                {
-                                    employeeOrder.Address = address;
-                                }
-                                if (order != null && address != null && workArea != null
-                                && employeeOrder.Address!.WorkArea == null)
-                                {
-                                    employeeOrder.Address!.WorkArea = workArea;
-                                }
-                                if (service != null && !serviceId.Contains(service.Id))
-                                {
-                                    serviceId.Add(service.Id);
-                                    employeeOrder.Services!.Add(service);
-                                    for (int j = 0; j <= employeeOrder.Services.Count-1; j++)
-                                    {
-                                        ServiceDTO crntServiceOrder = employeeOrder.Services[j];
-                                        if (crntServiceOrder.ServiceOrder == null)
-                                        {
-                                            crntServiceOrder.ServiceOrder = new ServiceOrderDTO();
-                                        }
-                                        if (serviceOrder.OrderId == employeeOrder.Id
-                                        && serviceOrder.ServiceId == crntServiceOrder.Id)
-                                        {
-                                            crntServiceOrder.ServiceOrder = serviceOrder;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        return result;
-                    },
-                    param: new { id = employeeId },
-                    commandType: System.Data.CommandType.StoredProcedure,
-                    splitOn: "Id"
-                );
-                return result;
-            }
-        }
+        
 
         public List<EmployeeDTO> GetEmployyesAvailableForOrder(DateTime date, int serviceId, int workAreaId)
         {
@@ -352,6 +276,19 @@ namespace CliningContoraFromValera.DAL.Managers
                         ServiceId = serviceId
                     },
                     commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
+        public List<EmployeeDTO> GetEmployeesInOrderByOrderId(int orderId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                return connection.Query<EmployeeDTO>(
+                    StoredProcedures.GetEmployeesInOrderByOrderId,
+                    param: new {OrderId = orderId},
+                    commandType: System.Data.CommandType.StoredProcedure)
+                    .ToList();
             }
         }
 

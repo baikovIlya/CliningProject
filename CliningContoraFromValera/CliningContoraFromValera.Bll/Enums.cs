@@ -2,24 +2,34 @@
 {
     public enum StatusType
     {
-        Processed,
-        InProgress,
-        Done,
         Обработка,
         Выполняется,
-        Готов,
-        Отменён
+        Выполнен,
+        Отменён,
+        Новый,
+        Согласован
     }
 
     public enum ServiceType
     {
-        DryCleaning,
-        Cleaning,
-        Disinsection,
         Сухая_уборка,
-        Уборка,
-        Дезинсекция
+        Влажная_уборка,
+        Мойка_окон,
+        Дезинсекция,
+        Химчистка,
+        Уборка_после_ремонта,
+        Генеральная_уборка
     }
 
-
+    public enum UnitType
+    {
+        шт,
+        м2,
+        кг
+    }
+    public enum ClientOrderType
+    {
+        Юр_Лицо,
+        Физ_Лицо
+    }
 }

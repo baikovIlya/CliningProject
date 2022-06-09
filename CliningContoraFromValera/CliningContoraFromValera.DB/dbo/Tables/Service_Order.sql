@@ -5,6 +5,7 @@
     [Count]     INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Order] ([Id]),
-    FOREIGN KEY ([ServiceId]) REFERENCES [dbo].[Service] ([Id])
+    FOREIGN KEY ([ServiceId]) REFERENCES [dbo].[Service] ([Id]),
+    UNIQUE (ServiceId, OrderId)
 );
 

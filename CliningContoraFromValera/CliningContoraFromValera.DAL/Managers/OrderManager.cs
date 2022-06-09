@@ -44,8 +44,7 @@ namespace CliningContoraFromValera.DAL.Managers
             }
         }
 
-        public void AddOrder(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
+        public void AddOrder(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -68,20 +67,9 @@ namespace CliningContoraFromValera.DAL.Managers
                     },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
-            ClientManager clientManager = new ClientManager();
-            clientManager.AddClient(newClient);
-            AddressManager addressManager = new AddressManager();
-            addressManager.AddAddress(newAddress);
-            WorkAreaManager workAreaManager = new WorkAreaManager();
-            workAreaManager.AddWorkArea(newWorkArea);
-            ServiceManager servicsManager = new ServiceManager();
-            servicsManager.AddService(newService);
-            ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
-            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
-        public void UpdateOrderById(OrderDTO newOrder, ClientDTO newClient, AddressDTO newAddress, WorkAreaDTO newWorkArea,
-            ServiceDTO newService, ServiceOrderDTO newServiceOrder)
+        public void UpdateOrderById(OrderDTO newOrder)
         {
             using (var connection = new SqlConnection(ServerSettings._connectionString))
             {
@@ -105,17 +93,6 @@ namespace CliningContoraFromValera.DAL.Managers
                     },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
-            ClientManager clientManager = new ClientManager();
-            clientManager.UpdateClientById(newClient);
-            AddressManager addressManager = new AddressManager();
-            addressManager.UpdateAddressById(newAddress);
-            WorkAreaManager workAreaManager = new WorkAreaManager();
-            workAreaManager.UpdateWorkAreaById(newWorkArea);
-            ServiceManager servicsManager = new ServiceManager();
-            servicsManager.UpdateServiceById(newService);
-            ServiceOrderManager serviceOrderManager = new ServiceOrderManager();
-            serviceOrderManager.DeleteServiceFromOrder(newOrder.Id, newService.Id);
-            serviceOrderManager.AddServiceToOrder(newServiceOrder);
         }
 
         public void DeleteOrderById(int orderId)
@@ -211,6 +188,48 @@ namespace CliningContoraFromValera.DAL.Managers
                 return result.Values.ToList();
             }
         }
+
+        public List<OrderDTO> GetOrderHistoryOfTheEmployeeById(int employeeId)
+        {
+            using (var connection = new SqlConnection(ServerSettings._connectionString))
+            {
+                connection.Open();
+
+                Dictionary<int, OrderDTO> result = new Dictionary<int, OrderDTO>();
+
+                connection.Query<OrderDTO, AddressDTO, WorkAreaDTO, ClientDTO, OrderDTO>(
+                    StoredProcedures.GetOrderHistoryOfTheEmployeeById,
+                    (order, address, workArea, client) => {
+                        if (!result.ContainsKey(order.Id))
+                        {
+                            result.Add(order.Id, order);
+                        }
+
+                        OrderDTO crnt = result[order.Id];
+
+                        if (address != null)
+                        {
+                            crnt.Address = address;
+                        }
+                        if (workArea != null)
+                        {
+                            crnt.Address!.WorkArea = workArea;
+                        }
+                        if (client != null)
+                        {
+                            crnt.Client = client;
+                        }
+                        return crnt;
+                    },
+                    param: new { employeeId },
+                    commandType: System.Data.CommandType.StoredProcedure,
+                    splitOn: "Id"
+                );
+
+                return result.Values.ToList();
+            }
+        }
+
 
     }
 }
