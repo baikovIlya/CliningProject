@@ -97,4 +97,74 @@ namespace CliningContoraFromValera.Tests
             };
         }
     }
+    public class UpdateWorkAreaByIdTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+            {
+                new WorkAreaModel()
+                {
+                    Id = 2,
+                    Name = "Frunzenskiy"
+                },
+
+                new WorkAreaDTO()
+                {
+                    Id = 2,
+                    Name = "Frunzenskiy"
+                },
+            };
+            
+            yield return new object[]
+            {
+                new WorkAreaModel()
+                {
+                    Id = 3,
+                    Name = "Центральный"
+                },
+
+                new WorkAreaDTO()
+                {
+                    Id = 3,
+                    Name = "Центральный"
+                },
+            };
+        }
+    }
+    public class DeleteWorkAreaByIdTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+            {
+                new WorkAreaModel()
+                {
+                    Id = 2,
+                    Name = "Frunzenskiy"
+                },
+
+                new WorkAreaDTO()
+                {
+                    Id = 2,
+                    Name = "Frunzenskiy"
+                },
+            };
+            
+            yield return new object[]
+            {
+                new WorkAreaModel()
+                {
+                    Id = 3,
+                    Name = "Центральный"
+                },
+
+                new WorkAreaDTO()
+                {
+                    Id = 3,
+                    Name = "Центральный"
+                },
+            };
+        }
+    }
 }

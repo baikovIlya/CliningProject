@@ -20,14 +20,14 @@ namespace CliningContoraFromValera.Tests
         }
 
         [TestCaseSource(typeof(GetWorkAreaByIdTestSource))]
-        public void GetWorkAreaByIdTest(int id, WorkAreaDTO GetWorkAreaByIdResult, WorkAreaModel expected)
+        public void GetWorkAreaByIdTest(int id, WorkAreaDTO getWorkAreaByIdResult, WorkAreaModel expected)
         {
-            _workAreaManagerMock.Setup(o => o.GetWorkAreaByID(id)).Returns(GetWorkAreaByIdResult).Verifiable();
+            _workAreaManagerMock.Setup(o => o.GetWorkAreaByID(id)).Returns(getWorkAreaByIdResult).Verifiable();
 
             WorkAreaModel actual = _workAreaModelManager.GetWorkAreaById(id);
          
-            _workAreaManagerMock.Verify();
             Assert.AreEqual(expected, actual);
+            _workAreaManagerMock.Verify();
         }
 
         [TestCaseSource(typeof(AddWorkAreaTestSource))]
@@ -39,5 +39,27 @@ namespace CliningContoraFromValera.Tests
 
             _workAreaManagerMock.Verify();
         }
+        
+        [TestCaseSource(typeof(DeleteWorkAreaByIdTestSource))]
+        public void DeleteWorkAreaByIdTest(WorkAreaModel workAreaModel, WorkAreaDTO workAreaDto)
+        {
+            _workAreaManagerMock.Setup(o => o.DeleteWorkAreaById(workAreaDto.Id)).Verifiable();
+
+            _workAreaModelManager.DeleteWorkAreaById(workAreaModel.Id);
+
+            _workAreaManagerMock.Verify();
+        }
+        
+        [TestCaseSource(typeof(UpdateWorkAreaByIdTestSource))]
+        public void UpdateWorkAreaByIdTest(WorkAreaModel workAreaModel, WorkAreaDTO workAreaDto)
+        {
+            _workAreaManagerMock.Setup(o => o.UpdateWorkAreaById(workAreaDto)).Verifiable();
+
+            _workAreaModelManager.UpdateWorkAreaById(workAreaModel);
+
+            _workAreaManagerMock.Verify();
+        }
+        
+        
     }
 }
