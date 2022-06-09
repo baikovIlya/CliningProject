@@ -70,7 +70,7 @@ namespace CliningContoraFromValera.Tests.TestSources
             }
         }
 
-        public class GetAllAddressTestSource: IEnumerable
+        public class GetAddressByIdTestSource: IEnumerable
         {
             public IEnumerator GetEnumerator()
             {
@@ -82,6 +82,19 @@ namespace CliningContoraFromValera.Tests.TestSources
                 };
             }
         }
-       
+        
+        public class GetAllAddressTestSource : IEnumerable
+        {
+            public IEnumerator GetEnumerator()
+            {
+                yield return new object[]
+                {
+                  AddressTestDtos.addressDto,
+                  addressModels
+                };
+            }
+        }
+
+
     }
 }

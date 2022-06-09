@@ -4,6 +4,7 @@ using CliningContoraFromValera.DAL.DTOs;
 using CliningContoraFromValera.DAL.ManagersInterfaces;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using static CliningContoraFromValera.Tests.TestSources.AddressTestModels;
 
 namespace CliningContoraFromValera.Tests
@@ -29,18 +30,21 @@ namespace CliningContoraFromValera.Tests
             _addressManagerMock.Verify();
         }
 
-        [TestCaseSource(typeof(GetAllAddressTestSource))]
+        [TestCaseSource(typeof(GetAddressByIdTestSource))]
         public void GetAddressByIdAddressTest(int addressId, AddressDTO addressDto, AddressModel expectedAddress)
         {
             _addressManagerMock.Setup(o => o.GetAddressById(addressId)).Returns(addressDto).Verifiable();
             AddressModel actualAddress = _addressModelManager.GetAddressById(addressId);
-            //Assert.AreEqual(expectedAddress, actualAddress);
             _addressManagerMock.Verify();
         }
 
-
-
-
+        [TestCaseSource(typeof(GetAllAddressTestSource))]
+        public void GetAllAddressesTest(List<AddressDTO> addressDto, AddressModel expectedAddress)
+        {
+            _addressManagerMock.Setup(o => o.GetAllAddresses()).Returns(addressDto).Verifiable();
+            List<AddressModel> actualAddress = _addressModelManager.GetAllAddresses();
+            _addressManagerMock.Verify();
+        }
 
 
     }
