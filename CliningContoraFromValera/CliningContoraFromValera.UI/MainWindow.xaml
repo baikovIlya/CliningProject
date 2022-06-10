@@ -60,12 +60,12 @@
                     <Label Content="Имя:" Grid.Column="1" Margin="10,0,10,40" VerticalAlignment="Bottom"/>
                     <TextBox x:Name="TextBox_Name" Grid.Column="1" VerticalAlignment="Bottom"
                              Margin="10" AcceptsReturn="True" MaxLength="255" Height="28" VerticalContentAlignment="Bottom" />
-                    
+
                     <Label Content="Фамилия:" Grid.Column="1" Grid.Row="1" 
                            Margin="10,0,10,40" VerticalAlignment="Bottom"/>
                     <TextBox x:Name="TextBox_LastName" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Bottom"
                              VerticalAlignment="Bottom" Margin="10" AcceptsReturn="True" MaxLength="255" Height="28" />
-                    
+
                     <Label Content="Телефон в формате +7(951) 123-45-67:" VerticalAlignment="Bottom"
                            Grid.Column="1" Grid.Row="2" Margin="10,0,10,40"/>
                     <TextBox x:Name="TextBox_Phone" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2"
@@ -228,7 +228,15 @@
                                 <DatePicker Name="DatePicker_OrderDate" Grid.Column="0" Grid.Row="1"  Margin="14,19,14,19"/>
                                 <ComboBox x:Name="ComboBox_OrderStartTime" Grid.Column="0" Grid.Row="2" Text="TextBox" Margin="14,25,14,14" Loaded="ComboBox_OrderStartTime_Loaded"/>
                                 <ComboBox x:Name="ComboBox_OrderIsCommercial" Grid.Column="0" Grid.Row="3" Text="TextBox" Margin="14,25,14,14" Loaded="ComboBox_OrderIsCommercial_Loaded"/>
-                                <ComboBox x:Name="ComboBox_OrderWorkArea" Grid.Column="1" Grid.Row="0" Text="TextBox" Margin="14,25,14,14" Loaded="ComboBox_OrderWorkArea_Loaded"/>
+                                <ComboBox x:Name="ComboBox_OrderWorkArea" Grid.Column="1" Grid.Row="0" Text="TextBox" Margin="14,25,14,14" ItemsSource="{Binding WorkAreaModel}" Loaded="ComboBox_OrderWorkArea_Loaded">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <Run Text="{Binding Name}"/>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                                 <TextBox x:Name="TextBox_OrderStreet" VerticalContentAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Center" Height="23" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="310"/>
                                 <TextBox x:Name="TextBox_OrderBuilding" VerticalContentAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Center" Height="23" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="0,25,0,0"/>
                                 <TextBox x:Name="TextBox_OrderRoom" VerticalContentAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Center" Height="23" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="0,25,0,0"/>
@@ -544,10 +552,11 @@
             <TabItem Header="Подбор сотрудников">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="161*"/>
+                        <ColumnDefinition Width="236*"/>
+                        <ColumnDefinition Width="236*"/>
+                        <ColumnDefinition Width="86*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40*"/>
@@ -556,13 +565,13 @@
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.RowSpan="2" Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="10,30,0,0" Height="30"/>
+                    <Label Grid.Row="1" Content="Имеющиеся заказы:" HorizontalAlignment="Left" Margin="10,0,0,179" Height="30" Grid.ColumnSpan="2"/>
                     <DataGrid x:Name="DataGrid_RelevantEmployees" IsReadOnly="True"
                               ItemsSource="{Binding EmployeeWorkTimeModel}"
-                              Grid.ColumnSpan="4" 
+                              Grid.ColumnSpan="5" 
                               AutoGenerateColumns="False" 
                               CanUserAddRows="False"
-                              Margin="10" SelectionChanged="DataGrid_RelevantEmployees_SelectionChanged">
+                              Margin="10,10,10,10" SelectionChanged="DataGrid_RelevantEmployees_SelectionChanged">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="150"/>
@@ -575,7 +584,7 @@
                     <DataGrid x:Name="DataGrid_CurrentOrders" IsReadOnly="True"
                               ItemsSource="{Binding OrderModel}"
                               Grid.Row="1" 
-                              Grid.ColumnSpan="4" 
+                              Grid.ColumnSpan="5" 
                               CanUserAddRows="False"
                               AutoGenerateColumns="False" Margin="10,26,10,10">
                         <DataGrid.Columns>
@@ -587,13 +596,13 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <DatePicker x:Name="DP_OrdersDate" Grid.Row="3" Margin="10"/>
-                    <Label Grid.Column="1" Grid.Row="2" Margin="10,10,10,0"
-                           VerticalAlignment="Center" Content="Тип и услуга:"/>
-                    <ComboBox x:Name="CB_DesiredServiceType" Grid.Column="1" Grid.Row="2" Margin="100,10,10,10" 
+                    <DatePicker x:Name="DP_OrdersDate" Grid.Row="3" Margin="10,10,10,10" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="2" Grid.Row="2" Margin="10,18,10,0"
+                           VerticalAlignment="Top" Content="Тип и услуга:"/>
+                    <ComboBox x:Name="CB_DesiredServiceType" Grid.Column="2" Grid.Row="2" Margin="100,10,10,10" 
                               Loaded="CB_DesiredServiceType_Loaded" 
                               SelectionChanged="CB_DesiredServiceType_SelectionChanged"/>
-                    <ComboBox x:Name="CB_DesiredService" Grid.Column="1" Grid.Row="3" Margin="10" ItemsSource="{Binding ServiceModel}" Loaded="CB_DesiredService_Loaded">
+                    <ComboBox x:Name="CB_DesiredService" Grid.Column="2" Grid.Row="3" Margin="10,10,10,10" ItemsSource="{Binding ServiceModel}" Loaded="CB_DesiredService_Loaded">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -602,8 +611,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Label Grid.Column="2" Grid.Row="2" Margin="10,10,10,0" VerticalAlignment="Center" Content="Районы:"/>
-                    <ComboBox x:Name="CB_DesiredWorkArea" Grid.Column="2" Grid.Row="3" Margin="10" ItemsSource="{Binding WorkAreaModel}" Loaded="CB_DesiredWorkArea_Loaded">
+                    <Label Grid.Column="3" Grid.Row="2" Margin="10,18,10,0" VerticalAlignment="Top" Content="Районы:"/>
+                    <ComboBox x:Name="CB_DesiredWorkArea" Grid.Column="3" Grid.Row="3" Margin="10,10,10,10" ItemsSource="{Binding WorkAreaModel}" Loaded="CB_DesiredWorkArea_Loaded">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -612,9 +621,9 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button x:Name="Button_EmployeeSelection" Grid.Column="2" Grid.Row="2" Margin="236,10,10,10" Content="Подобрать" Click="Button_EmployeeSelection_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="Button_EmployeeSelection" Grid.Column="3" Grid.Row="2" Margin="236,10,10,10" Content="Подобрать" Click="Button_EmployeeSelection_Click" Grid.ColumnSpan="2"/>
 
-                    <Button x:Name="Button_ResetAll" Grid.Column="2" Grid.Row="3" Margin="236,10,10,10" Content="Обнулить" Click="Button_ResetAll_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="Button_ResetAll" Grid.Column="3" Grid.Row="3" Margin="236,10,10,10" Content="Обнулить" Click="Button_ResetAll_Click" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
 
