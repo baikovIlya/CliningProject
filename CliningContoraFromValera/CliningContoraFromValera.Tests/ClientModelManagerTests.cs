@@ -46,8 +46,8 @@ namespace CliningContoraFromValera.Tests
             _clientManagerMock.Verify();
         }
 
-        [TestCaseSource(typeof(GetAllClientByIdTestSource))]
-        public void GetAllClientByIdTest_ShouldReturnClient(List<ClientDTO> clientResult, List<ClientModel> expected)
+        [TestCaseSource(typeof(GetAllClientTestSource))]
+        public void GetAllClientTest_ShouldReturnClient(List<ClientDTO> clientResult, List<ClientModel> expected)
         {
             _clientManagerMock.Setup(o => o.GetAllClients()).Returns(clientResult).Verifiable();
 
