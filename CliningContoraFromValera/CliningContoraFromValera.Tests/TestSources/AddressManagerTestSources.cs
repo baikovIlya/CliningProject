@@ -15,7 +15,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                 Street = "Колотушкина",
                 Building = "50",
                 Room = "10A",
-                WorkAreaId = 1
+                WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
             },
 
             new AddressModel()
@@ -24,7 +24,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                 Street = "Кукушкина",
                 Building = "10Б",
                 Room = "123",
-                WorkAreaId = 1
+                WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
             }
         };
 
@@ -39,7 +39,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                 Street = "Колотушкина",
                 Building = "50",
                 Room = "10A",
-                WorkAreaId = 1
+                WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                 },
 
                 new AddressDTO()
@@ -48,7 +48,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                 Street = "Кукушкина",
                 Building = "10Б",
                 Room = "123",
-                WorkAreaId = 1
+                WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                 }
 
             };
@@ -85,7 +85,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                     },
                     new AddressModel()
                     {
@@ -93,7 +93,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                     }
                 };
 
@@ -106,7 +106,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                     },
 
                     new AddressModel()
@@ -115,7 +115,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                     }
                 };
             }
@@ -133,7 +133,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                     },
                     new AddressDTO()
                     {
@@ -141,7 +141,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                     }
                 };
 
@@ -153,7 +153,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                     },
 
                     new AddressDTO()
@@ -162,7 +162,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                     }
                 };
             }
@@ -180,7 +180,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                     },
                     new AddressDTO()
                     {
@@ -188,7 +188,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                     }
                 };
 
@@ -200,7 +200,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                     },
 
                     new AddressDTO()
@@ -209,7 +209,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                     }
                 };
             }
@@ -227,7 +227,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                         },
 
                         new AddressDTO{
@@ -235,7 +235,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaDTO() { Id = 1, Name = "Nevstyi" }
                         },
                     },
 
@@ -245,7 +245,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Колотушкина",
                         Building = "50",
                         Room = "10A",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                         },
 
                         new AddressModel{ 
@@ -253,7 +253,7 @@ namespace CliningContoraFromValera.Tests.TestSources
                         Street = "Кукушкина",
                         Building = "10Б",
                         Room = "123",
-                        WorkAreaId = 1
+                        WorkArea = new WorkAreaModel() { Id = 1, Name = "Nevstyi" }
                         },
                     }
                 };

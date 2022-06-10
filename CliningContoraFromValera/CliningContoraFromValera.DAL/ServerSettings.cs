@@ -2,6 +2,6 @@
 {
     public class ServerSettings
     {
-        public const string _connectionString = @"Server=.;Database=CliningContoraFromValera.DB;Trusted_Connection=True;";
+        public const string _connectionString = @"Data Source=80.78.240.16;Initial Catalog = CliningContoraFromValera.DB;Persist Security Info=True;User ID = student;Password=qwe!23;";
     }
 }

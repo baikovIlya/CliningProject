@@ -8,7 +8,6 @@ namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class ClientModelManager : IClientModelManager
     {
-        ClientManager _clientManager = new ClientManager();
         private IClientManager _clientManager;
 
         public ClientModelManager()
