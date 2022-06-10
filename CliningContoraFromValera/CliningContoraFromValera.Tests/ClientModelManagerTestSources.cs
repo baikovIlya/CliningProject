@@ -76,7 +76,7 @@ namespace CliningContoraFromValera.Tests
         }
     }
 
-    public class GetAllClientByIdTestSource : IEnumerable
+    public class GetAllClientTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
         {
