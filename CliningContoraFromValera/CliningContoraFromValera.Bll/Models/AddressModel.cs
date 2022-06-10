@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Street { get; set; }
         public string Building { get; set; }
-        public string? Room { get; set; }
+        public string Room { get; set; }
         public WorkAreaModel WorkArea { get; set; }
 
         public AddressModel()
