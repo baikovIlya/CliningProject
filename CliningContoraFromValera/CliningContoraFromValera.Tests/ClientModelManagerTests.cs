@@ -4,6 +4,7 @@ using CliningContoraFromValera.DAL.Interfaces;
 using CliningContoraFromValera.Bll.ModelsManager;
 using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.DTOs;
+using System.Collections.Generic;
 
 namespace CliningContoraFromValera.Tests
 {
@@ -42,6 +43,16 @@ namespace CliningContoraFromValera.Tests
             _clientManagerMock.Setup(o => o.GetClientByID(clientId)).Returns(clientDto).Verifiable();
             ClientModel actualClient = _clientModelManager.GetClientById(clientId);
             Assert.AreEqual(expected, actualClient);
+            _clientManagerMock.Verify();
+        }
+
+        [TestCaseSource(typeof(GetAllClientByIdTestSource))]
+        public void GetAllClientByIdTest_ShouldReturnClient(List<ClientDTO> clientResult, List<ClientModel> expected)
+        {
+            _clientManagerMock.Setup(o => o.GetAllClients()).Returns(clientResult).Verifiable();
+
+            List<ClientModel> actual = _clientModelManager.GetAllClients();
+            Assert.AreEqual(expected, actual);
             _clientManagerMock.Verify();
         }
 
