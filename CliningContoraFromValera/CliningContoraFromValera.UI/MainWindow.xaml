@@ -106,13 +106,13 @@
                                         <DataGridTextColumn Header="Сумма" IsReadOnly="True" Binding="{Binding Price}" Width="60"></DataGridTextColumn>
                                         <DataGridComboBoxColumn Header="Статус" SelectedItemBinding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Status}" ItemsSource="{Binding Source={StaticResource StatusType}}" />
                                         <DataGridTextColumn Header="Кол-во сотрудников" IsReadOnly="True" Binding="{Binding CountOfEmployees}" Width="125"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Фамилия клиента"  IsReadOnly="True" Width="110" Binding="{Binding LastName}"/>
-                                        <DataGridTextColumn Header="Имя клиента" IsReadOnly="True" Width="110" Binding="{Binding FirstName}"/>
-                                        <DataGridTextColumn Header="Телефон" IsReadOnly="True" Width="100" Binding="{Binding Phone}"/>
-                                        <DataGridTextColumn Header="Район" IsReadOnly="True" Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Name}"/>
-                                        <DataGridTextColumn Header="Улица" IsReadOnly="True" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Street}"/>
-                                        <DataGridTextColumn Header="Здание" Width="50" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Building}"/>
-                                        <DataGridTextColumn Header="Помещение" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Room}"/>
+                                        <DataGridTextColumn Header="Фамилия клиента"  IsReadOnly="True" Width="110" Binding="{Binding Client.LastName}"/>
+                                        <DataGridTextColumn Header="Имя клиента" IsReadOnly="True" Width="110" Binding="{Binding Client.FirstName}"/>
+                                        <DataGridTextColumn Header="Телефон" IsReadOnly="True" Width="100" Binding="{Binding Client.Phone}"/>
+                                        <DataGridTextColumn Header="Район" IsReadOnly="True" Width="70" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Address.WorkArea.Name}"/>
+                                        <DataGridTextColumn Header="Улица" IsReadOnly="True" Width="100" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Address.Street}"/>
+                                        <DataGridTextColumn Header="Здание" Width="50" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Address.Building}"/>
+                                        <DataGridTextColumn Header="Помещение" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=Address.Room}"/>
                                         <DataGridCheckBoxColumn Header="Коммерция" Width="80" Binding="{Binding UpdateSourceTrigger=PropertyChanged, Path=IsCommercial}"/>
                                         <DataGridTemplateColumn Header="Удалить" Width="60">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -591,8 +591,8 @@
                             <DataGridTextColumn Header="Время начала" Binding="{Binding StartTime}" Width="130"/>
                             <DataGridTextColumn Header="Приблиз. вр. выполнения" Binding="{Binding EstimatedEndTime}" Width="130"/>
                             <DataGridTextColumn Header="Время окончания" Binding="{Binding FinishTime}" Width="130"/>
-                            <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="280"/>
-                            <DataGridTextColumn Header="Дом" Binding="{Binding Building}" Width="81"/>
+                            <DataGridTextColumn Header="Улица" Binding="{Binding Address.Street}" Width="280"/>
+                            <DataGridTextColumn Header="Дом" Binding="{Binding Address.Building}" Width="81"/>
                         </DataGrid.Columns>
                     </DataGrid>
 

@@ -36,13 +36,6 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Status", opt => opt.MapFrom(c => c.Status))
                 .ForMember("CountOfEmployees", opt => opt.MapFrom(c => c.CountOfEmployees))
                 .ForMember("IsCommercial", opt => opt.MapFrom(c => c.IsCommercial))
-                .ForMember(pts => pts.FirstName, opt => opt.MapFrom(ps => ps.Client!.FirstName))
-                .ForMember(pts => pts.LastName, opt => opt.MapFrom(ps => ps.Client!.LastName))
-                .ForMember(pts => pts.Phone, opt => opt.MapFrom(ps => ps.Client!.Phone))
-                .ForMember(pts => pts.Name, opt => opt.MapFrom(ps => ps.Address!.WorkArea!.Name))
-                .ForMember(pts => pts.Street, opt => opt.MapFrom(ps => ps.Address!.Street))
-                .ForMember(pts => pts.Building, opt => opt.MapFrom(ps => ps.Address!.Building))
-                .ForMember(pts => pts.Room, opt => opt.MapFrom(ps => ps.Address!.Room))
                 .ReverseMap();
 
                 cfg.CreateMap<ServiceDTO, ServiceModel>()
