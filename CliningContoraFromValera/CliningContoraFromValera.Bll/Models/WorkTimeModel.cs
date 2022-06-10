@@ -12,22 +12,5 @@
         {
 
         } 
-
-        public WorkTimeModel(DateTime date, TimeSpan startTime, TimeSpan finishTime, int employeeId)
-        {
-            Date = date;
-            StartTime = startTime;
-            FinishTime = finishTime;
-            EmployeeId = employeeId;
-        }
-
-        public WorkTimeModel(int id, DateTime date, TimeSpan startTime, TimeSpan finishTime, int employeeId)
-        {
-            Id = id;
-            Date = date;
-            StartTime = startTime;
-            FinishTime = finishTime;
-            EmployeeId = employeeId;
-        }
     }
 }

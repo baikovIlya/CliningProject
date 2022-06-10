@@ -18,10 +18,10 @@ namespace CliningContoraFromValera.DAL.Managers
                         StoredProcedures.Address_Add,
                         param: new 
                         {
-                            newAddress.Street,
-                            newAddress.Building,
-                            newAddress.Room,
-                            newAddress.WorkAreaId
+                            Street = newAddress.Street,
+                            Building = newAddress.Building,
+                            Room = newAddress.Room,
+                            WorkAreaId = newAddress.WorkArea!.Id
                         },
                         commandType: System.Data.CommandType.StoredProcedure
                     );
@@ -49,7 +49,7 @@ namespace CliningContoraFromValera.DAL.Managers
             {
                 connection.Open();
 
-                connection.QuerySingle<AddressDTO>
+                connection.QuerySingleOrDefault<AddressDTO>
                     (
                         StoredProcedures.Address_UpdateById,
                         param: new
@@ -58,7 +58,7 @@ namespace CliningContoraFromValera.DAL.Managers
                             newAddress.Street,
                             newAddress.Building,
                             newAddress.Room,
-                            newAddress.WorkAreaId
+                            WorkAreaId = newAddress.WorkArea!.Id
                         },
                         commandType: System.Data.CommandType.StoredProcedure
                     );

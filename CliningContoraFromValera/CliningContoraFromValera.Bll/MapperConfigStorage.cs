@@ -59,7 +59,6 @@ namespace CliningContoraFromValera.Bll
                 .ForMember("Street", opt => opt.MapFrom(c => c.Street))
                 .ForMember("Building", opt => opt.MapFrom(c => c.Building))
                 .ForMember("Room", opt => opt.MapFrom(c => c.Room))
-                .ForMember(pts => pts.WorkAreaId, opt => opt.MapFrom(ps => ps.WorkAreaId))
                 .ReverseMap();
 
                 cfg.CreateMap<WorkAreaDTO, WorkAreaModel>()

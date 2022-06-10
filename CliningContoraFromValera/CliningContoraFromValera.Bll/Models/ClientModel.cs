@@ -12,13 +12,5 @@
         {
 
         }
-
-        public ClientModel(string firstName, string lastName, string email, string phone)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Phone = phone;
-        }
     }
 }
