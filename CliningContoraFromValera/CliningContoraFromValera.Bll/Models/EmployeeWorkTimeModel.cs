@@ -12,8 +12,6 @@
         public int WorkTimeId { get; set; }
         public int EmployeeId { get; set; }
 
-
-
         public EmployeeWorkTimeModel()
         {
 

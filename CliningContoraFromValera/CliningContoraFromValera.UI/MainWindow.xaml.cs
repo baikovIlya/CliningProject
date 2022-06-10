@@ -94,10 +94,13 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                ClientModel client = new ClientModel(TextBox_Name.Text,
-                TextBox_LastName.Text,
-                TextBox_Email.Text,
-                TextBox_Phone.Text);
+                ClientModel client = new ClientModel()
+                {
+                    FirstName = TextBox_Name.Text,
+                    LastName = TextBox_LastName.Text,
+                    Email = TextBox_Email.Text,
+                    Phone = TextBox_Phone.Text,
+                };
                 _clientModelManager.AddClient(client);
                 ClearClientAddTextBoxes();
                 ClientRefresh();
@@ -161,9 +164,12 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                EmployeeModel employee = new EmployeeModel(TB_FirstNameEmployee.Text,
-                TB_LastNameEmployee.Text,
-                TB_PhoneEmployee.Text);
+                EmployeeModel employee = new EmployeeModel()
+                {
+                    FirstName = TB_FirstNameEmployee.Text,
+                    LastName = TB_LastNameEmployee.Text,
+                    Phone = TB_PhoneEmployee.Text,
+                };
                 _employeeModelManager.AddEmployee(employee);
                 ClearEmployeeAddTextBoxes();
                 EmployeeRefresh();
@@ -311,8 +317,16 @@ namespace CliningContoraFromValera.UI
 
         private void AddService()
         {
-            ServiceModel employee = new ServiceModel((ServiceType)CB_ChooseServiceType.SelectedItem, TB_Name.Text, TB_Description.Text,
-            Convert.ToDecimal(TB_Price.Text), Convert.ToDecimal(TB_CommercialPrice.Text), Convert.ToString(CB_ChooseUnitType.SelectedItem)!, (TimeSpan)CB_ChooseEstimatedTime.SelectedItem);
+            ServiceModel employee = new ServiceModel()
+            {
+                ServiceType = (ServiceType)CB_ChooseServiceType.SelectedItem,
+                Name = TB_Name.Text,
+                Description = TB_Description.Text,
+                Price = Convert.ToDecimal(TB_Price.Text),
+                CommercialPrice = Convert.ToDecimal(TB_CommercialPrice.Text),
+                Unit = Convert.ToString(CB_ChooseUnitType.SelectedItem)!,
+                EstimatedTime = (TimeSpan)CB_ChooseEstimatedTime.SelectedItem,
+            };
             _serviceModelManager.AddService(employee);
             ClearServiceAddTextBoxes();
             RefreshService();
@@ -549,7 +563,13 @@ namespace CliningContoraFromValera.UI
             }
             else
             {
-                WorkTimeModel workTime = new WorkTimeModel(dateTime, newStartTime, newFinishTime, employee.Id);
+                WorkTimeModel workTime = new WorkTimeModel() 
+                {
+                    Date = dateTime,
+                    StartTime = newStartTime,
+                    FinishTime = newFinishTime,
+                    EmployeeId = employee.Id,
+                };
                 _workTimeModelManager.AddWorkTime(workTime);
             }
         }
@@ -601,7 +621,14 @@ namespace CliningContoraFromValera.UI
         private void DataGrid_Schedule_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             EmployeeWorkTimeModel crnt = (EmployeeWorkTimeModel)e.Row.Item;
-            WorkTimeModel workTimes = new WorkTimeModel(crnt.WorkTimeId, crnt.Date, crnt.StartTime, crnt.FinishTime, crnt.EmployeeId);
+            WorkTimeModel workTimes = new WorkTimeModel()
+            {
+                Id = crnt.WorkTimeId,
+                Date = crnt.Date,
+                StartTime = crnt.StartTime,
+                FinishTime = crnt.FinishTime,
+                EmployeeId = crnt.EmployeeId,
+            };
             var Element = (TextBox)e.EditingElement;
             TimeSpan finishTime;
             TimeSpan startTime;
@@ -864,7 +891,10 @@ namespace CliningContoraFromValera.UI
                 DateTime date = DateTime.Parse(DatePicker_OrderDate.Text);
                 TimeSpan startTime = (TimeSpan)ComboBox_OrderStartTime.SelectedItem;
                 StatusType status = CliningContoraFromValera.Bll.StatusType.Новый;
-                AddressModel newAddress = new AddressModel(street, building, room, workArea.Id);
+                AddressModel newAddress = new AddressModel()
+                {
+                    Street = street, Building = building, Room = room, WorkArea = workArea,
+                };
                 _addressModelManager.AddAddress(newAddress);
                 List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
                 AddressModel crntAddress = allAddress.Find(item => item.Street == street);
@@ -880,7 +910,18 @@ namespace CliningContoraFromValera.UI
                 {
                     isCommercial = false;
                 }
-                OrderModel orderModel = new OrderModel(date, startTime, estimatedTime, finishTime, price, status, isCommercial, client.Id, crntAddress!.Id, workArea.Id);
+                OrderModel orderModel = new OrderModel()
+                { 
+                    Date = date,
+                    StartTime = startTime,
+                    EstimatedEndTime = estimatedTime,
+                    FinishTime = finishTime,
+                    Price = price,
+                    Status = status,
+                    Client = client,
+                    Address = crntAddress!,
+                    IsCommercial = isCommercial,
+                };
                 _orderModelManager.AddOrder(orderModel);
                 ShowMessageBox(UiTextElements.OrderСreated);
                 ClrearAllFieldsInNewOrder();
@@ -1222,35 +1263,17 @@ namespace CliningContoraFromValera.UI
                     }
                 }
                 List<AddressModel> allAddress = _addressModelManager.GetAllAddresses();
-                AddressModel crntAddress = allAddress.Find(item => item.Street == order.Street);
+                AddressModel crntAddress = allAddress.Find(item => item.Street == order.Address.Street);
                 if (String.Equals((string)e.Column.Header, UiTextElements.Building))
                 {
-                    crntAddress = new AddressModel() { Id = crntAddress!.Id, Street = crntAddress.Street, Building = element.Text,
-                        Room = crntAddress.Room, WorkAreaId = crntAddress.WorkAreaId };
-                    _addressModelManager.UpdateAddressById(crntAddress!);
-                }
-                if (String.Equals((string)e.Column.Header, UiTextElements.Building))
-                {
-                    crntAddress = new AddressModel()
-                    {
-                        Id = crntAddress!.Id,
-                        Street = crntAddress.Street,
-                        Building = element.Text,
-                        Room = crntAddress.Room,
-                        WorkAreaId = crntAddress.WorkAreaId
-                    };
-                    _addressModelManager.UpdateAddressById(crntAddress!);
-                }
+                    crntAddress!.Building = element.Text;
+                    crntAddress.WorkArea = order.Address.WorkArea;
+                    _addressModelManager.UpdateAddressById(crntAddress);
+                }              
                 if (String.Equals((string)e.Column.Header, UiTextElements.Room))
                 {
-                    crntAddress = new AddressModel()
-                    {
-                        Id = crntAddress!.Id,
-                        Street = crntAddress.Street,
-                        Building = crntAddress.Building,
-                        Room = element.Text,
-                        WorkAreaId = crntAddress.WorkAreaId
-                    };
+                    crntAddress!.Room= element.Text;
+                    crntAddress.WorkArea = order.Address.WorkArea;
                     _addressModelManager.UpdateAddressById(crntAddress!);
                 }
                 _orderModelManager.UpdateOrder(order);
