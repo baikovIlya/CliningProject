@@ -762,7 +762,7 @@ namespace CliningContoraFromValera.UI
                     ServiceOrderModel serviceOrder = new ServiceOrderModel() { OrderId = order.Id, ServiceId = service.Id, Count = count };
                     _serviceOrderModelManager.AddServiceToOrder(serviceOrder);
                     TimeSpan oldEstTime = order.EstimatedEndTime;
-                    TimeSpan? oldFinishTime = order.FinishTime;
+                    TimeSpan oldFinishTime = order.FinishTime;
                     decimal oldPrice = order.Price;
                     try
                     {
