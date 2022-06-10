@@ -64,22 +64,79 @@ namespace CliningContoraFromValera.Tests
             yield return new object[]
             {
                 1,
-                new ClientDTO()
+                ClientTestDtos.clientDTOs[0],
+                ClientTestModels.clientModels[0],
+            };
+            yield return new object[]
+            {
+                2,
+                ClientTestDtos.clientDTOs[1],
+                ClientTestModels.clientModels[1],
+            };
+        }
+    }
+
+    public class GetAllClientByIdTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[]
+           {
+                new List<ClientDTO>
                 {
-                    Id = 1,
-                    FirstName = "Milana",
-                    LastName = "Maksina",
-                    Email = "maksina@mail.ru",
-                    Phone = "88005553535"
+                    new ClientDTO
+                    {
+                        Id = 1,
+                        FirstName = "Milana",
+                        LastName = "Maksina",
+                        Email = "maksina@mail.ru",
+                        Phone = "88005553535" 
+                    },
+                    new ClientDTO
+                    {
+                        Id = 2,
+                        FirstName = "Milana",
+                        LastName = "Maksina",
+                        Email = "maksina@mail.ru",
+                        Phone = "88005553535"
+                    },
+                    new ClientDTO
+                    {
+                        Id = 3,
+                        FirstName = "Milana",
+                        LastName = "Maksina",
+                        Email = "maksina@mail.ru",
+                        Phone = "88005553535"
+                    }
                 },
-                new ClientModel()
+
+                new List<ClientModel>
                 {
-                    Id = 1,
-                    FirstName = "Milana",
-                    LastName = "Maksina",
-                    Email = "maksina@mail.ru",
-                    Phone = "88005553535"
-                },
+                    new ClientModel
+                    { 
+                        Id = 1,
+                        FirstName = "Milana",
+                        LastName = "Maksina",
+                        Email = "maksina@mail.ru",
+                        Phone = "88005553535"
+                    },
+                    new ClientModel
+                    {
+                        Id = 2,
+                        FirstName = "Milana",
+                        LastName = "Maksina",
+                        Email = "maksina@mail.ru",
+                        Phone = "88005553535"
+                    },
+                    new ClientModel
+                    {
+                        Id = 3,
+                        FirstName = "Milana",
+                        LastName = "Maksina",
+                        Email = "maksina@mail.ru",
+                        Phone = "88005553535"
+                    }
+                }
             };
         }
     }
@@ -90,23 +147,14 @@ namespace CliningContoraFromValera.Tests
         {
             yield return new object[]
             {
-                
-                new ClientModel()
-                {
-                    Id = 1,
-                    FirstName = "Milana",
-                    LastName = "Maksina",
-                    Email = "maksina@mail.ru",
-                    Phone = "88005553535"
-                },
-                new ClientDTO()
-                {
-                    Id = 1,
-                    FirstName = "Milana",
-                    LastName = "Maksina",
-                    Email = "maksina@mail.ru",
-                    Phone = "88005553535"
-                },
+                ClientTestModels.clientModels[0],
+                ClientTestDtos.clientDTOs[0]
+            };
+
+            yield return new object[]
+            {
+                ClientTestModels.clientModels[1],
+                ClientTestDtos.clientDTOs[1]
             };
         }
     }
