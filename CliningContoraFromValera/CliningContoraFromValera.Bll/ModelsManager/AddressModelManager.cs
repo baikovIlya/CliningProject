@@ -1,12 +1,23 @@
 ﻿using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.ManagersInterfaces;
 
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
     public class AddressModelManager
     {
-        AddressManager _addressManager = new AddressManager();
+        private IAddressManager _addressManager;
+
+        public AddressModelManager()
+        {
+            _addressManager = new AddressManager();
+        }
+
+        public AddressModelManager(IAddressManager addressManager)
+        {
+            _addressManager = addressManager;
+        }
 
         public void AddAddress(AddressModel newAddress)
         {

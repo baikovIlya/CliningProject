@@ -13,5 +13,24 @@
 
         }
 
+        public override bool Equals(object? obj)
+        {
+            bool flag = true;
+            if (obj == null || !(obj is AddressDTO))
+            {
+                flag = false;
+            }
+            AddressDTO addressDto = (AddressDTO)obj;
+            if (    addressDto.Id != this.Id ||
+                    addressDto.Street != this.Street ||
+                    addressDto.Building != this.Building ||
+                    addressDto.Room != this.Room ||
+                    addressDto.WorkAreaId != this.WorkAreaId)
+            {
+                flag = false;
+            }
+            return flag;
+        }
+
     }
 }
