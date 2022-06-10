@@ -1,13 +1,25 @@
 ﻿using CliningContoraFromValera.Bll.Models;
 using CliningContoraFromValera.DAL.Managers;
 using CliningContoraFromValera.DAL.DTOs;
-
+using CliningContoraFromValera.DAL.Interfaces;
+using CliningContoraFromValera.Bll.Interfaces;
 
 namespace CliningContoraFromValera.Bll.ModelsManager
 {
-    public class ClientModelManager
+    public class ClientModelManager : IClientModelManager
     {
         ClientManager _clientManager = new ClientManager();
+        private IClientManager _clientManager;
+
+        public ClientModelManager()
+        {
+            _clientManager = new ClientManager();
+        }     
+
+        public ClientModelManager(IClientManager clientManager)
+        {
+            _clientManager = clientManager;
+        }
 
         public List<ClientModel> GetAllClients()
         {

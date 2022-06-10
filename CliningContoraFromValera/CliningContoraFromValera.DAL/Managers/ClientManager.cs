@@ -1,10 +1,11 @@
 ﻿using Dapper;
 using System.Data.SqlClient;
 using CliningContoraFromValera.DAL.DTOs;
+using CliningContoraFromValera.DAL.Interfaces;
 
 namespace CliningContoraFromValera.DAL.Managers
 {
-    public class ClientManager
+    public class ClientManager : IClientManager
     {
         public List<ClientDTO> GetAllClients()
         {
