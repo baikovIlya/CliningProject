@@ -25,7 +25,7 @@
                     addressDto.Street != this.Street ||
                     addressDto.Building != this.Building ||
                     addressDto.Room != this.Room ||
-                    addressDto.WorkAreaId != this.WorkAreaId)
+                    addressDto.WorkArea!.Id != this.WorkArea!.Id)
             {
                 flag = false;
             }

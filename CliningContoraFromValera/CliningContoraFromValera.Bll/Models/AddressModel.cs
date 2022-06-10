@@ -13,14 +13,6 @@
 
         }
 
-        public AddressModel(string street, string building, string room, int workAreaId)
-        {
-            Street = street;
-            Building = building;
-            Room = room;
-            WorkAreaId = workAreaId;
-        }
-
         public override bool Equals(object? obj)
         {
             bool flag = true;
@@ -35,7 +27,7 @@
                     addressDto.Street != this.Street ||
                     addressDto.Building != this.Building ||
                     addressDto.Room != this.Room ||
-                    addressDto.WorkAreaId != this.WorkAreaId)
+                    addressDto.WorkArea.Id != this.WorkArea.Id)
                 {
                     flag = false;
                 }
